@@ -6,9 +6,11 @@
 
 2. Python 版本要求为： python 2.7.5
 
-3. 运行是只需要执行： python esc.py /xxx/data.txt /xxx/input.txt /xxx/output.txt
+3. 运行时只需要执行： python ecs.py /xxx/TrainData.txt /xxx/input.txt /xxx/output.txt
+	(说明：TrainData.txt是历史数据文件，input.txt是其他参数输入文件，output.txt是输出文件)
 
-4. 打包上传文件需要包括文件路径：如有你自己定义的py文件也可添加， 保证能引用得到。
-   src/ecs.py
-   src/predictor.py 
+4. 打包上传文件需要包括文件路径：
+   src/ecs/ecs.py
+   src/ecs/predictor.py
+   如有你自己定义的py文件也可添加， 保证能引用得到。可直接修改SDK_Python为自己名字，打成tar.gz包上传即可，如zhangsan.tar.gz。
   
