@@ -422,7 +422,7 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
 #########################################
 
 #选择预测方案
-used_func = predict_model9
+used_func = predict_model10
 #########################################
 
 
