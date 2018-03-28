@@ -33,7 +33,7 @@ def predict_one(vm_type,# 虚拟机类型
                 caseInfo,# 案例信息对象
                 prodict_function=None# 时间序列预测
                 ):
-    return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v1(vm_type,-1),
+    return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v3(vm_type,-1),
                             caseInfo.date_range_size)
     '''
     训练并预测一种虚拟机的类型，返回为
