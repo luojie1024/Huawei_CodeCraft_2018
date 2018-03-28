@@ -385,18 +385,18 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
     # 衰减值
     alpha = 0.2
     # 趋势
-    beta = 0.2
+    beta = 0.1
     # 权重
-    h = 1
+    h = 2
 
     y_hot_t = 0.0
-    l_t = 0.0
-    b_t = 0.0
+    l_t = 0.2
+    b_t = 0.2
 
     #初始trend
-    pre_b_t =0.2
+    pre_b_t =0.0
     #初始化level
-    pre_l_t =0.2
+    pre_l_t =0.0
 
     for rept in range(date_range_size):  # 预测天数范围
 
@@ -411,6 +411,8 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
             b_t=beta*(l_t-pre_l_t)+(1-beta)*b_t
             #step3
             y_hot_t=l_t+h*b_t
+            if y_hot_t<0:
+                y_hot_t=0
         #追加到历史表中
         chis_data.append(y_hot_t)
         #保存结果
