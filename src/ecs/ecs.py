@@ -1,25 +1,38 @@
 # coding=utf-8
 import sys
 import os
+
 import predictor
 
+#python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output.txt
 
+
+input=2
 def main():
-    print 'main function begin.'
-    if len(sys.argv) != 4:
-        print 'parameter is incorrect!'
-        print 'Usage: python esc.py ecsDataPath inputFilePath resultFilePath'
-        exit(1)
-    # Read the input files
-    ecsDataPath = sys.argv[1]
-    inputFilePath = sys.argv[2]
-    resultFilePath = sys.argv[3]
+    if input==2:
+        print 'main function begin.'
+        if len(sys.argv) != 4:
+            print 'parameter is incorrect!'
+            print 'Usage: python esc.py ecsDataPath inputFilePath resultFilePath'
+            exit(1)
+        ecsDataPath = sys.argv[1]
+        inputFilePath = sys.argv[2]
+        resultFilePath = sys.argv[3]
+    else:
+        # #设置路径
+        case_path = os.getcwd()
+        ecsDataPath = case_path + r'/data/TrainData_2015.1.1_2015.2.19.txt'
+        inputFilePath = case_path + r'/data/input_5flavors_cpu_7days.txt'
+        resultFilePath = case_path + r'/result/result_out.txt'
 
+    #获取训练集列表
     ecs_infor_array = read_lines(ecsDataPath)
+    #获取输入配置列表
     input_file_array = read_lines(inputFilePath)
-    # implementation the function predictVm
+
+    #预测 Step 01
     predic_result = predictor.predict_vm(ecs_infor_array, input_file_array)
-    # write the result to output file
+    #写入结果到文件
     if len(predic_result) != 0:
         write_result(predic_result, resultFilePath)
     else:
