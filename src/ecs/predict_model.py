@@ -348,7 +348,7 @@ def predict_model9(his_data,date_range_size):#简单滑动平均法
     :return: 返回结果
     '''
     #衰减值
-    alpha=0.1
+    alpha=0.2
     #历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -422,7 +422,7 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
 #########################################
 
 #选择预测方案
-used_func = predict_model9
+used_func = predict_model7
 #########################################
 
 
