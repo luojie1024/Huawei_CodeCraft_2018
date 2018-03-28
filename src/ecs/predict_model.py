@@ -394,9 +394,9 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
     b_t = 0.0
 
     #初始trend
-    pre_b_t =0
+    pre_b_t =0.2
     #初始化level
-    pre_l_t =0
+    pre_l_t =0.2
 
     for rept in range(date_range_size):  # 预测天数范围
 
