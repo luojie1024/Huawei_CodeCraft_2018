@@ -117,7 +117,7 @@ class CaseInfo(object):
         #计算间隔时间
         end_date = datetime.strptime(self.data_range[0],'%Y-%m-%d %H:%M:%S')
         begin_date = datetime.strptime(endtime, '%Y-%m-%d %H:%M:%S')
-        self.gap_time=end_date.timetuple().tm_yday-begin_date.timetuple().tm_yday-1
+        self.gap_time=end_date.timetuple().tm_yday-begin_date.timetuple().tm_yday
 
         self.his_data = hisdata
 
