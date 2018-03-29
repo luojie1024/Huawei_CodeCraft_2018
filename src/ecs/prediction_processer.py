@@ -26,7 +26,7 @@ def predict_all(caseInfo):
 
     # result=predict_func(caseInfo)
 
-    if caseInfo.date_range_size>=7:
+    if caseInfo.date_range_size>=8:
         predict_func=long_gap_predict_func
     else:
         predict_func=short_gap_predict_func
