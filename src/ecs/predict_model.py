@@ -452,7 +452,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     s_t = []
 
     # 初始trend
-    pre_b_t = 0.1
+    pre_b_t = 0.0
     # 初始化level
     pre_l_t = 0
     # 初始化seasonal
