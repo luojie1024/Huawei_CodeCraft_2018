@@ -387,7 +387,7 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
     # 趋势
     beta = 0.11
     # 权重 75.21
-    h = 1.75
+    h = 1.76
 
     y_hot_t = 0.0
     l_t = 0.2
