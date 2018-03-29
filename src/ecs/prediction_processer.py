@@ -26,13 +26,13 @@ def predict_all(caseInfo):
 
     # result=predict_func(caseInfo)
 
-    #预测天数[1,5]   [5,8]
+    #预测天数[7,8] [7]
 
-    predict_func = short_gap_predict_func  # 76
-    # if caseInfo.date_range_size>=7:
-    #     predict_func=short_gap_predict_func#76
-    # else:
-    #     predict_func = long_gap_predict_func# 78
+    # predict_func = short_gap_predict_func  # 76
+    if caseInfo.date_range_size==7:
+        predict_func=short_gap_predict_func#76.68
+    else:
+        predict_func = long_gap_predict_func# 78
 
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype,caseInfo,predict_func)
