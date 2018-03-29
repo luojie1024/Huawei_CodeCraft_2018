@@ -438,7 +438,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值
-    alpha = 0.2
+    alpha = 0.8
     # 趋势
     beta = 0.1
     # 季节
@@ -456,7 +456,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     # 初始化level
     pre_l_t = 0.0
     # 初始化seasonal
-    pre_s_t = 0.2
+    pre_s_t = 0.0
 
     # 初始化第一天的季动
     l_t.append(pre_l_t)
