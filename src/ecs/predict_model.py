@@ -456,7 +456,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     # 初始化level
     pre_l_t = 0.0
     # 初始化seasonal
-    pre_s_t = 0.0
+    pre_s_t = 0.2
 
     # 初始化第一天的季动
     l_t.append(pre_l_t)
