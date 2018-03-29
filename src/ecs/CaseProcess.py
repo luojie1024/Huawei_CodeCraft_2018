@@ -23,7 +23,9 @@ class CaseInfo(object):
     time_grain = -1 # 预测时间粒度
     date_range_size=0# 需要预测多少天数的数据
     data_range=[]#预测开始时间与结束时间，左闭右开
-    
+
+    #预测时间与训练集间隔时间
+    gap_time=0
     # 训练数据中虚拟机、日期二维映射表 {虚拟机类型flavor1：{'日期':出现次数,.....]
     his_data={}
 
@@ -110,6 +112,13 @@ class CaseInfo(object):
                 point[gt]=0
             cot = point[gt]+1
             point[gt]=cot
+            endtime=time.replace('\n','')
+
+        #计算间隔时间
+        end_date = datetime.strptime(self.data_range[0],'%Y-%m-%d %H:%M:%S')
+        begin_date = datetime.strptime(endtime, '%Y-%m-%d %H:%M:%S')
+        self.gap_time=end_date.timetuple().tm_yday-begin_date.timetuple().tm_yday-1
+
         self.his_data = hisdata
 
     def add_his_data(self,origin_train_data):

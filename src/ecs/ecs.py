@@ -7,7 +7,7 @@ import predictor
 #python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output.txt
 
 
-input=2
+input=1
 def main():
     if input==2:
         print 'main function begin.'
@@ -22,7 +22,7 @@ def main():
         # #设置路径
         case_path = '/home/luojie/桌面/project/log'
         ecsDataPath = case_path + r'/data/TrainData_2015.1.1_2015.2.19.txt'
-        inputFilePath = case_path + r'/data/input_5flavors_cpu_7days.txt'
+        inputFilePath = 'input_5flavors_cpu_7days.txt'
         resultFilePath = case_path + r'/result/result_out.txt'
 
     #获取训练集列表
