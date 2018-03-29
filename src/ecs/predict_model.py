@@ -444,7 +444,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     # 季节
     gamma = 0.21
     # 季度周期长度
-    s = 5
+    s = 7
 
 
     l_t = []
@@ -452,11 +452,11 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     s_t = []
 
     # 初始trend
-    pre_b_t = 0
+    pre_b_t = 0.1
     # 初始化level
     pre_l_t = 0
     # 初始化seasonal
-    pre_s_t = 0
+    pre_s_t = 0.1
 
     # 初始化第一天的季动
     l_t.append(pre_l_t)
