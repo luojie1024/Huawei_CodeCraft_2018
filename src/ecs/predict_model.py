@@ -500,5 +500,8 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
 #########################################
 
 # 选择预测方案
-used_func = predict_model11
+#间隔短的方案
+short_gap_used_func = predict_model11
+
+long_gap_used_func = predict_model7
 #########################################
