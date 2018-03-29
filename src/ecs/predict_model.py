@@ -487,12 +487,14 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     for h in range(k,date_range_size+k):
             # 追加到历史表中
         temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
-        # 如果小于0 置为零
-        if temp_Y < 0:
-            temp_Y = 0
+        # # 如果小于0 置为零
+        # if temp_Y < 0:
+        #     temp_Y = 0
         # 保存结果
         temp_reuslt += temp_Y
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+        if temp_reuslt<0:
+            temp_reuslt=0
     result.append(int(math.floor(temp_reuslt)))
     return result
 

@@ -23,7 +23,7 @@ def main():
         case_path = '/home/luojie/桌面/project/log'
         ecsDataPath = case_path + r'/data/TrainData_2015.1.1_2015.2.19.txt'
         inputFilePath = 'input_5flavors_cpu_7days.txt'
-        resultFilePath = case_path + r'/result/result_out.txt'
+        resultFilePath = 'output.txt'
 
     #获取训练集列表
     ecs_infor_array = read_lines(ecsDataPath)
