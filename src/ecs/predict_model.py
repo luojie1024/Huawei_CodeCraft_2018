@@ -385,7 +385,7 @@ def predict_model10(his_data,date_range_size):#霍尔特线性趋势法
     # 衰减值
     alpha = 0.2
     # 趋势
-    beta = 0.115
+    beta = 0.112
     # 权重
     h = 2
 
