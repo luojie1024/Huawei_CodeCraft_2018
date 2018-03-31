@@ -5,6 +5,7 @@
     输出在预测期内各个虚拟机类型的请求数量
     
 '''
+from datetime import datetime
 
 import predict_model
 
@@ -34,7 +35,11 @@ def predict_all(caseInfo):
     # else:
     #     predict_func=short_gap_predict_func#76.68
 
-    if caseInfo.gap_time==1:
+    start_time = datetime.strptime(caseInfo.data_range[0], "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime(caseInfo.data_range[1], "%Y-%m-%d %H:%M:%S")
+
+    pos_time = datetime.strptime('2016-02-01 00:00:00', "%Y-%m-%d %H:%M:%S")
+    if end_time>pos_time:
         # predict_func = long_gap_predict_func# 78
     # else:
         predict_func=short_gap_predict_func#76.68
