@@ -35,8 +35,8 @@ def predict_all(caseInfo):
     #     predict_func=short_gap_predict_func#76.68
 
     if caseInfo.gap_time==1:
-        predict_func = long_gap_predict_func# 78
-    else:
+        # predict_func = long_gap_predict_func# 78
+    # else:
         predict_func=short_gap_predict_func#76.68
 
     for vmtype in vm_types:
