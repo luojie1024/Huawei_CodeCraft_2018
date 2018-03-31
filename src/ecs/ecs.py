@@ -38,6 +38,7 @@ def main():
     else:
         predic_result.append("NA")
         write_result(predic_result, resultFilePath)
+    write_result('return','out.txt')
     print 'main function end.'
 
 
