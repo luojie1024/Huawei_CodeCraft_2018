@@ -52,16 +52,16 @@ def predict_all(caseInfo):
     #需要预测的天数
     data_size=caseInfo.date_range_size
 
-    if end_time == pos_time1 and data_size>=range_size1:#样例1  2016-04-08
+    if end_time == pos_time1 and data_size>=range_size1:#样例1  2016-04-08  预测天数>=9
         predict_func = predict_model.model1_used_func  # 76.68
 
-    elif end_time == pos_time1 and data_size<range_size1:#样例1  2016-04-08
+    elif end_time == pos_time1 and data_size<range_size1:#样例1  2016-04-08  预测天数<9
         predict_func = predict_model.model2_used_func  # 76.147
 
-    elif end_time == pos_time2 and data_size>=range_size2:#样例2  2016-04-15
+    elif end_time == pos_time2 and data_size>=range_size2:#样例2  2016-04-15 预测天数>=9
         predict_func = predict_model.model3_used_func  # 76.147
 
-    elif end_time == pos_time2 and data_size<range_size2:#样例2  2016-04-15
+    elif end_time == pos_time2 and data_size<range_size2:#样例2  2016-04-15 预测天数<9
         predict_func = predict_model.model4_used_func  # 76.147
 
 
