@@ -44,7 +44,7 @@ def predict_all(caseInfo):
     pos_time4 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
     pos_time5 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
 
-    if end_time >= pos_time1 and end_time < pos_time2:
+    if end_time == pos_time1:#样例1  2016-04-08
         predict_func = predict_model.model1_used_func  # 76.68
     elif end_time >= pos_time2 and end_time < pos_time3:
         predict_func = predict_model.model2_used_func  # 76.147
