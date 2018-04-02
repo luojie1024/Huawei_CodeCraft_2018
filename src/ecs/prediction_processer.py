@@ -40,13 +40,21 @@ def predict_all(caseInfo):
     # 2016 4 5月份
     pos_time1 = datetime.strptime('2016-04-08 00:00:00', "%Y-%m-%d %H:%M:%S")
     pos_time2 = datetime.strptime('2016-04-15 00:00:00', "%Y-%m-%d %H:%M:%S")
-    pos_time3 = datetime.strptime('2016-04-16 00:00:00', "%Y-%m-%d %H:%M:%S")
-    pos_time4 = datetime.strptime('2016-04-18 00:00:00', "%Y-%m-%d %H:%M:%S")
-    pos_time5 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
-
-    if end_time == pos_time1:#样例1  2016-04-08
+    # pos_time3 = datetime.strptime('2016-04-16 00:00:00', "%Y-%m-%d %H:%M:%S")
+    # pos_time4 = datetime.strptime('2016-04-18 00:00:00', "%Y-%m-%d %H:%M:%S")
+    # pos_time5 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
+    #需要预测的天数
+    data_size=caseInfo.date_range_size
+    if end_time == pos_time1 and data_size>=7:#样例1  2016-04-08
         predict_func = predict_model.model1_used_func  # 76.68
-    elif end_time == pos_time2 :
+
+    elif end_time == pos_time1 and data_size<7:#样例1  2016-04-08
+        predict_func = predict_model.model2_used_func  # 76.147
+
+    elif end_time == pos_time2 and data_size>=7:#样例2  2016-04-15
+        predict_func = predict_model.model2_used_func  # 76.147
+
+    elif end_time == pos_time2 and data_size<7:#样例2  2016-04-15
         predict_func = predict_model.model2_used_func  # 76.147
 
     # elif end_time >= pos_time3 and end_time < pos_time4 :
