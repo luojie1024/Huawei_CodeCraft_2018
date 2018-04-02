@@ -748,7 +748,7 @@ model1_used_func = predict_model11
 
 model2_used_func = predict_model12
 
-model4_used_func = predict_model13
+model3_used_func = predict_model13
 
 model4_used_func = predict_model14
 
