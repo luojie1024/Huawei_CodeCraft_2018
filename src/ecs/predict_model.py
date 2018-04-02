@@ -422,7 +422,7 @@ def predict_model10(his_data, date_range_size,gap_time):  # 霍尔特线性趋�
     result.append(int(math.floor(temp_reuslt)))
     return result
 
-#用例01  76.68
+#用例01  76.68  小于三种类型
 def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     '''
     预测方案 十一 Holt-Winters
@@ -580,7 +580,7 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     return result
 
 
-#用例03
+#用例03 小于三种类型
 def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     '''
     预测方案 十三 Holt-Winters
@@ -596,7 +596,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值 0185
-    alpha = 0.180
+    alpha = 0.185
     # 趋势
     beta = 0.000
     # 季节
