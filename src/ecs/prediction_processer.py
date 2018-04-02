@@ -55,16 +55,16 @@ def predict_all(caseInfo):
     #类型1的虚拟机阈值
     preliminar1_size =3
     # 类型2的虚拟机阈值
-    preliminar2_size =15
+    preliminar2_size =3
 
     #需要预测的天数
     data_size=caseInfo.date_range_size
     '''
     #每个等级的难度主要根据预测的时间长短以及预测的虚拟机规格数量两个指标来区分。 ,按照虚拟机规格数量||预测时间区分 (初赛按虚拟机规格区分)
-    #样例1  2016-04-08  预测的天数=7
-    #样例2  2016-04-08  预测的天数=7   
-    #样例3  2016-04-15  预测的天数=7   
-    #样例4  2016-04-15  预测的天数=7
+    #样例1  2016-04-08  预测的天数=7  虚拟机类型<=3
+    #样例2  2016-04-08  预测的天数=7  虚拟机类型>3 
+    #样例3  2016-04-15  预测的天数=7  虚拟机类型<=3
+    #样例4  2016-04-15  预测的天数=7  虚拟机类型<=3
     
     '''
     # if end_time == pos_time1 and data_size<2:#样例1  2016-04-08  预测天数9 [0,7)
@@ -73,14 +73,14 @@ def predict_all(caseInfo):
     # elif end_time == pos_time1 and data_size==6:#样例1  2016-04-08  预测天数[8,9)
     #     predict_func = predict_model.model2_used_func  # 76.147
 
-    if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  2016-04-08  预测天数 7  [preliminariesL1usecase01] [preliminariesL2usecase01]
+    if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  2016-04-08  预测天数 7
         predict_func = predict_model.model1_used_func  # model1_used_func 75.091
-    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:
+    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:#样例1  2016-04-08  预测天数 7
         predict_func = predict_model.model2_used_func  # model2_used_func	77.092
-    # elif end_time == pos_time2 and data_size==range_size2:#样例2  2016-04-15 预测天数7
-    #     predict_func = predict_model.model3_used_func  # 77.361
-    elif end_time == pos_time2 and data_size==range_size2:#样例2  2016-04-15 预测天数7
-        predict_func = predict_model.model4_used_func  # 77.361
+    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size<=preliminar2_size:#样例2  2016-04-15 预测天数7
+        predict_func = predict_model.model3_used_func  #
+    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size<=preliminar2_size:#样例2  2016-04-15 预测天数7
+        predict_func = predict_model.model4_used_func  # model4_used_func 77.156
 
 
     # elif end_time >= pos_time3 and end_time < pos_time4 :
