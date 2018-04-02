@@ -53,7 +53,7 @@ def predict_all(caseInfo):
     vm_type_size = caseInfo.vm_types_size
 
     #类型1的虚拟机阈值
-    preliminar1_size =10
+    preliminar1_size =5
     # 类型2的虚拟机阈值
     preliminar2_size =15
 
