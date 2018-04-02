@@ -60,8 +60,8 @@ def predict_all(caseInfo):
     elif end_time == pos_time1 and data_size<range_size1 and data_size>=range_size2:#样例1  2016-04-08  预测天数[8,9)
         predict_func = predict_model.model2_used_func  # 76.147
 
-    elif end_time == pos_time1 and data_size<range_size2:#样例1  2016-04-08  预测天数[0,8)
-        predict_func = predict_model.model3_used_func  # 76.147
+    # elif end_time == pos_time1 and data_size<range_size2:#样例1  2016-04-08  预测天数[0,8)
+    #     predict_func = predict_model.model3_used_func  # 76.147
 
     elif end_time == pos_time2 and data_size==range_size3:#样例2  2016-04-15 预测天数7
         predict_func = predict_model.model4_used_func  # 77.361
