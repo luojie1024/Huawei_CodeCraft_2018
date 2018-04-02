@@ -47,7 +47,7 @@ def predict_all(caseInfo):
     # 需要预测的天数1
     range_size1=9
     # 需要预测的天数2
-    range_size2=7
+    range_size2=8
     # 需要预测的天数3
     range_size3=7
 
