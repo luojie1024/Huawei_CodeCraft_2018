@@ -49,9 +49,9 @@ def predict_all(caseInfo):
     # # model 2
     # predict_func = predict_model.model2_used_func  # 76.147
     # model 3
-    # predict_func = predict_model.model3_used_func  # 76.68
+    predict_func = predict_model.model3_used_func  # 76.68
     # model 4
-    predict_func = predict_model.model4_used_func  # 76.68
+    # predict_func = predict_model.model4_used_func  # 76.052
 
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype,caseInfo,predict_func)
