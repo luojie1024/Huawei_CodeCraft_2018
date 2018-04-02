@@ -37,12 +37,14 @@ def predict_all(caseInfo):
 
     start_time = datetime.strptime(caseInfo.data_range[0], "%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime(caseInfo.data_range[1], "%Y-%m-%d %H:%M:%S")
-
+    #2016 4 5月份
     pos_time = datetime.strptime('2016-04-01 00:00:00', "%Y-%m-%d %H:%M:%S")
-    if end_time>pos_time:
-        predict_func=short_gap_predict_func#76.68
-    else:
-        predict_func = long_gap_predict_func# 78
+    # if end_time>pos_time:
+    #     predict_func=short_gap_predict_func#76.68
+    # else:
+    #     predict_func = long_gap_predict_func# 78
+
+    predict_func = short_gap_predict_func  # 76.68
 
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype,caseInfo,predict_func)
