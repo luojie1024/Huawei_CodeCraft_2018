@@ -39,15 +39,15 @@ def predict_all(caseInfo):
     end_time = datetime.strptime(caseInfo.data_range[1], "%Y-%m-%d %H:%M:%S")
     # 2016 4 5月份
     pos_time1 = datetime.strptime('2016-04-08 00:00:00', "%Y-%m-%d %H:%M:%S")
-    pos_time2 = datetime.strptime('2016-04-09 00:00:00', "%Y-%m-%d %H:%M:%S")
-    pos_time3 = datetime.strptime('2016-04-10 00:00:00', "%Y-%m-%d %H:%M:%S")
+    pos_time2 = datetime.strptime('2016-04-10 00:00:00', "%Y-%m-%d %H:%M:%S")
+    pos_time3 = datetime.strptime('2016-04-15 00:00:00', "%Y-%m-%d %H:%M:%S")
     pos_time4 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
     pos_time5 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
 
     if end_time == pos_time1:#样例1  2016-04-08
         predict_func = predict_model.model1_used_func  # 76.68
-    # elif end_time >= pos_time2 and end_time < pos_time3:
-    #     predict_func = predict_model.model2_used_func  # 76.147
+    elif end_time >= pos_time2 and end_time < pos_time3:
+        predict_func = predict_model.model2_used_func  # 76.147
     else:
         predict_func = predict_model.model3_used_func # 76.94
     # model 1
