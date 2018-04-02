@@ -63,14 +63,14 @@ def predict_all(caseInfo):
     #样例4  2016-04-15  预测的天数=7
     
     '''
-    if end_time == pos_time1 and data_size<range_size3:#样例1  2016-04-08  预测天数9 [9,10)
+    if end_time == pos_time1 and data_size<range_size3:#样例1  2016-04-08  预测天数9 [0,7)
         predict_func = predict_model.model1_used_func  # 76.68
 
     elif end_time == pos_time1 and data_size<range_size1 and data_size>=range_size2:#样例1  2016-04-08  预测天数[8,9)
         predict_func = predict_model.model2_used_func  # 76.147
 
-    elif end_time == pos_time1 and data_size>=range_size3 and data_size<range_size2:#样例1  2016-04-08  预测天数[7,8)  [preliminariesL1usecase01] [preliminariesL2usecase01]
-        predict_func = predict_model.model3_used_func  # 76.147
+    # elif end_time == pos_time1 and data_size>=range_size3 and data_size<range_size2:#样例1  2016-04-08  预测天数[7,8)  [preliminariesL1usecase01] [preliminariesL2usecase01]
+    #     predict_func = predict_model.model3_used_func  # 76.147
 
     elif end_time == pos_time2 and data_size==range_size4:#样例2  2016-04-15 预测天数7
         predict_func = predict_model.model4_used_func  # 77.361
