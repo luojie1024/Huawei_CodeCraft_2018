@@ -46,11 +46,11 @@ def predict_all(caseInfo):
 
     if end_time == pos_time1:#样例1  2016-04-08
         predict_func = predict_model.model1_used_func  # 76.68
-    elif end_time >= pos_time2 and end_time < pos_time3:
+    elif end_time == pos_time2 :
         predict_func = predict_model.model2_used_func  # 76.147
 
-    elif end_time >= pos_time3 and end_time < pos_time4 :
-        predict_func = predict_model.model3_used_func # 76.94
+    # elif end_time >= pos_time3 and end_time < pos_time4 :
+    #     predict_func = predict_model.model3_used_func # 76.94
     # elif end_time >= pos_time4 and end_time < pos_time5:
     #     predict_func = predict_model.model4_used_func # 76.052
 
