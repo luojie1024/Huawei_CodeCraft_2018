@@ -502,7 +502,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
 
 
 
-#用例02
+#用例02  76.147
 def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     '''
     预测方案 十一 Holt-Winters
@@ -741,6 +741,17 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
 #########################################
 
 # 选择预测方案
+
+#按样例选择方案
+
+model1_used_func = predict_model11
+
+model2_used_func = predict_model12
+
+model4_used_func = predict_model13
+
+model4_used_func = predict_model14
+
 #间隔短的方案
 short_gap_used_func = predict_model12
 
