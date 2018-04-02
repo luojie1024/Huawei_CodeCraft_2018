@@ -49,7 +49,7 @@ def predict_all(caseInfo):
     elif end_time >= pos_time2 and end_time < pos_time3:
         predict_func = predict_model.model2_used_func  # 76.147
     else:
-        predict_func = predict_model.model2_used_func # 76.147
+        predict_func = predict_model.model3_used_func # 76.147
     # model 1
     # predict_func = predict_model.model1_used_func  # 76.68
     # # model 2
