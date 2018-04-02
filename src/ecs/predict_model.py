@@ -505,7 +505,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
 #用例02  76.147
 def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     '''
-    预测方案 十一 Holt-Winters
+    预测方案 十二 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :param k:跨度天数
@@ -584,7 +584,7 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
 #用例03
 def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     '''
-    预测方案 十一 Holt-Winters
+    预测方案 十三 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :param k:跨度天数
@@ -597,7 +597,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值
-    alpha = 0.18
+    alpha = 0.19
     # 趋势
     beta = 0.000
     # 季节
@@ -664,7 +664,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
 #用例04  76.052
 def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
     '''
-    预测方案 十一 Holt-Winters
+    预测方案 十四 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :param k:跨度天数
