@@ -669,6 +669,7 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
     :param date_range_size: 需要预测的长度
     :param k:跨度天数
     :return: 返回结果
+    76.891 alpha=1.7
     '''
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
