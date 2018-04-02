@@ -431,14 +431,13 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     :param k:跨度天数
     :return: 返回结果
     '''
-    # 历史天数
     Y = copy.deepcopy(his_data['value'])
 
     temp_reuslt = 0.0
     result = []
 
     # 衰减值
-    alpha = 0.185
+    alpha = 0.22
     # 趋势
     beta = 0.000
     # 季节
@@ -518,7 +517,7 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值
-    alpha = 0.18
+    alpha = 0.2
     # 趋势
     beta = 0.000
     # 季节
@@ -597,7 +596,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值
-    alpha = 0.22
+    alpha = 0.18
     # 趋势
     beta = 0.000
     # 季节
@@ -678,7 +677,7 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值
-    alpha = 0.185
+    alpha = 0.16
     # 趋势
     beta = 0.000
     # 季节
