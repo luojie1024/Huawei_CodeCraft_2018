@@ -53,7 +53,7 @@ def predict_all(caseInfo):
     vm_type_size = caseInfo.vm_types_size
 
     #类型1的虚拟机阈值
-    preliminar1_size =5
+    preliminar1_size =3
     # 类型2的虚拟机阈值
     preliminar2_size =15
 
@@ -61,9 +61,9 @@ def predict_all(caseInfo):
     data_size=caseInfo.date_range_size
     '''
     #每个等级的难度主要根据预测的时间长短以及预测的虚拟机规格数量两个指标来区分。 ,按照虚拟机规格数量||预测时间区分 (初赛按虚拟机规格区分)
-    #样例1  2016-04-08  预测的天数=9
-    #样例2  2016-04-08  预测的天数=8   没有=8 没有=6
-    #样例3  2016-04-08  预测的天数=7   
+    #样例1  2016-04-08  预测的天数=7
+    #样例2  2016-04-08  预测的天数=7   
+    #样例3  2016-04-15  预测的天数=7   
     #样例4  2016-04-15  预测的天数=7
     
     '''
