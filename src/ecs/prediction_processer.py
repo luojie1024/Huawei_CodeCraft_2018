@@ -51,6 +51,12 @@ def predict_all(caseInfo):
     range_size2=7
     #虚拟机类型数
     vm_type_size = caseInfo.vm_types_size
+
+    #类型1的虚拟机阈值
+    preliminar1_size =10
+    # 类型2的虚拟机阈值
+    preliminar2_size =15
+
     #需要预测的天数
     data_size=caseInfo.date_range_size
     '''
@@ -67,9 +73,9 @@ def predict_all(caseInfo):
     # elif end_time == pos_time1 and data_size==6:#样例1  2016-04-08  预测天数[8,9)
     #     predict_func = predict_model.model2_used_func  # 76.147
 
-    if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=15:#样例1  2016-04-08  预测天数 7  [preliminariesL1usecase01] [preliminariesL2usecase01]
+    if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  2016-04-08  预测天数 7  [preliminariesL1usecase01] [preliminariesL2usecase01]
         predict_func = predict_model.model1_used_func  # model1_used_func 75.091
-    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>15:
+    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:
         predict_func = predict_model.model2_used_func  # model2_used_func	77.092
     # elif end_time == pos_time2 and data_size==range_size2:#样例2  2016-04-15 预测天数7
     #     predict_func = predict_model.model3_used_func  # 77.361
