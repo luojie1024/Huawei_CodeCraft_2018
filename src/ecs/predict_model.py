@@ -521,9 +521,9 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     # 趋势
     beta = 0.000
     # 季节
-    gamma = 0.20
+    gamma = 0.3
     # 季度周期长度
-    s = 6
+    s = 7
 
 
     l_t = []
