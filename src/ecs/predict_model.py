@@ -759,6 +759,8 @@ model5_used_func = predict_model9
 
 model6_used_func = predict_model10
 
+#预测7
+model7_used_func=predict_model7
 
 #间隔短的方案
 short_gap_used_func = predict_model12
