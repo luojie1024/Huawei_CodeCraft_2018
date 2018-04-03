@@ -517,11 +517,11 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     result = []
 
     # 衰减值0.195
-    alpha = 0.205
+    alpha = 0.195
     # 趋势
     beta = 0.000
     # 季节
-    gamma = 0.195
+    gamma = 0.21
     # 季度周期长度
     s = 7
 
