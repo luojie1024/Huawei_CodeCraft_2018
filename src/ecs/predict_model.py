@@ -865,7 +865,7 @@ def predict_model17(his_data, date_range_size,gap_time):  # 霍尔特线性趋�
     # 衰减值
     alpha = 0.2
     # 趋势
-    beta = 0.11
+    beta = 0.0
     # 权重 75.21
     h = 1.5
 
