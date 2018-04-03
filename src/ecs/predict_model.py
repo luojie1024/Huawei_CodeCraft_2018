@@ -349,7 +349,7 @@ def predict_model9(his_data, date_range_size,gap_time):  # 简单滑动平均法
     :return: 返回结果
     '''
     # 衰减值
-    alpha = 0.22
+    alpha = 0.19
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
