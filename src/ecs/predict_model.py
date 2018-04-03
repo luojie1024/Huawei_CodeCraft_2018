@@ -341,7 +341,7 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 #
 #     return result
 
-def predict_model9(his_data, date_range_size,alpha):  # 简单滑动平均法
+def predict_model9(his_data, date_range_size,gap_time):  # 简单滑动平均法
     '''
     预测方案 九 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
@@ -349,7 +349,7 @@ def predict_model9(his_data, date_range_size,alpha):  # 简单滑动平均法
     :return: 返回结果
     '''
     # 衰减值
-    alpha = alpha
+    alpha = 0.2
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -371,7 +371,7 @@ def predict_model9(his_data, date_range_size,alpha):  # 简单滑动平均法
 
 def predict_model10(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
     '''
-    预测方案 十 指数滑动平均
+    预测方案 十 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
@@ -600,7 +600,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     # 趋势
     beta = 0.0
     # 季节 0.21
-    gamma = 0.5
+    gamma = 0.21
     # 季度周期长度
     s = 7
 
@@ -751,6 +751,14 @@ model2_used_func = predict_model12
 model3_used_func = predict_model13
 
 model4_used_func = predict_model14
+
+#指数平均
+model5_used_func = predict_model9
+
+#霍尔特线性趋势法
+
+model6_used_func = predict_model10
+
 
 #间隔短的方案
 short_gap_used_func = predict_model12
