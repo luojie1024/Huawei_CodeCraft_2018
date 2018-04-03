@@ -738,8 +738,226 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
             temp_reuslt=0
     result.append(int(math.floor(temp_reuslt)))
     return result
-#########################################
+###################霍尔特线性趋势法######################
 
+def predict_model15(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+    '''
+    预测方案 十 霍尔特线性趋势法
+    :param his_data: 真实的历史数据出现次数表
+    :param date_range_size: 需要预测的长度
+    :return: 返回结果
+    '''
+    # 历史天数
+    chis_data = copy.deepcopy(his_data['value'])
+    # 历史天数
+    cal_len = len(chis_data)
+    temp_reuslt = 0.0
+    result = []
+
+    # 衰减值
+    alpha = 0.2
+    # 趋势
+    beta = 0.11
+    # 权重 75.21
+    h = 1.75
+
+    y_hot_t = 0.0
+    l_t = 0.2
+    b_t = 0.2
+
+    # 初始trend
+    pre_b_t = 0.0
+    # 初始化level
+    pre_l_t = 0.0
+
+    for rept in range(date_range_size):  # 预测天数范围
+
+        # 遍历历史记录
+        for i in range(1, len(chis_data)):  # t+1开始
+            # 更新level trend
+            pre_l_t = l_t
+            pre_b_t = b_t
+            # step1 computer level
+            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
+            # step2 computer trend
+            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
+            # step3
+            y_hot_t = l_t + h * b_t
+            if y_hot_t < 0:
+                y_hot_t = 0
+        # 追加到历史表中
+        chis_data.append(y_hot_t)
+        # 保存结果
+        temp_reuslt += y_hot_t
+    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+    result.append(int(math.floor(temp_reuslt)))
+    return result
+
+
+def predict_model16(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+    '''
+    预测方案 十 霍尔特线性趋势法
+    :param his_data: 真实的历史数据出现次数表
+    :param date_range_size: 需要预测的长度
+    :return: 返回结果
+    '''
+    # 历史天数
+    chis_data = copy.deepcopy(his_data['value'])
+    # 历史天数
+    cal_len = len(chis_data)
+    temp_reuslt = 0.0
+    result = []
+
+    # 衰减值
+    alpha = 0.2
+    # 趋势
+    beta = 0.11
+    # 权重 75.21
+    h = 1.75
+
+    y_hot_t = 0.0
+    l_t = 0.2
+    b_t = 0.2
+
+    # 初始trend
+    pre_b_t = 0.0
+    # 初始化level
+    pre_l_t = 0.0
+
+    for rept in range(date_range_size):  # 预测天数范围
+
+        # 遍历历史记录
+        for i in range(1, len(chis_data)):  # t+1开始
+            # 更新level trend
+            pre_l_t = l_t
+            pre_b_t = b_t
+            # step1 computer level
+            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
+            # step2 computer trend
+            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
+            # step3
+            y_hot_t = l_t + h * b_t
+            if y_hot_t < 0:
+                y_hot_t = 0
+        # 追加到历史表中
+        chis_data.append(y_hot_t)
+        # 保存结果
+        temp_reuslt += y_hot_t
+    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+    result.append(int(math.floor(temp_reuslt)))
+    return result
+
+
+def predict_model17(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+    '''
+    预测方案 十 霍尔特线性趋势法
+    :param his_data: 真实的历史数据出现次数表
+    :param date_range_size: 需要预测的长度
+    :return: 返回结果
+    '''
+    # 历史天数
+    chis_data = copy.deepcopy(his_data['value'])
+    # 历史天数
+    cal_len = len(chis_data)
+    temp_reuslt = 0.0
+    result = []
+
+    # 衰减值
+    alpha = 0.2
+    # 趋势
+    beta = 0.11
+    # 权重 75.21
+    h = 1.75
+
+    y_hot_t = 0.0
+    l_t = 0.2
+    b_t = 0.2
+
+    # 初始trend
+    pre_b_t = 0.0
+    # 初始化level
+    pre_l_t = 0.0
+
+    for rept in range(date_range_size):  # 预测天数范围
+
+        # 遍历历史记录
+        for i in range(1, len(chis_data)):  # t+1开始
+            # 更新level trend
+            pre_l_t = l_t
+            pre_b_t = b_t
+            # step1 computer level
+            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
+            # step2 computer trend
+            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
+            # step3
+            y_hot_t = l_t + h * b_t
+            if y_hot_t < 0:
+                y_hot_t = 0
+        # 追加到历史表中
+        chis_data.append(y_hot_t)
+        # 保存结果
+        temp_reuslt += y_hot_t
+    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+    result.append(int(math.floor(temp_reuslt)))
+    return result
+
+
+def predict_model18(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+    '''
+    预测方案 十 霍尔特线性趋势法
+    :param his_data: 真实的历史数据出现次数表
+    :param date_range_size: 需要预测的长度
+    :return: 返回结果
+    '''
+    # 历史天数
+    chis_data = copy.deepcopy(his_data['value'])
+    # 历史天数
+    cal_len = len(chis_data)
+    temp_reuslt = 0.0
+    result = []
+
+    # 衰减值
+    alpha = 0.2
+    # 趋势
+    beta = 0.11
+    # 权重 75.21
+    h = 1.75
+
+    y_hot_t = 0.0
+    l_t = 0.2
+    b_t = 0.2
+
+    # 初始trend
+    pre_b_t = 0.0
+    # 初始化level
+    pre_l_t = 0.0
+
+    for rept in range(date_range_size):  # 预测天数范围
+
+        # 遍历历史记录
+        for i in range(1, len(chis_data)):  # t+1开始
+            # 更新level trend
+            pre_l_t = l_t
+            pre_b_t = b_t
+            # step1 computer level
+            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
+            # step2 computer trend
+            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
+            # step3
+            y_hot_t = l_t + h * b_t
+            if y_hot_t < 0:
+                y_hot_t = 0
+        # 追加到历史表中
+        chis_data.append(y_hot_t)
+        # 保存结果
+        temp_reuslt += y_hot_t
+    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+    result.append(int(math.floor(temp_reuslt)))
+    return result
+
+
+
+#########################################
 # 选择预测方案
 
 #按样例选择方案
@@ -754,10 +972,14 @@ model4_used_func = predict_model14
 
 #指数平均
 model5_used_func = predict_model9
+################霍尔特线性趋势法#########################
 
-#霍尔特线性趋势法
+model21_used_func = predict_model15
+model22_used_func = predict_model16
+model23_used_func = predict_model17
+model24_used_func = predict_model18
+#######################################################
 
-model6_used_func = predict_model10
 
 #预测7
 model7_used_func=predict_model7
