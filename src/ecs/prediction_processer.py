@@ -67,35 +67,16 @@ def predict_all(caseInfo):
     #样例4  2016-04-15  预测的天数=7  虚拟机类型>3
     
     '''
-    # if end_time == pos_time1 and data_size<2:#样例1  2016-04-08  预测天数9 [0,7)
-    #     predict_func = predict_model.model1_used_func  # 76.68
-
-    # elif end_time == pos_time1 and data_size==6:#样例1  2016-04-08  预测天数[8,9)
-    #     predict_func = predict_model.model2_used_func  # 76.147
 
     if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  L1 2016-04-08  预测天数 7
         predict_func = predict_model.model1_used_func  # model1_used_func 75.091
-    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:#样例2 L2  2016-04-08  预测天数 7
-        predict_func = predict_model.model2_used_func  # model2_used_func	77.092
-    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size<=preliminar2_size:#样例3 L1   2016-04-15 预测天数7
-        predict_func = predict_model.model3_used_func  # model3_used_func  77.32
-    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size>preliminar2_size:#样例4  2016-04-15 预测天数7
-        predict_func = predict_model.model4_used_func  # model4_used_func 77.156
+    # elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:#样例2 L2  2016-04-08  预测天数 7
+    #     predict_func = predict_model.model2_used_func  # model2_used_func	77.092
+    # elif end_time == pos_time2 and data_size==range_size2 and vm_type_size<=preliminar2_size:#样例3 L1   2016-04-15 预测天数7
+    #     predict_func = predict_model.model3_used_func  # model3_used_func  77.32
+    # elif end_time == pos_time2 and data_size==range_size2 and vm_type_size>preliminar2_size:#样例4  L2  2016-04-15 预测天数7
+    #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
 
-
-    # elif end_time >= pos_time3 and end_time < pos_time4 :
-    #     predict_func = predict_model.model3_used_func # 76.94
-    # elif end_time >= pos_time4 and end_time < pos_time5:
-    #     predict_func = predict_model.model4_used_func # 76.052
-
-    # model 1
-    # predict_func = predict_model.model1_used_func  # 76.68
-    # # model 2
-    # predict_func = predict_model.model2_used_func  # 76.147
-    # model 3
-    # predict_func = predict_model.model3_used_func  # 76.94
-    # model 4
-    # predict_func = predict_model.model4_used_func  # 76.052
 
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype, caseInfo, predict_func)
