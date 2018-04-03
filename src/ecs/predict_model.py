@@ -898,7 +898,7 @@ def predict_model17(his_data, date_range_size,gap_time):  # 霍尔特线性趋�
         # 保存结果
         temp_reuslt += y_hot_t
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)))
+    result.append(int(math.ceil(temp_reuslt)))
     return result
 
 
