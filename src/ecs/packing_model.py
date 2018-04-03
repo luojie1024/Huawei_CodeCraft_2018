@@ -334,7 +334,7 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
 
 #########################################
 # 选择装配方案
-used_func= pack_model5
+used_func= pack_model4
 #########################################
 
 
