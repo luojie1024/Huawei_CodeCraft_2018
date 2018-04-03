@@ -455,7 +455,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     # 初始trend
     pre_b_t = 0.0
     # 初始化level
-    pre_l_t = 10.0
+    pre_l_t = 0.0
     # 初始化seasonal
     pre_s_t = 0.0
 
@@ -465,7 +465,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     s_t.append(pre_s_t)
 
     #在首部填充一位数据初始
-    Y.insert(0,0.0)
+    Y.insert(0,5.0)
 
     # 用历史记录训练初始化参数
     for t in range(1, len(Y)): # 当前是t时刻
