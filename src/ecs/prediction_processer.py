@@ -65,7 +65,6 @@ def predict_all(caseInfo):
     #样例2  2016-04-08  预测的天数=7  虚拟机类型>3 
     #样例3  2016-04-15  预测的天数=7  虚拟机类型<=3
     #样例4  2016-04-15  预测的天数=7  虚拟机类型>3
-    
     '''
 
     if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  L1 2016-04-08  预测天数 7
