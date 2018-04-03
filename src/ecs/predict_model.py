@@ -736,7 +736,7 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
         if temp_reuslt<0:
             temp_reuslt=0
-    result.append(int(math.floor(temp_reuslt)))
+    result.append(int(math.ceil(temp_reuslt)))
     return result
 #########################################
 
