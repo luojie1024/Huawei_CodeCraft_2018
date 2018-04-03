@@ -600,7 +600,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     # 趋势
     beta = 0.000
     # 季节 0.21
-    gamma = 0.2
+    gamma = 0.3
     # 季度周期长度
     s = 7
 
