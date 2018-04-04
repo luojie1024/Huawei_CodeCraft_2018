@@ -847,14 +847,14 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
 
 
     '''
-    预测方案七,对若干星期前同一天数据求平均
+    预测方案17,对若干星期前同一天数据求平均
     his_data:['time':[时间标签],'value':[值]]
     '''
 
     n = 3  # 边长数
     # sigma = 0.5
 
-    back_week = 2
+    back_week = 3
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
     count=0
