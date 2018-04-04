@@ -81,7 +81,7 @@ def predict_all(caseInfo):
 
 
     for vmtype in vm_types:
-        result[vmtype] = predict_one(vmtype, caseInfo, predict_func,data_size)
+        result[vmtype] = predict_one(vmtype, caseInfo, predict_func)
 
     return result
 
