@@ -856,7 +856,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
     if (his_data['time'] == 0):
         return [0]
 
-    n = 7  # 历史长度
+    n = 3  # 历史长度
     sigma = 0.1
 
     n_layer1 = 1
