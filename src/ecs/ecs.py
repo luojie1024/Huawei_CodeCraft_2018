@@ -7,7 +7,7 @@ import predictor
 #python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output.txt
 
 
-input=1
+input=2
 def main():
     if input==2:
         print 'main function begin.'

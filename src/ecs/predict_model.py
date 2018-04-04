@@ -758,7 +758,7 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
     back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
-
+    count=0
     result = []
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
@@ -786,9 +786,10 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        count+=day_avage
         chis_data.append(day_avage)
-        result.append(day_avage)
-
+    result.append(count)
     return result
 
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
@@ -799,13 +800,15 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     his_data:['time':[时间标签],'value':[值]]
     '''
 
+
+
     n = 3  # 边长数
-    sigma = 0.5
+    # sigma = 0.5
 
     back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
-
+    count=0
     result = []
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
@@ -830,21 +833,17 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
                 break
         if cot_week != 0:
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        noise = random.gauss(0, sigma)
-        noise = math.fabs(noise)
-        day_avage = int(math.ceil(day_avage + noise))
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        count+=day_avage
         chis_data.append(day_avage)
-        result.append(day_avage)
-
+    result.append(count)
     return result
 
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size,gap_time):  # 需要预测的长度
-
-    '''
-    预测方案七,对若干星期前同一天数据求平均
-    his_data:['time':[时间标签],'value':[值]]
-    '''
 
 
     '''
@@ -858,7 +857,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
     back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
-
+    count=0
     result = []
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
@@ -886,14 +885,17 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        count+=day_avage
         chis_data.append(day_avage)
-        result.append(day_avage)
-
+    result.append(count)
     return result
+
 
 
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size,gap_time):  # 需要预测的长度
+
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -901,12 +903,12 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
     '''
 
     n = 3  # 边长数
-    sigma = 0.5
+    # sigma = 0.5
 
     back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
-
+    count=0
     result = []
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
@@ -931,12 +933,13 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
                 break
         if cot_week != 0:
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        noise = random.gauss(0, sigma)
-        noise = math.fabs(noise)
-        day_avage = int(math.ceil(day_avage + noise))
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        count+=day_avage
         chis_data.append(day_avage)
-        result.append(day_avage)
-
+    result.append(count)
     return result
 
 

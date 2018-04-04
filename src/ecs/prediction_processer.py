@@ -23,6 +23,9 @@ preliminar1_size = 3
 # 类型2的虚拟机阈值
 preliminar2_size = 3
 
+# 历史列表类型 1 2 滑动均值 3真实值
+vmtype_avage_v = 3
+
 
 def predict_all(caseInfo):
     '''
@@ -54,13 +57,11 @@ def predict_all(caseInfo):
     # pos_time4 = datetime.strptime('2016-04-18 00:00:00', "%Y-%m-%d %H:%M:%S")
     # pos_time5 = datetime.strptime('2016-04-20 00:00:00', "%Y-%m-%d %H:%M:%S")
 
-
-    #虚拟机类型数
+    # 虚拟机类型数
     vm_type_size = caseInfo.vm_types_size
 
-
-    #需要预测的天数
-    data_size=caseInfo.date_range_size
+    # 需要预测的天数
+    data_size = caseInfo.date_range_size
     '''
     #每个等级的难度主要根据预测的时间长短以及预测的虚拟机规格数量两个指标来区分。 ,按照虚拟机规格数量||预测时间区分 (初赛按虚拟机规格区分)
     #样例1  2016-04-08  预测的天数=7  虚拟机类型<=3
@@ -69,17 +70,21 @@ def predict_all(caseInfo):
     #样例4  2016-04-15  预测的天数=7  虚拟机类型>3
     '''
 
-    if end_time == pos_time1 and data_size==range_size1 and vm_type_size<=preliminar1_size:#样例1  L1 2016-04-08  预测天数 7
-        predict_func = predict_model.model21_used_func  # model1_used_func 75.091
-    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size>preliminar1_size:#样例2 L2  2016-04-08  预测天数 7
+    if end_time == pos_time1 and data_size == range_size1 and vm_type_size <= preliminar1_size:  # 样例1  L1 2016-04-08  预测天数 7
+        predict_func = predict_model.model1_used_func  # model1_used_func 75.091
+        vmtype_avage_v = 3
+    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size > preliminar1_size:  # 样例2 L2  2016-04-08  预测天数 7
         predict_func = predict_model.model2_used_func  # model2_used_func	77.092
-    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size<=preliminar2_size:#样例3 L1   2016-04-15 预测天数7
+        vmtype_avage_v = 3
+    elif end_time == pos_time2 and data_size == range_size2 and vm_type_size <= preliminar2_size:  # 样例3 L1   2016-04-15 预测天数7
         # predict_func = predict_model.model3_used_func  # model3_used_func  77.32
         predict_func = predict_model.model23_used_func  # 78.712
-    elif end_time == pos_time2 and data_size==range_size2 and vm_type_size>preliminar2_size:#样例4  L2  2016-04-15 预测天数7
+        vmtype_avage_v = 2
+    elif end_time == pos_time2 and data_size == range_size2 and vm_type_size > preliminar2_size:  # 样例4  L2  2016-04-15 预测天数7
         predict_func = predict_model.model4_used_func  # model4_used_func 77.156
+        vmtype_avage_v = 3
 
-
+    # predict_func = predict_model.model21_used_func
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype, caseInfo, predict_func)
 
@@ -90,12 +95,15 @@ def predict_one(vm_type,  # 虚拟机类型
                 caseInfo,  # 案例信息对象
                 prodict_function=None,  # 时间序列预测
                 ):
-    if caseInfo.date_range_size<=preliminar1_size:
+    if vmtype_avage_v == 1:
+        return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v1(vm_type, -1),
+                                caseInfo.date_range_size, caseInfo.gap_time)
+    elif (vmtype_avage_v == 2):
         return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v2(vm_type, -1),
                                 caseInfo.date_range_size, caseInfo.gap_time)
     else:
         return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v3(vm_type, -1),
-                            caseInfo.date_range_size, caseInfo.gap_time)
+                                caseInfo.date_range_size, caseInfo.gap_time)
     '''
     训练并预测一种虚拟机的类型，返回为
     一个[v1,v2,v3....]预测结果数组
