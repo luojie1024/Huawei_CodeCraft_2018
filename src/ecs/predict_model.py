@@ -857,7 +857,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
         return [0]
 
     n = 14  # 历史长度
-    sigma = 0.1
+    sigma = 0.2
 
     n_layer1 = 1
     chis_data = copy.deepcopy(his_data['value'])
