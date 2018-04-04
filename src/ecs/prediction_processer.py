@@ -77,9 +77,9 @@ def predict_all(caseInfo):
         predict_func = predict_model.model2_used_func  # model2_used_func	77.092
         vmtype_avage_v = 3
     elif end_time == pos_time2 and data_size == range_size2 and vm_type_size <= preliminar2_size:  # 样例3 L1   2016-04-15 预测天数7
-        # predict_func = predict_model.model3_used_func  # model3_used_func  77.32
-        predict_func = predict_model.model23_used_func  # 78.712
-        vmtype_avage_v = 2
+        predict_func = predict_model.model3_used_func  # model3_used_func  77.32
+        # predict_func = predict_model.model23_used_func  # 78.712
+        vmtype_avage_v = 3
     elif end_time == pos_time2 and data_size == range_size2 and vm_type_size > preliminar2_size:  # 样例4  L2  2016-04-15 预测天数7
         predict_func = predict_model.model4_used_func  # model4_used_func 77.156
         vmtype_avage_v = 3
