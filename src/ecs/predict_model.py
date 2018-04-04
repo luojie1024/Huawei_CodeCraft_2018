@@ -465,7 +465,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     s_t.append(pre_s_t)
 
     #在首部填充一位数据初始
-    Y.insert(0,5.0)
+    Y.insert(0,0.0)
 
     # 用历史记录训练初始化参数
     for t in range(1, len(Y)): # 当前是t时刻
@@ -743,223 +743,201 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
 
 
 
-###################霍尔特线性趋势法######################
+###################对若干星期前同一天数据求平均######################
+def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
+                   date_range_size,gap_time):  # 需要预测的长度
 
-def predict_model15(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
     '''
-    预测方案 十 霍尔特线性趋势法
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
     '''
-    # 历史天数
+
+    n = 3  # 边长数
+    # sigma = 0.5
+
+    back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
     cal_len = len(chis_data)
-    temp_reuslt = 0.0
+
     result = []
-
-    # 衰减值
-    alpha = 0.2
-    # 趋势
-    beta = 0.11
-    # 权重 75.21
-    h = 1.75
-
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
-
-    # 初始trend
-    pre_b_t = 0.0
-    # 初始化level
-    pre_l_t = 0.0
-
     for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / 2.0
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        chis_data.append(day_avage)
+        result.append(day_avage)
 
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
-        # 追加到历史表中
-        chis_data.append(y_hot_t)
-        # 保存结果
-        temp_reuslt += y_hot_t
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)))
+    return result
+
+def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
+                   date_range_size,gap_time):  # 需要预测的长度
+
+    '''
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
+    '''
+
+    n = 3  # 边长数
+    sigma = 0.5
+
+    back_week = 2
+    chis_data = copy.deepcopy(his_data['value'])
+    cal_len = len(chis_data)
+
+    result = []
+    for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / 2.0
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        noise = random.gauss(0, sigma)
+        noise = math.fabs(noise)
+        day_avage = int(math.ceil(day_avage + noise))
+        chis_data.append(day_avage)
+        result.append(day_avage)
+
+    return result
+
+def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
+                   date_range_size,gap_time):  # 需要预测的长度
+
+    '''
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
+    '''
+
+
+    '''
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
+    '''
+
+    n = 3  # 边长数
+    # sigma = 0.5
+
+    back_week = 2
+    chis_data = copy.deepcopy(his_data['value'])
+    cal_len = len(chis_data)
+
+    result = []
+    for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / 2.0
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        chis_data.append(day_avage)
+        result.append(day_avage)
+
     return result
 
 
-def predict_model16(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
+                   date_range_size,gap_time):  # 需要预测的长度
+
     '''
-    预测方案 十 霍尔特线性趋势法
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
     '''
-    # 历史天数
+
+    n = 3  # 边长数
+    sigma = 0.5
+
+    back_week = 2
     chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
     cal_len = len(chis_data)
-    temp_reuslt = 0.0
+
     result = []
-
-    # 衰减值
-    alpha = 0.2
-    # 趋势
-    beta = 0.11
-    # 权重 75.21
-    h = 1.75
-
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
-
-    # 初始trend
-    pre_b_t = 0.0
-    # 初始化level
-    pre_l_t = 0.0
-
     for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / 2.0
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        noise = random.gauss(0, sigma)
+        noise = math.fabs(noise)
+        day_avage = int(math.ceil(day_avage + noise))
+        chis_data.append(day_avage)
+        result.append(day_avage)
 
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
-        # 追加到历史表中
-        chis_data.append(y_hot_t)
-        # 保存结果
-        temp_reuslt += y_hot_t
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)))
     return result
-
-
-def predict_model17(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
-    '''
-    预测方案 十 霍尔特线性趋势法
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
-    '''
-    # 历史天数
-    chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
-    cal_len = len(chis_data)
-    temp_reuslt = 0.0
-    result = []
-
-    # 衰减值
-    alpha = 0.45
-    # 趋势
-    beta = 0.1
-    # 权重 75.21
-    h = 1.5
-
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
-
-    # 初始trend
-    pre_b_t = 0.0
-    # 初始化level
-    pre_l_t = 0.0
-
-    for rept in range(date_range_size):  # 预测天数范围
-
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
-        # 追加到历史表中
-        chis_data.append(y_hot_t)
-        # 保存结果
-        temp_reuslt += y_hot_t
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.ceil(temp_reuslt)))
-    return result
-
-
-def predict_model18(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
-    '''
-    预测方案 十 霍尔特线性趋势法
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
-    '''
-    # 历史天数
-    chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
-    cal_len = len(chis_data)
-    temp_reuslt = 0.0
-    result = []
-
-    # 衰减值
-    alpha = 0.2
-    # 趋势
-    beta = 0.11
-    # 权重 75.21
-    h = 1.75
-
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
-
-    # 初始trend
-    pre_b_t = 0.0
-    # 初始化level
-    pre_l_t = 0.0
-
-    for rept in range(date_range_size):  # 预测天数范围
-
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
-        # 追加到历史表中
-        chis_data.append(y_hot_t)
-        # 保存结果
-        temp_reuslt += y_hot_t
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)))
-    return result
-
 
 
 #########################################
