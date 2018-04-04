@@ -889,8 +889,8 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
         avag.append(predict)
         # result.append(predict)
         count+=predict
-
-    return result.append(count)
+    result.append(count)
+    return result
 
 
 
