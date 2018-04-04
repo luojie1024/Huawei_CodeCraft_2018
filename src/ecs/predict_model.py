@@ -845,51 +845,52 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size,gap_time):  # 需要预测的长度
 
-
     '''
-    预测方案17,对若干星期前同一天数据求平均
+    预测方案六,使用SMV模型预测，添加正态随机噪声
+    先将数据进行一次平均处理，然后采用平均预测
+    历史长度为n个粒度时间，权重设定暂定，
     his_data:['time':[时间标签],'value':[值]]
     '''
+    count=0
+    # 如果当前主机类型在当前数据集未出现
+    if (his_data['time'] == 0):
+        return [0]
 
-    n = 3  # 边长数
-    # sigma = 0.5
+    n = 7  # 历史长度
+    sigma = 0.1
 
-    back_week = 1
+    n_layer1 = 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
-    count=0
+    avag = []
+    tmp = 0.0
+    last = 0.0
+    for i in range(n_layer1):
+        last = chis_data[i] * 1.0 / n_layer1
+        tmp += last
+    avag.append(tmp)
+    for i in range(n_layer1, cal_len):
+        tmp -= last
+        last = chis_data[i] * 1.0 / n_layer1
+        tmp += last
+        avag.append(tmp)
+
     result = []
-    for rept in range(date_range_size):  # 预测天数范围
-        day_avage = 0.0
-        cot_week = 0
-        for i in range(1, back_week + 1):
-            index = i * 7
-            if index <= cal_len:
-                day_tmp = chis_data[-index] * n
-                cot_day = n
-                cot_week += 1
-                for j in range(1, n):
-                    tmp = (n - j) / 2.0
-                    day_tmp += chis_data[-index + j] * tmp
-                    cot_day += tmp
-                    if index + j <= cal_len:
-                        day_tmp += chis_data[-index - j] * tmp
-                        cot_day += tmp
-                    else:
-                        continue
-                day_avage += day_tmp / cot_day
-            else:
-                break
-        if cot_week != 0:
-            day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        # noise = random.gauss(0, sigma)
-        # noise = math.fabs(noise)
-        # day_avage = int(math.ceil(day_avage + noise))
-        day_avage = int(math.ceil(day_avage))
-        count+=day_avage
-        chis_data.append(day_avage)
-    result.append(count)
-    return result
+    for rept in range(date_range_size):
+        cal_len = len(avag)
+        tmpn = 0
+        predict = 0.0
+        for i in range(cal_len - 1, -1, -1):
+            predict += avag[i]
+            tmpn += 1
+            if tmpn == n: break
+        noise = random.gauss(0, sigma)
+        predict = int(math.ceil(predict * 1.0 / tmpn + noise))
+        avag.append(predict)
+        # result.append(predict)
+        count+=predict
+
+    return result.append(count)
 
 
 
