@@ -3,7 +3,7 @@ import copy
 import math
 import random
 
-from ParamInfo import VM_TYPE_MODIFY3
+from ParamInfo import *
 
 
 def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
@@ -503,7 +503,13 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
         if temp_reuslt<0:
             temp_reuslt=0
-    result.append(int(math.floor(temp_reuslt)))
+
+    # 结果修正
+    modify = VM_TYPE_MODIFY1[vm_type]
+    temp_reuslt = int(math.floor(temp_reuslt) + modify)
+    if temp_reuslt < 0:
+        temp_reuslt = 0
+    result.append(temp_reuslt)
     return result
 
 
@@ -613,8 +619,6 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     # 季度周期长度 7
     s = 7
 
-    #修正
-    # modify=2
 
     l_t = []
     b_t = []

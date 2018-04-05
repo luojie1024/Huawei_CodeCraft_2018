@@ -31,9 +31,9 @@ VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
                 'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15']
 
 VM_TYPE_MODIFY1 = {
-    'flavor1': 1, 'flavor2': 1, 'flavor3': 1, 'flavor4': 1, 'flavor5': 1,
-    'flavor6': 1, 'flavor7': 1, 'flavor8': 1, 'flavor9': 1, 'flavor10': 1,
-    'flavor11': 1, 'flavor12': 1, 'flavor13': 1, 'flavor14': 1, 'flavor15': 1
+    'flavor1': 1, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
+    'flavor6': 0, 'flavor7': 0, 'flavor8': 0, 'flavor9': 0, 'flavor10': 0,
+    'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
 VM_TYPE_MODIFY2 = {
@@ -43,7 +43,7 @@ VM_TYPE_MODIFY2 = {
 }
 
 VM_TYPE_MODIFY3 = {#flavor1 2 flavor5 -13 flavor8 6
-    'flavor1': 1, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5':-13,
+    'flavor1': 2, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5':-13,
     'flavor6': 0, 'flavor7': 0, 'flavor8': 6, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
