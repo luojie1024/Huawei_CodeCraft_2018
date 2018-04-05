@@ -30,8 +30,8 @@ VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
                 'flavor6', 'flavor7', 'flavor8', 'flavor9', 'flavor10',
                 'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15']
 
-VM_TYPE_MODIFY1 = {
-    'flavor1': 1, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
+VM_TYPE_MODIFY1 = {#flavor1 2 flavor5 -13 flavor8 6
+    'flavor1': 1, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 1,
     'flavor6': 0, 'flavor7': 0, 'flavor8': 0, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
