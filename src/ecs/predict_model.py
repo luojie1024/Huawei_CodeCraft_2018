@@ -606,7 +606,8 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     # 季度周期长度 7
     s = 7
 
-    modify=1
+    #修正
+    modify=-1
 
     l_t = []
     b_t = []
