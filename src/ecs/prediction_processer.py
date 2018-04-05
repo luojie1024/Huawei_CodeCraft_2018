@@ -20,7 +20,8 @@ range_size2 = 7
 
 # 类型1的虚拟机阈值
 preliminar1_1size = 3
-preliminar1_2_size = 7
+preliminar1_2_size = 5
+
 # 类型2的虚拟机阈值
 preliminar2_1_size = 3
 preliminar2_2_size = 3
