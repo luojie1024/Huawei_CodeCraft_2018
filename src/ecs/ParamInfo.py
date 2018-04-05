@@ -39,8 +39,8 @@ VM_TYPE_MODIFY1 = {#flavor1 1 flavor2 12 flavor8 -3
 
 #L2 type_size=5
 VM_TYPE_MODIFY2 = {#flavor1 1 flavor2 1 flavor8 1 flavor9
-    'flavor1': 1, 'flavor2': 1, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
-    'flavor6': 0, 'flavor7':0, 'flavor8':1 , 'flavor9': 1, 'flavor10': 0,
+    'flavor1': 1, 'flavor2': 1, 'flavor3': 1, 'flavor4': 1, 'flavor5': 1,
+    'flavor6':1, 'flavor7':1, 'flavor8':1 , 'flavor9': 1, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
@@ -55,7 +55,7 @@ VM_TYPE_MODIFY3 = {#flavor1 2 flavor5 -13 flavor8 6
 VM_TYPE_MODIFY4 = {
     'flavor1': 0, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
     'flavor6': 0, 'flavor7': 0, 'flavor8': 0, 'flavor9': 0, 'flavor10': 0,
-    'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 1
+    'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
 # 预测时间粒度
