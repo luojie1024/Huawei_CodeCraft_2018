@@ -39,7 +39,7 @@ VM_TYPE_MODIFY1 = {#flavor1 1 flavor2 12 flavor8 -3
 
 #L2 type_size=5
 VM_TYPE_MODIFY2 = {#flavor1 1 flavor2 15  flavor5 0  flavor8 -4 flavor9 0
-    'flavor1': 2, 'flavor2': 16, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
+    'flavor1': 3, 'flavor2': 16, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
     'flavor6':0, 'flavor7':0, 'flavor8':-4 , 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
