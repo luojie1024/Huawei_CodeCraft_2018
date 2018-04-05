@@ -668,8 +668,11 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
             temp_reuslt=0
     #结果修正
     modify=VM_TYPE_MODIFY3[vm_type]
+    temp_reuslt=int(math.floor(temp_reuslt)+modify)
+    if temp_reuslt < 0:
+        temp_reuslt = 0
 
-    result.append(int(math.floor(temp_reuslt)+modify))
+    result.append(temp_reuslt)
     return result
 
 
