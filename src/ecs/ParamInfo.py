@@ -43,7 +43,7 @@ VM_TYPE_MODIFY2 = {
 }
 
 VM_TYPE_MODIFY3 = {#flavor1 ↓ ↑
-    'flavor1': 0, 'flavor2': 0, 'flavor3': 0, 'flavor4': 1, 'flavor5': 1,
+    'flavor1': 0, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
     'flavor6': 1, 'flavor7': 1, 'flavor8': 1, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
@@ -60,13 +60,6 @@ TIME_GRAIN_HOUR = 0
 TIME_GRAIN_DAY = 1
 TIME_GRAIN_MORE_DAY = 2
 
-# 系统检查
-# sysstr = platform.system()
-# end_str = ''
-# if(sysstr =="Windows"):
-#     end_str = '\n'
-# elif(sysstr == "Linux"):
-#     end_str = '\r\n'
 
 holidays = [
     '2013-01-01', '2013-01-02', '2013-01-03',
