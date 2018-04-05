@@ -607,7 +607,7 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     s = 7
 
     #修正
-    modify=-1
+    modify=-0.4
 
     l_t = []
     b_t = []
