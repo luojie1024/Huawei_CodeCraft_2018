@@ -3,9 +3,11 @@ import copy
 import math
 import random
 
+from ParamInfo import VM_TYPE_MODIFY3
+
 
 def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案一,使用MV模型预测，最近n天 
@@ -35,7 +37,7 @@ def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model2(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案二,使用SMV 模型预测， 最近n天
@@ -66,7 +68,7 @@ def predict_model2(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model3(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案3,使用MV 模型预测，最近n天
@@ -102,7 +104,7 @@ def predict_model3(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model4(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案四,使用SMV 模型预测，添加正态随机噪声  最近n天
@@ -143,7 +145,7 @@ def change(w, b, x, py_y, lr):
 
 
 def predict_model5(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案5,进行一次差分，然后使用MA处理   失败
@@ -205,7 +207,7 @@ def predict_model5(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model6(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案六,使用SMV模型预测，添加正态随机噪声 
@@ -253,7 +255,7 @@ def predict_model6(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -341,7 +343,7 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 #
 #     return result
 
-def predict_model9(his_data, date_range_size,gap_time):  # 简单滑动平均法
+def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     '''
     预测方案 九 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
@@ -369,7 +371,7 @@ def predict_model9(his_data, date_range_size,gap_time):  # 简单滑动平均法
     return result
 
 
-def predict_model10(his_data, date_range_size,gap_time):  # 霍尔特线性趋势法
+def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 十 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
@@ -425,7 +427,7 @@ def predict_model10(his_data, date_range_size,gap_time):  # 霍尔特线性趋�
 
 ################Holt-Winters#########################
 #用例01  76.68  小于三种类型
-def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
+def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十一 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -434,6 +436,9 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
     :return: 返回结果
     '''
     Y = copy.deepcopy(his_data['value'])
+
+
+    k=1
 
     temp_reuslt = 0.0
     result = []
@@ -504,7 +509,7 @@ def predict_model11(his_data, date_range_size, k):  # Holt-Winters法
 
 
 #用例02  76.147
-def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
+def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十二 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -514,6 +519,7 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
     '''
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
+    k=1
 
     temp_reuslt = 0.0
     result = []
@@ -583,7 +589,7 @@ def predict_model12(his_data, date_range_size, k):  # Holt-Winters法
 
 
 #用例03 小于三种类型
-def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
+def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十三 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -593,21 +599,22 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
     '''
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
+    k=1
 
     temp_reuslt = 0.0
     result = []
 
-    # 衰减值0.19
+    # 衰减值0.186
     alpha = 0.186
-    # 趋势
-    beta = 0.0
+    # 趋势0.0
+    beta = 0.1
     # 季节 0.185
     gamma = 0.185
     # 季度周期长度 7
     s = 7
 
     #修正
-    modify=2
+    # modify=2
 
     l_t = []
     b_t = []
@@ -659,13 +666,16 @@ def predict_model13(his_data, date_range_size, k):  # Holt-Winters法
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
         if temp_reuslt<0:
             temp_reuslt=0
-    result.append(int(math.floor(temp_reuslt+modify)))
+    #结果修正
+    modify=VM_TYPE_MODIFY3[vm_type]
+
+    result.append(int(math.floor(temp_reuslt)+modify))
     return result
 
 
 
 #用例04  76.052
-def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
+def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十四 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -677,6 +687,7 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
 
+    k=1
     temp_reuslt = 0.0
     result = []
 
@@ -747,7 +758,7 @@ def predict_model14(his_data, date_range_size, k):  # Holt-Winters法
 
 ###################对若干星期前同一天数据求平均######################
 def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -795,7 +806,7 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
     return result
 
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -845,7 +856,7 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     return result
 
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
     '''
     预测方案六,使用SMV模型预测，添加正态随机噪声
@@ -897,7 +908,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,gap_time):  # 需要预测的长度
+                   date_range_size,vm_type):  # 需要预测的长度
 
 
     '''

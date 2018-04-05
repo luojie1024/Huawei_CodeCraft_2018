@@ -84,8 +84,8 @@ def predict_all(caseInfo):
         predict_func = predict_model.model4_used_func  # model4_used_func 77.156
         vmtype_avage_v = 3
 
-    # predict_func = predict_model.model23_used_func
-    # vmtype_avage_v=2
+    # predict_func = predict_model.model3_used_func
+    # vmtype_avage_v=3
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype, caseInfo, predict_func)
 
@@ -98,13 +98,13 @@ def predict_one(vm_type,  # 虚拟机类型
                 ):
     if vmtype_avage_v == 1:
         return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v1(vm_type, -1),
-                                caseInfo.date_range_size, caseInfo.gap_time)
+                                caseInfo.date_range_size,vm_type)
     elif (vmtype_avage_v == 2):
         return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v2(vm_type, -1),
-                                caseInfo.date_range_size, caseInfo.gap_time)
+                                caseInfo.date_range_size,vm_type)
     else:
         return prodict_function(caseInfo.get_his_data_by_vmtype_avage_v3(vm_type, -1),
-                                caseInfo.date_range_size, caseInfo.gap_time)
+                                caseInfo.date_range_size,vm_type)
     '''
     训练并预测一种虚拟机的类型，返回为
     一个[v1,v2,v3....]预测结果数组

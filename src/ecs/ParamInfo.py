@@ -6,35 +6,59 @@
 # 所有虚拟机的参数
 # [CPU,MEM, W(M/C) ] [U数，M数，存储比核的权重]
 VM_PARAM = {
-    'flavor1':[1,1,1.0],
-    'flavor2':[1,2,2.0],
-    'flavor3':[1,4,4.0],
-    
-    'flavor4':[2,2,1.0],
-    'flavor5':[2,4,2.0],
-    'flavor6':[2,8,4.0],
-    
-    'flavor7':[4,4,1.0],
-    'flavor8':[4,8,2.0],
-    'flavor9':[4,16,4.0],
-    
-    'flavor10':[8,8,1.0],
-    'flavor11':[8,16,2.0],
-    'flavor12':[8,32,4.0],
-    
-    'flavor13':[16,16,1.0],
-    'flavor14':[16,32,2.0],
-    'flavor15':[16,64,4.0]
-    }
-VM_TYPE_DIRT =['flavor1','flavor2','flavor3','flavor4','flavor5',
-               'flavor6','flavor7','flavor8','flavor9','flavor10',
-               'flavor11','flavor12','flavor13','flavor14','flavor15']
+    'flavor1': [1, 1, 1.0],
+    'flavor2': [1, 2, 2.0],
+    'flavor3': [1, 4, 4.0],
+
+    'flavor4': [2, 2, 1.0],
+    'flavor5': [2, 4, 2.0],
+    'flavor6': [2, 8, 4.0],
+
+    'flavor7': [4, 4, 1.0],
+    'flavor8': [4, 8, 2.0],
+    'flavor9': [4, 16, 4.0],
+
+    'flavor10': [8, 8, 1.0],
+    'flavor11': [8, 16, 2.0],
+    'flavor12': [8, 32, 4.0],
+
+    'flavor13': [16, 16, 1.0],
+    'flavor14': [16, 32, 2.0],
+    'flavor15': [16, 64, 4.0]
+}
+VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
+                'flavor6', 'flavor7', 'flavor8', 'flavor9', 'flavor10',
+                'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15']
+
+VM_TYPE_MODIFY1 = {
+    'flavor1': 1, 'flavor2': 1, 'flavor3': 1, 'flavor4': 1, 'flavor5': 1,
+    'flavor6': 1, 'flavor7': 1, 'flavor8': 1, 'flavor9': 1, 'flavor10': 1,
+    'flavor11': 1, 'flavor12': 1, 'flavor13': 1, 'flavor14': 1, 'flavor15': 1
+}
+
+VM_TYPE_MODIFY2 = {
+    'flavor1': 1, 'flavor2': 1, 'flavor3': 1, 'flavor4': 1, 'flavor5': 1,
+    'flavor6': 1, 'flavor7': 1, 'flavor8': 1, 'flavor9': 1, 'flavor10': 1,
+    'flavor11': 1, 'flavor12': 1, 'flavor13': 1, 'flavor14': 1, 'flavor15': 1
+}
+
+VM_TYPE_MODIFY3 = {
+    'flavor1': 0, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
+    'flavor6': 0, 'flavor7': 0, 'flavor8': 0, 'flavor9': 0, 'flavor10': 0,
+    'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
+}
+
+VM_TYPE_MODIFY4 = {
+    'flavor1': 1, 'flavor2': 1, 'flavor3': 1, 'flavor4': 1, 'flavor5': 1,
+    'flavor6': 1, 'flavor7': 1, 'flavor8': 1, 'flavor9': 1, 'flavor10': 1,
+    'flavor11': 1, 'flavor12': 1, 'flavor13': 1, 'flavor14': 1, 'flavor15': 1
+}
+
 # 预测时间粒度
 # 
 TIME_GRAIN_HOUR = 0
 TIME_GRAIN_DAY = 1
-TIME_GRAIN_MORE_DAY = 2 
-
+TIME_GRAIN_MORE_DAY = 2
 
 # 系统检查
 # sysstr = platform.system()
@@ -226,7 +250,6 @@ shopping_days = [
 
 ]
 
-
 # # 618[3,2] 11[4,3] 12[4,3]
 # shopping_days = [
 #
@@ -315,6 +338,3 @@ shopping_days = [
 #     '2017-12-12 00:00:00', '2017-12-13 00:00:00', '2017-12-14 00:00:00',
 #
 # ]
-
-
-
