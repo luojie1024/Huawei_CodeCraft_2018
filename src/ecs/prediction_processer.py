@@ -87,6 +87,7 @@ def predict_all(caseInfo):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #     vmtype_avage_v = 3
 
+
     predict_func = predict_model.model5_used_func
     vmtype_avage_v=2
     for vmtype in vm_types:
