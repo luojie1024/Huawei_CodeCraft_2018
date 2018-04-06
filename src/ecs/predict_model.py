@@ -350,6 +350,9 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
+
+    sigma = 0.15
+
     # 衰减值0.21
     alpha = 0.05
     # 历史天数
@@ -366,6 +369,9 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
             temp_value += chis_data[len(chis_data) - i - 1] * alpha * pow(1 - alpha, i)
         chis_data.append(temp_value)
         temp_reuslt += temp_value
+
+    noise = random.gauss(0, sigma)
+    noise = math.fabs(noise)
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
     result.append(int(math.floor(temp_reuslt)))
     return result
