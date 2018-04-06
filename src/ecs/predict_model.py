@@ -983,7 +983,7 @@ model3_used_func = predict_model13
 model4_used_func = predict_model14
 
 #指数平均
-model5_used_func = predict_model10
+model5_used_func = predict_model7
 ################霍尔特线性趋势法#########################
 
 model21_used_func = predict_model15
