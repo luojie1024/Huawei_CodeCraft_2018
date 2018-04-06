@@ -70,7 +70,7 @@ def predict_vm(ecs_lines, input_lines):
 
     vm_size, vm, pm_size, pm, res_use_pro = packing_processer.pack_all(caseInfo, try_result)
 
-    #############################################微调数量##################################
+#############################################微调数量##################################
     result = result_to_list(vm_size, vm, pm_size, pm)
     print(result)
     return result

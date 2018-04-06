@@ -397,6 +397,8 @@ def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势
     temp_reuslt = 0.0
     result = []
 
+    sigma = 0.2
+
     # 衰减值
     alpha = 0.2
     # 趋势
@@ -432,8 +434,10 @@ def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势
         chis_data.append(y_hot_t)
         # 保存结果
         temp_reuslt += y_hot_t
+    noise = random.gauss(0, sigma)
+    noise = math.fabs(noise)
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)))
+    result.append(int(math.floor(temp_reuslt)+noise))
     return result
 
 
