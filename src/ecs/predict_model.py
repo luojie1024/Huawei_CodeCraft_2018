@@ -351,7 +351,7 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     :return: 返回结果
     '''
     # 衰减值0.21
-    alpha = 0.8
+    alpha = 0.2
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -984,6 +984,9 @@ model4_used_func = predict_model14
 
 #指数平均
 model9_used_func = predict_model9
+
+
+model10_used_func = predict_model10
 ################霍尔特线性趋势法#########################
 
 model21_used_func = predict_model15

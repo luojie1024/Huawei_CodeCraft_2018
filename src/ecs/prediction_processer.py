@@ -89,7 +89,7 @@ def predict_all(caseInfo):
 
 
     predict_func = predict_model.model9_used_func
-    vmtype_avage_v=1
+    vmtype_avage_v=3
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype, caseInfo, predict_func)
 
