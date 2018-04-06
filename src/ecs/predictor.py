@@ -79,6 +79,7 @@ def predict_vm(ecs_lines, input_lines):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]]>=0 and \
                     VM_PARAM[VM_TYPE_DIRT[vm_type]][2]==pading_que[que]:#键值对存在
                 #找到非0的,最大,虚拟机
+                try_result_modify(try_result, caseInfo, -1, VM_TYPE_DIRT[vm_type])
                 try_result_modify(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type])
 
     print('MAX_USE_PRO=%.2f'%res_use_pro)
