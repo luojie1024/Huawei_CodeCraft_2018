@@ -58,7 +58,7 @@ def predict_vm(ecs_lines, input_lines):
     try_result = copy.deepcopy(predict_result)
 
     while res_use_pro<threshold:#微调数量,寻找一个优与阈值的分配
-        for vm_type in range(len(VM_TYPE_DIRT-5)-1,-1,-1):
+        for vm_type in range(len(VM_TYPE_DIRT)-5,-1,-1):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]):#键值对存在
                 try_result_modify(try_result,caseInfo,1,VM_TYPE_DIRT[vm_type])
                 try_result_modify(try_result,caseInfo,-1,VM_TYPE_DIRT[vm_type])
