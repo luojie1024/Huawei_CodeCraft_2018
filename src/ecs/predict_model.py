@@ -396,7 +396,7 @@ def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势
     cal_len = len(chis_data)
     temp_reuslt = 0.0
     result = []
-
+    #
     sigma = 0.2
 
     # 衰减值
