@@ -350,8 +350,8 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
-    # 衰减值
-    alpha = 0.21
+    # 衰减值0.21
+    alpha = 0.3
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
