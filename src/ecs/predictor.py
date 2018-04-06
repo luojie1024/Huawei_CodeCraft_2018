@@ -5,7 +5,7 @@ import packing_processer
 import prediction_processer
 import copy
 
-from ParamInfo import VM_TYPE_DIRT
+from ParamInfo import VM_TYPE_DIRT, VM_PARAM
 
 threshold=90
 
@@ -57,20 +57,30 @@ def predict_vm(ecs_lines, input_lines):
     global pm
     global try_result
 
+    pading_que=[]
+
+    #搜索优先级
+    if caseInfo.opt_target=='CPU':
+        pading_que=[1.0,2.0,4.0]
+    else:
+        pading_que = [4.0,2.0,1.0]
+
+
     try_result = copy.deepcopy(predict_result)
     end_vm_pos=0
-    #找到第一个非0位
+    #找到第一个非0位[1,15]
     for vm_type in range(len(VM_TYPE_DIRT) - 1, -1, -1):
         if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]] > 0:  # 键值对存在
             end_vm_pos=vm_type
             break
+    for que in range(3):
+        #在有数量的区间内填充[1,8]
+        for vm_type in range(end_vm_pos,-1,-1):
+            if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]]>=0 and \
+                    VM_PARAM[VM_TYPE_DIRT[vm_type]][2]==pading_que[que]:#键值对存在
+                #找到非0的,最大,虚拟机
+                try_result_modify(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type])
 
-    #在有数量的区间内填充
-    for vm_type in range(end_vm_pos,-1,-1):
-        if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]]>=0:#键值对存在
-            #找到非0的,最大,虚拟机
-            # try_result_modify(try_result,caseInfo,-1,VM_TYPE_DIRT[vm_type])
-            try_result_modify(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type])
     print('MAX_USE_PRO=%.2f'%res_use_pro)
 
     vm_size, vm, pm_size, pm, res_use_pro = packing_processer.pack_all(caseInfo, try_result)

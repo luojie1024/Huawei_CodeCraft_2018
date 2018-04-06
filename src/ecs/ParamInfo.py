@@ -26,32 +26,74 @@ VM_PARAM = {
     'flavor14': [16, 32, 2.0],
     'flavor15': [16, 64, 4.0]
 }
+
+VM_CPU_QU = {  # CPU多,内存少的优先,从后往前
+
+    'flavor3': [1, 4, 4.0],
+    'flavor6': [2, 8, 4.0],
+    'flavor9': [4, 16, 4.0],
+    'flavor12': [8, 32, 4.0],
+    'flavor15': [16, 64, 4.0],
+
+    'flavor2': [1, 2, 2.0],
+    'flavor5': [2, 4, 2.0],
+    'flavor8': [4, 8, 2.0],
+    'flavor11': [8, 16, 2.0],
+    'flavor14': [16, 32, 2.0],
+
+    'flavor1': [1, 1, 1.0],
+    'flavor4': [2, 2, 1.0],
+    'flavor7': [4, 4, 1.0],
+    'flavor10': [8, 8, 1.0],
+    'flavor13': [16, 16, 1.0],
+
+}
+VM_MEM_QU = {# MEM,CPU少的优先,从后往前
+    'flavor1': [1, 1, 1.0],
+    'flavor4': [2, 2, 1.0],
+    'flavor7': [4, 4, 1.0],
+    'flavor10': [8, 8, 1.0],
+    'flavor13': [16, 16, 1.0],
+
+    'flavor2': [1, 2, 2.0],
+    'flavor5': [2, 4, 2.0],
+    'flavor8': [4, 8, 2.0],
+    'flavor11': [8, 16, 2.0],
+    'flavor14': [16, 32, 2.0],
+
+    'flavor3': [1, 4, 4.0],
+    'flavor6': [2, 8, 4.0],
+    'flavor9': [4, 16, 4.0],
+    'flavor12': [8, 32, 4.0],
+    'flavor15': [16, 64, 4.0]
+}
+
 VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
                 'flavor6', 'flavor7', 'flavor8', 'flavor9', 'flavor10',
                 'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15']
 
-#L1 type_size=3
-VM_TYPE_MODIFY1 = {#flavor1 1 flavor2 12 flavor8 -3
+# L1 type_size=3
+VM_TYPE_MODIFY1 = {  # flavor1 1 flavor2 12 flavor8 -3
     'flavor1': 2, 'flavor2': 11, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
-    'flavor6': 0, 'flavor7':0, 'flavor8': -3, 'flavor9': 0, 'flavor10': 0,
+    'flavor6': 0, 'flavor7': 0, 'flavor8': -3, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
-#L2 type_size=5
-VM_TYPE_MODIFY2 = {#flavor1 3 flavor2 16  flavor5 0  flavor8 -4 flavor9 0
+# L2 type_size=5
+VM_TYPE_MODIFY2 = {  # flavor1 3 flavor2 16  flavor5 0  flavor8 -4 flavor9 0
     'flavor1': 3, 'flavor2': 16, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
-    'flavor6':0, 'flavor7':0, 'flavor8':-4 , 'flavor9': 0, 'flavor10': 0,
+    'flavor6': 0, 'flavor7': 0, 'flavor8': -4, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
-#L1 type_size=3
-VM_TYPE_MODIFY3 = {#flavor1 2 flavor5 -13 flavor8 6
-    'flavor1': 2, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5':-13,
+# L1 type_size=3
+VM_TYPE_MODIFY3 = {  # flavor1 2 flavor5 -13 flavor8 6
+    'flavor1': 2, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': -13,
     'flavor6': 0, 'flavor7': 0, 'flavor8': 6, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
-#L2 type_size=5
+# L2 type_size=5
 VM_TYPE_MODIFY4 = {
     'flavor1': 0, 'flavor2': 0, 'flavor3': 0, 'flavor4': 0, 'flavor5': 0,
     'flavor6': 0, 'flavor7': 0, 'flavor8': 0, 'flavor9': 0, 'flavor10': 0,
@@ -63,7 +105,6 @@ VM_TYPE_MODIFY4 = {
 TIME_GRAIN_HOUR = 0
 TIME_GRAIN_DAY = 1
 TIME_GRAIN_MORE_DAY = 2
-
 
 holidays = [
     '2013-01-01', '2013-01-02', '2013-01-03',
