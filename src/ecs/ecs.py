@@ -4,8 +4,7 @@ import os
 
 import predictor
 
-#python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output.txt
-
+#python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output1.txt
 
 input=2
 def main():
@@ -23,7 +22,7 @@ def main():
         case_path = '/home/luojie/桌面/project/log'
         ecsDataPath = case_path + r'/data/TrainData_2015.1.1_2015.2.19.txt'
         inputFilePath = 'input_5flavors_cpu_7days.txt'
-        resultFilePath = 'output.txt'
+        resultFilePath = 'output1.txt'
 
     #获取训练集列表
     ecs_infor_array = read_lines(ecsDataPath)

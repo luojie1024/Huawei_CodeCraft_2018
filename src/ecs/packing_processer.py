@@ -27,8 +27,9 @@ def pack_all(caseInfo,predict_result):
     pack_function(picker,group,caseInfo.opt_target)
     vm_size,vm = picker.to_origin_desc()
     pm_size,pm = group.to_description()
+    res_use_pro=group.get_res_used_pro(caseInfo.opt_target)
     print(group.to_usage_status())
-    return vm_size,vm,pm_size,pm
+    return vm_size,vm,pm_size,pm,res_use_pro
 
 
 class MachineGroup():
@@ -69,6 +70,16 @@ class MachineGroup():
         '''
         初始化集群，创建一个物理机，并初始化相关参数
         '''
+        self.vm_size = 0
+        self.PM = []
+        self.VM = {}
+        self.PM_status = []
+        self.pm_size = 0
+        self.empty = 0
+        self.machine_info = {'CPU': 0,  # u数
+                        'MEM': 0,  # m数
+                        'HDD': 0}  # h数
+
         self.machine_info['CPU']= caseInfo.CPU
         self.machine_info['MEM']= caseInfo.MEM
         self.machine_info['HDD']= caseInfo.HDD
@@ -146,7 +157,48 @@ class MachineGroup():
             return self.pm_size,self.PM
         else:
             return 0,self.PM
-    
+
+
+    def get_res_used_pro(self, opt_target='CPU'):
+        '''
+        :param opt_target:资源优化目标
+        :return: 返回总的资源优化利用率
+        '''
+        #获取最大资源数
+        res_max = self.machine_info[opt_target]
+        #已经使用的资源状态
+        usage = self.PM_status
+
+        res_used=0
+        for i in range(self.pm_size):
+            # 单个物理机资源使用率
+            if opt_target == 'CPU':
+                res_used += res_max-usage[i]['re_cpu']
+            elif opt_target == 'MEM':
+                res_used += res_max-usage[i]['re_mem']
+
+        #返回最后一台物理机的资源使用率
+        return res_used *100/ (res_max*self.pm_size)
+
+    def get_last_res_used_pro(self, opt_target='CPU'):
+        '''
+        :param opt_target:资源优化目标
+        :return: 返回最后一个物理机的资源利用率
+        '''
+        #获取最大资源数
+        res_max = self.machine_info[opt_target]
+        #已经使用的资源状态
+        usage = self.PM_status
+        #获取资源使用率
+        if opt_target=='CPU':
+            res_used = res_max - usage[self.pm_size-1]['re_cpu']
+
+        elif opt_target=='MEM':
+            res_used = res_max - usage[self.pm_size-1]['re_mem']
+
+        #返回最后一台物理机的资源使用率
+        return res_used * 100.0 / res_max
+
     def to_usage_status(self):
         '''
         生成当前集群中各个物理机的使用状态
