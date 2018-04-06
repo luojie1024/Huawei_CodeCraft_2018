@@ -301,47 +301,53 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 
     return result
 
+def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
+                   date_range_size,vm_type):  # 需要预测的长度
 
-#
-# def predict_model8(caseInfo):#决策树
-#     #保存结果
-#     result = {}
-#     def train_decisiontree_model(dataset):
-#         '''
-#         :param dataset:输入数据集
-#         :return: 返回训练好的决策树
-#         '''
-#         # dataset = [map(int, x.strip().split('  ')) for x in open('lenses.data')]
-#         dataset=dataset
-#         features_len=len(dataset[0])- 1
-#         features = [x for x in xrange(len(dataset[0]) - 1)]
-#
-#         print info_gain(dataset, 0)
-#         print entropy(dataset)
-#         tree = build_tree(dataset, features)
-#         return tree
-#
-#     def decisiontree_prediction(tree,predictor_list,vm_types_size):
-#         #遍历虚拟机序号
-#         for postion in range(vm_types_size):
-#             #记录虚拟机申请数量
-#             count=0
-#             for x in predictor_list:
-#                 #标记虚拟机类型 17个特征之后才是虚拟机类型值
-#                 temp=copy.deepcopy(x)
-#                 temp[17+postion]=1
-#                 #累加预测的值
-#                 count+=predict(tree, temp)
-#             #单个虚拟机的预测数量
-#             result[VM_TYPE_DIRT[postion]] = count
-#
-#
-#
-#     tree=train_decisiontree_model(caseInfo.feature_list)
-#
-#     decisiontree_prediction(tree,caseInfo.predictor_list,caseInfo.vm_types_size)
-#
-#     return result
+    '''
+    预测方案七,对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
+    '''
+
+    n = 3  # 边长数
+    # sigma = 0.5
+
+    back_week = 2
+    chis_data = copy.deepcopy(his_data['value'])
+    cal_len = len(chis_data)
+
+    result = []
+    for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / 2.0
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        chis_data.append(day_avage)
+        result.append(day_avage)
+
+    return result
 
 def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     '''
@@ -991,7 +997,9 @@ model4_used_func = predict_model14
 #指数平均
 model9_used_func = predict_model9
 
-
+model6_used_func = predict_model6
+model8_used_func = predict_model8
+model5_used_func = predict_model5
 model10_used_func = predict_model10
 ################霍尔特线性趋势法#########################
 
