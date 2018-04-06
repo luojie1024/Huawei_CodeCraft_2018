@@ -8,7 +8,7 @@ import copy
 from ParamInfo import VM_TYPE_DIRT, VM_PARAM
 
 threshold=90
-
+other_res_use_pro=0
 res_use_pro=0
 vm_size=0
 vm=[]
@@ -47,7 +47,7 @@ def predict_vm(ecs_lines, input_lines):
 #                     'flavor4':[1,0,0,1,0,0,1],
 #                     'flavor5':[1,0,3,0,5,0,7]}
 
-    vm_size,vm,pm_size,pm,res_use_pro= packing_processer.pack_all(caseInfo, predict_result)
+    vm_size,vm,pm_size,pm,res_use_pro,other_res_use_pro= packing_processer.pack_all(caseInfo, predict_result)
 
 #############################################微调数量##################################
     global res_use_pro
@@ -56,7 +56,7 @@ def predict_vm(ecs_lines, input_lines):
     global pm_size
     global pm
     global try_result
-
+    global other_res_use_pro
     pading_que=[]
 
     #搜索优先级
@@ -84,7 +84,7 @@ def predict_vm(ecs_lines, input_lines):
 
     print('MAX_USE_PRO=%.2f'%res_use_pro)
 
-    vm_size, vm, pm_size, pm, res_use_pro = packing_processer.pack_all(caseInfo, try_result)
+    vm_size, vm, pm_size, pm, res_use_pro ,other_res_use_pro= packing_processer.pack_all(caseInfo, try_result)
 
 #############################################微调数量##################################
     result = result_to_list(vm_size, vm, pm_size, pm)
@@ -92,6 +92,7 @@ def predict_vm(ecs_lines, input_lines):
     return result
 
 def try_result_modify(predict_result,caseInfo,try_value,vm_type):
+    global other_res_use_pro
     global res_use_pro
     global vm_size
     global vm
@@ -102,13 +103,18 @@ def try_result_modify(predict_result,caseInfo,try_value,vm_type):
     try_predict[vm_type][0]=try_predict[vm_type][0]+try_value
     if try_predict[vm_type][0]<0:#小于0没有意义
         return
-    try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro = packing_processer.pack_all(caseInfo,try_predict)
+    try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro,try_other_res_use_pro= packing_processer.pack_all(caseInfo,try_predict)
     if try_res_use_pro>res_use_pro and try_pm_size<=pm_size:#如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
-        vm_size, vm, pm_size, pm, res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro
+        vm_size, vm, pm_size, pm, res_use_pro ,other_res_use_pro= try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro,try_other_res_use_pro
         try_result=try_predict
         # 继续深度搜索
         try_result_modify(try_predict, caseInfo, try_value, vm_type)
-    else:#如果没有当前的好,则返回
+    elif try_res_use_pro==res_use_pro and try_other_res_use_pro>other_res_use_pro:#如果没有当前的好,则返回
+        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
+        try_result = try_predict
+        # 继续深度搜索
+        try_result_modify(try_predict, caseInfo, try_value, vm_type)
+    else:
         return
 
 

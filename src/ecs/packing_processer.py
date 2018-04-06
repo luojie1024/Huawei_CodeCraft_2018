@@ -27,9 +27,10 @@ def pack_all(caseInfo,predict_result):
     pack_function(picker,group,caseInfo.opt_target)
     vm_size,vm = picker.to_origin_desc()
     pm_size,pm = group.to_description()
-    res_use_pro=group.get_res_used_pro(caseInfo.opt_target)
+    res_use_pro = group.get_res_used_pro(caseInfo.opt_target)
+    other_res_use_pro = group.get_other_res_used_pro(caseInfo.opt_target)
     print(group.to_usage_status())
-    return vm_size,vm,pm_size,pm,res_use_pro
+    return vm_size,vm,pm_size,pm,res_use_pro,other_res_use_pro
 
 
 class MachineGroup():
@@ -179,6 +180,31 @@ class MachineGroup():
 
         #返回最后一台物理机的资源使用率
         return res_used *100/ (res_max*self.pm_size)
+
+    def get_other_res_used_pro(self, opt_target='MEM'):
+        '''
+        :param opt_target:另外一个资源的利用率
+        :return: 返回总的资源优化利用率
+        '''
+        if opt_target=='CPU':
+            opt_target = 'MEM'
+        else:
+            opt_target = 'CPU'
+        # 获取最大资源数
+        res_max = self.machine_info[opt_target]
+        # 已经使用的资源状态
+        usage = self.PM_status
+
+        res_used = 0
+        for i in range(self.pm_size):
+            # 单个物理机资源使用率
+            if opt_target == 'CPU':
+                res_used += res_max - usage[i]['re_cpu']
+            elif opt_target == 'MEM':
+                res_used += res_max - usage[i]['re_mem']
+
+        # 返回最后一台物理机的资源使用率
+        return res_used * 100 / (res_max * self.pm_size)
 
     def get_last_res_used_pro(self, opt_target='CPU'):
         '''
