@@ -55,18 +55,18 @@ def predict_vm(ecs_lines, input_lines):
 
     vm_size,vm,pm_size,pm,res_use_pro= packing_processer.pack_all(caseInfo, predict_result)
 
-    # try_result = copy.deepcopy(predict_result)
-    #
-    # while res_use_pro<threshold:#微调数量,寻找一个优与阈值的分配
-    #     for vm_type in range(len(VM_TYPE_DIRT)-1,-1,-1):
-    #         if try_result.has_key(VM_TYPE_DIRT[vm_type]):#键值对存在
-    #             try_result_modify(try_result,caseInfo,1,VM_TYPE_DIRT[vm_type])
-    #             try_result_modify(try_result,caseInfo,-1,VM_TYPE_DIRT[vm_type])
-    #     break
-    #
-    # print('MAX_USE_PRO=%.2f'%res_use_pro)
-    #
-    # vm_size, vm, pm_size, pm, res_use_pro = packing_processer.pack_all(caseInfo, try_result)
+    try_result = copy.deepcopy(predict_result)
+
+    while res_use_pro<threshold:#微调数量,寻找一个优与阈值的分配
+        for vm_type in range(len(VM_TYPE_DIRT-5)-1,-1,-1):
+            if try_result.has_key(VM_TYPE_DIRT[vm_type]):#键值对存在
+                try_result_modify(try_result,caseInfo,1,VM_TYPE_DIRT[vm_type])
+                try_result_modify(try_result,caseInfo,-1,VM_TYPE_DIRT[vm_type])
+        break
+
+    print('MAX_USE_PRO=%.2f'%res_use_pro)
+
+    vm_size, vm, pm_size, pm, res_use_pro = packing_processer.pack_all(caseInfo, try_result)
 
     result = result_to_list(vm_size, vm, pm_size, pm)
     print(result)
