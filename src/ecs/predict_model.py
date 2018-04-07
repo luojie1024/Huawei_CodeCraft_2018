@@ -947,7 +947,7 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
        his_data:['time':[时间标签],'value':[值]]
        '''
 
-    n = 15  # 边长数10
+    n = 9  # 边长数10
     sigma = 0.5
 
     back_week = 1 #1
