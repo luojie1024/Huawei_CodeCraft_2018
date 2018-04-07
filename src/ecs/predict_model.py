@@ -895,10 +895,10 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
        his_data:['time':[时间标签],'value':[值]]
        '''
 
-    n = 3  # 边长数
+    n = 5  # 边长数3
     sigma = 0.5
 
-    back_week = 3
+    back_week = 1  #3
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
