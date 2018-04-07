@@ -144,3 +144,25 @@ model14:	L2
   	s = 7
 分配修正算法优化
    		  分数		82.593
+
+
+记录17：采用pre14和pack5
+model15:    L1
+    n=10
+    sigma = 0.5
+    back_week = 1
+
+model16:    L2
+	n=10
+    sigma = 0.5
+    back_week = 1
+model17:	L1
+	n=2
+    sigma = 0.5
+    back_week = 1
+model18:	L2
+	n=10
+    sigma = 0.5
+    back_week = 1
+分配修正算法优化
+   		  分数		83.652
