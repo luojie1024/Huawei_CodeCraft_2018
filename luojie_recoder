@@ -147,7 +147,7 @@ model14:	L2
 
 
 记录17：采用pre14和pack5
-model15:    L1
+model15:    L1      18.5
     n=10
     sigma = 0.5
     back_week = 1
