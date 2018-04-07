@@ -119,3 +119,28 @@ model14:	L2
 	gamma = 0.21
   	s = 7
    		  分数		80.975
+
+
+记录17：采用pre14和pack5
+model11:	L1	VM_TYPE_MODIFY1 = {#flavor1 1 flavor2 12 flavor8 -3
+	alpha=0.215     分数：18.419  /  2  =9.2095
+	beta = 0.00
+	gamma = 0.215
+  	s = 7
+model12:	L2	VM_TYPE_MODIFY2 = {#flavor1 3 flavor2 16  flavor5 0  flavor8 -4 flavor9 0
+	alpha=0.195      分数：23.356  /  3  =  7.7853
+	beta = 0.00
+	gamma = 0.21
+  	s = 7
+model13:	L1         VM_TYPE_MODIFY3 = {#flavor1 2 flavor5 -13 flavor8 6
+	alpha=0.19      分数：14.601  / 2  = 7.3005
+	beta = 0.00
+	gamma = 0.185
+  	s = 7
+model14:	L2
+	alpha=0.243      分数： 22.232 / 3  = 7.410
+	beta = 0.00
+	gamma = 0.21
+  	s = 7
+分配修正算法优化
+   		  分数		82.593
