@@ -156,11 +156,11 @@ model16:    L2      27.055    not noise:26.73
 	n=10
     sigma = 0.5
     back_week = 1
-model17:	L1      14.896
+model17:	L1      14.896      not noise:14.779
 	n=2
     sigma = 0.5
     back_week = 1
-model18:	L2      22.23
+model18:	L2      22.23      not noise:22.401
 	n=10
     sigma = 0.5
     back_week = 1
