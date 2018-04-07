@@ -309,7 +309,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     his_data:['time':[时间标签],'value':[值]]
     '''
 
-    n = 3  # 边长数
+    n = 2  # 边长数
     # sigma = 0.5
 
     back_week = 3
@@ -343,7 +343,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
-        day_avage = int(math.floor(day_avage))
+        day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         result.append(day_avage)
 
