@@ -123,7 +123,7 @@ model14:	L2
 
 记录17：采用pre14和pack5
 model11:	L1	VM_TYPE_MODIFY1 = {#flavor1 1 flavor2 12 flavor8 -3
-	alpha=0.215     分数：18.419  /  2  =9.2095
+	alpha=0.215     分数：19.386
 	beta = 0.00
 	gamma = 0.215
   	s = 7
