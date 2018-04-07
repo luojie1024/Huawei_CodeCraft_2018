@@ -147,12 +147,12 @@ model14:	L2
 
 
 记录17：采用pre14和pack5
-model15:    L1      18.5
+model15:    L1       18.5    not noise:19.199
     n=10
     sigma = 0.5
     back_week = 1
 
-model16:    L2      27.055
+model16:    L2      27.055  not noise:
 	n=10
     sigma = 0.5
     back_week = 1
