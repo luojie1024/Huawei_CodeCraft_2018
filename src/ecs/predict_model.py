@@ -310,7 +310,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     '''
 
     n = 2  # 边长数
-    # sigma = 0.5
+    sigma = 0.5
 
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -340,10 +340,10 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                 break
         if cot_week != 0:
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        # noise = random.gauss(0, sigma)
-        # noise = math.fabs(noise)
-        # day_avage = int(math.ceil(day_avage + noise))
-        day_avage = int(math.ceil(day_avage))
+        noise = random.gauss(0, sigma)
+        noise = math.fabs(noise)
+        day_avage = int(math.ceil(day_avage + noise))
+        # day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         result.append(day_avage)
 
