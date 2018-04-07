@@ -6,7 +6,7 @@ import random
 from ParamInfo import *
 
 #加入随机数
-is_noise=1
+is_noise=0
 
 def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size,vm_type):  # 需要预测的长度
