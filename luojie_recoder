@@ -152,7 +152,7 @@ model15:    L1      18.5
     sigma = 0.5
     back_week = 1
 
-model16:    L2
+model16:    L2      27.055
 	n=10
     sigma = 0.5
     back_week = 1
