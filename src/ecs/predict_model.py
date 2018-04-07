@@ -357,7 +357,7 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     :return: 返回结果
     '''
 
-    sigma = 0.5
+    sigma = 2
 
     # 衰减值0.21
     alpha = 0.21
