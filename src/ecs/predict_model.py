@@ -636,7 +636,7 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     result = []
 
     # 衰减值0.186
-    alpha = 0.186
+    alpha = 0.19
     # 趋势0.0
     beta = 0.0
     # 季节 0.185
