@@ -312,7 +312,6 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     预测方案八,若干星期前同一天数据求指数平均
     his_data:['time':[时间标签],'value':[值]]
     '''
-    n = 0  # 边长数
     sigma = 0.5
 
     # 衰减值0.21
