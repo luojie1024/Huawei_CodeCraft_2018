@@ -341,7 +341,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                         cot_day += tmp
                     else:
                         continue
-                day_avage += (day_tmp / cot_day)* alpha * pow(1 - alpha, i - 1)
+                day_avage += (day_tmp / cot_day)
             else:
                 break
 
