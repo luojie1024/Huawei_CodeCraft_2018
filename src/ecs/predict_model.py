@@ -5,11 +5,12 @@ import random
 
 from ParamInfo import *
 
-#加入随机数
-is_noise=0
+# 加入随机数
+is_noise = 0
+
 
 def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案一,使用MV模型预测，最近n天 
@@ -39,7 +40,7 @@ def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model2(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案二,使用SMV 模型预测， 最近n天
@@ -70,7 +71,7 @@ def predict_model2(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model3(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案3,使用MV 模型预测，最近n天
@@ -106,7 +107,7 @@ def predict_model3(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model4(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案四,使用SMV 模型预测，添加正态随机噪声  最近n天
@@ -147,7 +148,7 @@ def change(w, b, x, py_y, lr):
 
 
 def predict_model5(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案5,进行一次差分，然后使用MA处理   失败
@@ -209,7 +210,7 @@ def predict_model5(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model6(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案六,使用SMV模型预测，添加正态随机噪声 
@@ -257,7 +258,7 @@ def predict_model6(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -303,8 +304,9 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 
     return result
 
+
 def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                   date_range_size, vm_type):  # 需要预测的长度
 
     '''
     预测方案七,对若干星期前同一天数据求平均
@@ -322,7 +324,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
-        for i in range(1, back_week + 1):
+        for i in range(1, back_week + 1):  # 获取过去周索引
             index = i * 7
             if index <= cal_len:
                 day_tmp = chis_data[-index] * n
@@ -351,7 +353,8 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
 
     return result
 
-def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
+
+def predict_model9(his_data, date_range_size, vm_type):  # 简单滑动平均法
     '''
     预测方案 九 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
@@ -386,7 +389,7 @@ def predict_model9(his_data, date_range_size,vm_type):  # 简单滑动平均法
     return result
 
 
-def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势法
+def predict_model10(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 十 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
@@ -440,12 +443,12 @@ def predict_model10(his_data, date_range_size,vm_type):  # 霍尔特线性趋势
     noise = random.gauss(0, sigma)
     noise = math.fabs(noise)
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt)+noise))
+    result.append(int(math.floor(temp_reuslt) + noise))
     return result
 
 
 ################Holt-Winters#########################
-#用例01  76.68  小于三种类型
+# 用例01  76.68  小于三种类型
 def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十一 Holt-Winters
@@ -456,8 +459,7 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     Y = copy.deepcopy(his_data['value'])
 
-
-    k=1
+    k = 1
 
     temp_reuslt = 0.0
     result = []
@@ -471,7 +473,6 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     # 季度周期长度
     s = 7
 
-
     l_t = []
     b_t = []
     s_t = []
@@ -488,11 +489,11 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     b_t.append(pre_b_t)
     s_t.append(pre_s_t)
 
-    #在首部填充一位数据初始
-    Y.insert(0,0.0)
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
 
     # 用历史记录训练初始化参数
-    for t in range(1, len(Y)): # 当前是t时刻
+    for t in range(1, len(Y)):  # 当前是t时刻
         # 参数
         if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
             l_t.append(alpha * (Y[t] - s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
@@ -506,11 +507,11 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
         else:
             s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - s])
 
-    t=len(l_t)-1
+    t = len(l_t) - 1
 
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
-    for h in range(k,date_range_size+k):
-            # 追加到历史表中
+    for h in range(k, date_range_size + k):
+        # 追加到历史表中
         # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
 
         temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
@@ -520,8 +521,8 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
         # 保存结果
         temp_reuslt += temp_Y
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-        if temp_reuslt<0:
-            temp_reuslt=0
+        if temp_reuslt < 0:
+            temp_reuslt = 0
 
     # 结果修正
     modify = VM_TYPE_MODIFY1[vm_type]
@@ -532,8 +533,7 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     return result
 
 
-
-#用例02  76.147
+# 用例02  76.147
 def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十二 Holt-Winters
@@ -544,7 +544,7 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
-    k=1
+    k = 1
 
     temp_reuslt = 0.0
     result = []
@@ -558,7 +558,6 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     # 季度周期长度
     s = 7
 
-
     l_t = []
     b_t = []
     s_t = []
@@ -575,11 +574,11 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     b_t.append(pre_b_t)
     s_t.append(pre_s_t)
 
-    #在首部填充一位数据初始
-    Y.insert(0,0.0)
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
 
     # 用历史记录训练初始化参数
-    for t in range(1, len(Y)): # 当前是t时刻
+    for t in range(1, len(Y)):  # 当前是t时刻
         # 参数
         if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
             l_t.append(alpha * (Y[t] - s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
@@ -593,11 +592,11 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
         else:
             s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - s])
 
-    t=len(l_t)-1
+    t = len(l_t) - 1
 
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
-    for h in range(k,date_range_size+k):
-            # 追加到历史表中
+    for h in range(k, date_range_size + k):
+        # 追加到历史表中
         # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
 
         temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
@@ -607,8 +606,8 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
         # 保存结果
         temp_reuslt += temp_Y
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-        if temp_reuslt<0:
-            temp_reuslt=0
+        if temp_reuslt < 0:
+            temp_reuslt = 0
 
     # 结果修正
     modify = VM_TYPE_MODIFY2[vm_type]
@@ -619,7 +618,7 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     return result
 
 
-#用例03 小于三种类型
+# 用例03 小于三种类型
 def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十三 Holt-Winters
@@ -630,7 +629,7 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
-    k=1
+    k = 1
 
     temp_reuslt = 0.0
     result = []
@@ -644,7 +643,6 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     # 季度周期长度 7
     s = 7
 
-
     l_t = []
     b_t = []
     s_t = []
@@ -661,11 +659,11 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     b_t.append(pre_b_t)
     s_t.append(pre_s_t)
 
-    #在首部填充一位数据初始
-    Y.insert(0,0.0)
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
 
     # 用历史记录训练初始化参数
-    for t in range(1, len(Y)): # 当前是t时刻
+    for t in range(1, len(Y)):  # 当前是t时刻
         # 参数
         if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
             l_t.append(alpha * (Y[t] - s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
@@ -679,11 +677,11 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
         else:
             s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - s])
 
-    t=len(l_t)-1
+    t = len(l_t) - 1
 
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
-    for h in range(k,date_range_size+k):
-            # 追加到历史表中
+    for h in range(k, date_range_size + k):
+        # 追加到历史表中
         # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
 
         temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
@@ -693,19 +691,18 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
         # 保存结果
         temp_reuslt += temp_Y
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-        if temp_reuslt<0:
-            temp_reuslt=0
-    #结果修正
-    modify=VM_TYPE_MODIFY3[vm_type]
-    temp_reuslt=int(math.floor(temp_reuslt)+modify)
+        if temp_reuslt < 0:
+            temp_reuslt = 0
+    # 结果修正
+    modify = VM_TYPE_MODIFY3[vm_type]
+    temp_reuslt = int(math.floor(temp_reuslt) + modify)
     if temp_reuslt < 0:
         temp_reuslt = 0
     result.append(temp_reuslt)
     return result
 
 
-
-#用例04  76.052
+# 用例04  76.052
 def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     '''
     预测方案 十四 Holt-Winters
@@ -718,7 +715,7 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
 
-    k=1
+    k = 1
     temp_reuslt = 0.0
     result = []
 
@@ -730,7 +727,6 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     gamma = 0.21
     # 季度周期长度
     s = 7
-
 
     l_t = []
     b_t = []
@@ -748,11 +744,11 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     b_t.append(pre_b_t)
     s_t.append(pre_s_t)
 
-    #在首部填充一位数据初始
-    Y.insert(0,0.0)
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
 
     # 用历史记录训练初始化参数
-    for t in range(1, len(Y)): # 当前是t时刻
+    for t in range(1, len(Y)):  # 当前是t时刻
         # 参数
         if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
             l_t.append(alpha * (Y[t] - s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
@@ -766,11 +762,11 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
         else:
             s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - s])
 
-    t=len(l_t)-1
+    t = len(l_t) - 1
 
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
-    for h in range(k,date_range_size+k):
-            # 追加到历史表中
+    for h in range(k, date_range_size + k):
+        # 追加到历史表中
         # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
 
         temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
@@ -780,8 +776,8 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
         # 保存结果
         temp_reuslt += temp_Y
         # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-        if temp_reuslt<0:
-            temp_reuslt=0
+        if temp_reuslt < 0:
+            temp_reuslt = 0
     # 结果修正
     modify = VM_TYPE_MODIFY4[vm_type]
     temp_reuslt = int(math.floor(temp_reuslt) + modify)
@@ -791,17 +787,16 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     return result
 
 
-
 ###################对若干星期前同一天数据求平均######################
 def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                    date_range_size, vm_type):  # 需要预测的长度
 
     '''
        预测方案七,对若干星期前同一天数据求平均
        his_data:['time':[时间标签],'value':[值]]
        '''
 
-    n = 10 # 边长数10
+    n = 10  # 边长数10
     sigma = 0.5
 
     back_week = 1
@@ -844,8 +839,9 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
 
     return result
 
+
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                    date_range_size, vm_type):  # 需要预测的长度
 
     '''
        预测方案七,对若干星期前同一天数据求平均
@@ -896,8 +892,9 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 
     return result
 
+
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                    date_range_size, vm_type):  # 需要预测的长度
     '''
        预测方案七,对若干星期前同一天数据求平均
        his_data:['time':[时间标签],'value':[值]]
@@ -906,7 +903,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
     n = 2  # 边长数2  83.075
     sigma = 0.5
 
-    back_week = 1  #1
+    back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -946,9 +943,8 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
     return result
 
 
-
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size,vm_type):  # 需要预测的长度
+                    date_range_size, vm_type):  # 需要预测的长度
 
     '''
        预测方案七,对若干星期前同一天数据求平均
@@ -958,7 +954,7 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
     n = 10  # 边长数10 83.11
     sigma = 0.5
 
-    back_week = 1 #1
+    back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -1001,7 +997,7 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
 #########################################
 # 选择预测方案
 
-#按样例选择方案
+# 按样例选择方案
 
 model1_used_func = predict_model11
 
@@ -1011,7 +1007,7 @@ model3_used_func = predict_model13
 
 model4_used_func = predict_model14
 
-#指数平均
+# 指数平均
 model9_used_func = predict_model9
 
 model6_used_func = predict_model6
@@ -1027,10 +1023,10 @@ model24_used_func = predict_model18
 #######################################################
 
 
-#预测7
-model7_used_func=predict_model7
+# 预测7
+model7_used_func = predict_model7
 
-#间隔短的方案
+# 间隔短的方案
 short_gap_used_func = predict_model12
 
 long_gap_used_func = predict_model7
