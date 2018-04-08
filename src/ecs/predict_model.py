@@ -332,7 +332,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                 cot_day = n
                 cot_week += 1
                 for j in range(1, n):
-                    tmp = (n - j) / 2.0
+                    tmp = (n - j) / beta
                     day_tmp += chis_data[-index + j] * tmp
                     cot_day += tmp
                     if index + j <= cal_len:
