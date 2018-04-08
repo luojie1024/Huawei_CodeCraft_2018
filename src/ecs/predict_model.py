@@ -317,12 +317,12 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     sigma = 0.5
 
     # 衰减值0.21
-    alpha = 0.8
+    alpha = 0.9
 
     #周围衰减值
     beta=2.0
 
-    back_week = 3
+    back_week = 5
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -338,7 +338,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                 cot_day = n
                 cot_week += 1
                 for j in range(1, n):
-                    tmp = (n - j) / 2.0  # 计算左界
+                    tmp = (n - j) / beta  # 计算左界
                     day_tmp += chis_data[-index + j] * tmp
                     cot_day += tmp
                     if index + j <= cal_len:  # 计算右界
