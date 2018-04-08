@@ -320,7 +320,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     alpha = 0.9
 
     #周围衰减值
-    beta=2.0
+    beta=1.5
 
     back_week = 5
     chis_data = copy.deepcopy(his_data['value'])
