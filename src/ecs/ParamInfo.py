@@ -94,9 +94,9 @@ VM_TYPE_MODIFY3 = {  # flavor1 2 flavor5 -13 flavor8 6
 }
 
 # L2 type_size=5
-VM_TYPE_MODIFY4 = {# flavor1  flavor2 -12  flavor5 -10 flavor8 8 flavor11  	80.975->81.859
-    'flavor1': 0, 'flavor2': -12, 'flavor3':0, 'flavor4': 0, 'flavor5': -14,
-    'flavor6': 0, 'flavor7': 0, 'flavor8':10, 'flavor9': 0, 'flavor10': 0,
+VM_TYPE_MODIFY4 = {# flavor1  flavor2 -12  flavor5 -10 flavor8 8 flavor11  	80.975->81.885
+    'flavor1': 0, 'flavor2': -12, 'flavor3':0, 'flavor4': 0, 'flavor5': -12,
+    'flavor6': 0, 'flavor7': 0, 'flavor8':9, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 
