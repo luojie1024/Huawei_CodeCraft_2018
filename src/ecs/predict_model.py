@@ -317,12 +317,12 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     sigma = 0.5
 
     # 衰减值0.21
-    alpha = 0.9
+    alpha = 0.6
 
     #周围衰减值
-    beta=1.5
+    beta=2
 
-    back_week = 3
+    back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
