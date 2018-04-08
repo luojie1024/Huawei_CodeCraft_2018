@@ -110,7 +110,7 @@ def predict_all(caseInfo):
     #################################################星期前同一天数据求平均##################################################
 
     predict_func = predict_model.model8_used_func
-    vmtype_avage_v=2
+    vmtype_avage_v=3
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
