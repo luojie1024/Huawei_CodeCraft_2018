@@ -308,96 +308,53 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size, vm_type):  # 需要预测的长度
 
-    '''
-    预测方案八,若干星期前同一天数据求指数平均
-    his_data:['time':[时间标签],'value':[值]]
-    '''
+    n = 10  # 边长数
     sigma = 0.5
 
     # 衰减值0.21
     alpha = 0.9
 
-    # 周围衰减值
-    beta = 1.5
+    #周围衰减值
+    beta=2
 
-    back_week = 3
+    back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
     temp_result = 0.0  # 暂存结果
     result = []
-    for day in range(date_range_size):  # 预测天数范围
-        day_tmp = 0.0
+    for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
-        cot_week = 0.0
+        cot_week = 0
         for i in range(1, back_week + 1):  # 获取过去周索引
-            index = i * 7-day
+            index = i * 7
             if index <= cal_len:  # 如果没有越界
-                day_tmp += chis_data[-index]
+                day_tmp = chis_data[-index] * n
+                cot_day = n
                 cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / beta  # 计算左界
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:  # 计算右界
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += (day_tmp / cot_day)* alpha * pow(1 - alpha, i - 1)
             else:
-                if cot_week!=0.0:#没有过去信息
-                    day_avage = day_tmp / cot_week
-                temp_result += day_avage
                 break
-        # day_avage += (day_tmp / cot_week) * alpha * pow(1 - alpha, i - 1)
+
         # if cot_week != 0:
         #     day_avage = day_avage * 1.0 / cot_week  # 注意报错
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
-
+        chis_data.append(day_avage)
+        temp_result+=day_avage
     result.append(int(math.ceil(temp_result)))
 
     return result
-
-    # n = 0  # 边长数
-    # sigma = 0.5
-    #
-    # # 衰减值0.21
-    # alpha = 0.9
-    #
-    # #周围衰减值
-    # beta=1.5
-    #
-    # back_week = 2
-    # chis_data = copy.deepcopy(his_data['value'])
-    # cal_len = len(chis_data)
-    #
-    # temp_result = 0.0  # 暂存结果
-    # result = []
-    # for rept in range(date_range_size):  # 预测天数范围
-    #     day_avage = 0.0
-    #     cot_week = 0
-    #     for i in range(1, back_week + 1):  # 获取过去周索引
-    #         index = i * 7
-    #         if index <= cal_len:  # 如果没有越界
-    #             day_tmp = chis_data[-index] * n
-    #             cot_day = n
-    #             cot_week += 1
-    #             for j in range(1, n):
-    #                 tmp = (n - j) / beta  # 计算左界
-    #                 day_tmp += chis_data[-index + j] * tmp
-    #                 cot_day += tmp
-    #                 if index + j <= cal_len:  # 计算右界
-    #                     day_tmp += chis_data[-index - j] * tmp
-    #                     cot_day += tmp
-    #                 else:
-    #                     continue
-    #             day_avage += (day_tmp / cot_day)* alpha * pow(1 - alpha, i - 1)
-    #         else:
-    #             break
-    #
-    #     # if cot_week != 0:
-    #     #     day_avage = day_avage * 1.0 / cot_week  # 注意报错
-    #     # noise = random.gauss(0, sigma)
-    #     # noise = math.fabs(noise)
-    #     # day_avage = int(math.ceil(day_avage + noise))
-    #     chis_data.append(day_avage)
-    #     temp_result+=day_avage
-    # result.append(int(math.ceil(temp_result)))
-    #
-    # return result
 
 
 def predict_model9(his_data, date_range_size, vm_type):  # 简单滑动平均法
