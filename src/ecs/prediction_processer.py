@@ -41,6 +41,8 @@ def predict_all(caseInfo):
     result = {}
     vm_types = caseInfo.vm_types
 
+    global vmtype_avage_v
+
     # result=predict_func(caseInfo)
 
     # 预测天数[7] [7]
@@ -108,7 +110,7 @@ def predict_all(caseInfo):
     #################################################星期前同一天数据求平均##################################################
 
     predict_func = predict_model.model8_used_func
-    vmtype_avage_v=1
+    vmtype_avage_v=3
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
