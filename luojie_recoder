@@ -138,7 +138,7 @@ model13:	L1         VM_TYPE_MODIFY3 = {#flavor1 2 flavor5 -13 flavor8 6
 	gamma = 0.185
   	s = 7
 model14:	L2
-	alpha=0.243      分数： 22.527
+	alpha=0.243      分数： 22.527   23.442
 	beta = 0.00
 	gamma = 0.21
   	s = 7
