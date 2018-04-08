@@ -6,7 +6,7 @@ import random
 from ParamInfo import *
 
 # 加入随机数
-is_noise = 0
+is_noise = 1
 
 
 def predict_model1(his_data,  # 某种类型的虚拟机的历史数据
@@ -852,7 +852,7 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     n = 10  # 边长数 10
     sigma = 0.5
 
-    beta=2.2
+    beta=2.0
 
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -882,12 +882,12 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
                 break
         if cot_week != 0:
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        # if is_noise:
-        #     noise = random.gauss(0, sigma)
-        #     noise = math.fabs(noise)
-        #     day_avage = int(math.ceil(day_avage + noise))
-        # else:
-        #     day_avage = int(math.ceil(day_avage))
+        if is_noise:
+            noise = random.gauss(0, sigma)
+            noise = math.fabs(noise)
+            day_avage = int(math.ceil(day_avage + noise))
+        else:
+            day_avage = int(math.ceil(day_avage))
 
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
