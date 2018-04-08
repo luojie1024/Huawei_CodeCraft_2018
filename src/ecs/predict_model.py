@@ -313,7 +313,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     his_data:['time':[时间标签],'value':[值]]
     '''
 
-    n = 3  # 边长数
+    n = 10  # 边长数
     sigma = 0.5
 
     # 衰减值0.21
@@ -322,7 +322,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     #周围衰减值
     beta=1.5
 
-    back_week = 5
+    back_week = 3
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
