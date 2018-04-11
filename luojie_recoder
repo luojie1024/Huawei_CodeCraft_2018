@@ -166,3 +166,13 @@ model18:	L2      22.23      not noise:22.401
     back_week = 1
 分配修正算法优化
    		  分数		83.652
+
+
+记录19：特征
+虚拟机类型顺序--》self.vm_type
+
+[虚拟机类型*size,数量,]
+
+[类型] day_of_week,year,mother,day_of_mother,day_of_year,week_of_year,day_of_week,first_work_day,weekend_overtime,holiday,shopping_day,weekend
+
+
