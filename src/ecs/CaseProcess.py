@@ -36,10 +36,11 @@ class CaseInfo(object):
     train_date_range_size = 0
 
     # 训练特征表
-    train_data = []
+    train_X = []
+    train_Y = []
 
     # 测试表
-    predictor_data = {}#{vm:predictor_data}
+    predictor_data = {}  # {vm:predictor_data}
 
     def __init__(self, origin_case_info, origin_train_data, predict_time_grain=ParamInfo.TIME_GRAIN_DAY):
         '''
@@ -87,7 +88,7 @@ class CaseInfo(object):
             _typename = _type.split(' ')[0]
             self.vm_types.append(_typename)
             self.vm_types_count[_typename] = 0
-            self.predictor_data[_typename]=[]
+            self.predictor_data[_typename] = []
         # 处理优化目标    
         self.opt_target = origin_case_info[4 + tsize].replace('\r\n', '')
         # 处理时间
@@ -413,19 +414,25 @@ class CaseInfo(object):
         # 购物节数据放大
         return result
 
-    def get_feature_map(self):
+    def get_train_X(self):
         '''
-        提取特征,训练模型 34列
+        提取特征,训练模型 27列
         '''
-        pass
-        # self.feature_list = feature_merge(self.vm_types, self.his_data)  # 提取特征
+        return self.train_X[0:-1]
 
-    def get_predictor_map(self):
+    def get_train_Y(self):
         '''
-        获取预测特征表 33列
+        提取特征,训练模型 7列
         '''
-        pass
-        # self.predictor_list = get_predictor_map(self.data_range[0],self.data_range[1],self.vm_types_size)
+        return self.train_Y
+
+    def get_predictor_X(self, vm_type):
+        '''
+        获取预测特征表 27列
+        :param vm_type: 虚拟机类型
+        :return:预测集合
+        '''
+        return self.predictor_data[vm_type]
 
     def set_train_feature(self):
         '''
@@ -438,65 +445,105 @@ class CaseInfo(object):
         et = datetime.strptime(self.train_data_range[1], '%Y-%m-%d %H:%M:%S')
         # 遍历时间
         while st < et:
+            # 虚拟机特征
+            vm_feature = [0] * self.vm_types_size
             # 遍历要预测的虚拟机 当天需要观察的虚拟机(每天/每种虚拟机)
             for i in range(self.vm_types_size):
-                # 虚拟机特征
-                vm_feature = [0] * self.vm_types_size
-                count = 0
-                vm_feature[i] = 1
                 # 如果要预测的虚拟机出现过
                 if isContainKey(self.his_data, self.vm_types[i]):
                     # 当前时间出现过
                     if isContainKey(self.his_data[self.vm_types[i]], st.strftime("%Y-%m-%d %H:%M:%S")):
-                        count = self.his_data[self.vm_types[i]][st.strftime("%Y-%m-%d %H:%M:%S")]
-                    # 添加出现频率
-                    vm_feature.append(self.vm_types_count[self.vm_types[i]])
-                else:  # 如果要预测的虚拟机没出现过,频率为0
-                    vm_feature.append(0)
-                time_fear = get_time_feature(st)
-                vm_feature.extend(time_fear)
-                # 添加测试train_Y
-                vm_feature.append(count)
-                # 添加如训练集队列
-                self.train_data.append(vm_feature)
+                        vm_feature[i] = self.his_data[self.vm_types[i]][st.strftime("%Y-%m-%d %H:%M:%S")]
+                    # # 添加出现频率
+                    # vm_feature.append(self.vm_types_count[self.vm_types[i]])
+                # else:  # 如果要预测的虚拟机没出现过,频率为0
+                #     vm_feature.append(0)
+            time_fear = self.get_time_feature(st)
+            vm_feature.extend(time_fear)
+            # 添加如训练集队列
+            self.train_X.append(vm_feature)
             st += td
-        return self.train_data
 
     def set_predictor_feature(self):
-        '''
-        初始化预测特征集合
-        '''
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
-            hrs = 24
-        td = timedelta(hours=hrs)
-        st = datetime.strptime(self.data_range[0], '%Y-%m-%d %H:%M:%S')
-        et = datetime.strptime(self.data_range[1], '%Y-%m-%d %H:%M:%S')
-        # 遍历时间
-        while st < et:
-            # 遍历要预测的虚拟机 当天需要观察的虚拟机(每天/每种虚拟机)
-            for i in range(self.vm_types_size):
-                # 虚拟机特征
-                vm_feature = [0] * self.vm_types_size
-                count = 0
-                vm_feature[i] = 1
-                # 如果要预测的虚拟机出现过
-                if isContainKey(self.his_data, self.vm_types[i]):
-                    # 当前时间出现过
-                    if isContainKey(self.his_data[self.vm_types[i]], st.strftime("%Y-%m-%d %H:%M:%S")):
-                        count = self.his_data[self.vm_types[i]][st.strftime("%Y-%m-%d %H:%M:%S")]
-                    # 添加出现频率
-                    vm_feature.append(self.vm_types_count[self.vm_types[i]])
-                else:  # 如果要预测的虚拟机没出现过,频率为0
-                    vm_feature.append(0)
-                time_fear = get_time_feature(st)
-                vm_feature.extend(time_fear)
-                # 添加测试train_Y
-                vm_feature.append(count)
-                # 添加如训练集队列
-                self.train_data.append(vm_feature)
-            st += td
-        return self.train_data
+        self.train_Y = [a[0:self.vm_types_size] for a in self.train_X[1:]]
+        # '''
+        # 初始化预测特征集合
+        # '''
+        # if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        #     hrs = 24
+        # td = timedelta(hours=hrs)
+        # st = datetime.strptime(self.data_range[0], '%Y-%m-%d %H:%M:%S')
+        # et = datetime.strptime(self.data_range[1], '%Y-%m-%d %H:%M:%S')
+        # # 遍历时间
+        # while st < et:
+        #     # 遍历要预测的虚拟机 当天需要观察的虚拟机(每天/每种虚拟机)
+        #     for i in range(self.vm_types_size):
+        #         # 虚拟机特征
+        #         vm_feature = [0] * self.vm_types_size
+        #         vm_feature[i] = 1
+        #         # 如果要预测的虚拟机出现过
+        #         if isContainKey(self.his_data, self.vm_types[i]):
+        #             # 添加出现频率
+        #             vm_feature.append(self.vm_types_count[self.vm_types[i]])
+        #         else:  # 如果要预测的虚拟机没出现过,频率为0
+        #             vm_feature.append(0)
+        #         time_fear = self.get_time_feature(st)
+        #         vm_feature.extend(time_fear)
+        #
+        #         # 添加如训练集队列
+        #         self.predictor_data[self.vm_types[i]].append(vm_feature)
+        #     st += td
 
+    def get_time_feature(self, time):
+        '''
+        :param time:时间
+        :return: 返回时间特征
+        '''
+        time_feature = []
+        # 获取年份
+        year = time.timetuple().tm_year - 2015
+        # 获取月份
+        mother = time.timetuple().tm_mon
+        # 获取月日
+        day_of_mother = time.timetuple().tm_mday
+        # 获得星期几
+        dayofweek = time.timetuple().tm_wday + 1
+        # 获得第几天数
+        dayofyear = time.timetuple().tm_yday
+        # 获得第几周
+        weekofyear = int(time.strftime("%W")) + 1
+        # 日期
+        date_str = time.strftime("%Y-%m-%d")
+        # 比较
+        if date_str in first_workdays:  # 国家规定的第一个上班日
+            first_workday = 1
+        else:
+            first_workday = 0
+
+        if date_str in weekend_workdays:  # 国家规定周末上班日
+            weekend_overtime = 1
+        else:
+            weekend_overtime = 0
+
+        if date_str in holidays:  # 国家规定假期加班日
+            holiday = 1
+        else:
+            holiday = 0
+
+        if date_str in shopping_days:  # 购物节
+            shopping_day = 1
+        else:
+            shopping_day = 0
+
+        if dayofweek == 6 or dayofweek == 7:  # 周六周末
+            weekend = 1
+        else:
+            weekend = 0
+        time_feature.extend(
+            [year, mother, day_of_mother, dayofweek, dayofyear, weekofyear, first_workday, weekend_overtime, holiday,
+             shopping_day, weekend])
+
+        return time_feature
 
 
 ################### class CaseInfo end #############################
@@ -504,58 +551,6 @@ class CaseInfo(object):
 
 # 获取粒度时间
 split_append_tmp = [[13, ':00:00'], [10, ' 00:00:00']]
-
-
-def get_time_feature(time):
-    '''
-    :param time:时间
-    :return: 返回时间特征
-    '''
-    time_feature = []
-    # 获取年份
-    year = time.timetuple().tm_year
-    # 获取月份
-    mother = time.timetuple().tm_mon
-    # 获取月日
-    day_of_mother = time.timetuple().tm_mday
-    # 获得星期几
-    dayofweek = time.timetuple().tm_wday + 1
-    # 获得第几天数
-    dayofyear = time.timetuple().tm_yday
-    # 获得第几周
-    weekofyear = int(time.strftime("%W")) + 1
-    # 日期
-    date_str = time.strftime("%Y-%m-%d")
-    # 比较
-    if date_str in first_workdays:  # 国家规定的第一个上班日
-        first_workday = 1
-    else:
-        first_workday = 0
-
-    if date_str in weekend_workdays:  # 国家规定周末上班日
-        weekend_overtime = 1
-    else:
-        weekend_overtime = 0
-
-    if date_str in holidays:  # 国家规定假期加班日
-        holiday = 1
-    else:
-        holiday = 0
-
-    if date_str in shopping_days:  # 购物节
-        shopping_day = 1
-    else:
-        shopping_day = 0
-
-    if dayofweek == 6 or dayofweek == 7:  # 周六周末
-        weekend = 1
-    else:
-        weekend = 0
-    time_feature.extend(
-        [year, mother, day_of_mother, dayofweek, dayofyear, weekofyear, first_workday, weekend_overtime, holiday,
-         shopping_day, weekend])
-
-    return time_feature
 
 
 def get_grain_time(time_str, time_grain):

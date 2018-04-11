@@ -564,6 +564,18 @@ def count(x):
     else:
         raise Exception("Input Requires Matrix")
 
+def count_list(x):
+    x_is_mat = type_of(x) == 'matrix'
+    if x_is_mat:
+        res = []
+        for j in range(len(x[0])):
+            temp=[]
+            for i in range(len(x)):
+                temp.append(x[i][j])
+            res.append(temp)
+        return res
+    else:
+        raise Exception("Input Requires Matrix")
 
 def sqr_avg_square_sum(x):
     avg_ss = 0.0

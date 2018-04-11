@@ -30,6 +30,20 @@ preliminar2_2_size = 5
 vmtype_avage_v = 3
 
 
+def predict_deeplearning(caseInfo):
+    '''
+    输入为CaseInfo对象,使用深度学习模型
+    :param caseInfo:
+    :return: 预测结果
+    '''
+    result = {}
+    #使用LSTM
+    predict_func = predict_model.lstm_model_used_func
+    #预测
+    result=predict_func(caseInfo)
+    #返回结果
+    return result
+
 def predict_all(caseInfo):
     '''
     输入为CaseInfo对象，

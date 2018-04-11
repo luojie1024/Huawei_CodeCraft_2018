@@ -319,10 +319,10 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
         his_data:['time':[时间标签],'value':[值]]
         '''
 
-    n =10  # 边长数
+    n = 10  # 边长数
     sigma = 0.5
 
-    beta=2.0
+    beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -858,7 +858,7 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     n = 10  # 边长数 10
     sigma = 0.5
 
-    beta=2.0
+    beta = 2.0
 
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -956,9 +956,9 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
     '''
-       预测方案七,对若干星期前同一天数据求平均
-       his_data:['time':[时间标签],'value':[值]]
-       '''
+   预测方案七,对若干星期前同一天数据求平均
+   his_data:['time':[时间标签],'value':[值]]
+   '''
 
     n = 10  # 边长数10 83.11
     sigma = 0.5
@@ -1004,114 +1004,129 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
 
 
 #########################################LSTM#########################################
-def predict_model19(Train_X,  # 某种类型的虚拟机的历史数据
-                    Train_Y, PreY):  # 需要预测的长度
-    pass
-    # tic = t.time()
-    #
-    # input_size = num_flavor + 2
-    # label_size = num_flavor
-    # output_size = label_size
-    # batch_size = 7
-    # num_epoch = 2000
-    # learning_rate = 0.3
-    # num_batch_LB = int(math.floor(len(Train_X) / batch_size))
-    # num_batch_UB = int(math.ceil(len(Train_X) / batch_size))
-    # last_batch_size = len(Train_X) % batch_size
-    #
-    # lstm = lstmcl.LSTM(input_size, output_size, batch_size)
-    # lstm.init_lstm(rand_type='gauss')
-    #
-    # cost = []
-    # for i in range(num_epoch):
-    #     cost_epoch = 0
-    #     for j in range(num_batch_LB):
-    #         X_batch = [[0] * input_size]
-    #         X_batch.extend(Train_X[j * batch_size:j * batch_size + batch_size])
-    #         lstm.lstm_forward(X_batch)
-    #         Label_batch = [[0] * label_size]
-    #         Label_batch.extend(Train_Y[j * batch_size:j * batch_size + batch_size])
-    #         cost_batch_j = lstm.cost_LSE(Label_batch)
-    #         cost_epoch = cost_epoch + cost_batch_j
-    #         D = lstm.deriv_LSE(Label_batch)
-    #         lstm.lstm_bptt(D, X_batch, learning_rate, 'Adam')
-    #         lstm.reset()
-    #     if num_batch_LB != num_batch_UB:
-    #         lstm.set_batch_size(last_batch_size)
-    #         X_batch_last = [[0] * input_size]
-    #         X_batch_last.extend(Train_X[len(Train_X) - last_batch_size:len(Train_X)])
-    #         lstm.lstm_forward(X_batch_last)
-    #         Label_batch_last = [[0] * label_size]
-    #         Label_batch_last.extend(Train_Y[len(Train_Y) - last_batch_size:len(Train_Y)])
-    #         cost_batch_last = lstm.cost_LSE(Label_batch_last)
-    #         cost_epoch = cost_epoch + cost_batch_last
-    #         D = lstm.deriv_LSE(Label_batch_last)
-    #         lstm.lstm_bptt(D, X_batch_last, learning_rate, 'Adam')
-    #         lstm.reset()
-    #     cost_epoch = cost_epoch / len(Xn)
-    #     cost.append(cost_epoch)
-    #
-    # toc = t.time()
-    # print("time for training LSTM: " + str(toc - tic))
-    #
-    # plt.figure()
-    # plt.plot(cost)
-    # plt.xlabel("number of epoch")
-    # plt.ylabel("cost over one epoch")
-    # plt.title("learning curve with learning rate: " + str(learning_rate))
-    # plt.show()
-    # # X_pred = [[0]*input_size]
-    # # X_pred.extend(Xn)
-    # # lstm.set_batch_size(len(Xn))
-    # # lstm.lstm_forward(X_pred)
-    # # h = lstm.get_h()
-    # # pred = vt.ceil(vt.denormalize(h,mean,std))
-    #
-    # for j in range(num_batch_LB):
-    #     X_batch = [[0] * input_size]
-    #     X_batch.extend(Train_X[j * batch_size:j * batch_size + batch_size])
-    #     lstm.lstm_forward(X_batch)
-    #
-    # if num_batch_LB != num_batch_UB:
-    #     lstm.set_batch_size(last_batch_size)
-    #     X_batch_last = [[0] * input_size]
-    #     X_batch_last.extend(Train_X[len(Train_X) - last_batch_size:len(Train_X)])
-    #     lstm.lstm_forward(X_batch_last)
-    #
-    # h_prev = lstm.get_h()[-1]
-    # c_prev = lstm.get_c()[-1]
-    #
-    # # lstm.set_batch_size(num_days_pred)
-    # pred = vt.ceil(vt.denormalize_uniform([h_prev], max_data, min_data))
-    # for k in range(num_days_pred):
-    #     Xt = []
-    #     Xt.extend(h_prev)
-    #     Xt.extend(
-    #         [((tr_set[-1][-2] + k) / 10 - (max_data[-2] + min_data[-2]) / 2) / ((max_data[-2] - min_data[-2]) / 2),
-    #          ((tr_set[-1][-1] + k) % 7 - (max_data[-1] + min_data[-1]) / 2) / ((max_data[-1] - min_data[-1]) / 2)])
-    #     c_prev, h_prev = lstm.predict_t(c_prev, h_prev, Xt)
-    #     pred.extend(vt.trunc(vt.denormalize_uniform([h_prev], max_data, min_data)))
-    #
-    # print("\n")
+def predict_model19(caseInfo):  # 数据对象
+    # 结果
+    result = {}
+    vm_types = caseInfo.vm_types
+    # 获得训练集
+    train_X = caseInfo.get_train_X()
+    train_Y = caseInfo.get_train_Y()
+    tic = t.time()
+    # 最大最小训练集
+    max_data = vt.find_max(caseInfo.train_X)
+    min_data = vt.find_min(caseInfo.train_X)
+    train_X = vt.normalize_uniform(train_X, max_data, min_data)
+
+    max_data_Y = max_data[0:caseInfo.vm_types_size]
+    min_data_Y = min_data[0:caseInfo.vm_types_size]
+
+    input_size = len(train_X[0])
+    label_size = caseInfo.vm_types_size
+    output_size = label_size
+    batch_size = 20
+    num_epoch = 2000
+    learning_rate = 0.3
+    num_batch_LB = int(math.floor(len(train_X) / batch_size))
+    num_batch_UB = int(math.ceil(len(train_X) / batch_size))
+    last_batch_size = len(train_X) % batch_size
+
+    lstm = lstmcl.LSTM(input_size, output_size, batch_size)
+    lstm.init_lstm(rand_type='gauss')
+
+    cost = []
+    for i in range(num_epoch):
+        cost_epoch = 0
+        for j in range(num_batch_LB):
+            X_batch = [[0] * input_size]
+            X_batch.extend(train_X[j * batch_size:j * batch_size + batch_size])
+            lstm.lstm_forward(X_batch)
+            Label_batch = [[0] * label_size]
+            Label_batch.extend(train_Y[j * batch_size:j * batch_size + batch_size])
+            cost_batch_j = lstm.cost_LSE(Label_batch)
+            cost_epoch = cost_epoch + cost_batch_j
+            D = lstm.deriv_LSE(Label_batch)
+            lstm.lstm_bptt(D, X_batch, learning_rate, 'Adam')
+            lstm.reset()
+        if num_batch_LB != num_batch_UB:
+            lstm.set_batch_size(last_batch_size)
+            X_batch_last = [[0] * input_size]
+            X_batch_last.extend(train_X[len(train_X) - last_batch_size:len(train_X)])
+            lstm.lstm_forward(X_batch_last)
+            Label_batch_last = [[0] * label_size]
+            Label_batch_last.extend(train_Y[len(train_Y) - last_batch_size:len(train_Y)])
+            cost_batch_last = lstm.cost_LSE(Label_batch_last)
+            cost_epoch = cost_epoch + cost_batch_last
+            D = lstm.deriv_LSE(Label_batch_last)
+            lstm.lstm_bptt(D, X_batch_last, learning_rate, 'Adam')
+            lstm.reset()
+        cost_epoch = cost_epoch / len(train_X)
+        cost.append(cost_epoch)
+
+
+
+    plt.figure()
+    plt.plot(cost)
+    plt.xlabel("number of epoch")
+    plt.ylabel("cost over one epoch")
+    plt.title("learning curve with learning rate: " + str(learning_rate))
+    plt.show()
+    # X_pred = [[0]*input_size]
+    # X_pred.extend(Xn)
+    # lstm.set_batch_size(len(Xn))
+    # lstm.lstm_forward(X_pred)
+    # h = lstm.get_h()
+    # pred = vt.ceil(vt.denormalize(h,mean,std))
+
+    for j in range(num_batch_LB):
+        X_batch = [[0] * input_size]
+        X_batch.extend(train_X[j * batch_size:j * batch_size + batch_size])
+        lstm.lstm_forward(X_batch)
+
+    if num_batch_LB != num_batch_UB:
+        lstm.set_batch_size(last_batch_size)
+        X_batch_last = [[0] * input_size]
+        X_batch_last.extend(train_X[len(train_X) - last_batch_size:len(train_X)])
+        lstm.lstm_forward(X_batch_last)
+
+
+
+    # lstm.set_batch_size(num_days_pred)
+    h_prev = lstm.get_h()[-1]
+    c_prev = lstm.get_c()[-1]
+
+    # lstm.set_batch_size(num_days_pred)
+    predict_result = vt.ceil(vt.denormalize_uniform([h_prev], max_data_Y, min_data_Y))
+    st = datetime.datetime.strptime(caseInfo.data_range[0], '%Y-%m-%d %H:%M:%S')
+    et = datetime.datetime.strptime(caseInfo.data_range[1], '%Y-%m-%d %H:%M:%S')
+    td = datetime.timedelta(hours=24)
+    # 遍历时间
+    while st < et:
+        time_X = []
+        time_X.extend(h_prev)
+        time_fear = caseInfo.get_time_feature(st)
+        time_X.extend(time_fear)
+        c_prev, h_prev = lstm.predict_t(c_prev, h_prev, time_X)
+        predict_result.extend(vt.trunc(vt.denormalize_uniform([h_prev], max_data_Y, min_data_Y)))
+        st += td
+
+    print("\n")
     # print("Historical records:")
     # count_his = vt.count([a[0:num_flavor] for a in tr_set])
     # print(count_his)
     #
     # print("\n")
-    # print("Predictions:")
-    # for i in range(len(pred)):
-    #     print(pred[i])
-    # count_pred = vt.count(pred)
-    # print("number of each flavor:")
-    # print(count_pred)
-    #
-    # print("\n")
-    # print("Real case:")
-    # for i in range(len(ts_set)):
-    #     print(ts_set[i])
-    # count_real = vt.count(ts_set)
-    # print("number of each flavor:")
-    # print(count_real)
+    print("Predictions:")
+    for i in range(len(predict_result)):
+        print(predict_result[i])
+    count_pred = vt.count(predict_result)
+    count_pred_list=vt.count_list(predict_result)
+    print("number of each flavor:")
+    print(count_pred)
+
+    toc = t.time()
+    print("time for training LSTM: " + str(toc - tic))
+    result=dict(zip(caseInfo.vm_types, count_pred_list))
+    return result
     #
     # print("\n")
     # print("Differences:")
@@ -1182,3 +1197,4 @@ short_gap_used_func = predict_model12
 long_gap_used_func = predict_model7
 
 #########################################
+lstm_model_used_func = predict_model19
