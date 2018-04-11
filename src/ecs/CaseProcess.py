@@ -393,17 +393,17 @@ class CaseInfo(object):
         return result
 
 
-    # def set_feature_map(self):
-    #     '''
-    #     提取特征,训练模型 34列
-    #     '''
-    #     self.feature_list = feature_merge(self.vm_types, self.his_data)  # 提取特征
-    #
-    # def set_predictor_map(self):
-    #     '''
-    #     获取预测特征表 33列
-    #     '''
-    #     self.predictor_list = get_predictor_map(self.data_range[0],self.data_range[1],self.vm_types_size)
+    def get_feature_map(self):
+        '''
+        提取特征,训练模型 34列
+        '''
+        self.feature_list = feature_merge(self.vm_types, self.his_data)  # 提取特征
+
+    def get_predictor_map(self):
+        '''
+        获取预测特征表 33列
+        '''
+        self.predictor_list = get_predictor_map(self.data_range[0],self.data_range[1],self.vm_types_size)
 
 ################### class CaseInfo end #############################
 

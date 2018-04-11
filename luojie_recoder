@@ -146,7 +146,7 @@ model14:	L2      VM_TYPE_MODIFY4 = {# flavor1  flavor2 -12  flavor5 -12 flavor8 
    		  分数		82.593
 
 
-记录17：采用pre14和pack5
+记录18：采用pre14和pack5
 model15:    L1       18.5    not noise:19.199
     n=10
     sigma = 0.5
