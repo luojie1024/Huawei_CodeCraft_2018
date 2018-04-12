@@ -1023,8 +1023,8 @@ def predict_model19(caseInfo):  # 数据对象
     input_size = len(train_X[0])
     label_size = caseInfo.vm_types_size
     output_size = label_size
-    batch_size = 20
-    num_epoch = 2000
+    batch_size = 7
+    num_epoch = 300
     learning_rate = 0.3
     num_batch_LB = int(math.floor(len(train_X) / batch_size))
     num_batch_UB = int(math.ceil(len(train_X) / batch_size))
@@ -1034,6 +1034,8 @@ def predict_model19(caseInfo):  # 数据对象
     lstm.init_lstm(rand_type='gauss')
 
     cost = []
+
+    view_epoch=50
     for i in range(num_epoch):
         cost_epoch = 0
         for j in range(num_batch_LB):
@@ -1060,16 +1062,16 @@ def predict_model19(caseInfo):  # 数据对象
             lstm.lstm_bptt(D, X_batch_last, learning_rate, 'Adam')
             lstm.reset()
         cost_epoch = cost_epoch / len(train_X)
+        if i % view_epoch == 0:
+            print('%d.epoch: cost -->%f' % (i / view_epoch, cost_epoch))
         cost.append(cost_epoch)
 
-
-
-    plt.figure()
-    plt.plot(cost)
-    plt.xlabel("number of epoch")
-    plt.ylabel("cost over one epoch")
-    plt.title("learning curve with learning rate: " + str(learning_rate))
-    plt.show()
+    # plt.figure()
+    # plt.plot(cost)
+    # plt.xlabel("number of epoch")
+    # plt.ylabel("cost over one epoch")
+    # plt.title("learning curve with learning rate: " + str(learning_rate))
+    # plt.show()
     # X_pred = [[0]*input_size]
     # X_pred.extend(Xn)
     # lstm.set_batch_size(len(Xn))
@@ -1088,44 +1090,59 @@ def predict_model19(caseInfo):  # 数据对象
         X_batch_last.extend(train_X[len(train_X) - last_batch_size:len(train_X)])
         lstm.lstm_forward(X_batch_last)
 
-
-
     # lstm.set_batch_size(num_days_pred)
     h_prev = lstm.get_h()[-1]
     c_prev = lstm.get_c()[-1]
 
     # lstm.set_batch_size(num_days_pred)
     predict_result = vt.ceil(vt.denormalize_uniform([h_prev], max_data_Y, min_data_Y))
+
     st = datetime.datetime.strptime(caseInfo.data_range[0], '%Y-%m-%d %H:%M:%S')
     et = datetime.datetime.strptime(caseInfo.data_range[1], '%Y-%m-%d %H:%M:%S')
     td = datetime.timedelta(hours=24)
+    time_fears = []
     # 遍历时间
     while st < et:
+        time_fears.append(caseInfo.get_time_feature(st))
+        st += td
+    # 正规化
+    time_fears = vt.normalize_uniform(time_fears, max_data[caseInfo.vm_types_size:], min_data[caseInfo.vm_types_size:])
+
+    # 遍历时间
+    for i in range(len(time_fears)):
         time_X = []
         time_X.extend(h_prev)
-        time_fear = caseInfo.get_time_feature(st)
-        time_X.extend(time_fear)
+        time_X.extend(time_fears[i])
         c_prev, h_prev = lstm.predict_t(c_prev, h_prev, time_X)
-        predict_result.extend(vt.trunc(vt.denormalize_uniform([h_prev], max_data_Y, min_data_Y)))
-        st += td
+        predict_result.extend(vt.trunc(vt.denormalize_uniform([h_prev], max_data, min_data)))
 
-    print("\n")
-    # print("Historical records:")
-    # count_his = vt.count([a[0:num_flavor] for a in tr_set])
-    # print(count_his)
-    #
     # print("\n")
-    print("Predictions:")
-    for i in range(len(predict_result)):
-        print(predict_result[i])
-    count_pred = vt.count(predict_result)
-    count_pred_list=vt.count_list(predict_result)
-    print("number of each flavor:")
-    print(count_pred)
+    # # print("Historical records:")
+    # # count_his = vt.count([a[0:num_flavor] for a in tr_set])
+    # # print(count_his)
+    # #
+    # # print("\n")
+    # print("Predictions:")
+    # for i in range(1,len(predict_result)):
+    #     print(predict_result[i])
+    count_pred = vt.count(predict_result[1:])
+    count_pred_list = vt.count_list(predict_result[1:])
+    # print("number of each flavor:")
+    # # print(count_pred_list)
+    # print(count_pred)
+    # print ('\n')
+    # print("Real data:")
+    # test_list = caseInfo.get_test_list()
+    # print(test_list)
+    # print ('\n')
+    # toc = t.time()
+    # print("time for training LSTM: " + str(toc - tic))
+    # print ('\n')
+    result = dict(zip(caseInfo.vm_types, count_pred_list))
+    # print ('result:')
+    # print(result)
+    # print ('\n')
 
-    toc = t.time()
-    print("time for training LSTM: " + str(toc - tic))
-    result=dict(zip(caseInfo.vm_types, count_pred_list))
     return result
     #
     # print("\n")

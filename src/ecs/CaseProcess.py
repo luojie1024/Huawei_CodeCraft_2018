@@ -39,10 +39,15 @@ class CaseInfo(object):
     train_X = []
     train_Y = []
 
+    # 测试集各种种类的数量
+    test_vm_types_count = {}
+    test_count = []
+
     # 测试表
     predictor_data = {}  # {vm:predictor_data}
 
-    def __init__(self, origin_case_info, origin_train_data, predict_time_grain=ParamInfo.TIME_GRAIN_DAY):
+    def __init__(self, origin_case_info, origin_train_data, predict_time_grain=ParamInfo.TIME_GRAIN_DAY,
+                 input_test_file_array=None):
         '''
         origin_data  predictor中的input_lines数组
         origin_train_data predictor中的ecs_lines数组
@@ -54,6 +59,8 @@ class CaseInfo(object):
         # 提取特征
         self.set_train_feature()
         self.set_predictor_feature()
+        if input_test_file_array != None:
+            self.set_test_list(input_test_file_array)
         # self.set_feature_map()
         # self.set_predictor_map()
         pass
@@ -501,15 +508,15 @@ class CaseInfo(object):
         '''
         time_feature = []
         # 获取年份
-        year = time.timetuple().tm_year - 2015
+        # year = time.timetuple().tm_year - 2015
         # 获取月份
-        mother = time.timetuple().tm_mon
+        # mother = time.timetuple().tm_mon
         # 获取月日
-        day_of_mother = time.timetuple().tm_mday
+        # day_of_mother = time.timetuple().tm_mday
         # 获得星期几
         dayofweek = time.timetuple().tm_wday + 1
         # 获得第几天数
-        dayofyear = time.timetuple().tm_yday
+        # dayofyear = time.timetuple().tm_yday
         # 获得第几周
         weekofyear = int(time.strftime("%W")) + 1
         # 日期
@@ -530,20 +537,43 @@ class CaseInfo(object):
         else:
             holiday = 0
 
-        if date_str in shopping_days:  # 购物节
-            shopping_day = 1
-        else:
-            shopping_day = 0
+        # if date_str in shopping_days:  # 购物节
+        #     shopping_day = 1
+        # else:
+        #     shopping_day = 0
 
         if dayofweek == 6 or dayofweek == 7:  # 周六周末
             weekend = 1
         else:
             weekend = 0
+        # time_feature.extend(
+        #     [year, mother, day_of_mother, dayofweek, dayofyear, weekofyear, first_workday, weekend_overtime, holiday,
+        #      shopping_day, weekend])
+
         time_feature.extend(
-            [year, mother, day_of_mother, dayofweek, dayofyear, weekofyear, first_workday, weekend_overtime, holiday,
-             shopping_day, weekend])
+            [dayofweek, weekofyear, first_workday, weekend_overtime, holiday,
+             weekend])
 
         return time_feature
+
+    def set_test_list(self, origin_test_data):
+        for line in origin_test_data:
+            line = line.replace('\r\n', '')
+            _, vmtype, time = line.split('\t')
+            #如果不存在,则初始化
+            if not isContainKey(self.test_vm_types_count, vmtype):
+                self.test_vm_types_count[vmtype] = 1
+            else:#存在则计数增加
+                self.test_vm_types_count[vmtype]+=1
+
+        for vm_type in self.vm_types:
+            if isContainKey(self.test_vm_types_count,vm_type):
+                self.test_count.append(self.test_vm_types_count[vm_type])
+            else:
+                self.test_count.append(0)
+
+    def get_test_list(self):
+        return self.test_count
 
 
 ################### class CaseInfo end #############################

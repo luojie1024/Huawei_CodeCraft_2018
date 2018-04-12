@@ -29,7 +29,7 @@ try_result = {}
 #使用深度学习模型
 is_deeplearing=1
 
-def predict_vm(ecs_lines, input_lines):
+def predict_vm(ecs_lines, input_lines,input_test_file_array=None):
     '''
     :param ecs_lines:训练数据list<strLine>
     :param input_lines:类型要求list<strLine>
@@ -43,7 +43,7 @@ def predict_vm(ecs_lines, input_lines):
         print 'input file information is none'
         return result
     # 生成训练对象 Step 02
-    caseInfo = CaseProcess.CaseInfo(input_lines, ecs_lines)
+    caseInfo = CaseProcess.CaseInfo(input_lines, ecs_lines,input_test_file_array=input_test_file_array)
 
     # 使用RNN进行预测
     # predict_result = train_RNN(caseInfo)

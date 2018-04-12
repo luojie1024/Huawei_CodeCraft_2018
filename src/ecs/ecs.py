@@ -6,9 +6,14 @@ import predictor
 
 #python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output1.txt
 
-input=2
+is_Dubug=False
 def main():
-    if input==1:
+    if is_Dubug:
+        # #设置路径
+        ecsDataPath = '../data/TrainData_2015.1.1_2015.2.19.txt'
+        inputFilePath = '../data/input_5flavors_cpu_7days2.txt'
+        resultFilePath = '../result/output0.txt'
+    else:
         print 'main function begin.'
         if len(sys.argv) != 4:
             print 'parameter is incorrect!'
@@ -17,11 +22,6 @@ def main():
         ecsDataPath = sys.argv[1]
         inputFilePath = sys.argv[2]
         resultFilePath = sys.argv[3]
-    else:
-        # #设置路径
-        ecsDataPath = '../data/TrainData_2015.1.1_2015.2.19.txt'
-        inputFilePath = '../data/input_5flavors_cpu_7days.txt'
-        resultFilePath = '../result/output0.txt'
 
     #获取训练集列表
     ecs_infor_array = read_lines(ecsDataPath)
@@ -29,7 +29,12 @@ def main():
     input_file_array = read_lines(inputFilePath)
 
     #预测 Step 01
-    predic_result = predictor.predict_vm(ecs_infor_array, input_file_array)
+    if is_Dubug:
+        testFilePath = '../data/TestData_2015.2.20_2015.2.27.txt'
+        input_test_file_array=read_lines(testFilePath)
+        predic_result = predictor.predict_vm(ecs_infor_array, input_file_array,input_test_file_array)
+    else:
+        predic_result = predictor.predict_vm(ecs_infor_array, input_file_array, None)
     #写入结果到文件
     if len(predic_result) != 0:
         write_result(predic_result, resultFilePath)
