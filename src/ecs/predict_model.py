@@ -7,7 +7,6 @@ import LSTM_Class as lstmcl
 import time as t
 import datetime
 import math
-import matplotlib.pyplot as plt
 
 from ParamInfo import *
 
