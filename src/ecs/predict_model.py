@@ -327,6 +327,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     cal_len = len(chis_data)
 
     result = []
+    temp_result=0
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
@@ -355,7 +356,8 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
         # day_avage = int(math.ceil(day_avage + noise))
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
-        result.append(day_avage)
+        temp_result+=day_avage
+    result.append(temp_result)
 
     return result
 

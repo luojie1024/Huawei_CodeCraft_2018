@@ -306,7 +306,7 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
             in_id  = -1
             max_opt=-1
             for pm_id in range(pm_size):
-                ok,re_items = machineGroup.test_put_vm(pm_id,vm_type)
+                ok,re_items = machineGroup.test_put_vm(pm_id, vm_type)
                 if not ok:continue
                 if  max_opt<re_items[opt_index]:
                     max_opt = re_items[opt_index]

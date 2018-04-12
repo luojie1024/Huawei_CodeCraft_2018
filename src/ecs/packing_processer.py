@@ -27,12 +27,12 @@ def pack_all(caseInfo, predict_result):
     pack_function(picker, group, caseInfo.opt_target)
     vm_size, vm = picker.to_origin_desc()
     pm_size, pm = group.to_description()
-
+    pm_free=group.get_pm_free()
     res_use_pro = group.get_res_used_pro(caseInfo.opt_target)
     other_res_use_pro = group.get_other_res_used_pro(caseInfo.opt_target)
 
     print(group.to_usage_status())
-    return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
+    return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro,pm_free
 
 
 class MachineGroup():
@@ -67,6 +67,9 @@ class MachineGroup():
     #  pm_id2->{vm_type:cot,vm_type2:cot...}...]
     PM = []
 
+    #剩余资源表
+    PM_Free=[]
+
     def __init__(self, caseInfo):
         '''
         初始化集群，创建一个物理机，并初始化相关参数
@@ -77,6 +80,7 @@ class MachineGroup():
         self.PM_status = []
         self.pm_size = 0
         self.empty = 0
+        self.PM_Free=[]
         self.machine_info = {'CPU': 0,  # u数
                              'MEM': 0,  # m数
                              'HDD': 0}  # h数
@@ -238,9 +242,13 @@ class MachineGroup():
             vm_cot = usage[i]['vm_size']
             string = 'pm_id:%d cpu_used:%d(%.2f%%) ' % (i, cpu_used, cpu_used * 100.0 / cpu_max)
             string += 'mem_used:%d(%.2f%%) vm_cot:%d\n' % (mem_used, mem_used * 100.0 / mem_max, vm_cot)
+            #保存剩余空间情况表
+            self.PM_Free.append([cpu_max-cpu_used,mem_max-mem_used])
             result += string
         return result
 
+    def get_pm_free(self):
+        return self.PM_Free
 
 ################## end class MachineGroup ####################
 
