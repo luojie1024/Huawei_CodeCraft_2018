@@ -27,7 +27,7 @@ pm = []
 try_result = {}
 
 #使用深度学习模型
-is_deeplearing=1
+is_deeplearing=False
 
 def predict_vm(ecs_lines, input_lines,input_test_file_array=None):
     '''
@@ -49,7 +49,7 @@ def predict_vm(ecs_lines, input_lines,input_test_file_array=None):
     # predict_result = train_RNN(caseInfo)
 
     # 预测数据 Step 03
-    if is_deeplearing==1:
+    if is_deeplearing:
         predict_result = prediction_processer.predict_deeplearning(caseInfo)
     else:
         predict_result = prediction_processer.predict_all(caseInfo)
