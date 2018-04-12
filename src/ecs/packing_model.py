@@ -320,7 +320,7 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
             else:
                 machineGroup.put_vm(in_id,vm_type)
 
-    return (vm_cpu_size * 100.0 / (num * C),vm_mem_size * 100.0 / (num * M))
+    # return (vm_cpu_size * 100.0 / (num * C),vm_mem_size * 100.0 / (num * M))
 ############################## end model5 ###############################
 
 

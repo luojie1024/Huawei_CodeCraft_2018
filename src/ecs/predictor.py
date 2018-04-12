@@ -78,7 +78,7 @@ def predict_vm(ecs_lines, input_lines,input_test_file_array=None):
         if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]] > 0:  # 键值对存在
             end_vm_pos = vm_type
             break
-    for que in range(3):
+    for que in range(2):
         # 在有数量的区间内填充[1,8]
         for vm_type in range(end_vm_pos, -1, -1):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]) and try_result[VM_TYPE_DIRT[vm_type]] >= 0 and \

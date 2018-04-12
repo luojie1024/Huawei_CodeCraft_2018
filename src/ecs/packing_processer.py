@@ -24,10 +24,7 @@ def pack_all(caseInfo, predict_result):
     '''
     group = MachineGroup(caseInfo)
     picker = VmPicker(predict_result)
-    if caseInfo.opt_target == 'CPU':
-        res_use_pro, other_res_use_pro = pack_function(picker, group, caseInfo.opt_target)
-    else:
-        other_res_use_pro, res_use_pro = pack_function(picker, group, caseInfo.opt_target)
+    pack_function(picker, group, caseInfo.opt_target)
     vm_size, vm = picker.to_origin_desc()
     pm_size, pm = group.to_description()
 
@@ -180,7 +177,7 @@ class MachineGroup():
             elif opt_target == 'MEM':
                 res_used += res_max - usage[i]['re_mem']
 
-        # 返回最后一台物理机的资源使用率
+        # 返回物理机的资源使用率
         return res_used * 100 / (res_max * self.pm_size)
 
     def get_other_res_used_pro(self, opt_target='MEM'):
@@ -205,7 +202,7 @@ class MachineGroup():
             elif opt_target == 'MEM':
                 res_used += res_max - usage[i]['re_mem']
 
-        # 返回最后一台物理机的资源使用率
+        # 返回物理机的资源使用率
         return res_used * 100 / (res_max * self.pm_size)
 
     def get_last_res_used_pro(self, opt_target='CPU'):
