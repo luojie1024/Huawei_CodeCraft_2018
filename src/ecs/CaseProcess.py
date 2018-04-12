@@ -591,7 +591,7 @@ def get_grain_time(time_str, time_grain):
 
 # 检查dict中是否存在key
 def isContainKey(dic, key):
-    return key in dic.keys()
+    return key in dic
 
 
 # 小数舍入
