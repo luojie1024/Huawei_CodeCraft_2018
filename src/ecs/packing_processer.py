@@ -24,11 +24,11 @@ def pack_all(caseInfo,predict_result):
     '''
     group = MachineGroup(caseInfo)
     picker = VmPicker(predict_result)
-    pack_function(picker,group,caseInfo.opt_target)
+    res_use_pro,other_res_use_pro=pack_function(picker,group,caseInfo.opt_target)
     vm_size,vm = picker.to_origin_desc()
     pm_size,pm = group.to_description()
-    res_use_pro = group.get_res_used_pro(caseInfo.opt_target)
-    other_res_use_pro = group.get_other_res_used_pro(caseInfo.opt_target)
+    # res_use_pro = group.get_res_used_pro(caseInfo.opt_target)
+    # other_res_use_pro = group.get_other_res_used_pro(caseInfo.opt_target)
     print(group.to_usage_status())
     return vm_size,vm,pm_size,pm,res_use_pro,other_res_use_pro
 

@@ -258,7 +258,7 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
     
     if vm_cpu_size == 0: return  # 无需装装配， 结束
     
-    pw =   vm_mem_size*1.0 / vm_cpu_size
+    pw =vm_mem_size*1.0 / vm_cpu_size
     
     C = machineGroup.machine_info['CPU']# 物理机CPU数
     M = machineGroup.machine_info['MEM']# 物理机MEM数
@@ -319,6 +319,8 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
                     raise ValueError('ENDLESS LOOP ! ')
             else:
                 machineGroup.put_vm(in_id,vm_type)
+
+    return (vm_cpu_size * 100.0 / (num * C),vm_mem_size * 100.0 / (num * M))
 ############################## end model5 ###############################
 
 
