@@ -249,11 +249,11 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
     opt_target:优化目标[CPU,MEM],默认CPU优化
     '''
     # 获得放置顺序
-    vm_orders = [[], # vm_type
+    vm_orders = [[], # vm_types
                  []] # cot
     weightes = [1,2,4]
     cpu = [1,2,4,8,16]
-    
+
     vm_cpu_size,vm_mem_size = vmPicker.origin_cpu_mem_sum()
     
     if vm_cpu_size == 0: return  # 无需装装配， 结束
@@ -266,6 +266,7 @@ def pack_model5(vmPicker,machineGroup,opt_target='CPU'):
     
 #######################################
     print 'pw=%.2f,bw=%.2f'%(pw,bw)
+    #
     num = max(vm_cpu_size*1.0/C,vm_mem_size*1.0/M)
     print 'num=%d'%(ceil(num))
     
