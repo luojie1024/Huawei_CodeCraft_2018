@@ -32,7 +32,7 @@ try_result = {}
 is_deeplearing = False
 use_smooth = True
 use_search_maximum = True
-use_pm_average = False
+use_pm_average = True
 
 
 def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
@@ -306,7 +306,7 @@ def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_fre
 
     vm_types=caseInfo.vm_types
 
-    avg_value=-1
+    avg_value=-2
     M_C=0.0
     if caseInfo.opt_target=='CPU':
         M_C=4.0
