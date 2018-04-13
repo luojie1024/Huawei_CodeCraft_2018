@@ -62,8 +62,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_processer.pack_all(caseInfo, try_result)
     print('MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
 
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = result_smooth(vm_size, vm, pm_size, pm, caseInfo,pm_free)
-    print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
+    # vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = result_smooth(vm_size, vm, pm_size, pm, caseInfo,pm_free)
+    # print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
     #############################################微调数量##################################
     result = result_to_list(vm_size, vm, pm_size, pm)
     print(result)
