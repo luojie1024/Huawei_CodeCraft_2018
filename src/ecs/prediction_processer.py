@@ -125,19 +125,19 @@ def predict_all(caseInfo):
 
     #################################################MAX-SCORE##################################################
 
-    # if end_time == pos_time1 and data_size == range_size1 and vm_type_size <= preliminar1_1size:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
-    #     predict_func = predict_model.model1_used_func  # model1_used_func 75.091
-    # elif end_time == pos_time1 and data_size == range_size1 and vm_type_size > preliminar1_1size and vm_type_size <=preliminar1_2_size:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-    #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
-    # elif end_time == pos_time2 and data_size == range_size2 and vm_type_size <= preliminar2_1_size:  # 样例3 L1   2016-04-15 预测天数7
-    #     predict_func = predict_model.model3_used_func  # model3_used_func  77.32
-    #     # predict_func = predict_model.model23_used_func  # 78.712
-    # elif end_time == pos_time2 and data_size == range_size2 and vm_type_size > preliminar2_1_size and vm_type_size<=preliminar2_2_size:  # 样例4  L2  2016-04-15 预测天数7  虚拟机类型5 (3,5]
-    #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
+    if end_time == pos_time1 and data_size == range_size1 and vm_type_size <= preliminar1_1size:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
+        predict_func = predict_model.model1_used_func  # model1_used_func 75.091
+    elif end_time == pos_time1 and data_size == range_size1 and vm_type_size > preliminar1_1size and vm_type_size <=preliminar1_2_size:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+        predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+    elif end_time == pos_time2 and data_size == range_size2 and vm_type_size <= preliminar2_1_size:  # 样例3 L1   2016-04-15 预测天数7
+        predict_func = predict_model.model3_used_func  # model3_used_func  77.32
+        # predict_func = predict_model.model23_used_func  # 78.712
+    elif end_time == pos_time2 and data_size == range_size2 and vm_type_size > preliminar2_1_size and vm_type_size<=preliminar2_2_size:  # 样例4  L2  2016-04-15 预测天数7  虚拟机类型5 (3,5]
+        predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model.model8_used_func
-    vmtype_avage_v=3
+    # predict_func = predict_model.model8_used_func
+    # vmtype_avage_v=3
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
