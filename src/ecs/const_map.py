@@ -3,8 +3,7 @@
 
 # import platform
 
-# 所有虚拟机的参数
-# [CPU,MEM, W(M/C) ] [U数，M数，存储比核的权重]
+
 VM_PARAM = {
     'flavor1': [1, 1, 1.0],
     'flavor2': [1, 2, 2.0],

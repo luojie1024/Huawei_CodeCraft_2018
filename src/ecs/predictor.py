@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import CaseProcess
-import packing_processer
-import prediction_processer
+import DataObj
+import packing_utils
+import predict_utils
 import copy
 
-from ParamInfo import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
+from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
 
 global res_use_pro
 global vm_size
@@ -49,16 +49,16 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print 'input file information is none'
         return result
     # 生成训练对象 Step 02
-    caseInfo = CaseProcess.CaseInfo(input_lines, ecs_lines, input_test_file_array=input_test_file_array)
+    caseInfo = DataObj.DataObj(input_lines, ecs_lines, input_test_file_array=input_test_file_array)
 
     # 使用RNN进行预测
     # predict_result = train_RNN(caseInfo)
 
     # 预测数据 Step 03
     if is_deeplearing:
-        predict_result = prediction_processer.predict_deeplearning(caseInfo)
+        predict_result = predict_utils.predict_deeplearning(caseInfo)
     else:
-        predict_result = prediction_processer.predict_all(caseInfo)
+        predict_result = predict_utils.predict_all(caseInfo)
 
     #############################################微调数量##################################
     global try_result
@@ -66,8 +66,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     # 虚拟机表
     vm_map = dict(zip(caseInfo.vm_types, [0] * caseInfo.vm_types_size))
 
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_processer.pack_all(caseInfo,
-                                                                                                   predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(caseInfo,
+                                                                                               predict_result)
     #############################################use_pm_average##################################
     if use_pm_average:
         predict_result=res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, caseInfo,predict_result)
@@ -76,8 +76,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_search_maximum##################################
     if use_search_maximum:
         search_maximum_way1(caseInfo, predict_result)
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_processer.pack_all(caseInfo,
-                                                                                                       try_result)
+        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(caseInfo,
+                                                                                                   try_result)
     print('MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
     #############################################use_search_maximum##################################
 
@@ -102,7 +102,7 @@ def search_maximum_way1(caseInfo, predict_result):
     global try_result
     global other_res_use_pro
     global vm_map
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_processer.pack_all(caseInfo, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(caseInfo, predict_result)
     pading_que = []
 
     # 搜索优先级
@@ -143,7 +143,7 @@ def search_maximum_way2(caseInfo, predict_result):
     global pm
     global try_result
     global other_res_use_pro
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_processer.pack_all(caseInfo, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils.pack_api(caseInfo, predict_result)
     pading_que = []
 
     # 搜索优先级
@@ -206,7 +206,7 @@ def result_modify1(predict_result, caseInfo, try_value, vm_type, try_vm_map):
     try_predict[vm_type][0] = try_predict[vm_type][0] + try_value
     if try_predict[vm_type][0] < 0:  # 小于0没有意义
         return
-    try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro, _ = packing_processer.pack_all(
+    try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro, _ = packing_utils.pack_api(
         caseInfo, try_predict)
     if try_res_use_pro > res_use_pro and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
         vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro

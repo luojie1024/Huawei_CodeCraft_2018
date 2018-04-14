@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
 
-'''
-    装配模型，输入为预测模型输出的预测对象，
-    在转配模型中可维护一个历史物理机集群状态对象，
-    一个预测输入结果获取的picker对象，
-    最终分配结果在Group对象中
-'''
 
-import ParamInfo
+
+import const_map
 import math
-import packing_model
+import packing_method
 
 # 选择在packing_model 中的装配方案
-pack_function = packing_model.used_func
+pack_function = packing_method.used_func
 
 
-def pack_all(caseInfo, predict_result):
+def pack_api(caseInfo, predict_result):
     '''
     装配模块对外接口，
     caseInfo 为案例对象
@@ -36,9 +31,7 @@ def pack_all(caseInfo, predict_result):
 
 
 class MachineGroup():
-    '''
-    静态集群状态类
-    '''
+
 
     # 计数
     empty = 0
@@ -114,7 +107,7 @@ class MachineGroup():
         if pm_id is None or \
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
-        vm_cpu, vm_mem = ParamInfo.VM_PARAM[vm_type][:2]
+        vm_cpu, vm_mem = const_map.VM_PARAM[vm_type][:2]
         pmstatus = self.PM_status[pm_id]
         re_cpu = pmstatus['re_cpu'] - vm_cpu
         re_mem = pmstatus['re_mem'] - vm_mem
@@ -133,7 +126,7 @@ class MachineGroup():
         if pm_id is None or \
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
-        vm_cpu, vm_mem = ParamInfo.VM_PARAM[vm_type][:2]
+        vm_cpu, vm_mem = const_map.VM_PARAM[vm_type][:2]
         pmstatus = self.PM_status[pm_id]
         re_cpu = pmstatus['re_cpu'] - vm_cpu
         re_mem = pmstatus['re_mem'] - vm_mem
@@ -287,7 +280,7 @@ class VmPicker():
           ]
 
     # 虚拟机类型名数组
-    vm_types = ParamInfo.VM_TYPE_DIRT
+    vm_types = const_map.VM_TYPE_DIRT
 
     def __init__(self, predict_result):
         self.origin_data = predict_result
@@ -302,7 +295,7 @@ class VmPicker():
         for vmtype in types:
             vsum = 0
             pre = predict_result[vmtype]
-            vm_cpu, vm_mem, _ = ParamInfo.VM_PARAM[vmtype]
+            vm_cpu, vm_mem, _ = const_map.VM_PARAM[vmtype]
             for i in range(len(pre)):
                 vsum += pre[i]
             self.vm_cpu_size += vm_cpu * vsum

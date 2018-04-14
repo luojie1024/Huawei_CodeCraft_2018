@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import random
-import vectorization as vt
+import martix_utils as vt
 
 
 class LSTM:

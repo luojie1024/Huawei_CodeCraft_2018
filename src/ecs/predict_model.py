@@ -2,13 +2,13 @@
 import copy
 import math
 import random
-import vectorization as vt
-import LSTM_Class as lstmcl
+import martix_utils as vt
+import LSTM as lstmcl
 import time as t
 import datetime
 import math
 
-from ParamInfo import *
+from const_map import *
 
 # 加入随机数
 is_noise = 0
@@ -800,9 +800,9 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
     '''
-       预测方案七,对若干星期前同一天数据求平均
-       his_data:['time':[时间标签],'value':[值]]
-       '''
+    对若干星期前同一天数据求平均
+    his_data:['time':[时间标签],'value':[值]]
+    '''
 
     n = 10  # 边长数10
     sigma = 0.5
@@ -1145,36 +1145,6 @@ def predict_model19(caseInfo):  # 数据对象
     # print ('\n')
 
     return result
-    #
-    # print("\n")
-    # print("Differences:")
-    # for i in range(len(pred)):
-    #     print(vt.sub(pred, ts_set)[i])
-    # print("\n")
-    # print("Overall:")
-    # print(vt.sub(count_pred, count_real))
-    #
-    # diff = vt.sub(pred, ts_set)
-    # diff_abs = [0] * len(ts_set[0])
-    #
-    # for i in range(len(pred)):
-    #     for j in range(len(pred[0])):
-    #         diff_abs[j] = diff_abs[j] + abs(diff[i][j])
-    #
-    # print("Overall (abs):")
-    # print(diff_abs)
-    #
-    # srcore_left = 0.0
-    #
-    # x1 = vt.sqr_avg_square_sum(vt.sub(count_pred, count_real))
-    #
-    # x2 = vt.sqr_avg_square_sum(count_pred) + vt.sqr_avg_square_sum(count_real)
-    #
-    # x3 = x1 / x2
-    # print('x1=%f,x2=%f,x3=%f' % (x1, x2, x3))
-    #
-    # srcore_left = 1.0 - x3
-    # print("Scroce_left:%f" % srcore_left)
 
 
 #########################################LSTM#########################################

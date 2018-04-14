@@ -4,11 +4,11 @@ from datetime import timedelta
 from datetime import datetime
 import math
 
-import ParamInfo
-from date_map import first_workdays, weekend_workdays, holidays, shopping_days
+import const_map
+from feature_map import first_workdays, weekend_workdays, holidays, shopping_days
 
 
-class CaseInfo(object):
+class DataObj(object):
     '''
     训练数据对象
     '''
@@ -46,15 +46,15 @@ class CaseInfo(object):
     # 测试表
     predictor_data = {}  # {vm:predictor_data}
 
-    def __init__(self, origin_case_info, origin_train_data, predict_time_grain=ParamInfo.TIME_GRAIN_DAY,
+    def __init__(self, origin_case_info, origin_train_data, predict_time_grain=const_map.TIME_GRAIN_DAY,
                  input_test_file_array=None):
         '''
-        origin_data  predictor中的input_lines数组
-        origin_train_data predictor中的ecs_lines数组
-        初始化CaseInfo中的属性
+        origin_data  predictor中的input_lines
+        origin_train_data predictor中的ecs_lines
+        初始化DataObj
         '''
         self.time_grain = predict_time_grain
-        self.set_case_info(origin_case_info, predict_time_grain)
+        self.set_data_info(origin_case_info, predict_time_grain)
         self.set_his_data(origin_train_data, predict_time_grain)
         # 提取特征
         self.set_train_feature()
@@ -65,16 +65,7 @@ class CaseInfo(object):
         # self.set_predictor_map()
         pass
 
-    def set_case_info(self, origin_case_info, predict_time_grain):
-        '''
-        更改 案例属性信息
-        info[0]=CPU MEM HDD
-        info[2]=vm_type_size
-        info[3:(3+vm_type_size)]=vm_types
-        info[4+vm_type_size]=opt_target
-        info[6+vm_type_size]=start_time
-        info[7+vm_type_size]=start_time
-        '''
+    def set_data_info(self, origin_case_info, predict_time_grain):
         if (origin_case_info is None) or \
                 len(origin_case_info) < 2:
             raise ValueError('Error origin_case_info=', origin_case_info)
@@ -108,9 +99,9 @@ class CaseInfo(object):
         st = datetime.strptime(_st, "%Y-%m-%d %H:%M:%S")
         et = datetime.strptime(_et, '%Y-%m-%d %H:%M:%S')
         td = et - st
-        if predict_time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if predict_time_grain == const_map.TIME_GRAIN_DAY:
             self.date_range_size = td.days
-        elif predict_time_grain == ParamInfo.TIME_GRAIN_HOUR:
+        elif predict_time_grain == const_map.TIME_GRAIN_HOUR:
             self.date_range_size = td.days * 24 + td.seconds / 3600
         else:
             self.date_range_size = td.days
@@ -196,7 +187,7 @@ class CaseInfo(object):
         tkeys.sort()
 
         hrs = 1
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
             hrs = 24
         td = timedelta(hours=hrs)
         st = datetime.strptime(tkeys[0], '%Y-%m-%d %H:%M:%S')
@@ -248,7 +239,7 @@ class CaseInfo(object):
         kno_e_value = kno_s_value
 
         hrs = 1
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
             hrs = 24
         td = timedelta(hours=hrs)
         st = datetime.strptime(tkeys[0], '%Y-%m-%d %H:%M:%S')
@@ -313,7 +304,7 @@ class CaseInfo(object):
         shopping_weight = 1
 
         hrs = 1
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
             hrs = 24
         td = timedelta(hours=hrs)
         st = datetime.strptime(tkeys[0], '%Y-%m-%d %H:%M:%S')
@@ -338,7 +329,7 @@ class CaseInfo(object):
                 else:  # 用最后一个数据填充
                     temp_result = 0
                 # 购物节处理
-                if str(st) in ParamInfo.shopping_days:
+                if str(st) in const_map.shopping_days:
                     temp_result = temp_result * shopping_weight
                     # if temp_result>decimal_threshold:#阈值进位
                     #     temp_result+=1
@@ -365,7 +356,7 @@ class CaseInfo(object):
                     temp_result = temp_result / week_weight
 
                 # 购物节
-                if str(st) in ParamInfo.shopping_days:
+                if str(st) in const_map.shopping_days:
                     temp_result = temp_result * shopping_weight
 
                 result['value'].append(decimal_Process(temp_result, decimal_threshold))
@@ -401,7 +392,7 @@ class CaseInfo(object):
         kno_e_value = 0
 
         hrs = 1
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
             hrs = 24
         td = timedelta(hours=hrs)
         st = datetime.strptime(tkeys[0], '%Y-%m-%d %H:%M:%S')
@@ -447,7 +438,7 @@ class CaseInfo(object):
         '''
         初始化训练特征集合
         '''
-        if self.time_grain == ParamInfo.TIME_GRAIN_DAY:
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
             hrs = 24
         td = timedelta(hours=hrs)
         st = datetime.strptime(self.train_data_range[0], '%Y-%m-%d %H:%M:%S')
@@ -562,14 +553,14 @@ class CaseInfo(object):
         for line in origin_test_data:
             line = line.replace('\r\n', '')
             _, vmtype, time = line.split('\t')
-            #如果不存在,则初始化
+            # 如果不存在,则初始化
             if not isContainKey(self.test_vm_types_count, vmtype):
                 self.test_vm_types_count[vmtype] = 1
-            else:#存在则计数增加
-                self.test_vm_types_count[vmtype]+=1
+            else:  # 存在则计数增加
+                self.test_vm_types_count[vmtype] += 1
 
         for vm_type in self.vm_types:
-            if isContainKey(self.test_vm_types_count,vm_type):
+            if isContainKey(self.test_vm_types_count, vm_type):
                 self.test_count.append(self.test_vm_types_count[vm_type])
             else:
                 self.test_count.append(0)
@@ -581,7 +572,7 @@ class CaseInfo(object):
 ################### class CaseInfo end #############################
 
 
-# 获取粒度时间
+
 split_append_tmp = [[13, ':00:00'], [10, ' 00:00:00']]
 
 
@@ -591,12 +582,11 @@ def get_grain_time(time_str, time_grain):
     return time_str[:sp_len_tmp] + sp_str_tmp
 
 
-# 检查dict中是否存在key
 def isContainKey(dic, key):
     return key in dic
 
 
-# 小数舍入
+
 def decimal_Process(value, decimal_threshold):
     if value == 0:
         return 0
@@ -611,7 +601,7 @@ def holiday_Process(result, shopping_weight):
     vlues_list = copy.deepcopy(result['value'])
 
     for i in range(len(time_list)):
-        if time_list[i] in ParamInfo.shopping_days:
+        if time_list[i] in const_map.shopping_days:
             vlues_list[i] *= shopping_weight
     result = {'time': time_list,  # 时间标签
               'value': vlues_list}  # 统计值

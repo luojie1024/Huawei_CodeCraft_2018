@@ -2,9 +2,6 @@
 import math
 
 
-# naive realization of vectorization
-# matrix: [[R1],[R2],...[Rm]], dim(m) = m*n
-# vector: [x1,x2,...xn]
 
 # transpose of a martix
 def transpose(mat):
