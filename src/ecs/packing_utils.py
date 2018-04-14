@@ -17,8 +17,8 @@ def pack_api(caseInfo, predict_result):
     predict_result 为预测模块结果
     返回vm_size,vm,pm_size,pm 用于生成结果文件
     '''
-    group = MachineGroup(caseInfo)
-    picker = VmPicker(predict_result)
+    group = ServerObj(caseInfo)
+    picker = VmWorker(predict_result)
     pack_function(picker, group, caseInfo.opt_target)
     vm_size, vm = picker.to_origin_desc()
     pm_size, pm = group.to_description()
@@ -30,23 +30,20 @@ def pack_api(caseInfo, predict_result):
     return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro,pm_free
 
 
-class MachineGroup():
+class ServerObj():
 
 
     # 计数
     empty = 0
 
     # 集群中物理机参数
-    machine_info = {'CPU': 0,  # u数
+    server_info = {'CPU': 0,  # u数
                     'MEM': 0,  # m数
                     'HDD': 0}  # h数
 
-    # 物理机计数
+    # 物理机计数量
     pm_size = 0
-    # 各个物理机状态，存储值为
-    # re_cpu:剩余u数，re_mem:剩余m数，vm_size:当前物理机中虚拟机数
-    # [pm_id->{re_cpu:cot,re_mem:cot,vm_size:cot},
-    #  pm_id2->{re_cpu:cot,re_mem:cot,vm_size:cot...]
+
     PM_status = []
 
     # 当前集群中虚拟机计数
@@ -74,13 +71,13 @@ class MachineGroup():
         self.pm_size = 0
         self.empty = 0
         self.PM_Free=[]
-        self.machine_info = {'CPU': 0,  # u数
-                             'MEM': 0,  # m数
-                             'HDD': 0}  # h数
+        self.server_info = {'CPU': 0,
+                             'MEM': 0,
+                             'HDD': 0}
 
-        self.machine_info['CPU'] = caseInfo.CPU
-        self.machine_info['MEM'] = caseInfo.MEM
-        self.machine_info['HDD'] = caseInfo.HDD
+        self.server_info['CPU'] = caseInfo.CPU
+        self.server_info['MEM'] = caseInfo.MEM
+        self.server_info['HDD'] = caseInfo.HDD
         self.new_physic_machine()
         pass
 
@@ -91,8 +88,8 @@ class MachineGroup():
         while num > 0:
             self.pm_size += 1
             npm = {
-                're_cpu': self.machine_info['CPU'],
-                're_mem': self.machine_info['MEM'],
+                're_cpu': self.server_info['CPU'],
+                're_mem': self.server_info['MEM'],
                 'vm_size': 0
             }
             self.PM_status.append(npm)
@@ -162,7 +159,7 @@ class MachineGroup():
         :return: 返回总的资源优化利用率
         '''
         # 获取最大资源数
-        res_max = self.machine_info[opt_target]
+        res_max = self.server_info[opt_target]
         # 已经使用的资源状态
         usage = self.PM_status
 
@@ -187,7 +184,7 @@ class MachineGroup():
         else:
             opt_target = 'CPU'
         # 获取最大资源数
-        res_max = self.machine_info[opt_target]
+        res_max = self.server_info[opt_target]
         # 已经使用的资源状态
         usage = self.PM_status
 
@@ -208,7 +205,7 @@ class MachineGroup():
         :return: 返回最后一个物理机的资源利用率
         '''
         # 获取最大资源数
-        res_max = self.machine_info[opt_target]
+        res_max = self.server_info[opt_target]
         # 已经使用的资源状态
         usage = self.PM_status
         # 获取资源使用率
@@ -225,8 +222,8 @@ class MachineGroup():
         '''
         生成当前集群中各个物理机的使用状态
         '''
-        cpu_max = self.machine_info['CPU']
-        mem_max = self.machine_info['MEM']
+        cpu_max = self.server_info['CPU']
+        mem_max = self.server_info['MEM']
         usage = self.PM_status
         result = 'CPU:%d MEM:%d\n' % (cpu_max, mem_max)
         for i in range(self.pm_size):
@@ -246,7 +243,7 @@ class MachineGroup():
 ################## end class MachineGroup ####################
 
 
-class VmPicker():
+class VmWorker():
     '''
     输入预测模型的预测结果，
     并维护一个权重与核心数级别的二维映射表，
