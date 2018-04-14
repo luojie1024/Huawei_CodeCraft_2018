@@ -175,7 +175,7 @@ model18:	L2      22.23      not noise:22.401
 
 [类型] day_of_week,year,mother,day_of_mother,day_of_year,week_of_year,day_of_week,first_work_day,weekend_overtime,holiday,shopping_day,weekend
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////
 正式比赛记录：
 day1-->
 1 报错369格式更改
@@ -199,4 +199,14 @@ prediction 8 (noise)
 packing5
 use_smooth = True
 use_search_maximum = True
-use_pm_average = True       250.139
+use_pm_average = True   avg_value=-1    250.139
+
+
+5.
+prediction 8 (noise)
+packing5
+use_smooth = True
+use_search_maximum = True
+use_pm_average = True   avg_value=-2     245.55
+
+///////////////////////////////////////////////////////////////////////////////////////////////

@@ -306,7 +306,7 @@ def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_fre
 
     vm_types=caseInfo.vm_types
 
-    avg_value=-2
+    avg_value=-1
     M_C=0.0
     if caseInfo.opt_target=='CPU':
         M_C=4.0
