@@ -49,8 +49,6 @@ class DataObj(object):
     def __init__(self, origin_case_info, origin_train_data, predict_time_grain=const_map.TIME_GRAIN_DAY,
                  input_test_file_array=None):
         '''
-        origin_data  predictor中的input_lines
-        origin_train_data predictor中的ecs_lines
         初始化DataObj
         '''
         self.time_grain = predict_time_grain

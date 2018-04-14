@@ -49,41 +49,41 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print 'input file information is none'
         return result
     # 生成训练对象 Step 02
-    caseInfo = DataObj.DataObj(input_lines, ecs_lines, input_test_file_array=input_test_file_array)
+    dataObj = DataObj.DataObj(input_lines, ecs_lines, input_test_file_array=input_test_file_array)
 
     # 使用RNN进行预测
-    # predict_result = train_RNN(caseInfo)
+    # predict_result = train_RNN(dataObj)
 
     # 预测数据 Step 03
     if is_deeplearing:
-        predict_result = predict_utils.predict_deeplearning(caseInfo)
+        predict_result = predict_utils.predict_deeplearning(dataObj)
     else:
-        predict_result = predict_utils.predict_all(caseInfo)
+        predict_result = predict_utils.predict_all(dataObj)
 
     #############################################微调数量##################################
     global try_result
     global vm_map
     # 虚拟机表
-    vm_map = dict(zip(caseInfo.vm_types, [0] * caseInfo.vm_types_size))
+    vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(caseInfo,
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(dataObj,
                                                                                                predict_result)
     #############################################use_pm_average##################################
     if use_pm_average:
-        predict_result=res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, caseInfo,predict_result)
+        predict_result=res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj,predict_result)
     #############################################use_pm_average##################################
 
     #############################################use_search_maximum##################################
     if use_search_maximum:
-        search_maximum_way1(caseInfo, predict_result)
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(caseInfo,
+        search_maximum_way1(dataObj, predict_result)
+        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(dataObj,
                                                                                                    try_result)
     print('MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = result_smooth(vm_size, vm, pm_size, pm, caseInfo,
+        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = result_smooth(vm_size, vm, pm_size, pm, dataObj,
                                                                                  pm_free)
         print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
 
