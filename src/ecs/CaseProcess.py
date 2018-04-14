@@ -99,8 +99,10 @@ class CaseInfo(object):
         # 处理优化目标    
         self.opt_target = origin_case_info[4 + tsize].replace('\r\n', '')
         # 处理时间
-        _st = origin_case_info[6 + tsize].replace('\r\n', '')
-        _et = origin_case_info[7 + tsize].replace('\n', '')
+        # _st = origin_case_info[6 + tsize].replace('\r\n', '')
+        # _et = origin_case_info[7 + tsize].replace('\n', '')
+        _st = origin_case_info[6 + tsize][0:19]
+        _et = origin_case_info[7 + tsize][0:19]
         # 打印起始时间
         print _st, _et
         st = datetime.strptime(_st, "%Y-%m-%d %H:%M:%S")
