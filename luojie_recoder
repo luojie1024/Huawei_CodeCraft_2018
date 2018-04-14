@@ -192,3 +192,11 @@ packing5
 use_smooth = True
 use_search_maximum = True
 use_pm_average = True      249.603分 ——>83分
+
+
+4.
+prediction 8 (noise)
+packing5
+use_smooth = True
+use_search_maximum = True
+use_pm_average = True       250.139
