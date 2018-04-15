@@ -59,7 +59,7 @@ class ServerObj():
 
     def __init__(self, dataObj):
         '''
-        初始化集群，创建一个物理机，并初始化相关参数
+        初始化
         '''
         self.vm_size = 0
         self.PM = []
@@ -111,12 +111,6 @@ class ServerObj():
             return (False, [re_cpu, re_mem])
 
     def put_vm(self, pm_id, vm_type):
-        '''
-        放置一个虚拟机，
-        pm_id为物理机ID，vm_type为虚拟机类型名
-        如果放置成功 返回放置后的物理机(re_cpu,re_mem)，
-        因空间不足放置失败返回None
-        '''
         if pm_id is None or \
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
@@ -141,10 +135,6 @@ class ServerObj():
         return None  # 超分返回
 
     def to_description(self):
-        '''
-        统计当前PM一个描述结果
-        返回当前pm_size PM
-        '''
         if self.empty != 0:
             return self.pm_size, self.PM
         else:

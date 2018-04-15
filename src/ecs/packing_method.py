@@ -233,30 +233,30 @@ def result_modify1(predict_result, caseInfo, try_value, vm_type, try_vm_map):
         return
 
 
-def result_smooth(vm_size, vm, pm_size, pm, caseInfo, pm_free):
+def result_smooth(vm_size, vm, pm_size, pm, dataObje, pm_free):
     '''
     平滑填充结果集
     :param vm:虚拟机列表
     :param pm_size:虚拟机数量
     :param pm:物理机列表
-    :param caseInfo:数据对象
+    :param dataObje:数据对象
     :return:
     '''
-    vm_types = caseInfo.vm_types
+    vm_types = dataObje.vm_types
     res_use_pro = 0.0
     other_res_use_pro = 0.0
     VM_QUE = []
     free_cpu = 0.0
     free_mem = 0.0
     # 初始化填充队列
-    if caseInfo.opt_target == 'CPU':
+    if dataObje.opt_target == 'CPU':
         VM_QUE = VM_CPU_QU
-        res_use_pro = caseInfo.CPU * pm
-        other_res_use_pro = caseInfo.MEM * pm
+        res_use_pro = dataObje.CPU * pm
+        other_res_use_pro = dataObje.MEM * pm
     else:
         VM_QUE = VM_MEM_QU
-        res_use_pro = caseInfo.MEM * pm
-        other_res_use_pro = caseInfo.CPU * pm
+        res_use_pro = dataObje.MEM * pm
+        other_res_use_pro = dataObje.CPU * pm
 
     epoch = 2
     # 遍历物理机
@@ -296,26 +296,26 @@ def result_smooth(vm_size, vm, pm_size, pm, caseInfo, pm_free):
         free_cpu += pm_free[i][0]
         free_mem += pm_free[i][1]
         print('i:cpu:%d mem:%d' % (pm_free[i][0], pm_free[i][1]))
-    if caseInfo.opt_target == 'CPU':
-        res_use_pro = free_cpu / (caseInfo.CPU * pm_size)
-        other_res_use_pro = free_mem / (caseInfo.MEM * pm_size)
+    if dataObje.opt_target == 'CPU':
+        res_use_pro = free_cpu / (dataObje.CPU * pm_size)
+        other_res_use_pro = free_mem / (dataObje.MEM * pm_size)
     else:
-        res_use_pro = free_mem / (caseInfo.MEM * pm_size)
-        other_res_use_pro = free_cpu / (caseInfo.CPU * pm_size)
+        res_use_pro = free_mem / (dataObje.MEM * pm_size)
+        other_res_use_pro = free_cpu / (dataObje.CPU * pm_size)
 
     res_use_pro = (1.0 - res_use_pro) * 100
     other_res_use_pro = (1.0 - other_res_use_pro) * 100
     return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
 
 
-def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, caseInfo,predict_result):
+def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj, predict_result):
     avg_predict_result=copy.deepcopy(predict_result)
 
-    vm_types=caseInfo.vm_types
+    vm_types=dataObj.vm_types
 
     avg_value=-1
     M_C=0.0
-    if caseInfo.opt_target=='CPU':
+    if dataObj.opt_target== 'CPU':
         M_C=4.0
     else:
         M_C=1.0

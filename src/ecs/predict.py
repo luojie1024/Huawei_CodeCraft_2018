@@ -93,7 +93,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     return result
 
 
-def search_maximum_way1(caseInfo, predict_result):
+def search_maximum_way1(dataObj, predict_result):
     global res_use_pro
     global vm_size
     global vm
@@ -102,11 +102,11 @@ def search_maximum_way1(caseInfo, predict_result):
     global try_result
     global other_res_use_pro
     global vm_map
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(caseInfo, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(dataObj, predict_result)
     pading_que = []
 
     # 搜索优先级
-    if caseInfo.opt_target == 'CPU':
+    if dataObj.opt_target == 'CPU':
         pading_que = [1.0, 2.0, 4.0]
     else:
         pading_que = [4.0, 2.0, 1.0]
@@ -128,14 +128,14 @@ def search_maximum_way1(caseInfo, predict_result):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
                 que]:  # 键值对存在,C/M比相等
                 if try_result[VM_TYPE_DIRT[vm_type]] > 0:
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type], vm_map)
-                    result_modify1(try_result, caseInfo, -1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
                 else:
                     # 找到非0的,最大,虚拟机
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
 
 
-def search_maximum_way2(caseInfo, predict_result):
+def search_maximum_way2(dataObj, predict_result):
     global res_use_pro
     global vm_size
     global vm
@@ -143,11 +143,11 @@ def search_maximum_way2(caseInfo, predict_result):
     global pm
     global try_result
     global other_res_use_pro
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils.pack_api(caseInfo, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils.pack_api(dataObj, predict_result)
     pading_que = []
 
     # 搜索优先级
-    if caseInfo.opt_target == 'CPU':
+    if dataObj.opt_target == 'CPU':
         pading_que = [1.0, 2.0, 4.0]
     else:
         pading_que = [4.0, 2.0, 1.0]
@@ -158,9 +158,9 @@ def search_maximum_way2(caseInfo, predict_result):
     # 震荡范围
     value_range = 3
     # 范围表
-    data_range = [[value_range] * caseInfo.vm_types_size]
+    data_range = [[value_range] * dataObj.vm_types_size]
     # 虚拟机类型
-    vm_type = caseInfo.vm_types
+    vm_type = dataObj.vm_types
     # 虚拟机震荡表
     vm_range = dict(zip(vm_type, data_range))
 
@@ -178,17 +178,17 @@ def search_maximum_way2(caseInfo, predict_result):
                 que]:  # 键值对存在,C/M比相等
                 # 数量
                 if try_result[VM_TYPE_DIRT[vm_type]] > 0:
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type])
-                    result_modify1(try_result, caseInfo, -1, VM_TYPE_DIRT[vm_type])
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type])
+                    result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type])
                 else:
                     # 找到非0的,最大,虚拟机
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type])
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type])
 
 
-def result_modify1(predict_result, caseInfo, try_value, vm_type, try_vm_map):
+def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     '''
     :param predict_result: 虚拟机预测结果 贪心搜索局部优解
-    :param caseInfo: 训练集信息
+    :param dataObj: 训练集信息
     :param try_value: 尝试值
     :param vm_type: 虚拟机类型
     :return:
@@ -207,49 +207,49 @@ def result_modify1(predict_result, caseInfo, try_value, vm_type, try_vm_map):
     if try_predict[vm_type][0] < 0:  # 小于0没有意义
         return
     try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro, _ = packing_utils.pack_api(
-        caseInfo, try_predict)
+        dataObj, try_predict)
     if try_res_use_pro > res_use_pro and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
         vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
         try_result = try_predict
         try_vm_map[vm_type] += try_value
         vm_map = try_vm_map
         # 继续深度搜索
-        result_modify1(try_predict, caseInfo, try_value, vm_type, try_vm_map)
+        result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
     elif try_res_use_pro == res_use_pro and try_other_res_use_pro > other_res_use_pro:  # 如果没有当前的好,则返回
         vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
         try_result = try_predict
         try_vm_map[vm_type] += try_value
         vm_map = try_vm_map
         # 继续深度搜索
-        result_modify1(try_predict, caseInfo, try_value, vm_type, try_vm_map)
+        result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
     else:
         return
 
 
-def result_smooth(vm_size, vm, pm_size, pm, caseInfo, pm_free):
+def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     '''
     平滑填充结果集
     :param vm:虚拟机列表
     :param pm_size:虚拟机数量
     :param pm:物理机列表
-    :param caseInfo:数据对象
+    :param dataObj:数据对象
     :return:
     '''
-    vm_types = caseInfo.vm_types
+    vm_types = dataObj.vm_types
     res_use_pro = 0.0
     other_res_use_pro = 0.0
     VM_QUE = []
     free_cpu = 0.0
     free_mem = 0.0
     # 初始化填充队列
-    if caseInfo.opt_target == 'CPU':
+    if dataObj.opt_target == 'CPU':
         VM_QUE = VM_CPU_QU
-        res_use_pro = caseInfo.CPU * pm
-        other_res_use_pro = caseInfo.MEM * pm
+        res_use_pro = dataObj.CPU * pm
+        other_res_use_pro = dataObj.MEM * pm
     else:
         VM_QUE = VM_MEM_QU
-        res_use_pro = caseInfo.MEM * pm
-        other_res_use_pro = caseInfo.CPU * pm
+        res_use_pro = dataObj.MEM * pm
+        other_res_use_pro = dataObj.CPU * pm
 
     epoch = 2
     # 遍历物理机
@@ -289,26 +289,26 @@ def result_smooth(vm_size, vm, pm_size, pm, caseInfo, pm_free):
         free_cpu += pm_free[i][0]
         free_mem += pm_free[i][1]
         print('i:cpu:%d mem:%d' % (pm_free[i][0], pm_free[i][1]))
-    if caseInfo.opt_target == 'CPU':
-        res_use_pro = free_cpu / (caseInfo.CPU * pm_size)
-        other_res_use_pro = free_mem / (caseInfo.MEM * pm_size)
+    if dataObj.opt_target == 'CPU':
+        res_use_pro = free_cpu / (dataObj.CPU * pm_size)
+        other_res_use_pro = free_mem / (dataObj.MEM * pm_size)
     else:
-        res_use_pro = free_mem / (caseInfo.MEM * pm_size)
-        other_res_use_pro = free_cpu / (caseInfo.CPU * pm_size)
+        res_use_pro = free_mem / (dataObj.MEM * pm_size)
+        other_res_use_pro = free_cpu / (dataObj.CPU * pm_size)
 
     res_use_pro = (1.0 - res_use_pro) * 100
     other_res_use_pro = (1.0 - other_res_use_pro) * 100
     return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
 
 
-def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, caseInfo,predict_result):
+def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj, predict_result):
     avg_predict_result=copy.deepcopy(predict_result)
 
-    vm_types=caseInfo.vm_types
+    vm_types=dataObj.vm_types
 
     avg_value=-1
     M_C=0.0
-    if caseInfo.opt_target=='CPU':
+    if dataObj.opt_target== 'CPU':
         M_C=4.0
     else:
         M_C=1.0
