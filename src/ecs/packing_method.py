@@ -100,7 +100,7 @@ def pack_model(vmWorker, serverObj, opt_target='CPU'):
 
 #################################################优化方案########################################
 
-def search_maximum_way1(caseInfo, predict_result):
+def search_maximum_way1(dataObj, predict_result):
     global res_use_pro
     global vm_size
     global vm
@@ -109,11 +109,11 @@ def search_maximum_way1(caseInfo, predict_result):
     global try_result
     global other_res_use_pro
     global vm_map
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(caseInfo, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(dataObj, predict_result)
     pading_que = []
 
     # 搜索优先级
-    if caseInfo.opt_target == 'CPU':
+    if dataObj.opt_target == 'CPU':
         pading_que = [1.0, 2.0, 4.0]
     else:
         pading_que = [4.0, 2.0, 1.0]
@@ -135,11 +135,11 @@ def search_maximum_way1(caseInfo, predict_result):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
                 que]:  # 键值对存在,C/M比相等
                 if try_result[VM_TYPE_DIRT[vm_type]] > 0:
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type], vm_map)
-                    result_modify1(try_result, caseInfo, -1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
                 else:
                     # 找到非0的,最大,虚拟机
-                    result_modify1(try_result, caseInfo, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
 
 
 def search_maximum_way2(caseInfo, predict_result):
