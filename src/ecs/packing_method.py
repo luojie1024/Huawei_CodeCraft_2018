@@ -5,6 +5,17 @@ from math import ceil
 import packing_utils
 from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
 
+#添加模拟退火的算法
+def  pack_model1(vmPicker,machineGroup,opt_target="CPU"):
+    vm_cpu_size,vm_mem_size=vmPicker.origin_cpu_mem_sum()
+    C=machineGroup.machine_info["CPU"]
+    M=machineGroup.machine_info["MEM"]
+
+    num = max(vm_cpu_size * 1.0 / C, vm_mem_size * 1.0 / M)
+    T=100.0   #模拟退火初始温度
+    Tmin=1    #模拟退火终止温度
+    r=0.9999  #温度下降系数
+    pass
 
 def pack_model(vmWorker, serverObj, opt_target='CPU'):
     '''
