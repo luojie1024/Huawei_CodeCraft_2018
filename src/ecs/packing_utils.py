@@ -49,12 +49,9 @@ class ServerObj():
     # 当前集群中虚拟机计数
     vm_size = 0
     # 虚拟机存储状态，对应的存储为
-    # {vm_type:cot,vm_type2:cot...}
     VM = {}
 
     # 物理机存储状态，对应存储值
-    # [pm_id->{vm_type:cot,vm_type2:cot....},
-    #  pm_id2->{vm_type:cot,vm_type2:cot...}...]
     PM = []
 
     #剩余资源表
@@ -244,14 +241,6 @@ class ServerObj():
 
 
 class VmWorker():
-    '''
-    输入预测模型的预测结果，
-    并维护一个权重与核心数级别的二维映射表，
-    调用任何get_xxx 方法会时Picker中的虚拟机数减少，
-    直到全部虚拟机被取完。
-    二维表中原值为-1,未被预测虚拟机，
-    大于等于0表示已被预测的虚拟机数量
-    '''
 
     # 预测输入的原始数据
     origin_data = None
@@ -313,13 +302,6 @@ class VmWorker():
         return self.vm_types[cindex * 3 + windex]
 
     def get_vm_by_index(self, windex, cindex):
-        '''
-        windex M/U权重的下标 cindex CPU数下标，
-        若原先并没有预测则返回None,拿取失败
-        若原先有预测但当前数量为0,返回-1,拿取失败，
-        正常情况 返回 该虚拟机类型剩余量
-        '''
-
         re_vm = self.VM[windex][cindex]
         if self.vm_size == -1 or re_vm == -1:
             return None
@@ -333,37 +315,16 @@ class VmWorker():
         pass
 
     def get_vm_by_wc(self, weight, cpu):
-        '''
-        通过虚拟机M/U权重和CPU数获取，
-        若原先并没有预测则返回None,拿取失败
-        若原先有预测但当前数量为0,返回-1,拿取失败，
-        正常情况 返回 该虚拟机类型剩余量
-        '''
         windex = int(math.log(weight, 2))
         cindex = int(math.log(cpu, 2))
         return self.get_vm_by_index(windex, cindex)
         pass
 
     def get_vm_by_type(self, vm_type):
-        '''
-        通过虚拟机类型名获取，
-        若原先并没有预测则返回None,拿取失败
-        若原先有预测但当前数量为0,返回-1,拿取失败，
-        正常情况 返回 该虚拟机类型剩余量
-        '''
         windex, cindex = self.type2index(vm_type)
         return self.get_vm_by_index(windex, cindex)
 
     def get_vm_by_mu_weight(self, mu_weight, order=0):
-        '''
-        获取某一M/U权重下所有虚拟机，并按照cpu数排序
-        注意：调用该函数后，M/u权重下所有有预测结果的虚拟机计数都清为0
-        mu_weight:权重值，[1，2，4]
-        order:排序方法，order=1时按照cpu降序给出结果,
-        其他按照cpu升序给出结果
-        返回格式：存在值时[[vm_type1,vm_type2...],[cot1,cot2...]]
-        无效时返回None
-        '''
         result = [[],  # vm_type
                   []]  # cot
         windex = int(math.log(mu_weight, 2))
@@ -387,15 +348,6 @@ class VmWorker():
         return result
 
     def get_vm_by_cpu(self, cpu, order=0):
-        '''
-        获取某一CPU数值下所有虚拟机，并按照M/U权重数排序
-        注意：调用该函数后，CPU数值下所有有预测结果的虚拟机计数都清为0
-        CPU:核数，[1，2，4，8，16]
-        order:排序方法，order=1时按照权重降序给出结果,
-        其他按照权重升序给出结果
-        返回格式：存在值时[[vm_type1,vm_type2...],[cot1,cot2...]]
-        无效时返回None
-        '''
         result = [[],  # vm_type
                   []]  # cot
         cindex = int(math.log(cpu, 2))
@@ -426,10 +378,6 @@ class VmWorker():
         pass
 
     def to_description(self):
-        '''
-        统计当前VM一个描述结果
-        返回当前vm_size vm_desc_table
-        '''
         new_desc_table = {}
         vmsum = 0
         flag = True
