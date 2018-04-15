@@ -177,7 +177,7 @@ model18:	L2      22.23      not noise:22.401
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 正式比赛记录：
-day1-->
+####################day1#########################
 1 报错369格式更改
 2
 prediction 8 (无noise)
@@ -208,5 +208,43 @@ packing5
 use_smooth = True
 use_search_maximum = True
 use_pm_average = True   avg_value=-2     245.55
+
+####################day2#########################
+6
+prediction 8 (noise)
+packing5
+use_smooth = True   epoch = 2
+use_search_maximum = True
+use_pm_average = True    avg_value=-1  246.376分
+
+7
+prediction 8 (noise)
+packing5
+use_smooth = True   epoch = 2
+use_search_maximum = True
+use_pm_average = True    avg_value=-1  249.554分
+
+8
+prediction 8 (noise)
+packing5
+use_smooth = True   epoch = 2
+use_search_maximum = True
+use_pm_average = True    avg_value=-1  247.625分
+
+9
+prediction 8 (noise)
+packing5
+use_smooth = True   epoch = 2
+use_search_maximum = True
+use_pm_average = True    avg_value=-1  246.741分
+
+10
+prediction 8 (无noise)
+packing5
+use_smooth = True   epoch = 2
+use_search_maximum = True
+use_pm_average = True    avg_value=-1  249.553分
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
