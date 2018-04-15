@@ -251,7 +251,7 @@ def result_smooth(vm_size, vm, pm_size, pm, caseInfo, pm_free):
         res_use_pro = caseInfo.MEM * pm
         other_res_use_pro = caseInfo.CPU * pm
 
-    epoch = 2
+    epoch = 1
     # 遍历物理机
     for i in range(pm_size):
         M_C = 0.0

@@ -3,10 +3,10 @@ import copy
 from math import ceil
 
 import packing_utils
-from const_map import VM_TYPE_DIRT, VM_PARAM
+from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
 
 
-def pack_model(vmPicker, serverObj, opt_target='CPU'):
+def pack_model(vmWorker, serverObj, opt_target='CPU'):
     '''
     具体装配方案1,packing1,M/U权重分配
     '''
@@ -16,7 +16,7 @@ def pack_model(vmPicker, serverObj, opt_target='CPU'):
     weightes = [1,2,4]
     cpu = [1,2,4,8,16]
 
-    vm_cpu_size,vm_mem_size = vmPicker.origin_cpu_mem_sum()
+    vm_cpu_size,vm_mem_size = vmWorker.origin_cpu_mem_sum()
     
     if vm_cpu_size == 0: return  # 无需装装配， 结束
     
@@ -42,7 +42,7 @@ def pack_model(vmPicker, serverObj, opt_target='CPU'):
     
     
     # 获取CPU从大到小，权重都
-    pick_func = vmPicker.get_vm_by_cpu
+    pick_func = vmWorker.get_vm_by_cpu
     dirt = cpu    
     start=len(dirt)-1
     end=-1

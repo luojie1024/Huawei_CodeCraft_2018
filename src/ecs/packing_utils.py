@@ -57,7 +57,7 @@ class ServerObj():
     #剩余资源表
     PM_Free=[]
 
-    def __init__(self, caseInfo):
+    def __init__(self, dataObj):
         '''
         初始化集群，创建一个物理机，并初始化相关参数
         '''
@@ -72,9 +72,9 @@ class ServerObj():
                              'MEM': 0,
                              'HDD': 0}
 
-        self.server_info['CPU'] = caseInfo.CPU
-        self.server_info['MEM'] = caseInfo.MEM
-        self.server_info['HDD'] = caseInfo.HDD
+        self.server_info['CPU'] = dataObj.CPU
+        self.server_info['MEM'] = dataObj.MEM
+        self.server_info['HDD'] = dataObj.HDD
         self.new_physic_machine()
         pass
 

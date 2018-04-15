@@ -2,7 +2,7 @@
 import sys
 import os
 
-import predictor
+import predict
 
 #python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output1.txt
 
@@ -33,9 +33,9 @@ def main():
     if is_Dubug:
         testFilePath = '../data/TestData_2015.2.20_2015.2.27.txt'
         input_test_file_array=read_lines(testFilePath)
-        predic_result = predictor.predict_vm(ecs_infor_array, input_file_array,input_test_file_array)
+        predic_result = predict.predict_vm(ecs_infor_array, input_file_array, input_test_file_array)
     else:
-        predic_result = predictor.predict_vm(ecs_infor_array, input_file_array, None)
+        predic_result = predict.predict_vm(ecs_infor_array, input_file_array, None)
     #写入结果到文件
     if len(predic_result) != 0:
         write_result(predic_result, resultFilePath)
