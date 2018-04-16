@@ -119,9 +119,9 @@ class DataObj(object):
             self.date_range_size = td.days
         self.data_range = [_st, _et]
 
-        self.CPU = self.mp_type_list["L"]["CPU"]
-        self.MEM = self.mp_type_list["L"]["MEM"]
-        self.HDD = self.mp_type_list["L"]["HDD"]
+        self.CPU = self.mp_type_list["H"]["CPU"]
+        self.MEM = self.mp_type_list["H"]["MEM"]
+        self.HDD = self.mp_type_list["H"]["HDD"]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
         if (origin_train_data is None) or \
