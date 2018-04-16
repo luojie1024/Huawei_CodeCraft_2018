@@ -270,11 +270,11 @@ use_search_maximum = False
 use_pm_average = False      69.017
 
 use_smooth = True
-use_search_maximum = False
+use_search_maximum = True
 use_pm_average = False      69.068
 
 use_smooth = True
-use_search_maximum = False
-use_pm_average = False
+use_search_maximum = True
+use_pm_average = True       69.028
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
