@@ -260,10 +260,18 @@ use_pm_average = True    avg_value=-1  249.553分
 测试单个样本 G prediction 8  vmtype_avage_v=2 69.028
 测试单个样本 G prediction 7  vmtype_avage_v=2 70.123
 
-记录4：prediction 7  vmtype_avage_v=2
+记录4：prediction 8  vmtype_avage_v=2
 use_smooth = False
 use_search_maximum = False
 use_pm_average = False      69.127
+
+use_smooth = True
+use_search_maximum = False
+use_pm_average = False      69.017
+
+use_smooth = True
+use_search_maximum = False
+use_pm_average = False
 
 use_smooth = True
 use_search_maximum = False
