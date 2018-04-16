@@ -360,7 +360,7 @@ def result_to_list(vm_size, vm, pm_size, pm,pm_type_name):
 
     result.append(end_str)
     # TODO
-    result.append(pm_type_name[0]+' '+str(pm_size) + end_str)
+    result.append(pm_type_name[1]+' '+str(pm_size) + end_str)
     for pm_id in range(len(pm)):
         tmp = str(pm_id + 1)
         pmone = pm[pm_id]
@@ -373,7 +373,7 @@ def result_to_list(vm_size, vm, pm_size, pm,pm_type_name):
         result.append(tmp)
 
     result.append(end_str)
-    result.append(pm_type_name[1] + ' ' + str(0))
+    result.append(pm_type_name[0] + ' ' + str(0))
     result.append(end_str)
     result.append(pm_type_name[2] + ' ' + str(0))
     return result
