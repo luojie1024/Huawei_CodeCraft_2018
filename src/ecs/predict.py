@@ -32,7 +32,7 @@ try_result = {}
 is_deeplearing = False
 use_smooth = True
 use_search_maximum = True
-use_pm_average = False
+use_pm_average = True
 
 
 def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
