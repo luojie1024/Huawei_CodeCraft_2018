@@ -254,6 +254,10 @@ use_pm_average = True    avg_value=-1  249.553分
 测试单个样本 H prediction 8   45.676  1.2
 
 记录2：
-测试单个样本 H prediction 10   48.676
+测试单个样本 G prediction 10   48.676
+
+记录3：
+测试单个样本 G prediction 8  vmtype_avage_v=2 69.028
+测试单个样本 G prediction 7  vmtype_avage_v=2 69.966
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
