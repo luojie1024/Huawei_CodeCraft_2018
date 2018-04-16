@@ -88,7 +88,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
 
     #############################################use_smooth##################################
-    result = result_to_list(vm_size, vm, pm_size, pm)
+    result = result_to_list(vm_size, vm, pm_size, pm,dataObj.mp_type_name)
     print(result)
     return result
 
@@ -344,7 +344,7 @@ def computer_MC(CM_free):
 #
 #     return vm_que
 
-def result_to_list(vm_size, vm, pm_size, pm):
+def result_to_list(vm_size, vm, pm_size, pm,pm_type_name):
     '''
     由预测和分配生成结果
     vm：{vm_type:cot...}
@@ -360,7 +360,7 @@ def result_to_list(vm_size, vm, pm_size, pm):
 
     result.append(end_str)
     # TODO
-    result.append(str(pm_size) + end_str)
+    result.append(pm_type_name[0]+' '+str(pm_size) + end_str)
     for pm_id in range(len(pm)):
         tmp = str(pm_id + 1)
         pmone = pm[pm_id]
@@ -371,4 +371,9 @@ def result_to_list(vm_size, vm, pm_size, pm):
             tmp += ' ' + index + ' ' + str(item)
         tmp += end_str
         result.append(tmp)
+
+    result.append(end_str)
+    result.append(pm_type_name[1] + ' ' + str(0))
+    result.append(end_str)
+    result.append(pm_type_name[2] + ' ' + str(0))
     return result
