@@ -16,10 +16,9 @@ class DataObj(object):
     MEM = 0  # 内存存储量 单位Gb
     HDD = 0  # 硬盘存储量 单位Gb
 
+    mp_type_list = {}
 
-    mp_list={}
-
-    opt_target = ''  # 优化目标，值为CPU和MEM
+    opt_target = 'CPU'  # 优化目标，值为CPU和MEM
 
     vm_types_size = 0  # 虚拟机类型数
     vm_types = []  # 虚拟机类型{list}
@@ -55,7 +54,7 @@ class DataObj(object):
         初始化DataObj
         '''
         self.time_grain = predict_time_grain
-        self.set_data_info(origin_case_info, predict_time_grain)
+        self.set_input_config(origin_case_info, predict_time_grain)
         self.set_his_data(origin_train_data, predict_time_grain)
         # 提取特征
         self.set_train_feature()
@@ -66,7 +65,12 @@ class DataObj(object):
         # self.set_predictor_map()
         pass
 
-    def set_data_info(self, origin_case_info, predict_time_grain):
+    def set_input_config(self, origin_case_info, predict_time_grain):
+        '''
+        :param origin_case_info:
+        :param predict_time_grain:
+        :return:
+        '''
         if (origin_case_info is None) or \
                 len(origin_case_info) < 2:
             raise ValueError('Error origin_case_info=', origin_case_info)
@@ -74,27 +78,32 @@ class DataObj(object):
         # 处理 CPU MEM HDD
         tmp = origin_case_info[0].replace('\r\n', '')
         tmps = tmp.split(' ')
-        self.CPU = int(tmps[0])
-        self.MEM = int(tmps[1])
-        self.HDD = int(tmps[2])
+        pm_size = int(tmps[0])
+        for i in range(1, pm_size + 1):
+            mp_list = {}
+            tmp = origin_case_info[i].replace('\r\n', '')
+            tmps = tmp.split(' ')
+            mp_list['CPU'] = int(tmps[1])
+            mp_list['MEM'] = int(tmps[2])
+            mp_list['HDD'] = int(tmps[3])
+            self.mp_type_list[tmps[0][0]] = mp_list
 
         # 处理虚拟机类型
-        tsize = int(origin_case_info[2].replace('\r\n', ''))
-        self.vm_types_size = tsize
+        vm_size = int(origin_case_info[5].replace('\r\n', ''))
+        self.vm_types_size = vm_size
         self.vm_types = []
         for i in range(self.vm_types_size):
-            _type = origin_case_info[3 + i].replace('\r\n', '')
+            _type = origin_case_info[6 + i].replace('\r\n', '')
             _typename = _type.split(' ')[0]
             self.vm_types.append(_typename)
             self.vm_types_count[_typename] = 0
             self.predictor_data[_typename] = []
-        # 处理优化目标    
-        self.opt_target = origin_case_info[4 + tsize].replace('\r\n', '')
+
         # 处理时间
-        # _st = origin_case_info[6 + tsize].replace('\r\n', '')
-        # _et = origin_case_info[7 + tsize].replace('\n', '')
-        _st = origin_case_info[6 + tsize][0:19]
-        _et = origin_case_info[7 + tsize][0:19]
+        # _st = origin_case_info[6 + vm_size].replace('\r\n', '')
+        # _et = origin_case_info[7 + vm_size].replace('\n', '')
+        _st = origin_case_info[4 + pm_size + vm_size][0:19]
+        _et = origin_case_info[5 + pm_size + vm_size][0:19]
         # 打印起始时间
         print _st, _et
         st = datetime.strptime(_st, "%Y-%m-%d %H:%M:%S")
@@ -107,6 +116,10 @@ class DataObj(object):
         else:
             self.date_range_size = td.days
         self.data_range = [_st, _et]
+
+        self.CPU =self.mp_type_list["G"]["CPU"]
+        self.MEM =self.mp_type_list["G"]["MEM"]
+        self.HDD =self.mp_type_list["G"]["HDD"]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
         if (origin_train_data is None) or \
@@ -146,6 +159,10 @@ class DataObj(object):
         self.gap_time = end_date.timetuple().tm_yday - begin_date.timetuple().tm_yday
 
         self.his_data = hisdata
+
+        # 测试一台主机
+
+
 
     def add_his_data(self, origin_train_data):
         '''
@@ -573,7 +590,6 @@ class DataObj(object):
 ################### class CaseInfo end #############################
 
 
-
 split_append_tmp = [[13, ':00:00'], [10, ' 00:00:00']]
 
 
@@ -585,7 +601,6 @@ def get_grain_time(time_str, time_grain):
 
 def isContainKey(dic, key):
     return key in dic
-
 
 
 def decimal_Process(value, decimal_threshold):
