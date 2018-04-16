@@ -30,9 +30,9 @@ try_result = {}
 
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = True
-use_search_maximum = True
-use_pm_average = True
+use_smooth = False
+use_search_maximum = False
+use_pm_average = False
 
 
 def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
