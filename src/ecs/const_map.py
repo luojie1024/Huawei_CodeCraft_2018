@@ -23,7 +23,11 @@ VM_PARAM = {
 
     'flavor13': [16, 16, 1.0],
     'flavor14': [16, 32, 2.0],
-    'flavor15': [16, 64, 4.0]
+    'flavor15': [16, 64, 4.0],
+
+    'flavor16': [32, 32, 1.0],
+    'flavor17': [32, 64, 2.0],
+    'flavor18': [32, 128, 4.0],
 }
 
 VM_CPU_QU = {  # CPU多,内存少的优先,从后往前
@@ -33,41 +37,47 @@ VM_CPU_QU = {  # CPU多,内存少的优先,从后往前
     'flavor9': [4, 16, 4.0],
     'flavor12': [8, 32, 4.0],
     'flavor15': [16, 64, 4.0],
+    'flavor18': [32, 128, 4.0],
 
     'flavor2': [1, 2, 2.0],
     'flavor5': [2, 4, 2.0],
     'flavor8': [4, 8, 2.0],
     'flavor11': [8, 16, 2.0],
     'flavor14': [16, 32, 2.0],
+    'flavor17': [32, 64, 2.0],
 
     'flavor1': [1, 1, 1.0],
     'flavor4': [2, 2, 1.0],
     'flavor7': [4, 4, 1.0],
     'flavor10': [8, 8, 1.0],
     'flavor13': [16, 16, 1.0],
+    'flavor16': [32, 32, 1.0],
 
 }
-VM_MEM_QU = {# MEM,CPU少的优先,从后往前
+VM_MEM_QU = {  # MEM,CPU少的优先,从后往前
     'flavor1': [1, 1, 1.0],
     'flavor4': [2, 2, 1.0],
     'flavor7': [4, 4, 1.0],
     'flavor10': [8, 8, 1.0],
     'flavor13': [16, 16, 1.0],
+    'flavor16': [32, 32, 1.0],
 
     'flavor2': [1, 2, 2.0],
     'flavor5': [2, 4, 2.0],
     'flavor8': [4, 8, 2.0],
     'flavor11': [8, 16, 2.0],
     'flavor14': [16, 32, 2.0],
+    'flavor17': [32, 64, 2.0],
 
     'flavor3': [1, 4, 4.0],
     'flavor6': [2, 8, 4.0],
     'flavor9': [4, 16, 4.0],
     'flavor12': [8, 32, 4.0],
-    'flavor15': [16, 64, 4.0]
+    'flavor15': [16, 64, 4.0],
+    'flavor18': [32, 128, 4.0],
 }
 
-AVERAGE_WEEK_WEIGHTS=[#每周权重矩阵
+AVERAGE_WEEK_WEIGHTS = [  # 每周权重矩阵
     [],
     [],
     [],
@@ -77,10 +87,10 @@ AVERAGE_WEEK_WEIGHTS=[#每周权重矩阵
     [],
 ]
 
-
 VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
                 'flavor6', 'flavor7', 'flavor8', 'flavor9', 'flavor10',
-                'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15']
+                'flavor11', 'flavor12', 'flavor13', 'flavor14', 'flavor15',
+                'flavor16', 'flavor17', 'flavor18']
 
 # L1 type_size=3
 VM_TYPE_MODIFY1 = {  # flavor1 1 flavor2 12 flavor8 -3
@@ -104,9 +114,9 @@ VM_TYPE_MODIFY3 = {  # flavor1 2 flavor5 -13 flavor8 6
 }
 
 # L2 type_size=5
-VM_TYPE_MODIFY4 = {# flavor1  flavor2 -12  flavor5 -12 flavor8 9 flavor11 0  	80.975->81.89
-    'flavor1': 0, 'flavor2': -12, 'flavor3':0, 'flavor4': 0, 'flavor5': -12,
-    'flavor6': 0, 'flavor7': 0, 'flavor8':9, 'flavor9': 0, 'flavor10': 0,
+VM_TYPE_MODIFY4 = {  # flavor1  flavor2 -12  flavor5 -12 flavor8 9 flavor11 0  	80.975->81.89
+    'flavor1': 0, 'flavor2': -12, 'flavor3': 0, 'flavor4': 0, 'flavor5': -12,
+    'flavor6': 0, 'flavor7': 0, 'flavor8': 9, 'flavor9': 0, 'flavor10': 0,
     'flavor11': 0, 'flavor12': 0, 'flavor13': 0, 'flavor14': 0, 'flavor15': 0
 }
 

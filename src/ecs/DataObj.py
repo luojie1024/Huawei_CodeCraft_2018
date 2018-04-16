@@ -16,6 +16,9 @@ class DataObj(object):
     MEM = 0  # 内存存储量 单位Gb
     HDD = 0  # 硬盘存储量 单位Gb
 
+
+    mp_list={}
+
     opt_target = ''  # 优化目标，值为CPU和MEM
 
     vm_types_size = 0  # 虚拟机类型数

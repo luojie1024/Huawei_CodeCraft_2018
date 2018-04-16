@@ -11,8 +11,8 @@ is_Dubug=True
 def main():
     if is_Dubug:
         # #设置路径
-        ecsDataPath = 'data/TrainData_2015.1.1_2015.2.19.txt'
-        inputFilePath = 'data/input_5flavors_cpu_7days.txt'
+        ecsDataPath = 'data/TrainData_2015.12.txt'
+        inputFilePath = 'data/input_3hosttypes_5flavors_1week.txt'
         resultFilePath = 'result/output0.txt'
     else:
         print 'main function begin.'
