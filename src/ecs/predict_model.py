@@ -290,7 +290,7 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 
     n = 14  # 边长数10
     sigma = 0.5
-    beta = 2.0  # 1.1
+    beta = 1.1  # 1.1
     back_week = 1 #1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
