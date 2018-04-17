@@ -343,11 +343,11 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
 
     #无noise
 
-    n = 10  # 边长数10
+    n = 3  # 边长数10
     sigma = 0.5
 
     beta = 2.0
-    back_week = 3 #1
+    back_week = 2 #1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
