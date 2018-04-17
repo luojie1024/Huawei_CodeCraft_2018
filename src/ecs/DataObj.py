@@ -19,7 +19,7 @@ class DataObj(object):
     mp_type_name = []
     mp_type_list = {}
 
-    opt_target = 'CPU'  # 优化目标，值为CPU和MEM
+    opt_target = 'MEM'  # 优化目标，值为CPU和MEM
 
     vm_types_size = 0  # 虚拟机类型数
     vm_types = []  # 虚拟机类型{list}
