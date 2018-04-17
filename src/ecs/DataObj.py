@@ -117,7 +117,7 @@ class DataObj(object):
         elif predict_time_grain == const_map.TIME_GRAIN_HOUR:
             self.date_range_size = td.days * 24 + td.seconds / 3600
         else:
-            self.date_range_size = td.days
+            self.date_range_size = td.days +1
         self.data_range = [_st, _et]
 
         self.CPU = self.mp_type_list["G"]["CPU"]
