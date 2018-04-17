@@ -477,7 +477,7 @@ class DataObj(object):
             else:  # 没有的就是申请数为0的
                 result['value'].append(self.toInt(0, toInt))
             st = st + td
-        # 购物节数据放大
+
         return result
 
     def get_data_list(self, vmtype, toInt, vmtype_avage_v):
