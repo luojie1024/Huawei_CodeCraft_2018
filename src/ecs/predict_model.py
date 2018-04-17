@@ -177,7 +177,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
 
 def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
     '''
-    预测方案 十 霍尔特线性趋势法
+    预测方案 5 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
@@ -234,60 +234,50 @@ def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
 
 
 def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
-    '''
-    预测方案 6 霍尔特线性趋势法
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
-    '''
-    # 历史天数
+
+    #无noise
+
+    n = 10  # 边长数10
+    sigma = 0.5
+
+    beta = 1.1 #1.1
+    back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
     cal_len = len(chis_data)
-    temp_reuslt = 0.0
+
     result = []
-    #
-    sigma = 0.2
-
-    # 衰减值
-    alpha = 0.2
-    # 趋势
-    beta = 0.0
-    # 权重 75.21
-    h = 1.75
-
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
-
-    # 初始trend
-    pre_b_t = 0.0
-    # 初始化level
-    pre_l_t = 0.0
-
+    temp_result=0
     for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / beta
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:  # 直接平均  --> 改进成指数平均
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        chis_data.append(day_avage)
+        temp_result+=day_avage
+    result.append(temp_result)
 
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
-        # 追加到历史表中
-        chis_data.append(y_hot_t)
-        # 保存结果
-        temp_reuslt += y_hot_t
-    noise = random.gauss(0, sigma)
-    noise = math.fabs(noise)
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt) + noise))
     return result
 
 

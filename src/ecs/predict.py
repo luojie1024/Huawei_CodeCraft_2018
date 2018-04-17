@@ -209,20 +209,14 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
         return
     try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro, _ = packing_utils.pack_api(
         dataObj, try_predict)
-    if (try_res_use_pro+try_other_res_use_pro) > (res_use_pro+other_res_use_pro) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+    if (try_res_use_pro + try_other_res_use_pro) > (
+            res_use_pro + other_res_use_pro) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
         vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
         try_result = try_predict
         try_vm_map[vm_type] += try_value
         vm_map = try_vm_map
         # 继续深度搜索
         result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
-    # elif try_res_use_pro == res_use_pro and try_other_res_use_pro > other_res_use_pro:  # 如果没有当前的好,则返回
-    #     vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
-    #     try_result = try_predict
-    #     try_vm_map[vm_type] += try_value
-    #     vm_map = try_vm_map
-    #     # 继续深度搜索
-    #     result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
     else:
         return
 
@@ -293,7 +287,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                     M_C = M_C / 2.0
         free_cpu += pm_free[i][0]
         free_mem += pm_free[i][1]
-        print('i:cpu:%d mem:%d' % (pm_free[i][0], pm_free[i][1]))
+        print('%d:cpu:%d mem:%d' % (i,pm_free[i][0], pm_free[i][1]))
     if dataObj.opt_target == 'CPU':
         res_use_pro = free_cpu / (dataObj.CPU * pm_size)
         other_res_use_pro = free_mem / (dataObj.MEM * pm_size)
@@ -367,7 +361,7 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_type_name):
     # TODO
     result.append(pm_type_name[0] + ' ' + str(pm_size) + end_str)
     for pm_id in range(len(pm)):
-        tmp = pm_type_name[0]+'-'+str(pm_id + 1)
+        tmp = pm_type_name[0] + '-' + str(pm_id + 1)
         pmone = pm[pm_id]
         if len(pmone.keys()) == 0:
             continue
