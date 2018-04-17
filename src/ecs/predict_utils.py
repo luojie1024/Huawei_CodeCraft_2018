@@ -125,7 +125,7 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
     predict_func = predict_model.model8_used_func
-    vmtype_avage_v=2
+    vmtype_avage_v=4
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
@@ -140,15 +140,9 @@ def predict_one(vm_type,  # 虚拟机类型
                 dataObj,  # 案例信息对象
                 prodict_function=None,  # 时间序列预测
                 ):
-    if vmtype_avage_v == 1:
-        return prodict_function(dataObj.get_his_data_by_vmtype_avage_v1(vm_type, -1),
+    return prodict_function(dataObj.get_data_list(vm_type, -1,vmtype_avage_v),
                                 dataObj.date_range_size, vm_type)
-    elif (vmtype_avage_v == 2):
-        return prodict_function(dataObj.get_his_data_by_vmtype_avage_v2(vm_type, -1),
-                                dataObj.date_range_size, vm_type)
-    else:
-        return prodict_function(dataObj.get_his_data_by_vmtype_avage_v3(vm_type, -1),
-                                dataObj.date_range_size, vm_type)
+
 
 
     #  test here

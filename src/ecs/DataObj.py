@@ -124,6 +124,10 @@ class DataObj(object):
         self.HDD = self.mp_type_list["G"]["HDD"]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
+        '''
+        :param origin_train_data: 原始数据
+        :param predict_time_grain:预测时间范围
+        '''
         if (origin_train_data is None) or \
                 len(origin_train_data) == 0:
             raise ValueError('Error origin_train_data=', origin_train_data)
@@ -232,7 +236,7 @@ class DataObj(object):
         elif tType == 0.5:
             return round(value)
 
-    def get_his_data_by_vmtype_avage_v1(self, vmtype, toInt=0):
+    def get_data_list_v1(self, vmtype, toInt=0):
         '''
         返回一个从第一个数据时间到预测开始前的数据统计列表
         使用前后最近平均值填补空缺,若后一段的无法平均值 用最近有效值填补
@@ -283,7 +287,7 @@ class DataObj(object):
 
         return result
 
-    def get_his_data_by_vmtype_avage_v2(self, vmtype, toInt=0):
+    def get_data_list_v2(self, vmtype, toInt=0):
         '''
         返回一个从第一个数据时间到预测开始前的数据统计列表
         使用前后最近平均值填补空缺,若后一段的无法平均值 
@@ -387,7 +391,7 @@ class DataObj(object):
         # result=holiday_Process(result,shopping_weight)
         return result
 
-    def get_his_data_by_vmtype_avage_v3(self, vmtype, toInt=0):
+    def get_data_list_v3(self, vmtype, toInt=0):
         '''
         返回一个真实的时间表
         ['time':[时间标签],
@@ -431,6 +435,61 @@ class DataObj(object):
             st = st + td
         # 购物节数据放大
         return result
+
+    def get_data_list_v4(self, vmtype, toInt=0):
+        '''
+        返回一个真实的时间表
+        ['time':[时间标签],
+        'value':[值]]
+        '''
+        # 如果该类型并没有出现过，则返回0
+        if vmtype not in self.his_data:
+            result = {'time': [0],  # 时间标签
+                      'value': [0]}  # 统计值
+            return result
+        else:
+            result = {'time': [],  # 时间标签
+                      'value': []}  # 统计值
+        tdict = self.his_data[vmtype]
+        tkeys = tdict.keys()
+        tkeys.sort()
+        kno_len = len(tkeys)
+        kno_pos = 0
+        kno_s_value = tdict[tkeys[0]]
+        kno_e_value = 0
+
+        hrs = 1
+        if self.time_grain == const_map.TIME_GRAIN_DAY:
+            hrs = 24
+        td = timedelta(hours=hrs)
+        st = datetime.strptime(tkeys[0], '%Y-%m-%d %H:%M:%S')
+        et = datetime.strptime(self.data_range[0], '%Y-%m-%d %H:%M:%S')
+        while st < et:
+            timestr = st.strftime('%Y-%m-%d %H:%M:%S')
+            result['time'].append(timestr)
+            if kno_len != kno_pos:  # 如果申请表中还有时间
+                if timestr == tkeys[kno_pos]:
+                    # 正确时间赋值
+                    result['value'].append(self.toInt(tdict[tkeys[kno_pos]], toInt))
+                    # 指向申请时间点
+                    kno_pos += 1
+                else:
+                    result['value'].append(self.toInt(0, toInt))
+            else:  # 没有的就是申请数为0的
+                result['value'].append(self.toInt(0, toInt))
+            st = st + td
+        # 购物节数据放大
+        return result
+
+    def get_data_list(self, vmtype, toInt, vmtype_avage_v):
+        if vmtype_avage_v == 1:
+            return self.get_data_list_v1(vmtype, toInt)
+        elif vmtype_avage_v == 2:
+            return self.get_data_list_v2(vmtype, toInt)
+        elif vmtype_avage_v == 3:
+            return self.get_data_list_v3(vmtype, toInt)
+        elif vmtype_avage_v == 4:
+            return self.get_data_list_v4(vmtype, toInt)
 
     def get_train_X(self):
         '''
