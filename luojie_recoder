@@ -279,7 +279,7 @@ use_search_maximum = True
 use_pm_average = True       69.028
 
 
-记录5：prediction 7 #分配优化
+记录5：prediction 8 #分配优化
 use_smooth = True
 use_search_maximum = True
 use_pm_average = False      69.847
