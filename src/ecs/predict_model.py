@@ -280,8 +280,8 @@ def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
 
     return result
 
-
-def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
+# 某种类型的虚拟机的历史数据
+def predict_model7(his_data,  
                    date_range_size, vm_type):  # 需要预测的长度
 
     '''
@@ -1148,6 +1148,7 @@ def predict_model19(caseInfo):  # 数据对象
     # print ('\n')
 
     return result
+
 
 
 #########################################LSTM#########################################
