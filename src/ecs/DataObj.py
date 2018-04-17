@@ -438,9 +438,8 @@ class DataObj(object):
 
     def get_data_list_v4(self, vmtype, toInt=0):
         '''
-        返回一个真实的时间表
-        ['time':[时间标签],
-        'value':[值]]
+        返回一个真实的时间表+滤波去噪
+        以周为周期,滤波去噪
         '''
         # 如果该类型并没有出现过，则返回0
         if vmtype not in self.his_data:
@@ -482,6 +481,12 @@ class DataObj(object):
         return result
 
     def get_data_list(self, vmtype, toInt, vmtype_avage_v):
+        '''
+        :param vmtype:虚拟机类型
+        :param toInt: 取整类型
+        :param vmtype_avage_v:填充方案
+        :return: 返回数据列表
+        '''
         if vmtype_avage_v == 1:
             return self.get_data_list_v1(vmtype, toInt)
         elif vmtype_avage_v == 2:
