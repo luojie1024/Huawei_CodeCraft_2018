@@ -248,11 +248,11 @@ class VmWorker():
     vm_mem_size = 0
 
     # 预测虚拟机的在M/U权重与核心数级别
-    # 上展开 shape=[3,5]
-    #   CPU=1,2,4,8,16
-    VM = [[-1, -1, -1, -1, -1],  # weight_1.0
-          [-1, -1, -1, -1, -1],  # weight_2.0
-          [-1, -1, -1, -1, -1]  # weight_4.0
+    # 上展开 shape=[3,6]
+    #   CPU=1,2,4,8,16,32
+    VM = [[-1, -1, -1, -1, -1,-1],  # weight_1.0
+          [-1, -1, -1, -1, -1,-1],  # weight_2.0
+          [-1, -1, -1, -1, -1,-1]  # weight_4.0
           ]
 
     # 虚拟机类型名数组
@@ -292,6 +292,11 @@ class VmWorker():
         return self.vm_types[cindex * 3 + windex]
 
     def get_vm_by_index(self, windex, cindex):
+        '''
+        :param windex:
+        :param cindex:
+        :return:
+        '''
         re_vm = self.VM[windex][cindex]
         if self.vm_size == -1 or re_vm == -1:
             return None
@@ -305,6 +310,11 @@ class VmWorker():
         pass
 
     def get_vm_by_wc(self, weight, cpu):
+        '''
+        :param weight:
+        :param cpu:
+        :return:
+        '''
         windex = int(math.log(weight, 2))
         cindex = int(math.log(cpu, 2))
         return self.get_vm_by_index(windex, cindex)
@@ -365,7 +375,7 @@ class VmWorker():
 
     def to_origin_desc(self):
         return self.origin_vm_size, self.origin_desc_table
-        pass
+
 
     def to_description(self):
         new_desc_table = {}
@@ -382,4 +392,3 @@ class VmWorker():
             vmsum = -1
         return vmsum, new_desc_table
 
-    pass

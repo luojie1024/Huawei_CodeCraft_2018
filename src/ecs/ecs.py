@@ -7,12 +7,12 @@ import predict
 #python2 ecs.py data/TrainData_2015.1.1_2015.2.19.txt  data/input_5flavors_cpu_7days.txt result/output1.txt
 
 
-is_Dubug=False
+is_Dubug=True
 def main():
     if is_Dubug:
         # #设置路径
         ecsDataPath = 'data/TrainData_2015.12.txt'
-        inputFilePath = 'data/input_3hosttypes_5flavors_1week.txt'
+        inputFilePath = 'data/input_3hosttypes_5flavors_1week2.txt'
         resultFilePath = 'result/output0.txt'
     else:
         print 'main function begin.'

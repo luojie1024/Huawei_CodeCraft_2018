@@ -30,8 +30,8 @@ try_result = {}
 
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = True
-use_search_maximum = True
+use_smooth = False
+use_search_maximum = False
 use_pm_average = False
 
 
@@ -70,7 +70,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
                                                                                                predict_result)
     #############################################use_pm_average##################################
     if use_pm_average:
-        predict_result=res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj,predict_result)
+        predict_result = res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj,
+                                     predict_result)
     #############################################use_pm_average##################################
 
     #############################################use_search_maximum##################################
@@ -88,7 +89,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
 
     #############################################use_smooth##################################
-    result = result_to_list(vm_size, vm, pm_size, pm,dataObj.mp_type_name)
+    result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
     print(result)
     return result
 
@@ -271,8 +272,12 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                                     VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1] <= pm_free[i][1]:
                                 # 虚拟机数量增加
                                 vm_size += 1
-                                # 列表中数量添加
-                                vm[VM_TYPE_DIRT[vm_type_index]] += 1
+
+                                if isContainKey(vm, VM_TYPE_DIRT[vm_type_index]):
+                                    # 列表中数量添加
+                                    vm[VM_TYPE_DIRT[vm_type_index]] += 1
+                                else:
+                                    vm[VM_TYPE_DIRT[vm_type_index]] = 1
                                 # 物理机列表中添加
                                 if isContainKey(pm[i], VM_TYPE_DIRT[vm_type_index]):
                                     pm[i][VM_TYPE_DIRT[vm_type_index]] += 1
@@ -302,21 +307,21 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
 
 
 def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj, predict_result):
-    avg_predict_result=copy.deepcopy(predict_result)
+    avg_predict_result = copy.deepcopy(predict_result)
 
-    vm_types=dataObj.vm_types
+    vm_types = dataObj.vm_types
 
-    avg_value=-1
-    M_C=0.0
-    if dataObj.opt_target== 'CPU':
-        M_C=4.0
+    avg_value = -1
+    M_C = 0.0
+    if dataObj.opt_target == 'CPU':
+        M_C = 4.0
     else:
-        M_C=1.0
+        M_C = 1.0
 
-    if res_use_pro<other_res_use_pro:
+    if res_use_pro < other_res_use_pro:
         for vm_type in vm_types:
-            if VM_PARAM[vm_type][2]==M_C and avg_predict_result[vm_type][0]>=-avg_value:
-                avg_predict_result[vm_type][0]+=avg_value
+            if VM_PARAM[vm_type][2] == M_C and avg_predict_result[vm_type][0] >= -avg_value:
+                avg_predict_result[vm_type][0] += avg_value
 
     return avg_predict_result
 
@@ -344,7 +349,7 @@ def computer_MC(CM_free):
 #
 #     return vm_que
 
-def result_to_list(vm_size, vm, pm_size, pm,pm_type_name):
+def result_to_list(vm_size, vm, pm_size, pm, pm_type_name):
     '''
     由预测和分配生成结果
     vm：{vm_type:cot...}
@@ -360,7 +365,7 @@ def result_to_list(vm_size, vm, pm_size, pm,pm_type_name):
 
     result.append(end_str)
     # TODO
-    result.append(pm_type_name[0]+' '+str(pm_size) + end_str)
+    result.append(pm_type_name[0] + ' ' + str(pm_size) + end_str)
     for pm_id in range(len(pm)):
         tmp = str(pm_id + 1)
         pmone = pm[pm_id]
