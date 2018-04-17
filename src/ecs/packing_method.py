@@ -25,7 +25,7 @@ def pack_model(vmWorker, serverObj, opt_target='CPU'):
     vm_orders = [[], # vm_types
                  []] # cot
     weightes = [1,2,4]
-    cpu = [1,2,4,8,16]
+    cpu = [1,2,4,8,16,32]
 
     vm_cpu_size,vm_mem_size = vmWorker.origin_cpu_mem_sum()
     
