@@ -367,7 +367,7 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_type_name):
     # TODO
     result.append(pm_type_name[0] + ' ' + str(pm_size) + end_str)
     for pm_id in range(len(pm)):
-        tmp = str(pm_id + 1)
+        tmp = pm_type_name[0]+'-'+str(pm_id + 1)
         pmone = pm[pm_id]
         if len(pmone.keys()) == 0:
             continue
