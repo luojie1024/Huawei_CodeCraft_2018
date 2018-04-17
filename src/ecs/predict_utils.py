@@ -125,7 +125,7 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
     predict_func = predict_model.model8_used_func
-    vmtype_avage_v=2
+    vmtype_avage_v=4
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
