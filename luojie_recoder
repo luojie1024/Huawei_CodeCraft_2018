@@ -287,4 +287,13 @@ use_pm_average = False      69.847
 
 记录6：prediction 7
 变长权重优化 beta=1.1  	71.085
+
+记录7：改进n=10->  n=14
+use_smooth = False
+use_search_maximum = False
+use_pm_average = False           68.357  提升(68.11)0.247
+
+use_smooth = True
+use_search_maximum = True
+use_pm_average = False           70.48  提升(69.068)1.412
 ///////////////////////////////////////////////////////////////////////////////////////////////
