@@ -300,7 +300,7 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
 
     n = 10  # 边长数10
     sigma = 0.5
-
+    beta = 1.1  # 1.1
     back_week = 1 #1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -316,7 +316,7 @@ def predict_model7(his_data,  # 某种类型的虚拟机的历史数据
                 cot_day = n
                 cot_week += 1
                 for j in range(1, n):
-                    tmp = (n - j) / 2.0
+                    tmp = (n - j) / beta
                     day_tmp += chis_data[-index + j] * tmp
                     cot_day += tmp
                     if index + j <= cal_len:
@@ -346,7 +346,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     n = 10  # 边长数10
     sigma = 0.5
 
-    beta = 1.09 #1.1
+    beta = 1.1 #1.1
     back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
