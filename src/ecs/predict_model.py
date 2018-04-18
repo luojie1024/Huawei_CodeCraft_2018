@@ -52,10 +52,10 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
 def predict_model2(his_data, date_range_size, vm_type):
      #无noise
 
-    n = 14  # 边长数10
+    n = 3  # 边长数10
     sigma = 0.5
 
-    beta = 1.1 #1.1
+    beta = 2.0 #1.1
     back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -298,7 +298,7 @@ def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     return result
 
 # 某种类型的虚拟机的历史数据
-def predict_model7(his_data,  
+def predict_model7(his_data,
                    date_range_size, vm_type):  # 需要预测的长度
 
     '''
@@ -341,7 +341,7 @@ def predict_model7(his_data,
         day_avage = int(math.ceil(day_avage + noise))
         chis_data.append(day_avage)
         result.append(day_avage)
-    
+
     return result
 
 
@@ -880,7 +880,7 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
-   
+
 
     n = 10  # 边长数 10
     sigma = 0.5
@@ -931,7 +931,7 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
-    
+
 
     n = 2  # 边长数2  83.075
     sigma = 0.5
@@ -979,7 +979,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
-    
+
 
     n = 10  # 边长数10 83.11
     sigma = 0.5
@@ -1182,7 +1182,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func=predict_model4
+model_used_func=predict_model2
 # 按样例选择方案
 
 model1_used_func = predict_model11
