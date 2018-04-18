@@ -15,7 +15,7 @@ from const_map import *
 is_noise = 0
 
 
-def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
+def predict_model1(his_data, dataObj, vm_type):  # 简单滑动平均法
     '''
     预测方案 1 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
@@ -24,7 +24,7 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
     '''
 
     # sigma = 0.5
-
+    date_range_size = dataObj.date_range_size
     # 衰减值0.21
     alpha = 0.9
     # 历史天数
@@ -50,15 +50,20 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
     return result
 
 
-def predict_model2(his_data, date_range_size, vm_type):
+def predict_model2(his_data, dataObj, vm_type):
     # 无noise
+    # 需要预测的天数
+    date_range_size = dataObj.date_range_size
+
+    #获取放大权重
+    count_weight=dataObj.get_count_weight(vm_type)
 
     n = 3  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.515  #1.45
-    beta = 2  # 1.1
-    back_week = 1  # 1 2
+    enlarge = 1  # 151
+    beta = 2  # 2
+    back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -90,8 +95,8 @@ def predict_model2(his_data, date_range_size, vm_type):
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
-
-        day_avage = day_avage * enlarge
+        # 系数放大,修正高斯效果
+        day_avage = day_avage * enlarge*count_weight
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         temp_result += day_avage
@@ -100,7 +105,7 @@ def predict_model2(his_data, date_range_size, vm_type):
     return result
 
 
-def predict_model3(his_data, date_range_size, vm_type):  # 简单滑动平均法
+def predict_model3(his_data, dataObj, vm_type):  # 简单滑动平均法
     '''
     预测方案 3 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
@@ -109,7 +114,7 @@ def predict_model3(his_data, date_range_size, vm_type):  # 简单滑动平均法
     '''
 
     # sigma = 0.5
-
+    date_range_size = dataObj.date_range_size
     # 衰减值0.21
     alpha = 0.21
     # 历史天数
@@ -135,13 +140,14 @@ def predict_model3(his_data, date_range_size, vm_type):  # 简单滑动平均法
     return result
 
 
-def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
+def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 4 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
     print his_data
     # print date_range_size
     # print vm_type
@@ -197,13 +203,14 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     return result
 
 
-def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
+def predict_model5(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 5 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -255,10 +262,10 @@ def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     return result
 
 
-def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
+def predict_model6(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     # 无noise
-
+    date_range_size = dataObj.date_range_size
     n = 10  # 边长数10
     sigma = 0.5
 
@@ -305,12 +312,12 @@ def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
 
 # 某种类型的虚拟机的历史数据
 def predict_model7(his_data,
-                   date_range_size, vm_type):  # 需要预测的长度
+                   dataObj, vm_type):  # 需要预测的长度
 
     '''
     预测方案七 对若干星期前同一天数据求平均
     '''
-
+    date_range_size = dataObj.date_range_size
     n = 14  # 边长数10
     sigma = 0.5
     beta = 1.1  # 1.1
@@ -352,10 +359,10 @@ def predict_model7(his_data,
 
 
 def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
-                   date_range_size, vm_type):  # 需要预测的长度
+                   dataObj, vm_type):  # 需要预测的长度
 
     # 无noise
-
+    date_range_size = dataObj.date_range_size
     n = 14  # 边长数10
     sigma = 0.5
 
@@ -400,14 +407,14 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
     return result
 
 
-def predict_model9(his_data, date_range_size, vm_type):  # 简单滑动平均法
+def predict_model9(his_data, dataObj, vm_type):  # 简单滑动平均法
     '''
     预测方案 九 指数滑动平均
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
-
+    date_range_size = dataObj.date_range_size
     # sigma = 0.5
 
     # 衰减值0.21
@@ -435,13 +442,14 @@ def predict_model9(his_data, date_range_size, vm_type):  # 简单滑动平均法
     return result
 
 
-def predict_model10(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
+def predict_model10(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 十 霍尔特线性趋势法
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -495,7 +503,7 @@ def predict_model10(his_data, date_range_size, vm_type):  # 霍尔特线性趋�
 
 ################Holt-Winters#########################
 # 用例01  76.68  小于三种类型
-def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
+def predict_model11(his_data, dataObj, vm_type):  # Holt-Winters法
     '''
     预测方案 十一 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -503,6 +511,8 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
     :param k:跨度天数
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
+
     Y = copy.deepcopy(his_data['value'])
 
     k = 1
@@ -580,7 +590,7 @@ def predict_model11(his_data, date_range_size, vm_type):  # Holt-Winters法
 
 
 # 用例02  76.147
-def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
+def predict_model12(his_data, dataObj, vm_type):  # Holt-Winters法
     '''
     预测方案 十二 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -588,6 +598,7 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
     :param k:跨度天数
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
     k = 1
@@ -665,7 +676,7 @@ def predict_model12(his_data, date_range_size, vm_type):  # Holt-Winters法
 
 
 # 用例03 小于三种类型
-def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
+def predict_model13(his_data, dataObj, vm_type):  # Holt-Winters法
     '''
     预测方案 十三 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -673,6 +684,7 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
     :param k:跨度天数
     :return: 返回结果
     '''
+    date_range_size = dataObj.date_range_size
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
     k = 1
@@ -749,7 +761,7 @@ def predict_model13(his_data, date_range_size, vm_type):  # Holt-Winters法
 
 
 # 用例04  76.052
-def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
+def predict_model14(his_data, dataObj, vm_type):  # Holt-Winters法
     '''
     预测方案 十四 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -758,6 +770,7 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
     :return: 返回结果
     77.325 alpha=1.8
     '''
+    date_range_size = dataObj.date_range_size
     # 历史天数
     Y = copy.deepcopy(his_data['value'])
 
@@ -835,8 +848,8 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
 
 ###################对若干星期前同一天数据求平均######################
 def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
-                    date_range_size, vm_type):  # 需要预测的长度
-
+                    dataObj, vm_type):  # 需要预测的长度
+    date_range_size = dataObj.date_range_size
     n = 10  # 边长数10
     sigma = 0.5
 
@@ -882,8 +895,8 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
-                    date_range_size, vm_type):  # 需要预测的长度
-
+                    dataObj, vm_type):  # 需要预测的长度
+    date_range_size = dataObj.date_range_size
     n = 10  # 边长数 10
     sigma = 0.5
 
@@ -932,8 +945,8 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
-                    date_range_size, vm_type):  # 需要预测的长度
-
+                    dataObj, vm_type):  # 需要预测的长度
+    date_range_size = dataObj.date_range_size
     n = 2  # 边长数2  83.075
     sigma = 0.5
 
@@ -978,8 +991,8 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
 
 
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
-                    date_range_size, vm_type):  # 需要预测的长度
-
+                    dataObj, vm_type):  # 需要预测的长度
+    date_range_size = dataObj.date_range_size
     n = 10  # 边长数10 83.11
     sigma = 0.5
 
@@ -988,7 +1001,7 @@ def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
     cal_len = len(chis_data)
 
     result = []
-    for rept in range(date_range_size):  # 预测天数范围
+    for rept in range(dataObj):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
         for i in range(1, back_week + 1):
@@ -1170,7 +1183,8 @@ def predict_model19(caseInfo):  # 数据对象
 
 #####################BPNN#######################
 def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
-                    date_range_size, vm_type):
+                    dataObj, vm_type):
+    date_range_size = dataObj.date_range_size
     # 神经网络
     nn = BPNeuralNetwork()
     # num_dict = nn.bp_predict(data_x, day_flavor_num, pre_x)  # 60......

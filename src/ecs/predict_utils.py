@@ -145,7 +145,7 @@ def predict_one(vm_type,  # 虚拟机类型
                 prodict_function=None,  # 时间序列预测
                 ):
     return prodict_function(dataObj.get_data_list(vm_type, -1,vmtype_avage_v),
-                                dataObj.date_range_size, vm_type)
+                                dataObj, vm_type)
 
 # def predict_BPNN(vm_type,  # 虚拟机类型
 #                 dataObj,  # 案例信息对象

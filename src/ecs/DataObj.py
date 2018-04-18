@@ -24,6 +24,8 @@ class DataObj(object):
     vm_types_size = 0  # 虚拟机类型数
     vm_types = []  # 虚拟机类型{list}
     vm_types_count = {}
+    max_type_count = 1
+    min_type_count = 20000
 
     time_grain = -1  # 预测时间粒度
     date_range_size = 0  # 需要预测多少天数的数据
@@ -58,6 +60,7 @@ class DataObj(object):
         self.time_grain = predict_time_grain
         self.set_input_config(origin_case_info, predict_time_grain)
         self.set_his_data(origin_train_data, predict_time_grain)
+        self.set_max_min_count()
         # 提取特征
         # self.set_train_feature()
         # self.set_predictor_feature()
@@ -128,6 +131,19 @@ class DataObj(object):
         self.CPU = self.mp_type_list["G"]["CPU"]
         self.MEM = self.mp_type_list["G"]["MEM"]
         self.HDD = self.mp_type_list["G"]["HDD"]
+
+    def set_max_min_count(self):
+        '''
+        设置最大最小数量
+        '''
+        max_type_count = 0
+        self.min_type_count = 20000
+        keys = self.vm_types_count.keys()
+        for key in keys:
+            if self.vm_types_count[key] > self.max_type_count:
+                self.max_type_count = self.vm_types_count[key]
+            if self.vm_types_count[key] < self.min_type_count:
+                self.min_type_count = self.vm_types_count[key]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
         '''
@@ -232,6 +248,13 @@ class DataObj(object):
 
         return result
 
+    def get_count_weight(self, vmtype):
+        '''
+        :param vmtype:虚拟机类型
+        :return: 获取放大权重
+        '''
+        return (1 + self.vm_types_count[vmtype] / float(self.max_type_count))
+
     def toInt(self, value, tType=0):
         if tType == 0.0:
             return value
@@ -296,7 +319,7 @@ class DataObj(object):
     def get_data_list_v2(self, vmtype, toInt=0):
         '''
         返回一个从第一个数据时间到预测开始前的数据统计列表
-        使用前后最近平均值填补空缺,若后一段的无法平均值 
+        使用前后最近平均值填补空缺,若后一段的无法平均值
         用最近前一个星期前数据替代，无法替代则使用最后一个
         ['time':[时间标签],
         'value':[值]]
