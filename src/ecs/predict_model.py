@@ -147,11 +147,11 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.04 #0.05 65.983  0.08 515  1.5 390
+    alpha = 0.05 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
     beta = 0.0
-    # 权重 75.21
-    h = 1.75
+    # 权重 1.75  65.983
+    h = 2
 
     y_hot_t = 0.0
     l_t = 0.2
