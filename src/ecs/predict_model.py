@@ -912,10 +912,10 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     #获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    n = 10  # 边长数3
+    n = 6  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.53 # 1.52 76.967
+    enlarge = 1.35 # 1.52 76.967
     beta = 2 # 2
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -961,15 +961,24 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                     dataObj, vm_type):  # 需要预测的长度
+    # 无noise
+    # 需要预测的天数
     date_range_size = dataObj.date_range_size
-    n = 2  # 边长数2  83.075
-    sigma = 0.5
 
+    # 获取放大权重
+    # count_weight=dataObj.get_count_weight(vm_type)
+
+    n = 10  # 边长数3
+    sigma = 0.5
+    # 放大系数
+    enlarge = 1.52  # 1.52 76.967
+    beta = 2  # 2
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
     result = []
+    temp_result = 0
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
@@ -980,7 +989,7 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                 cot_day = n
                 cot_week += 1
                 for j in range(1, n):
-                    tmp = (n - j) / 2.0
+                    tmp = (n - j) / beta
                     day_tmp += chis_data[-index + j] * tmp
                     cot_day += tmp
                     if index + j <= cal_len:
@@ -991,16 +1000,17 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                 day_avage += day_tmp / cot_day
             else:
                 break
-        if cot_week != 0:
+        if cot_week != 0:  # 直接平均  --> 改进成指数平均
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        if is_noise:
-            noise = random.gauss(0, sigma)
-            noise = math.fabs(noise)
-            day_avage = int(math.ceil(day_avage + noise))
-        else:
-            day_avage = int(math.ceil(day_avage))
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        # 系数放大,修正高斯效果
+        day_avage = day_avage * enlarge
+        day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
-        result.append(day_avage)
+        temp_result += day_avage
+    result.append(temp_result)
 
     return result
 
