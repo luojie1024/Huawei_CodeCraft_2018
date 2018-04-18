@@ -344,12 +344,12 @@ n = 3  # 边长数10
 beta = 2  # 1.1
 back_week = 1  # 1 2            73.718    520  74.248  548
 
-记录11：
-n = 3  # 边长数3                          n = 10  # 边长数3
+记录11：sigma=3
+n = 3  # 边长数3                             n = 10
 # 放大系数
-enlarge = 1.45                           enlarge = 1.38
-beta = 1.1                               beta = 2
-back_week = 1    74.248  548             back_week = 1       	74.38   547
+enlarge = 1.43                              enlarge = 1.38
+beta = 1.1                                  beta = 2
+back_week = 1    	74.476  549             back_week = 1       	74.38   547
 
 
 记录12：
