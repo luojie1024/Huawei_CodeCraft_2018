@@ -331,4 +331,10 @@ use_smooth = True
 use_search_maximum = True
 use_pm_average = False          72.002    500虚拟机
 
+
+记录9：predict_model2 + vmtype_avage_v6 高斯滤波 sigma=2  enlarge = 1.3
+# 放大系数
+n = 3  # 边长数10
+beta = 2  # 1.1
+back_week = 1  # 1 2            73.232
 ///////////////////////////////////////////////////////////////////////////////////////////////

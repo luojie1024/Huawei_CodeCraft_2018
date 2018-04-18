@@ -49,19 +49,21 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
     result.append(int(math.floor(temp_reuslt)))
     return result
 
+
 def predict_model2(his_data, date_range_size, vm_type):
-     #无noise
+    # 无noise
 
     n = 3  # 边长数10
     sigma = 0.5
-    enlarge=1.3
-    beta = 2 #1.1
-    back_week = 1 #1 2
+    # 放大系数
+    enlarge = 1.4
+    beta = 2  # 1.1
+    back_week = 1  # 1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
     result = []
-    temp_result=0
+    temp_result = 0
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
@@ -89,10 +91,10 @@ def predict_model2(his_data, date_range_size, vm_type):
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
 
-        day_avage=day_avage*enlarge
+        day_avage = day_avage * enlarge
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
-        temp_result+=day_avage
+        temp_result += day_avage
     result.append(temp_result)
 
     return result
@@ -153,7 +155,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.8 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
+    alpha = 0.8  # 0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
     beta = 0.0
     # 权重 3    趋势权重    3.45 3.5-66.503
@@ -193,6 +195,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     result.append(int(math.floor(temp_reuslt) + noise))
     print result
     return result
+
 
 def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
     '''
@@ -254,18 +257,18 @@ def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
 
 def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
 
-    #无noise
+    # 无noise
 
     n = 10  # 边长数10
     sigma = 0.5
 
-    beta = 1.1 #1.1
-    back_week = 1 #1 2
+    beta = 1.1  # 1.1
+    back_week = 1  # 1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
     result = []
-    temp_result=0
+    temp_result = 0
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
@@ -294,10 +297,11 @@ def predict_model6(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
         # day_avage = int(math.ceil(day_avage + noise))
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
-        temp_result+=day_avage
+        temp_result += day_avage
     result.append(temp_result)
 
     return result
+
 
 # 某种类型的虚拟机的历史数据
 def predict_model7(his_data,
@@ -310,7 +314,7 @@ def predict_model7(his_data,
     n = 14  # 边长数10
     sigma = 0.5
     beta = 1.1  # 1.1
-    back_week = 1 #1
+    back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -350,18 +354,18 @@ def predict_model7(his_data,
 def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
                    date_range_size, vm_type):  # 需要预测的长度
 
-    #无noise
+    # 无noise
 
     n = 14  # 边长数10
     sigma = 0.5
 
-    beta = 1.1 #1.1
-    back_week = 1 #1 2
+    beta = 1.1  # 1.1
+    back_week = 1  # 1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
     result = []
-    temp_result=0
+    temp_result = 0
     for rept in range(date_range_size):  # 预测天数范围
         day_avage = 0.0
         cot_week = 0
@@ -390,7 +394,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
         # day_avage = int(math.ceil(day_avage + noise))
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
-        temp_result+=day_avage
+        temp_result += day_avage
     result.append(temp_result)
 
     return result
@@ -833,8 +837,6 @@ def predict_model14(his_data, date_range_size, vm_type):  # Holt-Winters法
 def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
-
-
     n = 10  # 边长数10
     sigma = 0.5
 
@@ -881,8 +883,6 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
 
 def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
-
-
 
     n = 10  # 边长数 10
     sigma = 0.5
@@ -934,7 +934,6 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
 def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
 
-
     n = 2  # 边长数2  83.075
     sigma = 0.5
 
@@ -980,8 +979,6 @@ def predict_model17(his_data,  # 某种类型的虚拟机的历史数据
 
 def predict_model18(his_data,  # 某种类型的虚拟机的历史数据
                     date_range_size, vm_type):  # 需要预测的长度
-
-
 
     n = 10  # 边长数10 83.11
     sigma = 0.5
@@ -1058,7 +1055,7 @@ def predict_model19(caseInfo):  # 数据对象
 
     cost = []
 
-    view_epoch=50
+    view_epoch = 50
     for i in range(num_epoch):
         cost_epoch = 0
         for j in range(num_batch_LB):
@@ -1167,6 +1164,8 @@ def predict_model19(caseInfo):  # 数据对象
     # print ('\n')
 
     return result
+
+
 #########################################LSTM#########################################
 
 #####################BPNN#######################
@@ -1178,13 +1177,12 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
     num_dict = nn.bp_predict(his_data, date_range_size, vm_type)
     print "BP_num_dict = ", num_dict
 
+
 #####################BPNN#######################
 
 
-
-
 # 选择预测方案
-model_used_func=predict_model2
+model_used_func = predict_model2
 # 按样例选择方案
 
 model1_used_func = predict_model11
