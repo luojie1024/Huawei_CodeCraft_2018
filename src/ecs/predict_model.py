@@ -52,10 +52,10 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
 def predict_model2(his_data, date_range_size, vm_type):
      #无noise
 
-    n = 3  # 边长数10
+    n = 14  # 边长数10
     sigma = 0.5
 
-    beta = 2.0 #1.1
+    beta = 1.1 #1.1
     back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -1182,7 +1182,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func=predict_model4
+model_used_func=predict_model2
 # 按样例选择方案
 
 model1_used_func = predict_model11

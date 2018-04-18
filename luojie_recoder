@@ -317,4 +317,18 @@ use_pm_average = False          66.503
 use_smooth = True
 use_search_maximum = True
 use_pm_average = False          67.129
+
+记录9：predict_model4 + vmtype_avage_v6  高斯滤波 sigma=2
+ sigma = 0.2
+# 衰减值
+alpha = 0.8 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
+# 趋势
+beta = 0.0
+# 权重 3
+h = 3.0
+
+use_smooth = True
+use_search_maximum = True
+use_pm_average = False          72.002    500虚拟机
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
