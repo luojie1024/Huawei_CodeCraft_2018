@@ -30,7 +30,7 @@ try_result = {}
 
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = True
+use_smooth = False
 use_search_maximum = True
 use_pm_average = False
 
