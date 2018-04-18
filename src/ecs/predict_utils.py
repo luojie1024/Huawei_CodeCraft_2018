@@ -126,7 +126,7 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model.model8_used_func
+    predict_func = predict_model.model_used_func
     vmtype_avage_v=4
 
     # predict_func = predict_model.model9_used_func
