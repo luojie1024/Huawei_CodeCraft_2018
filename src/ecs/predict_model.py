@@ -8,6 +8,7 @@ import time as t
 import datetime
 import math
 
+from BPNN import BPNeuralNetwork
 from const_map import *
 
 # 加入随机数
@@ -137,9 +138,12 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     :param date_range_size: 需要预测的长度
     :return: 返回结果
     '''
-    # 历史天数
+    print his_data
+    # print date_range_size
+    # print vm_type
+    # 历史天数 his_data {'value'   'time'}
     chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
+    # 历史天数 的个数
     cal_len = len(chis_data)
     temp_reuslt = 0.0
     result = []
@@ -185,6 +189,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     noise = math.fabs(noise)
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
     result.append(int(math.floor(temp_reuslt) + noise))
+    print result
     return result
 
 def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
@@ -1160,10 +1165,22 @@ def predict_model19(caseInfo):  # 数据对象
     # print ('\n')
 
     return result
-
-
-
 #########################################LSTM#########################################
+
+#####################BPNN#######################
+def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
+                    date_range_size, vm_type):
+    # 神经网络
+    nn = BPNeuralNetwork()
+    # num_dict = nn.bp_predict(data_x, day_flavor_num, pre_x)  # 60......
+    num_dict = nn.bp_predict(his_data, date_range_size, vm_type)
+    print "BP_num_dict = ", num_dict
+
+#####################BPNN#######################
+
+
+
+
 # 选择预测方案
 model_used_func=predict_model4
 # 按样例选择方案
@@ -1202,3 +1219,4 @@ long_gap_used_func = predict_model7
 
 #########################################
 lstm_model_used_func = predict_model19
+bpnn_model_used_func = predict_model20
