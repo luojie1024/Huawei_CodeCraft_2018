@@ -34,12 +34,13 @@ def predict_deeplearning(dataObj):
     :return: 预测结果
     '''
     result = {}
-    #使用LSTM
+    # 使用LSTM
     predict_func = predict_model.lstm_model_used_func
-    #预测
-    result=predict_func(dataObj)
-    #返回结果
+    # 预测
+    result = predict_func(dataObj)
+    # 返回结果
     return result
+
 
 def predict_all(dataObj):
     result = {}
@@ -82,13 +83,16 @@ def predict_all(dataObj):
     # #训练数据多少天
     # print((end_time-start_time).days)
 
-    if data_size>7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
+    if data_size <= 7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
         predict_func = predict_model.model21_used_func  # model1_used_func 75.091
-    elif data_size<=7:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+    elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
         predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+    # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+    #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+    # elif  data_size <= 28:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+    #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
 
-
-#################################################星期前同一天数据求平均##################################################
+    #################################################星期前同一天数据求平均##################################################
 
     # if end_time == pos_time1 and data_size == range_size1 and vm_type_size <= preliminar1_1size:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
     #     predict_func = predict_model.model21_used_func  # model1_used_func 75.091
@@ -119,25 +123,25 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
     # predict_func = predict_model.model_used_func
-    vmtype_avage_v=6
+    vmtype_avage_v = 6
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
 
     for vmtype in vm_types:
-        result[vmtype] = predict_one(vmtype, dataObj, predict_func)
+        result[vmtype] = predict(vmtype, dataObj, predict_func)
     # for vmtype in vm_types:
     #     result[vmtype] = predict_BPNN(vmtype, dataObj, predict_func)
 
     return result
 
 
-def predict_one(vm_type,  # 虚拟机类型
-                dataObj,  # 案例信息对象
-                prodict_function=None,  # 时间序列预测
-                ):
-    return prodict_function(dataObj.get_data_list(vm_type, -1,vmtype_avage_v),
-                                dataObj, vm_type)
+def predict(vm_type,  # 虚拟机类型
+            dataObj,  # 案例信息对象
+            prodict_function=None,  # 时间序列预测
+            ):
+    return prodict_function(dataObj.get_data_list(vm_type, -1, vmtype_avage_v),
+                            dataObj, vm_type)
 
 # def predict_BPNN(vm_type,  # 虚拟机类型
 #                 dataObj,  # 案例信息对象
@@ -146,5 +150,5 @@ def predict_one(vm_type,  # 虚拟机类型
 #                                 dataObj.date_range_size, vm_type)
 
 
-    #  test here
-    # return [1,2,3,4]
+#  test here
+# return [1,2,3,4]
