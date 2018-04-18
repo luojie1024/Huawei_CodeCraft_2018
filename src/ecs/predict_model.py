@@ -56,13 +56,13 @@ def predict_model2(his_data, dataObj, vm_type):
     date_range_size = dataObj.date_range_size
 
     #获取放大权重
-    count_weight=dataObj.get_count_weight(vm_type)
+    # count_weight=dataObj.get_count_weight(vm_type)
 
     n = 3  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1  # 151
-    beta = 2  # 2
+    enlarge = 1.54 # 151
+    beta = 3  # 2
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -96,7 +96,7 @@ def predict_model2(his_data, dataObj, vm_type):
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
         # 系数放大,修正高斯效果
-        day_avage = day_avage * enlarge*count_weight
+        day_avage = day_avage * enlarge
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         temp_result += day_avage
