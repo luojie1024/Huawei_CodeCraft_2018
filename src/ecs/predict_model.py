@@ -150,8 +150,8 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     alpha = 0.05 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
     beta = 0.0
-    # 权重 3    趋势权重     3.5-66.503  3.6-65.85
-    h = 3.45
+    # 权重 3    趋势权重    3.45 3.5-66.503
+    h = 3.5
 
     y_hot_t = 0.0
     l_t = 0.2
@@ -184,7 +184,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     noise = random.gauss(0, sigma)
     noise = math.fabs(noise)
     # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt) + noise))
+    result.append(int(math.ceil(temp_reuslt) + noise))
     return result
 
 def predict_model5(his_data, date_range_size, vm_type):  # 霍尔特线性趋势法
