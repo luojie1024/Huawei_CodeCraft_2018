@@ -495,7 +495,7 @@ class DataObj(object):
         ########################原始数据矩阵############################
 
         # 过滤 filter='average'   filter='gaussian'高斯滤波
-        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=self.train_day_count,
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=2, orgin_data_size=self.train_day_count,
                                     avg_count=avg_count)
 
         return result
@@ -723,7 +723,7 @@ def to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=0, 
         kernel = [[0.0] * (sigma * 2 + 1) for x in range(sigma * 2 + 1)]
         for x in range(-sigma, sigma + 1):
             for y in range(-sigma, sigma + 1):
-                kernel[x][y]=1.0
+                kernel[x][y] = 1.0
         # 填充padding
         martix_data = to_pading(orign_martix_data, kernel, padding_data=avg_count)
 
@@ -773,8 +773,8 @@ def dataConvolv(martix_data, kernel, orgin_data_size):
     data_len = orgin_data_size
     avg_data = []
     temp = 0.0
-    for i in range(1, row - 1):
-        for j in range(1, col - 1):
+    for i in range(kernel_w, row - kernel_w):
+        for j in range(kernel_w, col - kernel_w):
             temp = 0.0
             # 单个ceil
             for h in range(-kernel_h, kernel_h + 1):  # [-1,1]
@@ -786,6 +786,8 @@ def dataConvolv(martix_data, kernel, orgin_data_size):
             data_len -= 1
             if data_len == 0:
                 break
+        if data_len == 0:
+            break
     return avg_data
 
 
@@ -812,7 +814,7 @@ def to_pading(orign_martix_data, kernel, padding_data):
     for h in range(kernel_h):  # 上部填充
         martix_data.insert(0, padding_row)
     for w in range(kernel_w):  # 下部填充
-        martix_data.insert(row + 1, padding_row)
+        martix_data.insert(kernel_h+row, padding_row)
 
     temp = []
     # 中间数据填充首尾部
