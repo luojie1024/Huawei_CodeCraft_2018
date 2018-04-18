@@ -345,7 +345,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
 
     #无noise
 
-    n = 10  # 边长数10
+    n = 14  # 边长数10
     sigma = 0.5
 
     beta = 1.1 #1.1
