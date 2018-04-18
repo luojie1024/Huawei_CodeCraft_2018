@@ -151,7 +151,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     # 趋势
     beta = 0.0
     # 权重 3    趋势权重 66.177
-    h = 4
+    h = 3.5
 
     y_hot_t = 0.0
     l_t = 0.2
