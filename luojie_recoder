@@ -296,4 +296,25 @@ use_pm_average = False           68.357  提升(68.11) 0.247
 use_smooth = True
 use_search_maximum = True
 use_pm_average = False           70.48  提升(69.068) 1.412
+
+记录8：prediction 4  + vmtype_avage_v4  均值滤波
+use_smooth = True
+use_search_maximum = True
+use_pm_average = False           64.09
+
+
+# 衰减值
+alpha = 0.05 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
+# 趋势
+beta = 0.0
+# 权重 3
+h = 3.5
+use_smooth = False
+use_search_maximum = False
+use_pm_average = False          66.503
+
++
+use_smooth = True
+use_search_maximum = True
+use_pm_average = False          67.129
 ///////////////////////////////////////////////////////////////////////////////////////////////

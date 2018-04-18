@@ -52,11 +52,11 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
 def predict_model2(his_data, date_range_size, vm_type):
      #无noise
 
-    n = 1  # 边长数10
+    n = 14  # 边长数10
     sigma = 0.5
 
     beta = 1.1 #1.1
-    back_week = 2 #1 2
+    back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -151,11 +151,11 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.2
+    alpha = 0.05 #0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
     beta = 0.0
-    # 权重 75.21
-    h = 1.75
+    # 权重 3    趋势权重    3.45 3.5-66.503
+    h = 3.5
 
     y_hot_t = 0.0
     l_t = 0.2
@@ -350,7 +350,7 @@ def predict_model8(his_data,  # 某种类型的虚拟机的历史数据
 
     #无noise
 
-    n = 10  # 边长数10
+    n = 14  # 边长数10
     sigma = 0.5
 
     beta = 1.1 #1.1
