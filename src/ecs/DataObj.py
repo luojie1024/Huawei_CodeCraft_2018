@@ -113,9 +113,9 @@ class DataObj(object):
         et = datetime.strptime(_et, '%Y-%m-%d %H:%M:%S')
 
         ts = timedelta(seconds=1)
-        #时间修正+s
-        if et.timetuple().tm_hour==23 and et.timetuple().tm_min==59 and et.timetuple().tm_sec==59:
-            et+=ts
+        # 时间修正+s
+        if et.timetuple().tm_hour == 23 and et.timetuple().tm_min == 59 and et.timetuple().tm_sec == 59:
+            et += ts
         td = et - st
         if predict_time_grain == const_map.TIME_GRAIN_DAY:
             self.date_range_size = td.days
@@ -450,11 +450,11 @@ class DataObj(object):
         # 如果该类型并没有出现过，则返回0
         if vmtype not in self.his_data:
             result = {'time': [0],  # 时间标签
-                          'value': [0]}  # 统计值
+                      'value': [0]}  # 统计值
             return result
         else:
             result = {'time': [],  # 时间标签
-                          'value': []}  # 统计值
+                      'value': []}  # 统计值
 
         tdict = self.his_data[vmtype]
         tkeys = tdict.keys()
@@ -487,42 +487,16 @@ class DataObj(object):
         # 获得基本数据集
 
         ########################原始数据矩阵############################
-
-        # 平铺
-        martix_data = []
-        data_len = len(result['value'])
         orign_martix_data = []
         # 获取平均值
         avg_count = self.vm_types_count[vmtype] / float(self.train_day_count)
+        orign_martix_data = reshape_data(result, avg_count)
 
-        # 原始数据映射表
-        count_map = result['value']
-
-        # 周数
-        week_count = len(count_map) / 7
-        # 周数
-        for w in range(week_count):
-            start = 7 * w
-            end = 7 * (w + 1)
-            # 填充数据
-            orign_martix_data.append(count_map[start:end])
-
-        # 获取最后一行数据
-        temp = count_map[(week_count) * 7:]
-
-        # 填充平均值
-        while (len(temp) != 7):
-            temp.append(avg_count)
-
-        # 填充最后一行数据
-        orign_martix_data.append(temp)
         ########################原始数据矩阵############################
 
-        # 填充padding
-        martix_data = to_pading(orign_martix_data, padding_data=avg_count)
-
-        # 过滤
-        result['value']=to_filter(martix_data, filter='average', wind=3, orgin_data_size=data_len)
+        # 过滤 filter='average'   filter='gaussian'
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=self.train_day_count,
+                                    avg_count=avg_count)
 
         return result
 
@@ -703,19 +677,67 @@ class DataObj(object):
 split_append_tmp = [[13, ':00:00'], [10, ' 00:00:00']]
 
 
-def to_filter(martix_data, filter='average', wind=3, orgin_data_size=0):
+def reshape_data(result, avg_count):
+    '''
+    :param result:历史数据
+    :param avg_count: 平均值
+    :return: 填充整形厚的数据
+    '''
+    # 平铺
+    martix_data = []
+    data_len = len(result['value'])
+    orign_martix_data = []
+
+    # 原始数据映射表
+    count_map = result['value']
+
+    # 周数
+    week_count = len(count_map) / 7
+    # 周数
+    for w in range(week_count):
+        start = 7 * w
+        end = 7 * (w + 1)
+        # 填充数据
+        orign_martix_data.append(count_map[start:end])
+
+    # 获取最后一行数据
+    temp = count_map[(week_count) * 7:]
+
+    # 填充平均值
+    while (len(temp) != 7):
+        temp.append(avg_count)
+
+    # 填充最后一行数据
+    orign_martix_data.append(temp)
+
+    return orign_martix_data
+
+
+def to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=0, avg_count=0):
     '''
     :param martix_data:需要过滤的数据
     :param filter: 滤波类型
-    :param wind: 窗口大小
+    :param sigma: 窗口大小
     '''
     if filter == 'average':
-        kernel = []
-        for i in range(wind):
-            temp = []
-            for j in range(wind):
-                temp.append(1)
-            kernel.append(temp)
+        kernel = [[0.0] * (sigma * 2 + 1) for x in range(sigma * 2 + 1)]
+        for x in range(-sigma, sigma + 1):
+            for y in range(-sigma, sigma + 1):
+                kernel[x][y]=1.0
+        # 填充padding
+        martix_data = to_pading(orign_martix_data, kernel, padding_data=avg_count)
+
+        return averageFilter(martix_data, kernel, orgin_data_size)
+
+    if filter == 'gaussian':
+        kernel = [[0.0] * (sigma * 2 + 1) for x in range(sigma * 2 + 1)]
+        for x in range(-sigma, sigma + 1):
+            for y in range(-sigma, sigma + 1):
+                kernel[x + sigma][y + sigma] = math.exp(-0.5 * (x ** 2 + y ** 2) / (sigma ** 2))
+
+        # 填充padding
+        martix_data = to_pading(orign_martix_data, kernel, padding_data=avg_count)
+
         return averageFilter(martix_data, kernel, orgin_data_size)
 
 
@@ -726,46 +748,86 @@ def averageFilter(martix_data, kernel, orgin_data_size):
     :param orgin_data_size:原始数据长度
     :return:
     '''
+    return dataConvolv(martix_data, kernel, orgin_data_size)
+
+
+def dataConvolv(martix_data, kernel, orgin_data_size):
+    '''
+    :param martix_data:数据矩阵
+    :param kernel: 核
+    :param orgin_data_size:原始数据长度
+    :return:
+    '''
+    kernel_h = len(kernel)
+    kernel_w = len(kernel[0])
     col = len(martix_data[0])
     row = len(martix_data)
+    kernel_sum = 0.0
+    # 求和
+    for i in range(kernel_h):
+        for j in range(kernel_w):
+            kernel_sum += kernel[i][j]
+
+    kernel_h = kernel_h / 2
+    kernel_w = kernel_w / 2
     data_len = orgin_data_size
     avg_data = []
     temp = 0.0
-    for i in range(1, row-1):
-        for j in range(1, col-1):
-            temp = (martix_data[i - 1][j - 1] + martix_data[i - 1][j] + martix_data[i - 1][j + 1] +
-                    martix_data[i][j - 1] + martix_data[i][j] + martix_data[i][j + 1] +
-                    martix_data[i + 1][j - 1] + martix_data[i + 1][j] + martix_data[i + 1][j + 1]) / 9.0
+    for i in range(1, row - 1):
+        for j in range(1, col - 1):
+            temp = 0.0
+            # 单个ceil
+            for h in range(-kernel_h, kernel_h + 1):  # [-1,1]
+                for w in range(-kernel_w, kernel_w + 1):  # [-1,1]
+                    temp += martix_data[i + h][j + w] * kernel[h + kernel_h][w + kernel_w]
+            temp /= kernel_sum
             avg_data.append(temp)
-            data_len-=1
-            if data_len==0:
+            # 有效数据卷积完毕
+            data_len -= 1
+            if data_len == 0:
                 break
     return avg_data
 
-def to_pading(orign_martix_data, padding_data):
+
+def to_pading(orign_martix_data, kernel, padding_data):
     '''
+
     :param orign_martix_data:原始矩阵数据
+    :param kernel: 滤波窗口
     :param padding_data: 填充数据
     :return: 返回填充完的数据
     '''
+    kernel_h = len(kernel) / 2
+    kernel_w = len(kernel[0]) / 2
+
     col = len(orign_martix_data[0])
     row = len(orign_martix_data)
     martix_data = copy.deepcopy(orign_martix_data)
 
     padding_row = []
-
-    for i in range(col + 2):
+    # pading行的item个数
+    for i in range(col + 2 * kernel_w):
         padding_row.append(padding_data)
 
-    martix_data.insert(0, padding_row)
-    martix_data.insert(row+1, padding_row)
+    for h in range(kernel_h):  # 上部填充
+        martix_data.insert(0, padding_row)
+    for w in range(kernel_w):  # 下部填充
+        martix_data.insert(row + 1, padding_row)
 
-    for i in range(row):
-        martix_data[i + 1].insert(0, martix_data[i][1+col])
-        martix_data[i + 1].insert(1 + col, martix_data[i+2][0])
-
-    martix_data.append(padding_row)
-
+    temp = []
+    # 中间数据填充首尾部
+    for i in range(kernel_h, row + kernel_h):
+        temp = []
+        # 首部插入
+        temp = martix_data[i - 1][-kernel_w * 2:-kernel_w]
+        # 原始数据插入
+        temp.extend(martix_data[i])
+        # 尾部数据插入
+        temp.extend(martix_data[i + 1][0:kernel_w])
+        martix_data[i] = temp
+        # martix_data[i].insert(0, martix_data[i-1][-kernel_w*2:-kernel_w])
+        # # 尾部插入
+        # martix_data[i].insert(1 + col, martix_data[i+1][0:kernel_w])
     return martix_data
 
 
