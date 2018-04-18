@@ -324,7 +324,7 @@ def predict_model7(his_data,
         day_avage = int(math.ceil(day_avage + noise))
         chis_data.append(day_avage)
         result.append(day_avage)
-
+    
     return result
 
 

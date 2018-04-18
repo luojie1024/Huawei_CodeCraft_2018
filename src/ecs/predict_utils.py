@@ -4,6 +4,8 @@ from datetime import datetime
 
 import predict_model
 
+import BPNN
+
 long_gap_predict_func = predict_model.long_gap_used_func
 
 short_gap_predict_func = predict_model.short_gap_used_func
@@ -132,6 +134,8 @@ def predict_all(dataObj):
 
     for vmtype in vm_types:
         result[vmtype] = predict_one(vmtype, dataObj, predict_func)
+    # for vmtype in vm_types:
+    #     result[vmtype] = predict_BPNN(vmtype, dataObj, predict_func)
 
     return result
 
@@ -143,6 +147,11 @@ def predict_one(vm_type,  # 虚拟机类型
     return prodict_function(dataObj.get_data_list(vm_type, -1,vmtype_avage_v),
                                 dataObj.date_range_size, vm_type)
 
+# def predict_BPNN(vm_type,  # 虚拟机类型
+#                 dataObj,  # 案例信息对象
+#                 prodict_function=None,  # 时间序列预测):
+#     return prodict_function(dataObj.get_data_list(vm_type, -1,vmtype_avage_v),
+#                                 dataObj.date_range_size, vm_type)
 
 
     #  test here
