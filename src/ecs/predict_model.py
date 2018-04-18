@@ -147,7 +147,7 @@ def predict_model4(his_data, date_range_size, vm_type):  # 霍尔特线性趋势
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.05 #0.08 65.228  0.08 515  1.5 390
+    alpha = 0.02 #0.05 65.983  0.08 515  1.5 390
     # 趋势
     beta = 0.0
     # 权重 75.21
