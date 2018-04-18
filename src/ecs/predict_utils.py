@@ -127,12 +127,7 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
     predict_func = predict_model.model8_used_func
-<<<<<<< HEAD
-    # predict_func = BPNN.BPNeuralNetwork.train
-    vmtype_avage_v=2
-=======
     vmtype_avage_v=4
->>>>>>> d01f77a5b88743ff82fdf5896ad66d758bf39cb6
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
