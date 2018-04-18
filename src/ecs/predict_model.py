@@ -52,11 +52,11 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
 def predict_model2(his_data, date_range_size, vm_type):
      #无noise
 
-    n = 14  # 边长数10
+    n = 3  # 边长数10
     sigma = 0.5
-
-    beta = 1.1 #1.1
-    back_week = 1 #1 2
+    enlarge=1.5
+    beta = 2 #1.1
+    back_week = 4 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
@@ -88,6 +88,8 @@ def predict_model2(his_data, date_range_size, vm_type):
         # noise = random.gauss(0, sigma)
         # noise = math.fabs(noise)
         # day_avage = int(math.ceil(day_avage + noise))
+
+        day_avage=day_avage*enlarge
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         temp_result+=day_avage
