@@ -82,19 +82,11 @@ def predict_all(dataObj):
     # #训练数据多少天
     # print((end_time-start_time).days)
 
-    # if end_time == pos_time1 and data_size == range_size1 and vm_type_size <= preliminar1_1size:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
-    #     predict_func = predict_model.model1_used_func  # model1_used_func 75.091
-    #     vmtype_avage_v = 3
-    # elif end_time == pos_time1 and data_size == range_size1 and vm_type_size > preliminar1_1size and vm_type_size <=preliminar1_2_size:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-    #     predict_func = predict_model.model2_used_func  # model2_used_func	77.092
-    #     vmtype_avage_v = 3
-    # elif end_time == pos_time2 and data_size == range_size2 and vm_type_size <= preliminar2_1_size:  # 样例3 L1   2016-04-15 预测天数7
-    #     predict_func = predict_model.model3_used_func  # model3_used_func  77.32
-    #     # predict_func = predict_model.model23_used_func  # 78.712
-    #     vmtype_avage_v = 3
-    # elif end_time == pos_time2 and data_size == range_size2 and vm_type_size > preliminar2_1_size and vm_type_size<=preliminar2_2_size:  # 样例4  L2  2016-04-15 预测天数7  虚拟机类型5 (3,5]
-    #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
-    #     vmtype_avage_v = 3
+    if data_size>7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
+        predict_func = predict_model.model21_used_func  # model1_used_func 75.091
+    elif data_size<=7:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+        predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+
 
 #################################################星期前同一天数据求平均##################################################
 
@@ -126,7 +118,7 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model.model_used_func
+    # predict_func = predict_model.model_used_func
     vmtype_avage_v=6
 
     # predict_func = predict_model.model9_used_func
