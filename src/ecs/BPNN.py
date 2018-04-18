@@ -60,6 +60,8 @@ class BPNeuralNetwork:
         # init correction matrix
         self.input_correction = make_matrix(self.input_n, self.hidden_n)
         self.output_correction = make_matrix(self.hidden_n, self.output_n)
+
+
     # 定义predict方法进行一次前馈， 并返回输出
     def predict(self, inputs):
         # activate input layer
@@ -131,10 +133,9 @@ class BPNeuralNetwork:
         self.setup(2, 5, 1)
         self.train(cases, labels, 10000, 0.05, 0.1)
         for case in cases:
-            print(self.predict(case))
+            print self.predict(case)
 
 
 if __name__ == '__main__':
     nn = BPNeuralNetwork()
     nn.test()
-    
