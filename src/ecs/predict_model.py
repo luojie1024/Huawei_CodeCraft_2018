@@ -25,7 +25,7 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
     # sigma = 0.5
 
     # 衰减值0.21
-    alpha = 0.21
+    alpha = 0.9
     # 历史天数
     chis_data = copy.deepcopy(his_data['value'])
     # 历史天数
@@ -1153,7 +1153,7 @@ def predict_model19(caseInfo):  # 数据对象
 
 #########################################LSTM#########################################
 # 选择预测方案
-model_used_func=predict_model10
+model_used_func=predict_model1
 # 按样例选择方案
 
 model1_used_func = predict_model11

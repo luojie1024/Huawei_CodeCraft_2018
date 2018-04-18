@@ -747,9 +747,11 @@ def to_pading(orign_martix_data, padding_data):
         padding_row.append(padding_data)
 
     martix_data.insert(0, padding_row)
+    martix_data.insert(row+1, padding_row)
+
     for i in range(row):
-        martix_data[i + 1].insert(0, padding_data)
-        martix_data[i + 1].insert(1 + col, padding_data)
+        martix_data[i + 1].insert(0, martix_data[i][1+col])
+        martix_data[i + 1].insert(1 + col, martix_data[i+2][0])
 
     martix_data.append(padding_row)
 
