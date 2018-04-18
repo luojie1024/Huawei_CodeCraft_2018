@@ -54,9 +54,9 @@ def predict_model2(his_data, date_range_size, vm_type):
 
     n = 3  # 边长数10
     sigma = 0.5
-    enlarge=1.5
+    enlarge=1.3
     beta = 2 #1.1
-    back_week = 4 #1 2
+    back_week = 1 #1 2
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
 
