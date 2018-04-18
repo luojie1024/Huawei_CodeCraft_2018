@@ -55,14 +55,14 @@ def predict_model2(his_data, dataObj, vm_type):
     # 需要预测的天数
     date_range_size = dataObj.date_range_size
 
-    #获取放大权重
+    # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
     n = 10  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.38 # 151
-    beta = 2 # 2
+    enlarge = 1.38  # 151
+    beta = 2  # 2
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
@@ -909,14 +909,14 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     # 需要预测的天数
     date_range_size = dataObj.date_range_size
 
-    #获取放大权重
+    # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
     n = 6  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.59 # 1.58  	77.091
-    beta = 2 # 2
+    enlarge = 1.58  # 1.58  	77.164
+    beta = 2  # 2
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
