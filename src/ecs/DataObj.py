@@ -31,12 +31,13 @@ class DataObj(object):
 
     # 预测时间与训练集间隔时间
     gap_time = 0
-    # 训练数据中虚拟机、日期二维映射表 {虚拟机类型flavor1：{'日期':出现次数,.....]
+
+    # 训练数据中虚拟机
     his_data = {}
 
     # 训练集 开始-结束 时间
     train_data_range = []
-    train_date_range_size = 0
+    train_day_count = 0.0  # 训练天数
 
     # 训练特征表
     train_X = []
@@ -58,8 +59,8 @@ class DataObj(object):
         self.set_input_config(origin_case_info, predict_time_grain)
         self.set_his_data(origin_train_data, predict_time_grain)
         # 提取特征
-        self.set_train_feature()
-        self.set_predictor_feature()
+        # self.set_train_feature()
+        # self.set_predictor_feature()
         if input_test_file_array != None:
             self.set_test_list(input_test_file_array)
         # self.set_feature_map()
@@ -158,7 +159,7 @@ class DataObj(object):
         end_date = datetime.strptime(self.train_data_range[1], '%Y-%m-%d %H:%M:%S')
         begin_date = datetime.strptime(self.train_data_range[0], '%Y-%m-%d %H:%M:%S')
         # 训练集长度
-        self.train_date_range_size = end_date.timetuple().tm_yday - begin_date.timetuple().tm_yday
+        self.train_day_count = end_date.timetuple().tm_yday - begin_date.timetuple().tm_yday
         # 计算间隔时间
         end_date = datetime.strptime(self.data_range[0], '%Y-%m-%d %H:%M:%S')
         begin_date = datetime.strptime(endtime, '%Y-%m-%d %H:%M:%S')
@@ -444,11 +445,12 @@ class DataObj(object):
         # 如果该类型并没有出现过，则返回0
         if vmtype not in self.his_data:
             result = {'time': [0],  # 时间标签
-                      'value': [0]}  # 统计值
+                          'value': [0]}  # 统计值
             return result
         else:
             result = {'time': [],  # 时间标签
-                      'value': []}  # 统计值
+                          'value': []}  # 统计值
+
         tdict = self.his_data[vmtype]
         tkeys = tdict.keys()
         tkeys.sort()
@@ -477,7 +479,46 @@ class DataObj(object):
             else:  # 没有的就是申请数为0的
                 result['value'].append(self.toInt(0, toInt))
             st = st + td
-        # 购物节数据放大
+        # 获得基本数据集
+
+        ########################原始数据矩阵############################
+
+        # 平铺
+        martix_data = []
+        data_len = len(result['value'])
+        orign_martix_data = []
+        # 获取平均值
+        avg_count = self.vm_types_count[vmtype] / float(self.train_day_count)
+
+        # 原始数据映射表
+        count_map = result['value']
+
+        # 周数
+        week_count = len(count_map) / 7
+        # 周数
+        for w in range(week_count):
+            start = 7 * w
+            end = 7 * (w + 1)
+            # 填充数据
+            orign_martix_data.append(count_map[start:end])
+
+        # 获取最后一行数据
+        temp = count_map[(week_count) * 7:]
+
+        # 填充平均值
+        while (len(temp) != 7):
+            temp.append(avg_count)
+
+        # 填充最后一行数据
+        orign_martix_data.append(temp)
+        ########################原始数据矩阵############################
+
+        # 填充padding
+        martix_data = to_pading(orign_martix_data, padding_data=avg_count)
+
+        # 过滤
+        result['value']=to_filter(martix_data, filter='average', wind=3, orgin_data_size=data_len)
+
         return result
 
     def get_data_list(self, vmtype, toInt, vmtype_avage_v):
@@ -655,6 +696,64 @@ class DataObj(object):
 
 
 split_append_tmp = [[13, ':00:00'], [10, ' 00:00:00']]
+
+
+def to_filter(martix_data, filter='average', wind=3, orgin_data_size=0):
+    '''
+    :param martix_data:需要过滤的数据
+    :param filter: 滤波类型
+    :param wind: 窗口大小
+    '''
+    if filter == 'average':
+        kernel = []
+        for i in range(wind):
+            temp = []
+            for j in range(wind):
+                temp.append(1)
+            kernel.append(temp)
+        return averageFilter(martix_data, kernel, orgin_data_size)
+
+
+def averageFilter(martix_data, kernel, orgin_data_size):
+    col = len(martix_data[0])
+    row = len(martix_data)
+    data_len = orgin_data_size
+    avg_data = []
+    temp = 0.0
+    for i in range(1, row-1):
+        for j in range(1, col-1):
+            temp = (martix_data[i - 1][j - 1] + martix_data[i - 1][j] + martix_data[i - 1][j + 1] +
+                    martix_data[i][j - 1] + martix_data[i][j] + martix_data[i][j + 1] +
+                    martix_data[i + 1][j - 1] + martix_data[i + 1][j] + martix_data[i + 1][j + 1]) / 9.0
+            avg_data.append(temp)
+            data_len-=1
+            if data_len==0:
+                break
+    return avg_data
+
+def to_pading(orign_martix_data, padding_data):
+    '''
+    :param orign_martix_data:原始矩阵数据
+    :param padding_data: 填充数据
+    :return: 返回填充完的数据
+    '''
+    col = len(orign_martix_data[0])
+    row = len(orign_martix_data)
+    martix_data = copy.deepcopy(orign_martix_data)
+
+    padding_row = []
+
+    for i in range(col + 2):
+        padding_row.append(padding_data)
+
+    martix_data.insert(0, padding_row)
+    for i in range(row):
+        martix_data[i + 1].insert(0, padding_data)
+        martix_data[i + 1].insert(1 + col, padding_data)
+
+    martix_data.append(padding_row)
+
+    return martix_data
 
 
 def get_grain_time(time_str, time_grain):

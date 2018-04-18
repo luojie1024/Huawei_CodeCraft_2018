@@ -287,7 +287,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                     M_C = M_C / 2.0
         free_cpu += pm_free[i][0]
         free_mem += pm_free[i][1]
-        print('%d:cpu:%d mem:%d' % (i,pm_free[i][0], pm_free[i][1]))
+        print('%d:cpu:%d mem:%d' % (i, pm_free[i][0], pm_free[i][1]))
     if dataObj.opt_target == 'CPU':
         res_use_pro = free_cpu / (dataObj.CPU * pm_size)
         other_res_use_pro = free_mem / (dataObj.MEM * pm_size)
