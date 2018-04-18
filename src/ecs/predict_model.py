@@ -859,7 +859,7 @@ def predict_model15(his_data,  # 某种类型的虚拟机的历史数据
     n = 3  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.235  # 1.24 75.724
+    enlarge = 1.242  # 1.24 75.724
     beta = 2  # 1.1
     back_week = 1  # 1
     chis_data = copy.deepcopy(his_data['value'])
