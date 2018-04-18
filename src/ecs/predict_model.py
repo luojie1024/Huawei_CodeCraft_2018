@@ -1165,7 +1165,7 @@ def predict_model19(caseInfo):  # 数据对象
 
 #########################################LSTM#########################################
 # 选择预测方案
-model_used_func=predict_model4
+model_used_func=predict_model2
 # 按样例选择方案
 
 model1_used_func = predict_model11

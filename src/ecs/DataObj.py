@@ -111,6 +111,11 @@ class DataObj(object):
         print _st, _et
         st = datetime.strptime(_st, "%Y-%m-%d %H:%M:%S")
         et = datetime.strptime(_et, '%Y-%m-%d %H:%M:%S')
+
+        ts = timedelta(seconds=1)
+        #时间修正+s
+        if et.timetuple().tm_hour==23 and et.timetuple().tm_min==59 and et.timetuple().tm_sec==59:
+            et+=ts
         td = et - st
         if predict_time_grain == const_map.TIME_GRAIN_DAY:
             self.date_range_size = td.days
@@ -171,7 +176,7 @@ class DataObj(object):
 
     def add_his_data(self, origin_train_data):
         '''
-        在原时间粒度下，添加历史数据信息
+        添加历史数据信息
         '''
         if (origin_train_data is None) or \
                 len(origin_train_data) == 0:
@@ -715,6 +720,12 @@ def to_filter(martix_data, filter='average', wind=3, orgin_data_size=0):
 
 
 def averageFilter(martix_data, kernel, orgin_data_size):
+    '''
+    :param martix_data:数据矩阵
+    :param kernel: 核
+    :param orgin_data_size:原始数据长度
+    :return:
+    '''
     col = len(martix_data[0])
     row = len(martix_data)
     data_len = orgin_data_size
