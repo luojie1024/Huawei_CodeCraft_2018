@@ -338,9 +338,9 @@ n = 3  # 边长数10
 beta = 2  # 1.1
 back_week = 1  # 1 2            73.232
 
-predict_model2 + vmtype_avage_v6 高斯滤波 sigma=3  enlarge = 1.4
+predict_model2 + vmtype_avage_v6 高斯滤波 sigma=3  enlarge = 1.45
 # 放大系数
 n = 3  # 边长数10
 beta = 2  # 1.1
-back_week = 1  # 1 2            73.718    520
+back_week = 1  # 1 2            73.718    520  74.248  548
 ///////////////////////////////////////////////////////////////////////////////////////////////
