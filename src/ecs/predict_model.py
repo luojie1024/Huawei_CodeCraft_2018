@@ -49,37 +49,49 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
     return result
 
 def predict_model2(his_data, date_range_size, vm_type):
-    '''
-    预测方案 2 指数滑动平均
-    :param his_data: 真实的历史数据出现次数表
-    :param date_range_size: 需要预测的长度
-    :return: 返回结果
-    '''
+     #无noise
 
-    # sigma = 0.5
+    n = 1  # 边长数10
+    sigma = 0.5
 
-    # 衰减值0.21
-    alpha = 0.21
-    # 历史天数
+    beta = 1.1 #1.1
+    back_week = 2 #1 2
     chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
     cal_len = len(chis_data)
-    temp_reuslt = 0.0
+
     result = []
-
+    temp_result=0
     for rept in range(date_range_size):  # 预测天数范围
-        temp_value = 0.0
-        # 遍历预测值
-        for i in range(len(chis_data)):
-            temp_value += chis_data[len(chis_data) - i - 1] * alpha * pow(1 - alpha, i)
-        chis_data.append(temp_value)
-        temp_reuslt += temp_value
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / beta
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:  # 直接平均  --> 改进成指数平均
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+        # noise = random.gauss(0, sigma)
+        # noise = math.fabs(noise)
+        # day_avage = int(math.ceil(day_avage + noise))
+        day_avage = int(math.ceil(day_avage))
+        chis_data.append(day_avage)
+        temp_result+=day_avage
+    result.append(temp_result)
 
-    # noise = random.gauss(0, sigma)
-    # noise = math.fabs(noise)
-    # # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    # result.append(int(math.floor(temp_reuslt+noise)))
-    result.append(int(math.floor(temp_reuslt)))
     return result
 
 
