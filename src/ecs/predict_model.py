@@ -53,10 +53,10 @@ def predict_model1(his_data, date_range_size, vm_type):  # 简单滑动平均法
 def predict_model2(his_data, date_range_size, vm_type):
     # 无noise
 
-    n = 14  # 边长数3
+    n = 10  # 边长数3
     sigma = 0.5
     # 放大系数
-    enlarge = 1.39  #1.45
+    enlarge = 1.38  #1.45
     beta = 2  # 1.1
     back_week = 1  # 1 2
     chis_data = copy.deepcopy(his_data['value'])
