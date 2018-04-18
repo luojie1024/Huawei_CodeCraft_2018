@@ -1182,7 +1182,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func=predict_model2
+model_used_func=predict_model4
 # 按样例选择方案
 
 model1_used_func = predict_model11
