@@ -500,6 +500,22 @@ class DataObj(object):
 
         return result
 
+    def get_data_list_v6(self, vmtype, toInt=0):
+        result = self.get_data_list_v2(vmtype, toInt=0)
+
+        orign_martix_data = []
+        # 获取平均值
+        avg_count = self.vm_types_count[vmtype] / float(self.train_day_count)
+        orign_martix_data = reshape_data(result, avg_count)
+
+        ########################原始数据矩阵############################
+
+        # 过滤 filter='average'   filter='gaussian'高斯滤波
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=self.train_day_count,
+                                    avg_count=avg_count)
+
+        return result
+
     def get_data_list(self, vmtype, toInt, vmtype_avage_v):
         '''
         :param vmtype:虚拟机类型
@@ -515,6 +531,10 @@ class DataObj(object):
             return self.get_data_list_v3(vmtype, toInt)
         elif vmtype_avage_v == 4:
             return self.get_data_list_v4(vmtype, toInt)
+        elif vmtype_avage_v == 5:
+            return self.get_data_list_v4(vmtype, toInt)
+        elif vmtype_avage_v == 6:
+            return self.get_data_list_v6(vmtype, toInt)
 
     def get_train_X(self):
         '''
@@ -814,7 +834,7 @@ def to_pading(orign_martix_data, kernel, padding_data):
     for h in range(kernel_h):  # 上部填充
         martix_data.insert(0, padding_row)
     for w in range(kernel_w):  # 下部填充
-        martix_data.insert(kernel_h+row, padding_row)
+        martix_data.insert(kernel_h + row, padding_row)
 
     temp = []
     # 中间数据填充首尾部
