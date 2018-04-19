@@ -99,13 +99,13 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     # 衰减值 220
     alpha = weight['alpha']
-    # alpha = 0.22
+    alpha = 0.22
     # 趋势
     beta = weight['beta']
-    # beta = 0.2
+    beta = 0.7
     # 季节 0.215
     gamma = weight['gamma']
-    # gamma = 0.215
+    gamma = 0.215
     # 季度周期长度
     s = weight['s']
     # s = 7
@@ -161,11 +161,11 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
         if temp_reuslt < 0:
             temp_reuslt = 0
 
-    enlarge = weight['enlarge']
-
-    enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
-
-    temp_reuslt = temp_reuslt * (1.5+enlarge)
+    # enlarge = weight['enlarge']
+    #
+    # enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
+    #
+    # temp_reuslt = temp_reuslt * (1.5+enlarge)
 
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
@@ -175,5 +175,106 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     return result
 
 
+def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
+    '''
+    预测方案 2 Holt-Winters
+    :param his_data: 真实的历史数据出现次数表
+    :param date_range_size: 需要预测的长度
+    :param k:跨度天数
+    :return: 返回结果
+    '''
+    # 获取权重
+    weight = PREDICT_MODEL2_WEIGHTS[vm_type]
+    # 预测天数
+    date_range_size = dataObj.date_range_size
+    # 历史映射
+    Y = copy.deepcopy(his_data['value'])
+
+    # 时间间隔跨度
+    k = dataObj.gap_time
+
+    temp_reuslt = 0.0
+    result = []
+    # 2.65
+
+    # 衰减值 220
+    alpha = weight['alpha']
+    alpha = 0.22
+    # 趋势
+    beta = weight['beta']
+    beta = 0.7
+    # 季节 0.215
+    gamma = weight['gamma']
+    gamma = 0.215
+    # 季度周期长度
+    s = weight['s']
+    # s = 7
+
+    l_t = []
+    b_t = []
+    s_t = []
+
+    # 初始trend
+    pre_b_t = 1.0
+    # 初始化level
+    pre_l_t = 1.0
+    # 初始化seasonal
+    pre_s_t = 1.0
+
+    # 初始化第一天的季动
+    l_t.append(pre_l_t)
+    b_t.append(pre_b_t)
+    s_t.append(pre_s_t)
+
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
+
+    # 用历史记录训练初始化参数
+    for t in range(1, len(Y)):  # 当前是t时刻
+        # 参数
+        if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
+            l_t.append(alpha * (Y[t] / s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
+        else:
+            l_t.append(alpha * (Y[t] / s_t[t - s]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
+
+        b_t.append(beta * (l_t[t] - l_t[t - 1]) + (1 - beta) * b_t[t - 1])
+
+        if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
+            s_t.append(gamma * (Y[t] / l_t[t]) + (1 - gamma) * s_t[t - 1])
+        else:
+            s_t.append(gamma * (Y[t] / l_t[t]) + (1 - gamma) * s_t[t - s])
+
+    t = len(l_t) - 1
+
+    # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
+    for h in range(k, date_range_size + k):
+        # 追加到历史表中
+        temp_Y = (l_t[t] + h * b_t[t] )*s_t[t - s + 1 + ((h - 1) % s)]
+
+        # temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
+        # # 如果小于0 置为零
+        # if temp_Y < 0:
+        #     temp_Y = 0
+        # 保存结果
+        temp_reuslt += temp_Y
+        # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+        if temp_reuslt < 0:
+            temp_reuslt = 0
+
+    # enlarge = weight['enlarge']
+    #
+    # enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
+    #
+    # temp_reuslt = temp_reuslt * (1.5+enlarge)
+
+    # 结果修正
+    temp_reuslt = int(math.floor(temp_reuslt))
+    if temp_reuslt < 0:
+        temp_reuslt = 0
+    result.append(temp_reuslt)
+    return result
+
 model1_used_func = predict_model1
 model2_used_func = predict_model2
+
+model3_used_func = predict_model3
