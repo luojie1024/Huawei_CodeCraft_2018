@@ -59,22 +59,25 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         predict_result = predict_utils.predict_deeplearning(dataObj)
     else:
         predict_result = predict_utils.predict_all(dataObj)
-
+    #############################################参数搜索##################################
     # parameter = {"alpha": 0, "beta": 0, "gamma": 0}
-    # max_score = 0
-    # for alpha in range(1,100,5):
-    #     for beta in range(1,100,5):
-    #         for gamma in range(1,100,5):
-    #             predict_result = predict_utils.predict_all(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
+    # max_score = 0.0
+    # for alpha in range(1,100,2):
+    #     for beta in range(1,100,2):
+    #         for gamma in range(1,100,2):
+    #             predict_result = predict_utils.predict_predict_parameter(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
     #             # 评估函数
     #             score = evaluation(dataObj, predict_result)
     #             if score > max_score:
     #                 parameter['alpha'] = alpha
     #                 parameter['beta'] = beta
     #                 parameter['gamma'] = gamma
-    #     print('%d\n'%alpha)
+    #                 max_score=score
+    #     print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n'%(alpha,parameter['alpha'],parameter['beta'],parameter['gamma'],max_score))
     # print('max_paremeter:')
+    #
     # print(parameter)
+    # print('max_score:%f'%max_score)
     #############################################微调数量##################################
     global try_result
     global vm_map

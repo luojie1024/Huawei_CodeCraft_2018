@@ -198,13 +198,13 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     # 衰减值 220
     # alpha = weight['alpha']
-    alpha = 0.96
+    alpha = 0.09
     # 趋势
     # beta = weight['beta']
-    beta = 0.96
+    beta = 0.39
     # 季节 0.215
     # gamma = weight['gamma']
-    gamma = 0.96
+    gamma = 0.03
     # 季度周期长度
     s = weight['s']
     s = 7
@@ -292,7 +292,7 @@ def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线
     k = dataObj.gap_time
 
     temp_reuslt = 0.0
-    result =0.0
+    result =[]
     # 2.65
 
     # 衰减值 220
@@ -369,7 +369,7 @@ def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线
     temp_reuslt = int(math.floor(temp_reuslt))
     if temp_reuslt < 0:
         temp_reuslt = 0
-    result=temp_reuslt
+    result.append(temp_reuslt)
     return result
 
 model1_used_func = predict_model1
