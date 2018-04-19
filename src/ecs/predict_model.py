@@ -161,11 +161,11 @@ def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.8  # 0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
+    alpha = 0.6  # 0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
     beta = 0.0
     # 权重 3    趋势权重    3.45 3.5-66.503
-    h = 3.0
+    h = 2.5
 
     y_hot_t = 0.0
     l_t = 0.2
@@ -1221,7 +1221,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func = predict_model2
+model_used_func = predict_model4
 # 按样例选择方案
 
 model1_used_func = predict_model11
