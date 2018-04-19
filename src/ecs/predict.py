@@ -91,7 +91,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_smooth##################################
 
     # 评估函数
-    # evaluation(dataObj, vm)
+    evaluation(dataObj, vm)
 
     result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
     print(result)

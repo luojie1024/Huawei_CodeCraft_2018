@@ -23,7 +23,11 @@ def predict_model1(his_data, dataObj, vm_type):
 
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
-    weight = PREDICT_MODEL1_WEIGHTS[vm_type]
+
+    if dataObj.gap_time==1:#无间隔 7天预测
+        weight = PREDICT_MODEL1_WEIGHTS[vm_type]
+    else:#长预测
+        weight = PREDICT_MODEL10_WEIGHTS[vm_type]
     n = weight['n']
     # 放大系数
     enlarge = weight['enlarge']
