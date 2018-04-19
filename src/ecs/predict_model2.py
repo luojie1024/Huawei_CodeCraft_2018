@@ -96,7 +96,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     temp_reuslt = 0.0
     result = []
     #2.6
-    enlarge = 2.8
+    enlarge = 2.7
     # 衰减值 220
     alpha = weight['alpha']
     alpha = 0.22
