@@ -159,4 +159,4 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     return result
 
 
-model_used_func = predict_model1
+model_used_func = predict_model2
