@@ -938,7 +938,7 @@ def predict_model16(his_data,  # 某种类型的虚拟机的历史数据
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    n = 3  # 边长数3
+    n = 6  # 边长数3
     sigma = 0.5
     # 放大系数
     enlarge = 1.0  # 1.58  	77.164

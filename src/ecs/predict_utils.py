@@ -124,10 +124,12 @@ def predict_all(dataObj):
 
     # predict_func = predict_model2.model_used_func
     # 不同时间间隔使用不同的填充方案
-    if gap_time > 1:
-        vmtype_avage_v = 7
-    else:
-        vmtype_avage_v = 6
+    # if gap_time > 1:
+    #     vmtype_avage_v = 7
+    # else:
+    #     vmtype_avage_v = 6
+
+    vmtype_avage_v = 7
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
