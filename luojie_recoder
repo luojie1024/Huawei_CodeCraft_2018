@@ -401,4 +401,8 @@ predict_model2.model1_used_func  sigma=2
 
 use_smooth = True
 use_search_maximum = True    78.906
+
+记录16：
+predict_model2.model2_used_func  L2 sigma=1  = 38分
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
