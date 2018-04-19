@@ -215,7 +215,7 @@ def predict_model5(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     Y = copy.deepcopy(his_data['value'])
 
-    k = 1
+    k=dataObj.gap_time
 
     temp_reuslt = 0.0
     result = []
@@ -1247,7 +1247,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func = predict_model5
+model_used_func = predict_model2
 # 按样例选择方案
 
 model1_used_func = predict_model11

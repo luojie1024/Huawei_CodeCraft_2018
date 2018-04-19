@@ -4,7 +4,7 @@ import DataObj
 import packing_utils
 import predict_utils
 import copy
-
+import math
 from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
 
 global res_use_pro
@@ -89,6 +89,10 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
 
     #############################################use_smooth##################################
+
+    # 评估函数
+    evaluation(dataObj, vm)
+
     result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
     print(result)
     return result
@@ -323,6 +327,59 @@ def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_fre
 # 检查dict中是否存在key
 def isContainKey(dic, key):
     return key in dic
+
+
+def evaluation(dataObj, vm):
+    print('train count:\n')
+    print(dataObj.train_vm_count)
+    print('\n')
+
+    print('test count:\n')
+    print(dataObj.test_vm_count)
+    print('\n')
+
+    print('predict count:\n')
+    print(vm)
+    print('\n')
+
+    diff, score=diff_dic(dataObj.test_vm_count, vm)
+
+    print('diff count:\n')
+    print(diff)
+    print('\n')
+
+    print('score count:\n')
+    print(score)
+    print('\n')
+
+
+def diff_dic(test, predict):
+    '''
+    计算差
+    :param test:测试集
+    :param predict:预测数据
+    :return: 差值
+    '''
+    diff = {}
+    score = 1.0
+    n = 0.0
+    temp_diff = 0.0
+    temp_y = 0.0
+    temp_y_hot = 0.0
+    keys = test.keys()
+    for key in keys:
+        if isContainKey(predict,key):
+            diff[key] = abs(test[key] - predict[key])
+            temp_y_hot += (predict[key] ** 2)
+        else:
+            diff[key] = abs(test[key])
+        temp_diff += (diff[key]**2)
+        temp_y += (test[key]**2)
+        n += 1.0
+
+    score-=math.sqrt(temp_diff/n)/(math.sqrt(temp_y/n)+math.sqrt(temp_y_hot/n))
+
+    return diff,score
 
 
 def computer_MC(CM_free):

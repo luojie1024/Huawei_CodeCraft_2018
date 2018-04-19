@@ -77,15 +77,69 @@ VM_MEM_QU = {  # MEM,CPU少的优先,从后往前
     'flavor18': [32, 128, 4.0],
 }
 
-AVERAGE_WEEK_WEIGHTS = [  # 每周权重矩阵
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-]
+# 平均模型，权重 
+PREDICT_MODEL1_WEIGHTS = {
+    'flavor1': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor2': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor3': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+
+    'flavor4': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor5': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor6': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+
+    'flavor7': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor8': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor9': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+
+    'flavor10': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor11': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor12': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+
+    'flavor13': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor14': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor15': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+
+    'flavor16': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor17': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor18': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+}
+
+# Holt-Winters，权重
+'''[0,1]
+#衰减
+alpha = 0.3
+# 趋势
+beta = 0.5
+# 季节 0.215
+gamma = 0.2
+# 季度周期长度
+s = 7
+'''
+PREDICT_MODEL2_WEIGHTS = {
+    'flavor1': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor2': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.1, 's': 7},
+    'flavor3': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+
+    'flavor4': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor5': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor6': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+
+    'flavor7': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor8': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor9': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+
+    'flavor10': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor11': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor12': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+
+    'flavor10.3': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor14': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor15': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+
+    'flavor16': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor17': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+    'flavor18': {'alpha': 0.3, 'beta': 0.5, 'gamma': 0.2, 's': 7},
+}
 
 VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
                 'flavor6', 'flavor7', 'flavor8', 'flavor9', 'flavor10',

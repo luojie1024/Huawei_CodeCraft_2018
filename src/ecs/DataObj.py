@@ -23,7 +23,8 @@ class DataObj(object):
 
     vm_types_size = 0  # 虚拟机类型数
     vm_types = []  # 虚拟机类型{list}
-    vm_types_count = {}
+    train_vm_count = {}
+
     max_type_count = 1
     min_type_count = 20000
 
@@ -47,7 +48,7 @@ class DataObj(object):
 
     # 测试集各种种类的数量
     test_vm_types_count = {}
-    test_count = []
+    test_vm_count = {}
 
     # 测试表
     predictor_data = {}  # {vm:predictor_data}
@@ -102,7 +103,7 @@ class DataObj(object):
             _type = origin_case_info[6 + i].replace('\r\n', '')
             _typename = _type.split(' ')[0]
             self.vm_types.append(_typename)
-            self.vm_types_count[_typename] = 0
+            self.train_vm_count[_typename] = 0
             self.predictor_data[_typename] = []
 
         # 处理时间
@@ -138,12 +139,12 @@ class DataObj(object):
         '''
         max_type_count = 0
         self.min_type_count = 20000
-        keys = self.vm_types_count.keys()
+        keys = self.train_vm_count.keys()
         for key in keys:
-            if self.vm_types_count[key] > self.max_type_count:
-                self.max_type_count = self.vm_types_count[key]
-            if self.vm_types_count[key] < self.min_type_count:
-                self.min_type_count = self.vm_types_count[key]
+            if self.train_vm_count[key] > self.max_type_count:
+                self.max_type_count = self.train_vm_count[key]
+            if self.train_vm_count[key] < self.min_type_count:
+                self.min_type_count = self.train_vm_count[key]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
         '''
@@ -162,8 +163,8 @@ class DataObj(object):
                 hisdata[vmtype] = {}
             gt = get_grain_time(time, predict_time_grain)
             # 统计训练集中虚拟机出现次数
-            if isContainKey(self.vm_types_count, vmtype):
-                self.vm_types_count[vmtype] += 1
+            if isContainKey(self.train_vm_count, vmtype):
+                self.train_vm_count[vmtype] += 1
             # 保存训练集开始时间
             if first == 1:
                 self.train_data_range.append(gt)
@@ -180,11 +181,11 @@ class DataObj(object):
         end_date = datetime.strptime(self.train_data_range[1], '%Y-%m-%d %H:%M:%S')
         begin_date = datetime.strptime(self.train_data_range[0], '%Y-%m-%d %H:%M:%S')
         # 训练集长度
-        self.train_day_count = end_date.timetuple().tm_yday - begin_date.timetuple().tm_yday
+        self.train_day_count = ((end_date - begin_date).days + 1)
         # 计算间隔时间
         end_date = datetime.strptime(self.data_range[0], '%Y-%m-%d %H:%M:%S')
         begin_date = datetime.strptime(endtime, '%Y-%m-%d %H:%M:%S')
-        self.gap_time = end_date.timetuple().tm_yday - begin_date.timetuple().tm_yday
+        self.gap_time = ((end_date - begin_date).days + 1)
 
         self.his_data = hisdata
 
@@ -253,7 +254,7 @@ class DataObj(object):
         :param vmtype:虚拟机类型
         :return: 获取放大权重
         '''
-        return (1 + self.vm_types_count[vmtype] / float(self.max_type_count))
+        return (1 + self.train_vm_count[vmtype] / float(self.max_type_count))
 
     def toInt(self, value, tType=0):
         if tType == 0.0:
@@ -512,7 +513,7 @@ class DataObj(object):
         ########################原始数据矩阵############################
         orign_martix_data = []
         # 获取平均值
-        avg_count = self.vm_types_count[vmtype] / float(self.train_day_count)
+        avg_count = self.train_vm_count[vmtype] / float(self.train_day_count)
         orign_martix_data = reshape_data(result, avg_count)
 
         ########################原始数据矩阵############################
@@ -528,13 +529,13 @@ class DataObj(object):
 
         orign_martix_data = []
         # 获取平均值
-        avg_count = self.vm_types_count[vmtype] / float(self.train_day_count)
+        avg_count = self.train_vm_count[vmtype] / float(self.train_day_count)
         orign_martix_data = reshape_data(result, avg_count)
 
         ########################原始数据矩阵############################
 
         # 过滤 filter='average'   filter='gaussian'高斯滤波
-        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=self.train_day_count,
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=7, orgin_data_size=self.train_day_count,
                                     avg_count=avg_count)
 
         return result
@@ -706,12 +707,12 @@ class DataObj(object):
 
         for vm_type in self.vm_types:
             if isContainKey(self.test_vm_types_count, vm_type):
-                self.test_count.append(self.test_vm_types_count[vm_type])
+                self.test_vm_count[vm_type] = self.test_vm_types_count[vm_type]
             else:
-                self.test_count.append(0)
+                self.test_vm_count[vm_type] = 0
 
     def get_test_list(self):
-        return self.test_count
+        return self.test_vm_count
 
 
 ################### class CaseInfo end #############################
@@ -776,7 +777,8 @@ def to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=0, 
         kernel = [[0.0] * (sigma * 2 + 1) for x in range(sigma * 2 + 1)]
         for x in range(-sigma, sigma + 1):
             for y in range(-sigma, sigma + 1):
-                kernel[x + sigma][y + sigma] = (1/(sigma**2*math.pi*2))*math.exp(-0.5 * (x ** 2 + y ** 2) / (sigma ** 2))
+                kernel[x + sigma][y + sigma] = (1 / (sigma ** 2 * math.pi * 2)) * math.exp(
+                    -0.5 * (x ** 2 + y ** 2) / (sigma ** 2))
 
         # 填充padding
         martix_data = to_pading(orign_martix_data, kernel, padding_data=avg_count)

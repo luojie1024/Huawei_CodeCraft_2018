@@ -13,8 +13,9 @@ is_Dubug = False
 def main():
     if is_Dubug:
         # #设置路径
-        ecsDataPath = 'data/TrainData_2015.12.txt'
-        inputFilePath = 'data/input_3hosttypes_5flavors_1week2.txt'
+        path='data/continuous'
+        ecsDataPath = path+'/TrainData_2015.12.txt'
+        inputFilePath = path+'/input_3hosttypes_5flavors_1week.txt'
         resultFilePath = 'result/output0.txt'
     else:
         print 'main function begin.'
@@ -33,7 +34,7 @@ def main():
 
     # 预测 Step 01
     if is_Dubug:
-        testFilePath = '../data/TestData_2015.2.20_2015.2.27.txt'
+        testFilePath = 'data/TestData_2016.1.8_2016.1.14.txt'
         input_test_file_array = read_lines(testFilePath)
         predic_result = predict.predict_vm(ecs_infor_array, input_file_array, input_test_file_array)
     else:

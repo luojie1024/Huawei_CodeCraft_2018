@@ -3,12 +3,11 @@
 from datetime import datetime
 
 import predict_model
+import predict_model2
 
 import BPNN
 
-long_gap_predict_func = predict_model.long_gap_used_func
 
-short_gap_predict_func = predict_model.short_gap_used_func
 
 # 需要预测的天数2
 range_size1 = 7
@@ -122,7 +121,7 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model.model_used_func
+    predict_func = predict_model2.model_used_func
     vmtype_avage_v = 6
 
     # predict_func = predict_model.model9_used_func
