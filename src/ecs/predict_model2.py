@@ -95,20 +95,22 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     temp_reuslt = 0.0
     result = []
-    #2.6
-    enlarge = 2.65
+    # 2.65
+    enlarge = weight['enlarge']
+
+    enlarge = enlarge * dataObj.get_count_weight(vm_type)
     # 衰减值 220
     alpha = weight['alpha']
-    alpha = 0.22
+    # alpha = 0.22
     # 趋势
     beta = weight['beta']
-    beta = 0.2
+    # beta = 0.2
     # 季节 0.215
     gamma = weight['gamma']
-    gamma = 0.215
+    # gamma = 0.215
     # 季度周期长度
     s = weight['s']
-    s = 7
+    # s = 7
 
     l_t = []
     b_t = []

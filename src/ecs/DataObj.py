@@ -27,6 +27,7 @@ class DataObj(object):
 
     max_type_count = 1
     min_type_count = 20000
+    sum_type_count = 0
 
     time_grain = -1  # 预测时间粒度
     date_range_size = 0  # 需要预测多少天数的数据
@@ -145,6 +146,7 @@ class DataObj(object):
                 self.max_type_count = self.train_vm_count[key]
             if self.train_vm_count[key] < self.min_type_count:
                 self.min_type_count = self.train_vm_count[key]
+            self.sum_type_count += self.train_vm_count[key]
 
     def set_his_data(self, origin_train_data, predict_time_grain):
         '''
@@ -254,7 +256,7 @@ class DataObj(object):
         :param vmtype:虚拟机类型
         :return: 获取放大权重
         '''
-        return (1 + self.train_vm_count[vmtype] / float(self.max_type_count))
+        return (1 + self.train_vm_count[vmtype] / float(self.sum_type_count))
 
     def toInt(self, value, tType=0):
         if tType == 0.0:
