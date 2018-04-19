@@ -142,29 +142,29 @@ gamma = 0.2
 s = 7
 '''
 PREDICT_MODEL2_WEIGHTS = {
-    'flavor1': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor2': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor3': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor1': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor2': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor3': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 
-    'flavor4': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor5': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor6': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor4': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor5': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor6': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 
-    'flavor7': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor8': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor9': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor7': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor8': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor9': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 
-    'flavor10': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor11': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor12': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor10': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor11': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor12': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 
-    'flavor13': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor14': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor15': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor13': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor14': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor15': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 
-    'flavor16': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor17': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
-    'flavor18': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.70},
+    'flavor16': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor17': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
+    'flavor18': {'alpha': 0.22, 'beta': 0.0, 'gamma': 0.215, 's': 7,'enlarge':1.40},
 }
 
 VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
