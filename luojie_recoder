@@ -389,7 +389,7 @@ use_search_maximum = True   77.223分
 
 
 记录15：
-predict_model2.model1_used_func
+predict_model2.model1_used_func  sigma=2
 
 间隔=1
 {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1}
