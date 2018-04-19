@@ -256,7 +256,7 @@ class DataObj(object):
         :param vmtype:虚拟机类型
         :return: 获取放大权重
         '''
-        return (1 + self.train_vm_count[vmtype] / float(self.sum_type_count/2))
+        return (1 + self.train_vm_count[vmtype] / float(self.sum_type_count/3))
 
     def toInt(self, value, tType=0):
         if tType == 0.0:
