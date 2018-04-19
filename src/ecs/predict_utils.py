@@ -88,7 +88,7 @@ def predict_all(dataObj):
         # 5x5滤波
         vmtype_avage_v = 6
     elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-        predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+        predict_func = predict_model.model21_used_func  # model2_used_func	77.092
         # 3x3滤波
         vmtype_avage_v = 6
     # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
