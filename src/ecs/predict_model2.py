@@ -96,9 +96,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     temp_reuslt = 0.0
     result = []
     # 2.65
-    enlarge = weight['enlarge']
 
-    enlarge = enlarge * dataObj.get_count_weight(vm_type)
     # 衰减值 220
     alpha = weight['alpha']
     # alpha = 0.22
@@ -163,7 +161,12 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
         if temp_reuslt < 0:
             temp_reuslt = 0
 
-    temp_reuslt = temp_reuslt * enlarge
+    # enlarge = weight['enlarge']
+    #
+    # enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
+
+    # temp_reuslt = temp_reuslt * enlarge
+
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
     if temp_reuslt < 0:

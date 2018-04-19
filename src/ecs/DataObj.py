@@ -251,12 +251,15 @@ class DataObj(object):
 
         return result
 
-    def get_count_weight(self, vmtype):
+    def get_count_weight(self, vmtype, temp_reuslt, date_range_size):
         '''
         :param vmtype:虚拟机类型
         :return: 获取放大权重
         '''
-        return (1 + self.train_vm_count[vmtype] / float(self.sum_type_count/3))
+        avg_pre = temp_reuslt / float(date_range_size)
+        avg_train = self.train_vm_count[vmtype] / float(self.train_day_count)
+        modify=(avg_train-avg_pre)/avg_pre
+        return (1 + modify)
 
     def toInt(self, value, tType=0):
         if tType == 0.0:

@@ -369,7 +369,7 @@ def diff_dic(test, predict):
     keys = test.keys()
     for key in keys:
         if isContainKey(predict,key):
-            diff[key] = abs(test[key] - predict[key])
+            diff[key] = predict[key]-test[key]
             temp_y_hot += (predict[key] ** 2)
         else:
             diff[key] = abs(test[key])
