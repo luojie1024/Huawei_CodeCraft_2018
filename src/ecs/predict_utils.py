@@ -131,11 +131,11 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model2.model1_used_func
-    # 不同时间间隔使用不同的填充方案
-    # if gap_time > 1:
-    #     vmtype_avage_v = 7
-    # else:
+
+    if gap_time>1:
+        predict_func = predict_model2.model2_used_func
+
+    # 3x3填充方案
     vmtype_avage_v = 6
 
     # vmtype_avage_v = 6

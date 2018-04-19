@@ -395,7 +395,10 @@ predict_model2.model1_used_func  sigma=2
 {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1}
 
 间隔(1,8]
-{'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+{'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
 
-77.705分
+77.989
+
+use_smooth = True
+use_search_maximum = True    78.906
 ///////////////////////////////////////////////////////////////////////////////////////////////
