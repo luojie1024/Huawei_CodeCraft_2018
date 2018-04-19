@@ -161,15 +161,15 @@ def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     sigma = 0.2
 
     # 衰减值
-    alpha = 0.6  # 0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
+    alpha = 0.8  # 0.05 65.983  - 虚拟机数量增加  + 虚拟机数量减少
     # 趋势
-    beta = 0.0
+    beta = 0.1
     # 权重 3    趋势权重    3.45 3.5-66.503
-    h = 2.5
+    h = 0.5
 
     y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
+    l_t = 0.0
+    b_t = 0.0
 
     # 初始trend
     pre_b_t = 0.0
@@ -205,60 +205,86 @@ def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
 def predict_model5(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
-    预测方案 5 霍尔特线性趋势法
+    预测方案 十一 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
     :param date_range_size: 需要预测的长度
+    :param k:跨度天数
     :return: 返回结果
     '''
     date_range_size = dataObj.date_range_size
-    # 历史天数
-    chis_data = copy.deepcopy(his_data['value'])
-    # 历史天数
-    cal_len = len(chis_data)
+
+    Y = copy.deepcopy(his_data['value'])
+
+    k = 1
+
     temp_reuslt = 0.0
     result = []
-    #
-    sigma = 0.2
 
-    # 衰减值
-    alpha = 0.2
+    # 衰减值 220
+    alpha = 0.3
     # 趋势
-    beta = 0.0
-    # 权重 75.21
-    h = 1.75
+    beta = 1.85
+    # 季节 0.215
+    gamma = 0.2
+    # 季度周期长度
+    s = 7
 
-    y_hot_t = 0.0
-    l_t = 0.2
-    b_t = 0.2
+    l_t = []
+    b_t = []
+    s_t = []
 
     # 初始trend
     pre_b_t = 0.0
     # 初始化level
     pre_l_t = 0.0
+    # 初始化seasonal
+    pre_s_t = 0.0
 
-    for rept in range(date_range_size):  # 预测天数范围
+    # 初始化第一天的季动
+    l_t.append(pre_l_t)
+    b_t.append(pre_b_t)
+    s_t.append(pre_s_t)
 
-        # 遍历历史记录
-        for i in range(1, len(chis_data)):  # t+1开始
-            # 更新level trend
-            pre_l_t = l_t
-            pre_b_t = b_t
-            # step1 computer level
-            l_t = alpha * chis_data[i - 1] + (1 - alpha) * (pre_l_t + pre_b_t)
-            # step2 computer trend
-            b_t = beta * (l_t - pre_l_t) + (1 - beta) * b_t
-            # step3
-            y_hot_t = l_t + h * b_t
-            if y_hot_t < 0:
-                y_hot_t = 0
+    # 在首部填充一位数据初始
+    Y.insert(0, 0.0)
+
+    # 用历史记录训练初始化参数
+    for t in range(1, len(Y)):  # 当前是t时刻
+        # 参数
+        if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
+            l_t.append(alpha * (Y[t] - s_t[t - 1]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
+        else:
+            l_t.append(alpha * (Y[t] - s_t[t - s]) + (1 - alpha) * (l_t[t - 1] + b_t[t - 1]))
+
+        b_t.append(beta * (l_t[t] - l_t[t - 1]) + (1 - beta) * b_t[t - 1])
+
+        if (t - s) < len(s_t):  # 初始季动可能越界,越界则用上一个填充
+            s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - 1])
+        else:
+            s_t.append(gamma * (Y[t] - l_t[t]) + (1 - gamma) * s_t[t - s])
+
+    t = len(l_t) - 1
+
+    # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
+    for h in range(k, date_range_size + k):
         # 追加到历史表中
-        chis_data.append(y_hot_t)
+        # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
+
+        temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
+        # # 如果小于0 置为零
+        # if temp_Y < 0:
+        #     temp_Y = 0
         # 保存结果
-        temp_reuslt += y_hot_t
-    noise = random.gauss(0, sigma)
-    noise = math.fabs(noise)
-    # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
-    result.append(int(math.floor(temp_reuslt) + noise))
+        temp_reuslt += temp_Y
+        # 求一个浮点数的地板，就是求一个最接近它的整数 ceil向上取整
+        if temp_reuslt < 0:
+            temp_reuslt = 0
+
+    # 结果修正
+    temp_reuslt = int(math.floor(temp_reuslt))
+    if temp_reuslt < 0:
+        temp_reuslt = 0
+    result.append(temp_reuslt)
     return result
 
 
@@ -1221,7 +1247,7 @@ def predict_model20(his_data,  # 某种类型的虚拟机的历史数据
 
 
 # 选择预测方案
-model_used_func = predict_model4
+model_used_func = predict_model5
 # 按样例选择方案
 
 model1_used_func = predict_model11
