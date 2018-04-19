@@ -101,7 +101,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     alpha=0.22
     # 趋势
     beta = weight['beta']
-    beta=0.2
+    beta=0.3
     # 季节 0.215
     gamma = weight['gamma']
     gamma=0.215
