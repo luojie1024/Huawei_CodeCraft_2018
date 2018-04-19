@@ -84,7 +84,10 @@ def predict_all(dataObj):
     # print((end_time-start_time).days)
 
     if data_size <= 7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
-        predict_func = predict_model.model21_used_func  # model1_used_func 75.091
+        if gap_time>1:
+            predict_func = predict_model2.model_used_func  # model2_used_func	77.092
+        else:
+            predict_func = predict_model.model21_used_func  # model1_used_func 75.091
         # 5x5滤波
         vmtype_avage_v = 6
     elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
