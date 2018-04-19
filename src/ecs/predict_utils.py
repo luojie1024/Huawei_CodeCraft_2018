@@ -7,8 +7,6 @@ import predict_model2
 
 import BPNN
 
-
-
 # 需要预测的天数2
 range_size1 = 7
 # 需要预测的天数3
@@ -56,6 +54,9 @@ def predict_all(dataObj):
     #     predict_func = long_gap_predict_func# 78
     # else:
     #     predict_func=short_gap_predict_func#76.68
+
+    # 时间间隔  连续gap_time=1
+    gap_time = dataObj.gap_time
 
     start_time = datetime.strptime(dataObj.data_range[0], "%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime(dataObj.data_range[1], "%Y-%m-%d %H:%M:%S")
@@ -122,7 +123,10 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
     predict_func = predict_model2.model_used_func
-    vmtype_avage_v = 6
+    if gap_time>1:
+        vmtype_avage_v = 7
+    else:
+        vmtype_avage_v = 6
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3

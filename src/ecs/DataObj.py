@@ -540,6 +540,22 @@ class DataObj(object):
 
         return result
 
+    def get_data_list_v7(self, vmtype, toInt=0):
+        result = self.get_data_list_v2(vmtype, toInt=0)
+
+        orign_martix_data = []
+        # 获取平均值
+        avg_count = self.train_vm_count[vmtype] / float(self.train_day_count)
+        orign_martix_data = reshape_data(result, avg_count)
+
+        ########################原始数据矩阵############################
+
+        # 过滤 filter='average'   filter='gaussian'高斯滤波
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=5, orgin_data_size=self.train_day_count,
+                                    avg_count=avg_count)
+
+        return result
+
     def get_data_list(self, vmtype, toInt, vmtype_avage_v):
         '''
         :param vmtype:虚拟机类型
@@ -559,6 +575,8 @@ class DataObj(object):
             return self.get_data_list_v4(vmtype, toInt)
         elif vmtype_avage_v == 6:
             return self.get_data_list_v6(vmtype, toInt)
+        elif vmtype_avage_v == 7:
+            return self.get_data_list_v7(vmtype, toInt)
 
     def get_train_X(self):
         '''
