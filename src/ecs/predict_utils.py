@@ -136,7 +136,7 @@ def predict_all(dataObj):
     # if gap_time > 1:
     #     vmtype_avage_v = 7
     # else:
-    vmtype_avage_v = 6
+    vmtype_avage_v = 7
 
     # vmtype_avage_v = 6
 
