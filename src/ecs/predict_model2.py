@@ -28,6 +28,7 @@ def predict_model1(his_data, dataObj, vm_type):
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     else:#长预测
         weight = PREDICT_MODEL10_WEIGHTS[vm_type]
+
     n = weight['n']
     # 放大系数
     enlarge = weight['enlarge']
