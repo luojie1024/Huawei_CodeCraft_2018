@@ -556,7 +556,7 @@ class DataObj(object):
         ########################原始数据矩阵############################
 
         # 过滤 filter='average'   filter='gaussian'高斯滤波
-        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=4, orgin_data_size=self.train_day_count,
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=6, orgin_data_size=self.train_day_count,
                                     avg_count=avg_count)
 
         return result
