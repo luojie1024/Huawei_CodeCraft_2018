@@ -27,7 +27,8 @@ pm_size = 0
 pm = []
 
 try_result = {}
-
+#
+is_parameter_search=True
 # 使用深度学习模型
 is_deeplearing = False
 use_smooth = False
@@ -53,31 +54,33 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     # 使用RNN进行预测
     # predict_result = train_RNN(dataObj)
+    if is_parameter_search==False:
 
-    # 预测数据 Step 03
-    if is_deeplearing:
-        predict_result = predict_utils.predict_deeplearning(dataObj)
-    else:
-        predict_result = predict_utils.predict_all(dataObj)
+        # 预测数据 Step 03
+        if is_deeplearing:
+            predict_result = predict_utils.predict_deeplearning(dataObj)
+        else:
+            predict_result = predict_utils.predict_all(dataObj)
     #############################################参数搜索##################################
-    # parameter = {"alpha": 0, "beta": 0, "gamma": 0}
-    # max_score = 0.0
-    # for alpha in range(1,100,2):
-    #     for beta in range(1,100,2):
-    #         for gamma in range(1,100,2):
-    #             predict_result = predict_utils.predict_predict_parameter(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
-    #             # 评估函数
-    #             score = evaluation(dataObj, predict_result)
-    #             if score > max_score:
-    #                 parameter['alpha'] = alpha
-    #                 parameter['beta'] = beta
-    #                 parameter['gamma'] = gamma
-    #                 max_score=score
-    #     print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n'%(alpha,parameter['alpha'],parameter['beta'],parameter['gamma'],max_score))
-    # print('max_paremeter:')
-    #
-    # print(parameter)
-    # print('max_score:%f'%max_score)
+    else:
+        parameter = {"alpha": 0, "beta": 0, "gamma": 0}
+        max_score = 0.0
+        for alpha in range(1,100,2):
+            for beta in range(1,100,2):
+                for gamma in range(1,100,2):
+                    predict_result = predict_utils.predict_predict_parameter(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
+                    # 评估函数
+                    score = evaluation_parameter(dataObj, predict_result)
+                    if score > max_score:
+                        parameter['alpha'] = alpha
+                        parameter['beta'] = beta
+                        parameter['gamma'] = gamma
+                        max_score=score
+            print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n'%(alpha,parameter['alpha'],parameter['beta'],parameter['gamma'],max_score))
+        print('max_paremeter:')
+
+        print(parameter)
+        print('max_score:%f'%max_score)
     #############################################微调数量##################################
     global try_result
     global vm_map
@@ -109,7 +112,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_smooth##################################
 
     # # 评估函数
-    # evaluation(dataObj, predict_result)
+    if is_parameter_search==False:
+        evaluation(dataObj, predict_result)
 
     result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
     print(result)
@@ -346,6 +350,9 @@ def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_fre
 def isContainKey(dic, key):
     return key in dic
 
+def evaluation_parameter(dataObj, vm):
+    diff, score = diff_dic(dataObj.test_vm_count, vm)
+    return score
 
 def evaluation(dataObj, vm):
     print('train count:\n')

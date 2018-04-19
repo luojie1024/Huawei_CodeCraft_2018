@@ -174,7 +174,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     result.append(temp_reuslt)
     return result
 
-def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
+def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'alpha': 5, 'beta': 55, 'gamma': 1}
     '''
     预测方案 2 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
