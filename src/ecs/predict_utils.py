@@ -83,10 +83,10 @@ def predict_all(dataObj):
     # #训练数据多少天
     # print((end_time-start_time).days)
 
-    # if data_size <= 7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
-    #     predict_func = predict_model.model21_used_func  # model1_used_func 75.091
-    # elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-    #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
+    if data_size <= 7:  # 样例1  L1 2016-04-08  预测天数 7 虚拟机类型3
+        predict_func = predict_model.model21_used_func  # model1_used_func 75.091
+    elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+        predict_func = predict_model.model22_used_func  # model2_used_func	77.092
     # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
     #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
     # elif  data_size <= 28:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
@@ -122,8 +122,9 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-    predict_func = predict_model2.model_used_func
-    if gap_time>1:
+    # predict_func = predict_model2.model_used_func
+    # 不同时间间隔使用不同的填充方案
+    if gap_time > 1:
         vmtype_avage_v = 7
     else:
         vmtype_avage_v = 6
