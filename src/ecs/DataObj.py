@@ -541,6 +541,11 @@ class DataObj(object):
         return result
 
     def get_data_list_v7(self, vmtype, toInt=0):
+        '''
+        :param vmtype:类型
+        :param toInt: 进位
+        :return:
+        '''
         result = self.get_data_list_v2(vmtype, toInt=0)
 
         orign_martix_data = []

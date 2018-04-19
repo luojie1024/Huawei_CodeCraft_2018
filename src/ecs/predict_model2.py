@@ -24,9 +24,9 @@ def predict_model1(his_data, dataObj, vm_type):
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    if dataObj.gap_time==1:#无间隔 7天预测
+    if dataObj.gap_time == 1:  # 无间隔 7天预测
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
-    else:#长预测
+    else:  # 长预测
         weight = PREDICT_MODEL10_WEIGHTS[vm_type]
 
     n = weight['n']
@@ -95,19 +95,19 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     temp_reuslt = 0.0
     result = []
-
+    enlarge = 1.2
     # 衰减值 220
     alpha = weight['alpha']
-    alpha=0.22
+    alpha = 0.22
     # 趋势
     beta = weight['beta']
-    beta=0.3
+    beta = 0.2
     # 季节 0.215
     gamma = weight['gamma']
-    gamma=0.215
+    gamma = 0.215
     # 季度周期长度
     s = weight['s']
-    s=7
+    s = 7
 
     l_t = []
     b_t = []
@@ -160,6 +160,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
         if temp_reuslt < 0:
             temp_reuslt = 0
 
+    temp_reuslt = temp_reuslt * enlarge
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
     if temp_reuslt < 0:
