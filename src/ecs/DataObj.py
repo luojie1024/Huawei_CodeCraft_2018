@@ -534,7 +534,7 @@ class DataObj(object):
         ########################原始数据矩阵############################
 
         # 过滤 filter='average'   filter='gaussian'高斯滤波
-        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=3, orgin_data_size=self.train_day_count,
+        result['value'] = to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=self.train_day_count,
                                     avg_count=avg_count)
 
         return result
@@ -776,7 +776,7 @@ def to_filter(orign_martix_data, filter='gaussian', sigma=1, orgin_data_size=0, 
         kernel = [[0.0] * (sigma * 2 + 1) for x in range(sigma * 2 + 1)]
         for x in range(-sigma, sigma + 1):
             for y in range(-sigma, sigma + 1):
-                kernel[x + sigma][y + sigma] = math.exp(-0.5 * (x ** 2 + y ** 2) / (sigma ** 2))
+                kernel[x + sigma][y + sigma] = (1/(sigma**2*math.pi*2))*math.exp(-0.5 * (x ** 2 + y ** 2) / (sigma ** 2))
 
         # 填充padding
         martix_data = to_pading(orign_martix_data, kernel, padding_data=avg_count)
