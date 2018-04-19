@@ -105,29 +105,29 @@ PREDICT_MODEL1_WEIGHTS = {
 }
 
 PREDICT_MODEL10_WEIGHTS = {
-    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 
-    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 
-    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 
-    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 
-    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 
-    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
 }
 
 # Holt-Winters，权重
