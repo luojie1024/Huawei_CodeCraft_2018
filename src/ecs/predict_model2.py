@@ -139,9 +139,9 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
     for h in range(k, date_range_size + k):
         # 追加到历史表中
-        # temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
+        temp_Y = l_t[t] + h*b_t[t] + s_t[t - s+1+((h-1)%s)]
 
-        temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
+        # temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
         # # 如果小于0 置为零
         # if temp_Y < 0:
         #     temp_Y = 0
