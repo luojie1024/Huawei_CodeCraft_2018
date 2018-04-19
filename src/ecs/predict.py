@@ -60,6 +60,21 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     else:
         predict_result = predict_utils.predict_all(dataObj)
 
+    # parameter = {"alpha": 0, "beta": 0, "gamma": 0}
+    # max_score = 0
+    # for alpha in range(1,100,5):
+    #     for beta in range(1,100,5):
+    #         for gamma in range(1,100,5):
+    #             predict_result = predict_utils.predict_all(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
+    #             # 评估函数
+    #             score = evaluation(dataObj, predict_result)
+    #             if score > max_score:
+    #                 parameter['alpha'] = alpha
+    #                 parameter['beta'] = beta
+    #                 parameter['gamma'] = gamma
+    #     print('%d\n'%alpha)
+    # print('max_paremeter:')
+    # print(parameter)
     #############################################微调数量##################################
     global try_result
     global vm_map
@@ -90,8 +105,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     #############################################use_smooth##################################
 
-    # 评估函数
-    # evaluation(dataObj, vm)
+    # # 评估函数
+    # evaluation(dataObj, predict_result)
 
     result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
     print(result)
@@ -342,7 +357,9 @@ def evaluation(dataObj, vm):
     print(vm)
     print('\n')
 
-    diff, score=diff_dic(dataObj.test_vm_count, vm)
+    # diff, score = diff_dic(dataObj.test_vm_count, vm)
+    diff, score = diff_dic(dataObj.test_vm_count, vm)
+
 
     print('diff count:\n')
     print(diff)
@@ -352,6 +369,7 @@ def evaluation(dataObj, vm):
     print(score)
     print('\n')
 
+    return score
 
 def diff_dic(test, predict):
     '''
@@ -368,18 +386,18 @@ def diff_dic(test, predict):
     temp_y_hot = 0.0
     keys = test.keys()
     for key in keys:
-        if isContainKey(predict,key):
-            diff[key] = predict[key]-test[key]
-            temp_y_hot += (predict[key] ** 2)
+        if isContainKey(predict, key):
+            diff[key] = predict[key][0] - test[key]
+            temp_y_hot += (predict[key][0] ** 2)
         else:
             diff[key] = abs(test[key])
-        temp_diff += (diff[key]**2)
-        temp_y += (test[key]**2)
+        temp_diff += (diff[key] ** 2)
+        temp_y += (test[key] ** 2)
         n += 1.0
 
-    score-=math.sqrt(temp_diff/n)/(math.sqrt(temp_y/n)+math.sqrt(temp_y_hot/n))
+    score -= math.sqrt(temp_diff / n) / (math.sqrt(temp_y / n) + math.sqrt(temp_y_hot / n))
 
-    return diff,score
+    return diff, score
 
 
 def computer_MC(CM_free):
