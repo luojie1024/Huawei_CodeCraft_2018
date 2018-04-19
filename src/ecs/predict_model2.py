@@ -264,7 +264,7 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
 
-    temp_reuslt = temp_reuslt * (1.5+enlarge)
+    temp_reuslt = temp_reuslt * (2+enlarge)
 
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
