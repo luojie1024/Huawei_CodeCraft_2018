@@ -70,20 +70,28 @@ INDEX_MAP={
 }
 
 VM_PARAM = {
-    # 'flavor7': [4, 4, 1.0],
-    # 'flavor8': [4, 8, 2.0],
-    # 'flavor9': [4, 16, 4.0],
+    'flavor1': [1, 1, 1.0],
+    'flavor2': [1, 2, 2.0],
+    'flavor3': [1, 4, 4.0],
 
-    'flavor10': [8, 8, 1.0],
-    'flavor11': [8, 16, 2.0],
-    'flavor12': [8, 32, 4.0],
+    'flavor4': [2, 2, 1.0],
+    'flavor5': [2, 4, 2.0],
+    'flavor6': [2, 8, 4.0],
 
-    'flavor13': [16, 16, 1.0],
-    'flavor14': [16, 32, 2.0],
-    'flavor15': [16, 64, 4.0],
+    'flavor7': [4, 4, 1.0],
+    'flavor8': [4, 8, 2.0],
+    'flavor9': [4, 16, 4.0],
 
-    'flavor16': [32, 32, 1.0],
-    'flavor17': [32, 64, 2.0],
+    # 'flavor10': [8, 8, 1.0],
+    # 'flavor11': [8, 16, 2.0],
+    # 'flavor12': [8, 32, 4.0],
+    #
+    # 'flavor13': [16, 16, 1.0],
+    # 'flavor14': [16, 32, 2.0],
+    # 'flavor15': [16, 64, 4.0],
+    #
+    # 'flavor16': [32, 32, 1.0],
+    # 'flavor17': [32, 64, 2.0],
     'flavor18': [32, 128, 4.0],
 }
 
@@ -108,22 +116,20 @@ result = []
 def fun(free_res_list, path_list):
     # 遍历列表
     for key in VM_PARAM.keys():
-        path = copy.deepcopy(path_list)
-        free = copy.deepcopy(free_res_list)
         # 完美组合
-        if (VM_PARAM[key][0] == free['CPU'] and VM_PARAM[key][1] == free['MEM']):
-            path = add_vm(path, key)
+        if (VM_PARAM[key][0] == free_res_list['CPU'] and VM_PARAM[key][1] == free_res_list['MEM']):
+            path = add_vm(path_list, key)
             # 保存结果
             result.append(path)
-        elif (VM_PARAM[key][0] < free['CPU'] and VM_PARAM[key][1] < free['MEM']):
+        elif (VM_PARAM[key][0] < free_res_list['CPU'] and VM_PARAM[key][1] < free_res_list['MEM']):
             # 减去资源数
-            free = delete_res(free, key)
+            free = delete_res(free_res_list, key)
             # 添加路径
-            path = add_vm(path,key)
+            path = add_vm(path_list,key)
             # 继续搜索
             fun(free, path)
         else:
-            return
+            continue
 
 
 def delete_res(res_list, key):
@@ -139,11 +145,12 @@ def delete_res(res_list, key):
 
 
 def add_vm(path_list, key):
-    if isContainKey(path_list,key):
-        path_list[key]+=1
+    path=copy.deepcopy(path_list)
+    if isContainKey(path,key):
+        path[key]+=1
     else:
-        path_list[key]=1
-    return path_list
+        path[key]=1
+    return path
 
 
 # 检查dict中是否存在key
@@ -173,7 +180,7 @@ for key in VM_PM.keys():
     result.sort()
     print('%s result  size=%d' % (key, len(result)))
     result=result_unique(result)
-    write_result(result, outpuFilePath + key + '.txt')
+    write_result(result, outpuFilePath + key +'vm18' +'.txt')
     print('%s result_unique size=%d' % (key, len(result)))
     print('\n end \n')
     result = []

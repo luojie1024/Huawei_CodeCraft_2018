@@ -3,90 +3,93 @@ import copy
 from math import ceil
 
 import packing_utils
-from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
+from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU, PM_TYPE
 
-#添加模拟退火的算法
-def  pack_model1(vmPicker,machineGroup,opt_target="CPU"):
-    vm_cpu_size,vm_mem_size=vmPicker.origin_cpu_mem_sum()
-    C=machineGroup.machine_info["CPU"]
-    M=machineGroup.machine_info["MEM"]
+
+# 添加模拟退火的算法
+def pack_model1(vmPicker, machineGroup, opt_target="CPU"):
+    vm_cpu_size, vm_mem_size = vmPicker.origin_cpu_mem_sum()
+    C = machineGroup.machine_info["CPU"]
+    M = machineGroup.machine_info["MEM"]
 
     num = max(vm_cpu_size * 1.0 / C, vm_mem_size * 1.0 / M)
-    T=100.0   #模拟退火初始温度
-    Tmin=1    #模拟退火终止温度
-    r=0.9999  #温度下降系数
+    T = 100.0  # 模拟退火初始温度
+    Tmin = 1  # 模拟退火终止温度
+    r = 0.9999  # 温度下降系数
     pass
+
 
 def pack_model(vmWorker, serverObj, opt_target='CPU'):
     '''
     具体装配方案1,packing1,M/U权重分配
     '''
     # 获得放置顺序
-    vm_orders = [[], # vm_types
-                 []] # cot
-    weightes = [1,2,4]
-    cpu = [1,2,4,8,16,32]
+    vm_orders = [[],  # vm_types
+                 []]  # cot
+    weightes = [1, 2, 4]
+    cpu = [1, 2, 4, 8, 16, 32]
 
-    vm_cpu_size,vm_mem_size = vmWorker.origin_cpu_mem_sum()
-    
+    vm_cpu_size, vm_mem_size = vmWorker.origin_cpu_mem_sum()
+
     if vm_cpu_size == 0: return  # 无需装装配， 结束
-    
-    pw =vm_mem_size*1.0 / vm_cpu_size
-    
-    C = serverObj.server_info['CPU']# 物理机CPU数
-    M = serverObj.server_info['MEM']# 物理机MEM数
-    bw = M * 1.0 / C# 物理机权重
-    
-#######################################
-    print 'pw=%.2f,bw=%.2f'%(pw,bw)
+
+    pw = vm_mem_size * 1.0 / vm_cpu_size
+
+    C = serverObj.server_info['CPU']  # 物理机CPU数
+    M = serverObj.server_info['MEM']  # 物理机MEM数
+    bw = M * 1.0 / C  # 物理机权重
+
+    #######################################
+    print 'pw=%.2f,bw=%.2f' % (pw, bw)
     #
-    num = max(vm_cpu_size*1.0/C,vm_mem_size*1.0/M)
-    print 'num=%d'%(ceil(num))
-    
-    print 'cpu%%=%.2f mem%%=%.2f'%(vm_cpu_size*100.0/(num*C),
-                                   vm_mem_size*100.0/(num*M))
-#######################################    
-    
+    num = max(vm_cpu_size * 1.0 / C, vm_mem_size * 1.0 / M)
+    print 'num=%d' % (ceil(num))
+
+    print 'cpu%%=%.2f mem%%=%.2f' % (vm_cpu_size * 100.0 / (num * C),
+                                     vm_mem_size * 100.0 / (num * M))
+    #######################################
+
     # 创建最小量的虚拟机，原来集群中就存在一台，需要减一台
     serverObj.new_physic_machine(num=num - 1)
-    
-    
-    
+
     # 获取CPU从大到小，权重都
     pick_func = vmWorker.get_vm_by_cpu
-    dirt = cpu    
-    start=len(dirt)-1
-    end=-1
-    step=-1
-    order=0
+    dirt = cpu
+    start = len(dirt) - 1
+    end = -1
+    step = -1
+    order = 0
 
-    for i in range(start,end,step):
-        tmp = pick_func(dirt[i],order)
+    for i in range(start, end, step):
+        tmp = pick_func(dirt[i], order)
         if tmp != None:
             vm_orders[0].extend(tmp[0])
             vm_orders[1].extend(tmp[1])
 
-    if opt_target=='CPU':opt_index=0
-    elif opt_target=='MEM':opt_index=1
-    else: opt_index=2
+    if opt_target == 'CPU':
+        opt_index = 0
+    elif opt_target == 'MEM':
+        opt_index = 1
+    else:
+        opt_index = 2
 
     vm_type_size = len(vm_orders[0])
-    if vm_type_size ==0:return # 无装配项，结束
+    if vm_type_size == 0: return  # 无装配项，结束
     for vm_index in range(vm_type_size):
         vm_type = vm_orders[0][vm_index]
         vm_cot = vm_orders[1][vm_index]
         pm_size = serverObj.pm_size
         for rept in range(vm_cot):
-            in_id  = -1
-            max_opt=-1
+            in_id = -1
+            max_opt = -1
             for pm_id in range(pm_size):
-                ok,re_items = serverObj.test_put_vm(pm_id, vm_type)
-                if not ok:continue
-                if  max_opt<re_items[opt_index]:
+                ok, re_items = serverObj.test_put_vm(pm_id, vm_type)
+                if not ok: continue
+                if max_opt < re_items[opt_index]:
                     max_opt = re_items[opt_index]
                     in_id = pm_id
-                            
-            if in_id<0 : # 在现有的物理机中无法安排该虚拟机
+
+            if in_id < 0:  # 在现有的物理机中无法安排该虚拟机
                 pm_size = serverObj.new_physic_machine()
                 re_items = serverObj.put_vm(pm_size - 1, vm_type)
                 if re_items == None:
@@ -94,8 +97,84 @@ def pack_model(vmWorker, serverObj, opt_target='CPU'):
             else:
                 serverObj.put_vm(in_id, vm_type)
 
-    return (vm_cpu_size * 100.0 / (num * C),vm_mem_size * 100.0 / (num * M))
+    return (vm_cpu_size * 100.0 / (num * C), vm_mem_size * 100.0 / (num * M))
 
+
+def pack_model2(vmWorker, serverObj):
+    '''
+    具体装配方案1,packing1,M/U权重分配
+    :param vmWorker:虚拟机
+    :param serverObj: 物理机
+    :return:
+    '''
+    # 获得放置顺序
+    vm_orders = [[],  # vm_types
+                 []]  # cot
+    weightes = [1, 2, 4]
+    cpu = [1, 2, 4, 8, 16, 32]
+
+    # 获得所需的CPU 内存总数
+    vm_cpu_size, vm_mem_size = vmWorker.origin_cpu_mem_sum()
+
+    # 无需装装配,结束
+    if vm_cpu_size == 0:
+        return
+
+    # 基线
+    baseline_C_M = 56.0 / 128
+    print ('baseline C/M %.2f \n' % (baseline_C_M))
+
+    # 物理机资源比
+    C_M = vm_cpu_size * 1.0 / vm_mem_size
+
+    # 大量虚拟机时候,首选大号物理机
+    if (vm_cpu_size >= 112 and vm_mem_size >= 256):
+        if (C_M > baseline_C_M): # cpu比例大,选用高性能物理机
+            print ('now C/M %.2f > baseline C/M %.2f \n'%(C_M,baseline_C_M))
+            serverObj.new_physic_machine('High-Performance')
+        else:# mem比例大,选择大内存的物理机
+            serverObj.new_physic_machine('Large-Memory')
+    else:  # 最后资源优化策略
+        pass
+    # 获取CPU从大到小，权重都
+    pick_func = vmWorker.get_vm_by_cpu
+    dirt = cpu
+    start = len(dirt) - 1
+    end = -1
+    step = -1
+    order = 0
+
+    for i in range(start, end, step):
+        tmp = pick_func(dirt[i], order)
+        if tmp != None:
+            vm_orders[0].extend(tmp[0])
+            vm_orders[1].extend(tmp[1])
+
+    vm_type_size = len(vm_orders[0])
+    if vm_type_size == 0: return  # 无装配项，结束
+    for vm_index in range(vm_type_size):
+        vm_type = vm_orders[0][vm_index]
+        vm_cot = vm_orders[1][vm_index]
+        pm_size = serverObj.pm_size
+        for rept in range(vm_cot):
+            in_id = -1
+            max_opt = -1
+            for pm_id in range(pm_size):
+                ok, re_items = serverObj.test_put_vm(pm_id, vm_type)
+                if not ok: continue
+                if max_opt < re_items[opt_index]:
+                    max_opt = re_items[opt_index]
+                    in_id = pm_id
+
+            if in_id < 0:  # 在现有的物理机中无法安排该虚拟机
+                pm_size = serverObj.new_physic_machine()
+                re_items = serverObj.put_vm(pm_size - 1, vm_type)
+                if re_items == None:
+                    raise ValueError('ENDLESS LOOP ! ')
+            else:
+                serverObj.put_vm(in_id, vm_type)
+
+    return (vm_cpu_size * 100.0 / (num * C), vm_mem_size * 100.0 / (num * M))
 
 
 #################################################优化方案########################################
@@ -309,21 +388,21 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObje, pm_free):
 
 
 def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj, predict_result):
-    avg_predict_result=copy.deepcopy(predict_result)
+    avg_predict_result = copy.deepcopy(predict_result)
 
-    vm_types=dataObj.vm_types
+    vm_types = dataObj.vm_types
 
-    avg_value=-1
-    M_C=0.0
-    if dataObj.opt_target== 'CPU':
-        M_C=4.0
+    avg_value = -1
+    M_C = 0.0
+    if dataObj.opt_target == 'CPU':
+        M_C = 4.0
     else:
-        M_C=1.0
+        M_C = 1.0
 
-    if res_use_pro<other_res_use_pro:
+    if res_use_pro < other_res_use_pro:
         for vm_type in vm_types:
-            if VM_PARAM[vm_type][2]==M_C and avg_predict_result[vm_type][0]>=-avg_value:
-                avg_predict_result[vm_type][0]+=avg_value
+            if VM_PARAM[vm_type][2] == M_C and avg_predict_result[vm_type][0] >= -avg_value:
+                avg_predict_result[vm_type][0] += avg_value
 
     return avg_predict_result
 
@@ -345,13 +424,7 @@ def computer_MC(CM_free):
     return M_C
 
 
-
-
-
 #########################################
 # 选择装配方案
-used_func= pack_model
+used_func = pack_model2
 #########################################
-
-
-

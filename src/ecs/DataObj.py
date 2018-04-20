@@ -10,14 +10,14 @@ from feature_map import first_workdays, weekend_workdays, holidays, shopping_day
 
 class DataObj(object):
     '''
-    训练数据对象
+    数据对象
     '''
     CPU = 0  # cpu数
     MEM = 0  # 内存存储量 单位Gb
     HDD = 0  # 硬盘存储量 单位Gb
 
-    mp_type_name = []
-    mp_type_list = {}
+    pm_type_name = []
+    pm_type_list = {}
 
     opt_target = 'MEM'  # 优化目标，值为CPU和MEM
 
@@ -93,8 +93,8 @@ class DataObj(object):
             mp_list['CPU'] = int(tmps[1])
             mp_list['MEM'] = int(tmps[2])
             mp_list['HDD'] = int(tmps[3])
-            self.mp_type_list[tmps[0][0]] = mp_list
-            self.mp_type_name.append(tmps[0])
+            self.pm_type_list[tmps[0]] = mp_list
+            self.pm_type_name.append(tmps[0])
 
         # 处理虚拟机类型
         vm_size = int(origin_case_info[5].replace('\r\n', ''))
@@ -130,9 +130,9 @@ class DataObj(object):
             self.date_range_size = td.days
         self.data_range = [_st, _et]
 
-        self.CPU = self.mp_type_list["G"]["CPU"]
-        self.MEM = self.mp_type_list["G"]["MEM"]
-        self.HDD = self.mp_type_list["G"]["HDD"]
+        self.CPU = tmps[1]
+        self.MEM = tmps[2]
+        self.HDD = tmps[3]
 
     def set_max_min_count(self):
         '''

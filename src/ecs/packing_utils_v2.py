@@ -17,7 +17,7 @@ def pack_api(dataObj, predict_result):
     '''
     group = ServerObj(dataObj)
     picker = VmWorker(predict_result)
-    pack_function(picker, group, dataObj.opt_target)
+    pack_function(picker, group)
     vm_size, vm = picker.to_origin_desc()
     pm_size, pm = group.to_description()
     pm_free = group.get_pm_free()
@@ -64,30 +64,27 @@ class ServerObj():
         self.pm_size = 0
         self.empty = 0
         self.PM_Free = []
-        self.server_info = {'CPU': 0,
-                            'MEM': 0,
-                            'HDD': 0}
+        self.server_info = {}
+        self.server_info = dataObj.pm_type_list
 
-        self.server_info['CPU'] = dataObj.CPU
-        self.server_info['MEM'] = dataObj.MEM
-        self.server_info['HDD'] = dataObj.HDD
-        self.new_physic_machine()
-        pass
-
-    def new_physic_machine(self, num=1):
+    def new_physic_machine(self, pm_type):
         '''
-        创建num个新的物理机，返回物理机数量
+        创建物理机
+        :param pm_type:虚拟机类型
+        :return:
         '''
-        while num > 0:
-            self.pm_size += 1
-            npm = {
-                're_cpu': self.server_info['CPU'],
-                're_mem': self.server_info['MEM'],
-                'vm_size': 0
-            }
-            self.PM_status.append(npm)
-            self.PM.append({})
-            num -= 1
+        C_M = const_map.PM_TYPE[pm_type]['CPU'] / float(const_map.PM_TYPE[pm_type]['MEM'])
+        temp = {
+            'pm_type': pm_type,
+            'C_M': C_M,
+            're_cpu': const_map.PM_TYPE[pm_type]['CPU'],
+            're_mem': const_map.PM_TYPE[pm_type]['MEM'],
+            'vm_size': 0
+        }
+        self.PM_status.append(temp)
+        self.PM.append({})
+        self.pm_size += 1
+        print 'apply pm：%s , C/M=%.2f\n' % (pm_type, C_M)
         return self.pm_size
 
     def test_put_vm(self, pm_id, vm_type):
@@ -97,6 +94,7 @@ class ServerObj():
         :param vm_type: 虚拟机类型
         :return: 剩余资源数
         '''
+        # 数据异常
         if pm_id is None or \
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
@@ -263,26 +261,34 @@ class VmWorker():
     vm_types = const_map.VM_TYPE_DIRT
 
     def __init__(self, predict_result):
+        # 保存原始数据
         self.origin_data = predict_result
-        self.init_picker(predict_result)
-        self.vm_size, self.origin_desc_table = \
-            self.to_description()
+        # 初始化分拣对象
+        self.init_worker(predict_result)
+
+        self.vm_size, self.origin_desc_table = self.set_data_info()
+
         self.origin_vm_size = self.vm_size
         pass
 
-    def init_picker(self, predict_result):
+    def init_worker(self, predict_result):
+        '''
+        初始化分拣对象
+        :param predict_result:预测结果
+        '''
         types = predict_result.keys()
+        # 遍历计算总共需要cpu mem 的数量
         for vmtype in types:
-            vsum = 0
-            pre = predict_result[vmtype]
+            vm_sum = 0
+            pre_temp = predict_result[vmtype]
             vm_cpu, vm_mem, _ = const_map.VM_PARAM[vmtype]
-            for i in range(len(pre)):
-                vsum += pre[i]
-            self.vm_cpu_size += vm_cpu * vsum
-            self.vm_mem_size += vm_mem * vsum
-            windex, cindex = self.type2index(vmtype)
-            self.VM[windex][cindex] = vsum
-        pass
+            for i in range(len(pre_temp)):
+                vm_sum += pre_temp[i]
+            self.vm_cpu_size += vm_cpu * vm_sum
+            self.vm_mem_size += vm_mem * vm_sum
+            # 添加到数量列表
+            row, col = self.type2index(vmtype)
+            self.VM[row][col] = vm_sum
 
     def type2index(self, vm_type):
         tindex = self.vm_types.index(vm_type)
@@ -352,24 +358,35 @@ class VmWorker():
         return result
 
     def get_vm_by_cpu(self, cpu, order=0):
+        '''
+        获得队列顺序
+        :param cpu:
+        :param order:
+        :return:
+        '''
         result = [[],  # vm_type
                   []]  # cot
-        cindex = int(math.log(cpu, 2))
+        # 计算CPU所在列
+        col = int(math.log(cpu, 2))
         start = 0
         end = 3
         step = 1
 
+        # 从下往上取 1：4->1：1
         if order == 1:
             start = 2
             end = -1
             step = -1
-        for windex in range(start, end, step):
-            tmp = self.VM[windex][cindex]
+
+        # 从上往下取 1：1->1：4
+        for row in range(start, end, step):
+            tmp = self.VM[row][col]
             if tmp > 0:
-                result[0].append(self.index2type(windex, cindex))
+                result[0].append(self.index2type(row, col))
                 result[1].append(tmp)
-                self.VM[windex][cindex] = 0
+                self.VM[row][col] = 0
                 self.vm_size -= tmp
+        # 没有vm 返回None
         if len(result[0]) == 0:
             return None
         return result
@@ -380,17 +397,21 @@ class VmWorker():
     def to_origin_desc(self):
         return self.origin_vm_size, self.origin_desc_table
 
-    def to_description(self):
-        new_desc_table = {}
-        vmsum = 0
+    def set_data_info(self):
+        '''
+        设置虚拟机数量表
+        计算虚拟机总数
+        '''
+        info_table = {}
+        vm_sum = 0
         flag = True
-        for i in range(3):
-            for j in range(5):
+        for i in range(len(self.VM)):  # 行
+            for j in range(len(self.VM[2])):  # 列
                 tmp = self.VM[i][j]
                 if tmp != -1:
                     flag = False
-                    vmsum += tmp
-                    new_desc_table[self.index2type(i, j)] = tmp
+                    vm_sum += tmp
+                    info_table[self.index2type(i, j)] = tmp
         if flag:
-            vmsum = -1
-        return vmsum, new_desc_table
+            vm_sum = -1
+        return vm_sum, info_table

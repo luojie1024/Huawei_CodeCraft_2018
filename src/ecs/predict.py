@@ -6,6 +6,7 @@ import predict_utils
 import copy
 import math
 from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
+import packing_utils_v2
 
 global res_use_pro
 global vm_size
@@ -28,7 +29,7 @@ pm = []
 
 try_result = {}
 #
-is_parameter_search=True
+is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
 use_smooth = False
@@ -54,7 +55,9 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     # 使用RNN进行预测
     # predict_result = train_RNN(dataObj)
-    if is_parameter_search==False:
+
+    # 参数搜索
+    if is_parameter_search == False:
 
         # 预测数据 Step 03
         if is_deeplearing:
@@ -65,29 +68,31 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     else:
         parameter = {"alpha": 0, "beta": 0, "gamma": 0}
         max_score = 0.0
-        for alpha in range(1,100,2):
-            for beta in range(1,100,2):
-                for gamma in range(1,100,2):
-                    predict_result = predict_utils.predict_predict_parameter(dataObj, alpha/100.0, beta/100.0, gamma/100.0)
+        for alpha in range(1, 100, 2):
+            for beta in range(1, 100, 2):
+                for gamma in range(1, 100, 2):
+                    predict_result = predict_utils.predict_predict_parameter(dataObj, alpha / 100.0, beta / 100.0,
+                                                                             gamma / 100.0)
                     # 评估函数
                     score = evaluation_parameter(dataObj, predict_result)
                     if score > max_score:
                         parameter['alpha'] = alpha
                         parameter['beta'] = beta
                         parameter['gamma'] = gamma
-                        max_score=score
-            print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n'%(alpha,parameter['alpha'],parameter['beta'],parameter['gamma'],max_score))
+                        max_score = score
+            print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n' % (
+            alpha, parameter['alpha'], parameter['beta'], parameter['gamma'], max_score))
         print('max_paremeter:')
 
         print(parameter)
-        print('max_score:%f'%max_score)
+        print('max_score:%f' % max_score)
     #############################################微调数量##################################
     global try_result
     global vm_map
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(dataObj,
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                                predict_result)
     #############################################use_pm_average##################################
     if use_pm_average:
@@ -112,10 +117,10 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_smooth##################################
 
     # # 评估函数
-    if is_parameter_search==False:
+    if is_parameter_search == False:
         evaluation(dataObj, predict_result)
 
-    result = result_to_list(vm_size, vm, pm_size, pm, dataObj.mp_type_name)
+    result = result_to_list(vm_size, vm, pm_size, pm, dataObj.pm_type_name)
     print(result)
     return result
 
@@ -350,9 +355,11 @@ def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_fre
 def isContainKey(dic, key):
     return key in dic
 
+
 def evaluation_parameter(dataObj, vm):
     diff, score = diff_dic(dataObj.test_vm_count, vm)
     return score
+
 
 def evaluation(dataObj, vm):
     print('train count:\n')
@@ -370,7 +377,6 @@ def evaluation(dataObj, vm):
     # diff, score = diff_dic(dataObj.test_vm_count, vm)
     diff, score = diff_dic(dataObj.test_vm_count, vm)
 
-
     print('diff count:\n')
     print(diff)
     print('\n')
@@ -380,6 +386,7 @@ def evaluation(dataObj, vm):
     print('\n')
 
     return score
+
 
 def diff_dic(test, predict):
     '''

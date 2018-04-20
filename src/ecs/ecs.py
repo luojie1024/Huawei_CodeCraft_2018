@@ -13,10 +13,10 @@ is_Dubug = True
 def main():
     if is_Dubug:
         # #设置路径
-        path='data/continuous'
+        path = 'data/continuous'
         # path='data'
-        ecsDataPath = path+'/TrainData_2015.12.txt'
-        inputFilePath = path+'/input_3hosttypes_5flavors_1week.txt'
+        ecsDataPath = path + '/TrainData_2015.12.txt'
+        inputFilePath = path + '/input_3hosttypes_5flavors_1week.txt'
         resultFilePath = 'result/output0.txt'
     else:
         print 'main function begin.'
