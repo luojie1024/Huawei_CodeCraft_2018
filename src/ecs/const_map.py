@@ -120,7 +120,7 @@ PREDICT_MODEL10_WEIGHTS = {
     'flavor6': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
 
     'flavor7': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor8': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor8': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
     'flavor9': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
 
     'flavor10': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},

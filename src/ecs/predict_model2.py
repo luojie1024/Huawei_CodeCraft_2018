@@ -62,9 +62,9 @@ def predict_model1(his_data, dataObj, vm_type):
                 break
         if cot_week != 0:  # 直接平均  --> 改进成指数平均
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        # noise = random.gauss(0, sigma)
-        # noise = math.fabs(noise)
-        # day_avage = int(math.ceil(day_avage + noise))
+        noise = random.gauss(0, sigma)
+        noise = math.fabs(noise)
+        day_avage = int(math.ceil(day_avage + noise))
         # 系数放大,修正高斯效果
         day_avage = day_avage * enlarge
         day_avage = int(math.ceil(day_avage))
