@@ -38,6 +38,7 @@ def predict_deeplearning(dataObj):
     # 返回结果
     return result
 
+
 def predict_all(dataObj):
     result = {}
     vm_types = dataObj.vm_types
@@ -84,16 +85,16 @@ def predict_all(dataObj):
     # #训练数据多少天
     # print((end_time-start_time).days)
 
-    #均值处理
-    # if data_size <= 7:
-    #     predict_func = predict_model2.model1_used_func  # 35.993
-    #     # 5x5滤波
-    #     vmtype_avage_v = 6
-    # # Holt-Winters
-    # elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-    #     predict_func = predict_model2.model1_used_func  # 47.901
-    #     # 3x3滤波
-    #     vmtype_avage_v = 6
+    # 均值处理
+    if data_size <= 7:
+        predict_func = predict_model2.model1_used_func  # 35.993
+        # 5x5滤波
+        vmtype_avage_v = 6
+    # 均值处理
+    elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+        predict_func = predict_model2.model1_used_func  # 47.901
+        # 5x5滤波
+        vmtype_avage_v = 6
     # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
     #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
     # elif  data_size <= 28:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
@@ -129,15 +130,14 @@ def predict_all(dataObj):
     #     predict_func = predict_model.model4_used_func  # model4_used_func 77.156
     #################################################MAX-SCORE##################################################
 
-
-    if gap_time==1:
-        predict_func = predict_model2.model1_used_func
+    # if gap_time==1:
+    #     predict_func = predict_model2.model1_used_func
 
     # predict_func = predict_model2.model3_used_func
     # 3x3填充方案
     # vmtype_avage_v = 6
 
-    vmtype_avage_v = 6
+    # vmtype_avage_v = 6
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
@@ -150,7 +150,7 @@ def predict_all(dataObj):
     return result
 
 
-def predict_predict_parameter(dataObj,alpha,beta,gamma):
+def predict_predict_parameter(dataObj, alpha, beta, gamma):
     result = {}
     vm_types = dataObj.vm_types
 
@@ -184,7 +184,7 @@ def predict_predict_parameter(dataObj,alpha,beta,gamma):
     # 需要预测的天数
     data_size = dataObj.date_range_size
 
-    if gap_time>1:
+    if gap_time > 1:
         predict_func = predict_model2.model3_used_func
 
     # 3x3填充方案
@@ -197,8 +197,8 @@ def predict_predict_parameter(dataObj,alpha,beta,gamma):
 
     for vmtype in vm_types:
         # result[vmtype] = predict(vmtype, dataObj, predict_func)
-        result[vmtype]= predict_model2.predict_model4(dataObj.get_data_list(vmtype, -1, vmtype_avage_v),
-                                                      dataObj, vmtype, alpha, beta, gamma)
+        result[vmtype] = predict_model2.predict_model4(dataObj.get_data_list(vmtype, -1, vmtype_avage_v),
+                                                       dataObj, vmtype, alpha, beta, gamma)
     # for vmtype in vm_types:
     #     result[vmtype] = predict_BPNN(vmtype, dataObj, predict_func)
 

@@ -416,4 +416,12 @@ L1
 predict_model2.model1_used_func  L1 sigma=2  = 35.993
 predict_model2.model2_used_func  L1 sigma=1  = 30.286
 predict_model2.model3_used_func  L1 sigma=6  = 26.736
+
+记录18：
+day_avage = int(math.floor(day_avage + noise))   math.ceil->math.floor
+L1
+predict_model2.model1_used_func  L1 sigma=2  = 35.993  ->>	36.087
+
+L2
+predict_model2.model1_used_func  L2 sigma=2  = 47.901  -->  48.043
 ///////////////////////////////////////////////////////////////////////////////////////////////
