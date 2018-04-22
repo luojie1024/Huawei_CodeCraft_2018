@@ -12,7 +12,7 @@ from BPNN import BPNeuralNetwork
 from const_map import *
 
 # 加入随机数
-is_noise = False
+is_noise = True
 
 
 
@@ -70,8 +70,6 @@ def predict_model1(his_data, dataObj, vm_type):
             noise = random.gauss(0, sigma)
             noise = math.fabs(noise)
             day_avage = int(math.floor(day_avage + noise))
-
-        day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         temp_result += day_avage
     result.append(temp_result)
