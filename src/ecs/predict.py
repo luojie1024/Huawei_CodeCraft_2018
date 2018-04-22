@@ -117,8 +117,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_smooth##################################
 
     # # 评估函数
-    if is_parameter_search == False:
-        evaluation(dataObj, predict_result)
+    # if is_parameter_search == False:
+    #     evaluation(dataObj, predict_result)
 
     result = result_to_list(vm_size, vm, pm_size, pm, pm_name, dataObj.pm_type_name)
     print(result)
