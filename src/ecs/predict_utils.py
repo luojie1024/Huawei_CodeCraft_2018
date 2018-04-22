@@ -86,13 +86,12 @@ def predict_all(dataObj):
 
     #均值处理
     # if data_size <= 7:
-    #     predict_func = predict_model2.model1_used_func  # model1_used_func 75.091
+    #     predict_func = predict_model2.model1_used_func  # 35.993
     #     # 5x5滤波
     #     vmtype_avage_v = 6
-    #
     # # Holt-Winters
     # elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-    #     predict_func = predict_model2.model2_used_func  # model2_used_func	77.092
+    #     predict_func = predict_model2.model1_used_func  # 47.901
     #     # 3x3滤波
     #     vmtype_avage_v = 6
     # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
@@ -132,13 +131,13 @@ def predict_all(dataObj):
 
 
     if gap_time==1:
-        predict_func = predict_model2.model3_used_func
+        predict_func = predict_model2.model1_used_func
 
     # predict_func = predict_model2.model3_used_func
     # 3x3填充方案
     # vmtype_avage_v = 6
 
-    vmtype_avage_v = 7
+    vmtype_avage_v = 6
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
