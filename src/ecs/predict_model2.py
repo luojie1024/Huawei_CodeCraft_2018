@@ -62,12 +62,14 @@ def predict_model1(his_data, dataObj, vm_type):
                 break
         if cot_week != 0:  # 直接平均  --> 改进成指数平均
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
-        # if is_noise:
-        #     noise = random.gauss(0, sigma)
-        #     noise = math.fabs(noise)
-        #     day_avage = int(math.ceil(day_avage + noise))
         # 系数放大,修正高斯效果
         day_avage = day_avage * enlarge
+        # 加入噪声
+        if is_noise:
+            noise = random.gauss(0, sigma)
+            noise = math.fabs(noise)
+            day_avage = int(math.ceil(day_avage + noise))
+
         day_avage = int(math.ceil(day_avage))
         chis_data.append(day_avage)
         temp_result += day_avage
@@ -175,6 +177,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     result.append(temp_reuslt)
     return result
 
+
 def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'alpha': 5, 'beta': 55, 'gamma': 1}
     '''
     预测方案 2 Holt-Winters
@@ -194,7 +197,7 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'al
     k = dataObj.gap_time
 
     temp_reuslt = 0.0
-    result =[]
+    result = []
     # 2.65
 
     # 衰减值 220
@@ -249,7 +252,7 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'al
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
     for h in range(k, date_range_size + k):
         # 追加到历史表中
-        temp_Y = (l_t[t] + h * b_t[t] )*s_t[t - s + 1 + ((h - 1) % s)]
+        temp_Y = (l_t[t] + h * b_t[t]) * s_t[t - s + 1 + ((h - 1) % s)]
 
         # temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
         # # 如果小于0 置为零
@@ -263,18 +266,19 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'al
 
     enlarge = weight['enlarge']
 
-    enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
+    enlarge = enlarge * dataObj.get_count_weight(vm_type, temp_reuslt, dataObj.date_range_size)
 
-    temp_reuslt = temp_reuslt * (2+enlarge)
+    temp_reuslt = temp_reuslt * (2 + enlarge)
 
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
     if temp_reuslt < 0:
-        temp_reuslt=0
+        temp_reuslt = 0
     result.append(temp_reuslt)
     return result
 
-def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线性趋势法
+
+def predict_model4(his_data, dataObj, vm_type, alpha, beta, gamma):  # 霍尔特线性趋势法
     '''
     预测方案 2 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -293,7 +297,7 @@ def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线
     k = dataObj.gap_time
 
     temp_reuslt = 0.0
-    result =[]
+    result = []
     # 2.65
 
     # 衰减值 220
@@ -348,7 +352,7 @@ def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线
     # 预测要预测的时间k为相隔多少天,相连预测数据相隔k=1
     for h in range(k, date_range_size + k):
         # 追加到历史表中
-        temp_Y = (l_t[t] + h * b_t[t] )*s_t[t - s + 1 + ((h - 1) % s)]
+        temp_Y = (l_t[t] + h * b_t[t]) * s_t[t - s + 1 + ((h - 1) % s)]
 
         # temp_Y = l_t[t] + h * b_t[t] + s_t[t - s + h]
         # # 如果小于0 置为零
@@ -372,6 +376,7 @@ def predict_model4(his_data, dataObj, vm_type,alpha,beta,gamma):  # 霍尔特线
         temp_reuslt = 0
     result.append(temp_reuslt)
     return result
+
 
 model1_used_func = predict_model1
 model2_used_func = predict_model2
