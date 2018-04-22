@@ -463,9 +463,18 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_name, pm_type_name):
         else:
             pm_datas[name] = []
             pm_datas[name].append(pm[i])
+    end_str_sum = 2
+    for name in pm_type_name:
+        # 如果当前类型物理机请求量为0
+        if not isContainKey(pm_datas, name):
+            result.append(name + ' ' + str(0) + end_str)
+            if end_str_sum > 0:
+                result.append(end_str)
+                end_str_sum -= 1
+            continue
+        else:
+            result.append(name + ' ' + str(len(pm_datas[name])) + end_str)
 
-    for name in pm_datas.keys():
-        result.append(name + ' ' + str(len(pm_datas[name])) + end_str)
         # 每一种物理机
         pm_data = pm_datas[name]
         for pm_id in range(len(pm_datas[name])):
@@ -481,7 +490,10 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_name, pm_type_name):
                 tmp += ' ' + index + ' ' + str(item)
             tmp += end_str
             result.append(tmp)
-        result.append(end_str)
+
+        if end_str_sum > 0:
+            result.append(end_str)
+            end_str_sum -= 1
 
     # result.append(end_str)
     # result.append(pm_type_name[1] + ' ' + str(0))
