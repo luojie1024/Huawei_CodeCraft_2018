@@ -131,7 +131,7 @@ def predict_all(dataObj):
     #################################################MAX-SCORE##################################################
 
 
-    if gap_time>1:
+    if gap_time==1:
         predict_func = predict_model2.model1_used_func
 
     # predict_func = predict_model2.model3_used_func

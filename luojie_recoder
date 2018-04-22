@@ -407,7 +407,10 @@ predict_model2.model2_used_func  L2 sigma=1  = 38分
 predict_model2.model1_used_func  L2 sigma=2  = 45分
 
 记录17：更新新的拾取方案
+L2
 predict_model2.model3_used_func  L2 sigma=6  = 45.912分
 predict_model2.model2_used_func  L2 sigma=1  = 38分   -->41.355
-predict_model2.model1_used_func  L2 sigma=2  = 45分
+predict_model2.model1_used_func  L2 sigma=2  = 45分   -->47.901
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
