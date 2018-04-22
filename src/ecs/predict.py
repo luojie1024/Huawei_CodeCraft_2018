@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 
 import DataObj
-import packing_utils
 import predict_utils
 import copy
 import math
 from const_map import VM_TYPE_DIRT, VM_PARAM, VM_CPU_QU, VM_MEM_QU
 import packing_utils_v2
 
-global res_use_pro
+global res_use
 global vm_size
 global vm
 global pm_size
 global pm
 global try_result
-global other_res_use_pro
 global threshold
 global vm_map
+global pm_name
+
+pm_name = []
 
 vm_map = {}
 threshold = 90
-other_res_use_pro = 0
-res_use_pro = 0
+res_use = 0
 vm_size = 0
 vm = []
 pm_size = 0
@@ -33,7 +33,7 @@ is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
 use_smooth = False
-use_search_maximum = False
+use_search_maximum = True
 use_pm_average = False
 
 
@@ -81,7 +81,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
                         parameter['gamma'] = gamma
                         max_score = score
             print('%d:alpha=%d,beta=%d,gamma=%d,max_score=%f\n' % (
-            alpha, parameter['alpha'], parameter['beta'], parameter['gamma'], max_score))
+                alpha, parameter['alpha'], parameter['beta'], parameter['gamma'], max_score))
         print('max_paremeter:')
 
         print(parameter)
@@ -92,27 +92,27 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                               predict_result)
+    vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
+                                                                                    predict_result)
+    print('origin_use_rate=%.2f%%\n' % (res_use))
     #############################################use_pm_average##################################
     if use_pm_average:
-        predict_result = res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj,
+        predict_result = res_average(vm_size, vm, pm_size, pm, res_use, pm_free, vm_map, dataObj,
                                      predict_result)
     #############################################use_pm_average##################################
 
     #############################################use_search_maximum##################################
     if use_search_maximum:
         search_maximum_way1(dataObj, predict_result)
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free = packing_utils.pack_api(dataObj,
-                                                                                                   try_result)
-    print('MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
+        vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
+                                                                                        try_result)
+    print('use_search_use_rate=%.2f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = result_smooth(vm_size, vm, pm_size, pm, dataObj,
-                                                                                 pm_free)
-        print('result_smooth--> MAX_USE_PRO=%.2f%%,MAX_OTHER_PRO=%.2f%%' % (res_use_pro, other_res_use_pro))
+        vm_size, vm, pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
+        print('use_smooth_use_rate=%.2f%%\n' % (res_use))
 
     #############################################use_smooth##################################
 
@@ -120,31 +120,32 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     if is_parameter_search == False:
         evaluation(dataObj, predict_result)
 
-    result = result_to_list(vm_size, vm, pm_size, pm, dataObj.pm_type_name)
+    result = result_to_list(vm_size, vm, pm_size, pm, pm_name, dataObj.pm_type_name)
     print(result)
     return result
 
 
 def search_maximum_way1(dataObj, predict_result):
-    global res_use_pro
+    global res_use
     global vm_size
     global vm
     global pm_size
+    global pm_name
     global pm
     global try_result
-    global other_res_use_pro
     global vm_map
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, _ = packing_utils.pack_api(dataObj, predict_result)
+    vm_size, vm, pm_size, pm, pm_name, res_use, _ = packing_utils_v2.pack_api(dataObj, predict_result)
     pading_que = []
 
     # 搜索优先级
-    if dataObj.opt_target == 'CPU':
-        pading_que = [1.0, 2.0, 4.0]
-    else:
-        pading_que = [4.0, 2.0, 1.0]
+    # if dataObj.opt_target == 'CPU':
+    #     pading_que = [1.0, 2.0, 4.0]
+    # else:
+    #     pading_que = [4.0, 2.0, 1.0]
+
+    pading_que = [1.0, 2.0, 4.0]
 
     # 根据数量初始化队列
-    # vm_que=init_que(caseInfo)
 
     try_result = copy.deepcopy(predict_result)
 
@@ -175,7 +176,7 @@ def search_maximum_way2(dataObj, predict_result):
     global pm
     global try_result
     global other_res_use_pro
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils.pack_api(dataObj, predict_result)
+    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils_v2.pack_api(dataObj, predict_result)
     pading_que = []
 
     # 搜索优先级
@@ -225,24 +226,23 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     :param vm_type: 虚拟机类型
     :return:
     '''
-    global other_res_use_pro
-    global res_use_pro
+    global res_use
     global vm_size
     global vm
     global pm_size
     global pm
     global try_result
     global vm_map
+    global pm_name
     try_predict = copy.deepcopy(predict_result)
     try_vm_map = copy.deepcopy(vm_map)
     try_predict[vm_type][0] = try_predict[vm_type][0] + try_value
     if try_predict[vm_type][0] < 0:  # 小于0没有意义
         return
-    try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro, _ = packing_utils.pack_api(
+    try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(
         dataObj, try_predict)
-    if (try_res_use_pro + try_other_res_use_pro) > (
-            res_use_pro + other_res_use_pro) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
-        vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = try_vm_size, try_vm, try_pm_size, try_pm, try_res_use_pro, try_other_res_use_pro
+    if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+        vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
         try_result = try_predict
         try_vm_map[vm_type] += try_value
         vm_map = try_vm_map
@@ -268,14 +268,16 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     free_cpu = 0.0
     free_mem = 0.0
     # 初始化填充队列
-    if dataObj.opt_target == 'CPU':
-        VM_QUE = VM_CPU_QU
-        res_use_pro = dataObj.CPU * pm
-        other_res_use_pro = dataObj.MEM * pm
-    else:
-        VM_QUE = VM_MEM_QU
-        res_use_pro = dataObj.MEM * pm
-        other_res_use_pro = dataObj.CPU * pm
+    # if dataObj.opt_target == 'CPU':
+    #     VM_QUE = VM_CPU_QU
+    #     res_use_pro = dataObj.CPU * pm
+    #     other_res_use_pro = dataObj.MEM * pm
+    # else:
+    #     VM_QUE = VM_MEM_QU
+    #     res_use_pro = dataObj.MEM * pm
+    #     other_res_use_pro = dataObj.CPU * pm
+
+    VM_QUE = VM_CPU_QU
 
     epoch = 2
     # 遍历物理机
@@ -331,7 +333,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
 
 
-def res_average(vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free, vm_map, dataObj, predict_result):
+def res_average(vm_size, vm, pm_size, pm, res_use, pm_free, vm_map, dataObj, predict_result):
     avg_predict_result = copy.deepcopy(predict_result)
 
     vm_types = dataObj.vm_types
@@ -435,7 +437,7 @@ def computer_MC(CM_free):
 #
 #     return vm_que
 
-def result_to_list(vm_size, vm, pm_size, pm, pm_type_name):
+def result_to_list(vm_size, vm, pm_size, pm, pm_name, pm_type_name):
     '''
     由预测和分配生成结果
     vm：{vm_type:cot...}
@@ -448,23 +450,41 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_type_name):
         item = vm[index]
         tmp = index + ' ' + str(item) + end_str
         result.append(tmp)
+    result.append(end_str)
 
-    result.append(end_str)
-    # TODO
-    result.append(pm_type_name[0] + ' ' + str(pm_size) + end_str)
-    for pm_id in range(len(pm)):
-        tmp = pm_type_name[0] + '-' + str(pm_id + 1)
-        pmone = pm[pm_id]
-        if len(pmone.keys()) == 0:
-            continue
-        for index in pmone.keys():
-            item = pmone[index]
-            tmp += ' ' + index + ' ' + str(item)
-        tmp += end_str
-        result.append(tmp)
+    pm_datas = {}
+    # 物理机信息处理
+    for i in range(len(pm)):
+        # 虚拟机类型key
+        name = pm_name[i]
+        if isContainKey(pm_datas, name):
+            # 添加数据
+            pm_datas[name].append(pm[i])
+        else:
+            pm_datas[name] = []
+            pm_datas[name].append(pm[i])
 
-    result.append(end_str)
-    result.append(pm_type_name[1] + ' ' + str(0))
-    result.append(end_str)
-    result.append(pm_type_name[2] + ' ' + str(0))
+    for name in pm_type_name:
+        result.append(name + ' ' + str(len(pm_datas[name])) + end_str)
+        # 每一种物理机
+        pm_data = pm_datas[name]
+        for pm_id in range(len(pm_datas[name])):
+            tmp = name + '-' + str(pm_id + 1)
+            # 每一行物理机
+            pm_item = pm_data[pm_id]
+            # 一个都没有
+            if len(pm_item.keys()) == 0:
+                continue
+
+            for index in pm_item.keys():
+                item = pm_item[index]
+                tmp += ' ' + index + ' ' + str(item)
+            tmp += end_str
+            result.append(tmp)
+        result.append(end_str)
+
+    # result.append(end_str)
+    # result.append(pm_type_name[1] + ' ' + str(0))
+    # result.append(end_str)
+    # result.append(pm_type_name[2] + ' ' + str(0))
     return result

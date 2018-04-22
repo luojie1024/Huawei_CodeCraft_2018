@@ -15,17 +15,15 @@ def pack_api(dataObj, predict_result):
     :param dataObj: 数据对象
     :param predict_result: 预测结果
     '''
-    group = ServerObj(dataObj)
     picker = VmWorker(predict_result)
+    group = ServerObj(dataObj, picker.origin_cpu_mem_sum())
     pack_function(picker, group)
     vm_size, vm = picker.to_origin_desc()
-    pm_size, pm = group.to_description()
+    pm_size, pm, pm_name = group.to_description()
+    res_use = group.get_res_used_pro()
     pm_free = group.get_pm_free()
-    res_use_pro = group.get_res_used_pro(dataObj.opt_target)
-    other_res_use_pro = group.get_other_res_used_pro(dataObj.opt_target)
-
     print(group.to_usage_status())
-    return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro, pm_free
+    return vm_size, vm, pm_size, pm, pm_name, res_use, pm_free
 
 
 class ServerObj():
@@ -49,11 +47,33 @@ class ServerObj():
 
     # 物理机存储状态，对应存储值
     PM = []
+    PM_name = []
 
     # 剩余资源表
     PM_Free = []
 
-    def __init__(self, dataObj):
+    # 当前指向的物理机id 索引从0开始
+    PM_ID = 0
+
+    # 目标比例
+    direction = []
+
+    # 剩余的cpu数量
+    lave_cpu_sum = 0
+    # 剩余的mem数量
+    lave_mem_sum = 0
+
+    # vm总共需要cpu数量
+    need_cpu_sum = 0
+    # vm总共需要mem数量
+    need_mem_sum = 0
+
+    # 物理机cpu总数
+    pm_cpu_sum = 0
+    # 物理机内存总算
+    pm_mem_sum = 0
+
+    def __init__(self, dataObj, vm_res):
         '''
         初始化
         '''
@@ -62,10 +82,19 @@ class ServerObj():
         self.VM = {}
         self.PM_status = []
         self.pm_size = 0
+        self.PM_ID = -1
         self.empty = 0
         self.PM_Free = []
         self.server_info = {}
         self.server_info = dataObj.pm_type_list
+        self.direction = [0.25, 0.5, 1]
+        self.lave_mem_sum = vm_res[1]
+        self.lave_cpu_sum = vm_res[0]
+        self.need_mem_sum = vm_res[1]
+        self.need_cpu_sum = vm_res[0]
+        self.pm_cpu_sum = 0
+        self.pm_mem_sum = 0
+        self.PM_name = []
 
     def new_physic_machine(self, pm_type):
         '''
@@ -74,18 +103,84 @@ class ServerObj():
         :return:
         '''
         C_M = const_map.PM_TYPE[pm_type]['CPU'] / float(const_map.PM_TYPE[pm_type]['MEM'])
+        re_cpu = const_map.PM_TYPE[pm_type]['CPU']
+        re_mem = const_map.PM_TYPE[pm_type]['MEM']
         temp = {
             'pm_type': pm_type,
             'C_M': C_M,
-            're_cpu': const_map.PM_TYPE[pm_type]['CPU'],
-            're_mem': const_map.PM_TYPE[pm_type]['MEM'],
+            're_cpu': re_cpu,
+            're_mem': re_mem,
             'vm_size': 0
         }
         self.PM_status.append(temp)
         self.PM.append({})
         self.pm_size += 1
+        self.PM_ID += 1
+
+        # 保存现在总的物理资源开辟数量
+        self.pm_cpu_sum += re_cpu
+        self.pm_mem_sum += re_mem
+        # 存储物理机名字
+        self.PM_name.append(pm_type)
         print 'apply pm：%s , C/M=%.2f\n' % (pm_type, C_M)
-        return self.pm_size
+        return self.PM_ID
+
+    def get_nearest_distance(self, c_m):
+        '''
+        获取最接近c_m的优化目标
+        :param c_m:
+        :return:
+        '''
+        min_distance_target = 1
+        distance = 1
+        for i in range(len(self.direction)):
+            # 距离更接近
+            if abs(c_m - self.direction[i]) < distance:
+                distance = abs(c_m - self.direction[i])
+                min_distance_target = self.direction[i]
+        return min_distance_target
+
+    def get_pm_c_m(self, pm_id):
+        '''
+        返回指定物理机的c/m
+        :param pm_id:
+        :return:
+        '''
+        c_m = self.PM_status[pm_id]['C_M']
+        return c_m
+
+    def get_lave_cpu_mem_sum(self):
+        '''
+        获取当前cpu mem的数量
+        :return:
+        '''
+        return self.lave_cpu_sum, self.lave_mem_sum
+
+    def get_sum_C_M(self):
+        return self.lave_cpu_sum * 1.0 / self.lave_mem_sum
+
+    def is_free(self, pm_id):
+        '''
+        判断是否还没放满
+        :param pm: 物理机编号
+        :return: 状态
+        '''
+        re_cpu = self.PM_status[pm_id]['re_cpu']
+        re_mem = self.PM_status[pm_id]['re_mem']
+        if re_cpu > 0 and re_mem > 0:
+            return True
+        else:
+            return False
+
+    def get_pm_cpu_mem(self, pm_id):
+        '''
+        返回指定物理机的cpu 内存剩余空间
+        :param pm_id:
+        :return:
+        '''
+        re_cpu = self.PM_status[pm_id]['re_cpu']
+        re_mem = self.PM_status[pm_id]['re_mem']
+        return re_cpu, re_mem
 
     def test_put_vm(self, pm_id, vm_type):
         '''
@@ -99,13 +194,19 @@ class ServerObj():
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
         vm_cpu, vm_mem = const_map.VM_PARAM[vm_type][:2]
+        # 从物理机状态表中获取参数
         pmstatus = self.PM_status[pm_id]
         re_cpu = pmstatus['re_cpu'] - vm_cpu
         re_mem = pmstatus['re_mem'] - vm_mem
-        if re_cpu >= 0 and re_mem >= 0:
-            return (True, [re_cpu, re_mem])
+        if re_cpu == 0 or re_mem == 0:
+            c_m = 0
         else:
-            return (False, [re_cpu, re_mem])
+            c_m = re_cpu * 1.0 / re_mem
+        # 返回能否放置,并返回放置后的剩余空间大小
+        if re_cpu >= 0 and re_mem >= 0:
+            return (True, [re_cpu, re_mem, c_m])
+        else:
+            return (False, [re_cpu, re_mem, c_m])
 
     def put_vm(self, pm_id, vm_type):
         '''
@@ -116,20 +217,36 @@ class ServerObj():
         if pm_id is None or \
                 pm_id < 0 or pm_id >= self.pm_size:
             raise ValueError('error pm_id=', pm_id)
+        # 获取资源数
         vm_cpu, vm_mem = const_map.VM_PARAM[vm_type][:2]
+        # 获取参数状态
         pmstatus = self.PM_status[pm_id]
         re_cpu = pmstatus['re_cpu'] - vm_cpu
         re_mem = pmstatus['re_mem'] - vm_mem
+
+        # 剩余总数计算
+        self.lave_cpu_sum -= vm_cpu
+        self.lave_mem_sum -= vm_mem
+
+        # 资源充足,分配
         if re_cpu >= 0 and re_mem >= 0:
             self.empty += 1
             pmstatus['re_cpu'] = re_cpu
             pmstatus['re_mem'] = re_mem
+            # 计算c/m比例
+            if re_cpu == 0 or re_mem == 0:
+                c_m = 0
+            else:
+                c_m = re_cpu * 1.0 / re_mem
+            pmstatus['C_M'] = c_m
             pmstatus['vm_size'] += 1
             self.vm_size += 1
+            # 记录虚拟机种类数量
             if vm_type not in self.VM.keys():
                 self.VM[vm_type] = 0
             self.VM[vm_type] += 1
             pm = self.PM[pm_id]
+            # 记录物理机种类数量
             if vm_type not in pm.keys():
                 pm[vm_type] = 0
             pm[vm_type] += 1
@@ -138,89 +255,41 @@ class ServerObj():
 
     def to_description(self):
         if self.empty != 0:
-            return self.pm_size, self.PM
+            return self.pm_size, self.PM, self.PM_name
         else:
-            return 0, self.PM
+            return 0, self.PM, self.PM_name
 
-    def get_res_used_pro(self, opt_target='CPU'):
+    def get_res_used_pro(self):
         '''
-        :param opt_target:资源优化目标
-        :return: 返回总的资源优化利用率
+        :return: 返回资源使用率
         '''
-        # 获取最大资源数
-        res_max = self.server_info[opt_target]
-        # 已经使用的资源状态
-        usage = self.PM_status
-
-        res_used = 0
-        for i in range(self.pm_size):
-            # 单个物理机资源使用率
-            if opt_target == 'CPU':
-                res_used += res_max - usage[i]['re_cpu']
-            elif opt_target == 'MEM':
-                res_used += res_max - usage[i]['re_mem']
-
+        cpu_use = self.need_cpu_sum * 1.0 / self.pm_cpu_sum
+        mem_use = self.need_mem_sum * 1.0 / self.pm_mem_sum
+        use = cpu_use * 0.5 + mem_use * 0.5
         # 返回物理机的资源使用率
-        return res_used * 100 / (res_max * self.pm_size)
-
-    def get_other_res_used_pro(self, opt_target='MEM'):
-        '''
-        :param opt_target:另外一个资源的利用率
-        :return: 返回总的资源优化利用率
-        '''
-        if opt_target == 'CPU':
-            opt_target = 'MEM'
-        else:
-            opt_target = 'CPU'
-        # 获取最大资源数
-        res_max = self.server_info[opt_target]
-        # 已经使用的资源状态
-        usage = self.PM_status
-
-        res_used = 0
-        for i in range(self.pm_size):
-            # 单个物理机资源使用率
-            if opt_target == 'CPU':
-                res_used += res_max - usage[i]['re_cpu']
-            elif opt_target == 'MEM':
-                res_used += res_max - usage[i]['re_mem']
-
-        # 返回物理机的资源使用率
-        return res_used * 100 / (res_max * self.pm_size)
-
-    def get_last_res_used_pro(self, opt_target='CPU'):
-        '''
-        :param opt_target:资源优化目标
-        :return: 返回最后一个物理机的资源利用率
-        '''
-        # 获取最大资源数
-        res_max = self.server_info[opt_target]
-        # 已经使用的资源状态
-        usage = self.PM_status
-        # 获取资源使用率
-        if opt_target == 'CPU':
-            res_used = res_max - usage[self.pm_size - 1]['re_cpu']
-
-        elif opt_target == 'MEM':
-            res_used = res_max - usage[self.pm_size - 1]['re_mem']
-
-        # 返回最后一台物理机的资源使用率
-        return res_used * 100.0 / res_max
+        # return cpu_use, mem_use, use
+        return use
 
     def to_usage_status(self):
         '''
         生成当前集群中各个物理机的使用状态
         '''
-        cpu_max = self.server_info['CPU']
-        mem_max = self.server_info['MEM']
+        result = ''
         usage = self.PM_status
-        result = 'CPU:%d MEM:%d\n' % (cpu_max, mem_max)
+        # result = 'CPU:%d MEM:%d\n' % (cpu_max, mem_max)
         for i in range(self.pm_size):
+            pm_type = usage[i]['pm_type']
+            cpu_max = self.server_info[pm_type]['CPU']
+            mem_max = self.server_info[pm_type]['MEM']
             cpu_used = cpu_max - usage[i]['re_cpu']
             mem_used = mem_max - usage[i]['re_mem']
+            cpu_usage_rate = cpu_used * 100.0 / cpu_max
+            mem_usage_rate = mem_used * 100.0 / mem_max
+            total_usage_rate = cpu_usage_rate * 0.5 + mem_usage_rate * 0.5
             vm_cot = usage[i]['vm_size']
-            string = 'pm_id:%d cpu_used:%d(%.2f%%) ' % (i, cpu_used, cpu_used * 100.0 / cpu_max)
-            string += 'mem_used:%d(%.2f%%) vm_cot:%d\n' % (mem_used, mem_used * 100.0 / mem_max, vm_cot)
+            string = 'pm_id:%d \t cpu_used:%d(%.2f%%)\t' % (i, cpu_used, cpu_usage_rate)
+            string += 'mem_used:%d(%.2f%%)\t' % (mem_used, mem_usage_rate)
+            string += 'total_used:(%.2f%%)\tvm_cot:%d\n' % (total_usage_rate, vm_cot)
             # 保存剩余空间情况表
             self.PM_Free.append([cpu_max - cpu_used, mem_max - mem_used])
             result += string
@@ -228,6 +297,12 @@ class ServerObj():
 
     def get_pm_free(self):
         return self.PM_Free
+
+    def is_packing(self):
+        if self.lave_cpu_sum == 0 or self.lave_mem_sum == 0:
+            return False
+        else:
+            return True
 
 
 ################## end class Server ####################
@@ -269,6 +344,9 @@ class VmWorker():
         self.vm_size, self.origin_desc_table = self.set_data_info()
 
         self.origin_vm_size = self.vm_size
+        # 初始化实时的cpu mem数量
+        self.cpu_sum = self.vm_cpu_size
+        self.mem_sum = self.vm_mem_size
         pass
 
     def init_worker(self, predict_result):
@@ -356,6 +434,38 @@ class VmWorker():
         if len(result[0]) == 0:
             return None
         return result
+
+    def get_vm_order(self, cpu):
+        '''
+        :param cpu:CPU
+        :return: 返回该cpu类型下所有比例队列
+        '''
+        result = {}
+        col = int(math.log(cpu, 2))
+        start = col
+        end = -1
+        step = -1
+        temp_1 = [[], []]
+        temp_2 = [[], []]
+        temp_4 = [[], []]
+        for col in range(start, end, step):
+            if self.VM[0][col] != -1:
+                temp_1[0].append(self.index2type(0, col))
+                temp_1[1].append(self.VM[0][col])
+            if self.VM[1][col] != -1:
+                temp_2[0].append(self.index2type(1, col))
+                temp_2[1].append(self.VM[1][col])
+            if self.VM[2][col] != -1:
+                temp_4[0].append(self.index2type(2, col))
+                temp_4[1].append(self.VM[2][col])
+        # 如果都为空,则无需放置
+        if len(temp_1[0]) == 0 and len(temp_2[0]) == 0 and len(temp_4[0]) == 0:
+            return result
+        else:
+            result['1.0'] = temp_1
+            result['2.0'] = temp_2
+            result['4.0'] = temp_4
+            return result
 
     def get_vm_by_cpu(self, cpu, order=0):
         '''
