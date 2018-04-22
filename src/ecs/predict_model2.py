@@ -13,14 +13,14 @@ from const_map import *
 
 # 加入随机数
 is_noise = True
-sigma = 0.5
+
 
 
 def predict_model1(his_data, dataObj, vm_type):
     # 无noise
     # 需要预测的天数
     date_range_size = dataObj.date_range_size
-
+    sigma = 0.5
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
@@ -64,6 +64,7 @@ def predict_model1(his_data, dataObj, vm_type):
             day_avage = day_avage * 1.0 / cot_week  # 注意报错
         # 系数放大,修正高斯效果
         day_avage = day_avage * enlarge
+
         # 加入噪声
         if is_noise:
             noise = random.gauss(0, sigma)
