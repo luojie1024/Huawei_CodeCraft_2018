@@ -464,7 +464,7 @@ def result_to_list(vm_size, vm, pm_size, pm, pm_name, pm_type_name):
             pm_datas[name] = []
             pm_datas[name].append(pm[i])
 
-    for name in pm_type_name:
+    for name in pm_datas.keys():
         result.append(name + ' ' + str(len(pm_datas[name])) + end_str)
         # 每一种物理机
         pm_data = pm_datas[name]
