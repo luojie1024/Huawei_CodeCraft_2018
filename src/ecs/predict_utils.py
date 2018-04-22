@@ -138,7 +138,7 @@ def predict_all(dataObj):
     # 3x3填充方案
     # vmtype_avage_v = 6
 
-    # vmtype_avage_v = 7
+    vmtype_avage_v = 7
 
     # predict_func = predict_model.model9_used_func
     # vmtype_avage_v=3
