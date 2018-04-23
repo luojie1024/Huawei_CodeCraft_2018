@@ -85,7 +85,7 @@ VM_MEM_QU = {  # MEM,CPU少的优先,从后往前
 
 # 平均模型，权重 
 PREDICT_MODEL1_WEIGHTS = {
-    'flavor1': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
+    'flavor1': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.1},
     'flavor2': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
     'flavor3': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
 
@@ -146,7 +146,7 @@ PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
     'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
 
     'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.81},#+  1.8
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.80},#+  1.8
     'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
 
     'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
