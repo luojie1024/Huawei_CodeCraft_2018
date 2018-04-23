@@ -86,15 +86,15 @@ def predict_all(dataObj):
     # print((end_time-start_time).days)
 
     # 均值处理
-    if data_size <= 7:
-        predict_func = predict_model2.model1_used_func  # 35.993
-        # 5x5滤波
-        vmtype_avage_v = 6
-    # 均值处理
-    elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
-        predict_func = predict_model2.model1_used_func  # 47.901
-        # 5x5滤波
-        vmtype_avage_v = 6
+    # if data_size <= 7:
+    #     predict_func = predict_model2.model1_used_func  # 35.993
+    #     # 5x5滤波
+    #     vmtype_avage_v = 6
+    # # 均值处理
+    # elif data_size <= 14:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
+    #     predict_func = predict_model2.model1_used_func  # 47.901
+    #     # 5x5滤波
+    #     vmtype_avage_v = 6
     # elif  data_size <= 21:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
     #     predict_func = predict_model.model22_used_func  # model2_used_func	77.092
     # elif  data_size <= 28:  # 样例2 L2  2016-04-08  预测天数 7 虚拟机类型5 (3,5]
@@ -132,10 +132,10 @@ def predict_all(dataObj):
 
     # if gap_time==1:
     #     predict_func = predict_model2.model1_used_func
-
+    predict_func = predict_model2.model1_used_func
     # predict_func = predict_model2.model3_used_func
     # 3x3填充方案
-    # vmtype_avage_v = 6
+    vmtype_avage_v = 6
 
     # vmtype_avage_v = 6
 

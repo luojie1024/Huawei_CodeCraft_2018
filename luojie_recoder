@@ -424,4 +424,11 @@ predict_model2.model1_used_func  L1 sigma=2  = 35.993  ->>	36.087
 
 L2
 predict_model2.model1_used_func  L2 sigma=2  = 47.901  -->  48.043
+
+记录19：
+L1
+predict_model2.model1_used_func  L1 sigma=2  = 35.993  ->>	36.087
+L2
+predict_model2.model1_used_func  L2 sigma=2  = 47.901  -->  48.043
+                                                                       84.14分
 ///////////////////////////////////////////////////////////////////////////////////////////////
