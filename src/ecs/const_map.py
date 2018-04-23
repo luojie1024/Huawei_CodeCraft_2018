@@ -136,6 +136,35 @@ PREDICT_MODEL10_WEIGHTS = {
     'flavor18': {'n': 6, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
 }
 
+
+PREDICT_MODEL21_WEIGHTS = {
+    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+
+    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+
+    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+
+    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+
+    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+
+    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+}
+
+
+
 # Holt-Winters，权重
 '''[0,1]
 #衰减

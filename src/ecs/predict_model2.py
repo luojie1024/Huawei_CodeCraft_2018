@@ -26,7 +26,9 @@ def predict_model1(his_data, dataObj, vm_type):
 
     if dataObj.gap_time == 1:  # 无间隔 7天预测
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
-    else:  # 长预测
+    elif dataObj.gap_time > 1 and dataObj.gap_time <= 8:  # 间隔7天
+        weight = PREDICT_MODEL10_WEIGHTS[vm_type]
+    elif dataObj.gap_time > 8 :  # 间隔7天
         weight = PREDICT_MODEL10_WEIGHTS[vm_type]
 
     n = weight['n']
@@ -201,13 +203,13 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'al
 
     # 衰减值 220
     # alpha = weight['alpha']
-    alpha = 0.09
+    alpha = 0.05
     # 趋势
     # beta = weight['beta']
-    beta = 0.39
+    beta = 0.55
     # 季节 0.215
     # gamma = weight['gamma']
-    gamma = 0.03
+    gamma = 0.01
     # 季度周期长度
     s = weight['s']
     s = 7
