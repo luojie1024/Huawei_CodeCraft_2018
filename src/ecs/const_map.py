@@ -94,7 +94,7 @@ PREDICT_MODEL1_WEIGHTS = {
     'flavor6': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
 
     'flavor7': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
-    'flavor8': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.5},
+    'flavor8': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
     'flavor9': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
 
     'flavor10': {'n': 3, 'back_week': 1, 'beta': 2.0, 'enlarge': 1},
