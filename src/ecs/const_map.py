@@ -146,7 +146,7 @@ PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
     'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
 
     'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.70},#+
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.80},#+
     'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
 
     'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
