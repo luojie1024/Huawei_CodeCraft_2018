@@ -138,29 +138,29 @@ PREDICT_MODEL10_WEIGHTS = {
 
 
 PREDICT_MODEL21_WEIGHTS = {
-    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 
-    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 
-    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 
-    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 
-    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 
-    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
-    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},
+    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
+    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.53},
 }
 
 
