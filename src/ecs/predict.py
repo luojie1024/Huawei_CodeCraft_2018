@@ -39,6 +39,8 @@ vm = []
 pm_size = 0
 pm = []
 
+local_optimal_result = {}
+global_optimal_result = {}
 try_result = {}
 #
 is_parameter_search = False
@@ -186,7 +188,7 @@ def search_maximum_way1(dataObj, predict_result):
     #     pading_que = [4.0, 2.0, 1.0]
 
     # 根据数量初始化队列
-
+    local_optimal_result = copy.deepcopy(predict_result)
     global_optimal_result = copy.deepcopy(predict_result)
     # 遍历所有放置队列 九个方向寻找最优解 TODO 可能超时 容易陷入局部最优
     pading_que = [1.0, 1.0, 1.0]
@@ -264,12 +266,11 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
                                                                                                           try_predict,
                                                                                                           target_c_m[i])
         if (try_res_use) > (local_res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
-            vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
+            vm_size, vm, pm_size, pm, pm_name, local_res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
             local_optimal_result = try_predict
             try_vm_map[vm_type] += try_value
             vm_map = try_vm_map
             c_m = target_c_m[i]
-            local_res_use = try_res_use
             # 继续深度搜索
             result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
         else:
