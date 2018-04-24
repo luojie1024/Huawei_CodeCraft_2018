@@ -178,7 +178,7 @@ def search_maximum_way1(dataObj, predict_result):
         for vm_type in range(end_vm_pos, -1, -1):
             if try_result.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
                 que]:  # 键值对存在,C/M比相等
-                if try_result[VM_TYPE_DIRT[vm_type]] > 0:
+                if try_result[VM_TYPE_DIRT[vm_type]][0] > 0:
                     result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
                     result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
                 else:
@@ -212,7 +212,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     #     dataObj, try_predict)
 
     # 遍历各种不同优化比例
-    target_c_m = [0.25, 0.5, 1]
+    target_c_m = [0.25, 0.5, 1,None]
     for i in range(len(target_c_m)):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           predict_result,
