@@ -17,6 +17,9 @@ global threshold
 global vm_map
 global pm_name
 global c_m
+global origin_pm_size
+
+origin_pm_size=0
 
 c_m = None
 pm_name = []
@@ -94,6 +97,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     global vm_map
     global res_use
     global pm_size
+    global origin_pm_size
     origin_use_rate = 0.0
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
@@ -101,6 +105,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                     predict_result, c_m)
     origin_use_rate = res_use
+    origin_pm_size=pm_size
     #############################################use_pm_average##################################
     # if use_search_u_m_maximum:
     #     search_u_m_maximum(dataObj, predict_result)
@@ -163,36 +168,57 @@ def search_maximum_way1(dataObj, predict_result):
     #     pading_que = [1.0, 2.0, 4.0]
     # else:
     #     pading_que = [4.0, 2.0, 1.0]
-    # pading_que = [4.0, 2.0, 1.0]
-    pading_que = [1.0, 1.0, 1.0]
-    for i in range(len(Weight_que)):
-        pading_que[0] = Weight_que[i]
-        for j in range(len(Weight_que)):
-            pading_que[1] = Weight_que[j]
-            for k in range(len(Weight_que)):
-                pading_que[2] = Weight_que[k]
+    pading_que = [4.0, 2.0, 1.0]
+    # 根据数量初始化队列
+    pre_copy = copy.deepcopy(predict_result)
 
-                # 根据数量初始化队列
-                pre_copy = copy.deepcopy(predict_result)
-
-                end_vm_pos = 0
-                # 找到第一个非0位[1,15]
-                for vm_type_index in range(len(VM_TYPE_DIRT) - 1, -1, -1):
-                    if pre_copy.has_key(VM_TYPE_DIRT[vm_type_index]) and pre_copy[
-                        VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
-                        end_vm_pos = vm_type_index
-                        break
-                for que in range(3):
-                    # 在有数量的区间内填充[1,8]
-                    for vm_type in range(end_vm_pos, -1, -1):
-                        if pre_copy.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
-                            que]:  # 键值对存在,C/M比相等
-                            if pre_copy[VM_TYPE_DIRT[vm_type]][0] > 0:
-                                result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
-                                result_modify1(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
-                            else:
-                                # 找到非0的,最大,虚拟机
-                                result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+    end_vm_pos = 0
+    # 找到第一个非0位[1,15]
+    for vm_type_index in range(len(VM_TYPE_DIRT) - 1, -1, -1):
+        if pre_copy.has_key(VM_TYPE_DIRT[vm_type_index]) and pre_copy[
+            VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
+            end_vm_pos = vm_type_index
+            break
+    for que in range(3):
+        # 在有数量的区间内填充[1,8]
+        for vm_type in range(end_vm_pos, -1, -1):
+            if pre_copy.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
+                que]:  # 键值对存在,C/M比相等
+                if pre_copy[VM_TYPE_DIRT[vm_type]][0] > 0:
+                    result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
+                else:
+                    # 找到非0的,最大,虚拟机
+                    result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+    # pading_que = [1.0, 1.0, 1.0]
+    # for i in range(len(Weight_que)):
+    #     pading_que[0] = Weight_que[i]
+    #     for j in range(len(Weight_que)):
+    #         pading_que[1] = Weight_que[j]
+    #         for k in range(len(Weight_que)):
+    #             pading_que[2] = Weight_que[k]
+    #
+    #             # 根据数量初始化队列
+    #             pre_copy = copy.deepcopy(predict_result)
+    #
+    #             end_vm_pos = 0
+    #             # 找到第一个非0位[1,15]
+    #             for vm_type_index in range(len(VM_TYPE_DIRT) - 1, -1, -1):
+    #                 if pre_copy.has_key(VM_TYPE_DIRT[vm_type_index]) and pre_copy[
+    #                     VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
+    #                     end_vm_pos = vm_type_index
+    #                     break
+    #             for que in range(3):
+    #                 # 在有数量的区间内填充[1,8]
+    #                 for vm_type in range(end_vm_pos, -1, -1):
+    #                     if pre_copy.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
+    #                         que]:  # 键值对存在,C/M比相等
+    #                         if pre_copy[VM_TYPE_DIRT[vm_type]][0] > 0:
+    #                             result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+    #                             result_modify1(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
+    #                         else:
+    #                             # 找到非0的,最大,虚拟机
+    #                             result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
 
 
 def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
@@ -226,7 +252,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           try_predict,
                                                                                                           target_c_m[i])
-        if (try_res_use) > (res_use) :  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+        if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
             try_result = try_predict
             try_vm_map[vm_type] += try_value
