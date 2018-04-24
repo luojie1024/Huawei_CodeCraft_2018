@@ -327,9 +327,9 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     VM_QUE = VM_CPU_QU
     add_cpu = 0
     add_mem = 0
-    epoch = 2
+    epoch = 1
     # 遍历物理机
-    for i in range(pm_size):
+    for i in range(pm_size-2,pm_size):
         M_C = 0.0
         # 进行多轮赋值,防止漏空
         for e in range(epoch):  # CPU 内存均有空间
