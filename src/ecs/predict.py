@@ -72,6 +72,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     # 使用RNN进行预测
     # predict_result = train_RNN(dataObj)
 
+    predict_result = predict_utils.predict_all(dataObj)
+
     # 参数搜索
     if is_parameter_search == False:
 
@@ -112,12 +114,14 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     global global_c_m
     global local_res_use
     origin_use_rate = 0.0
+
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
-    vm_size, vm, local_pm_size, pm, pm_name, local_res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                                predict_result,
-                                                                                                local_c_m)
+    vm_size, vm, pm_size, pm, pm_name, local_res_use, pm_free = packing_utils_v2.pack_api(dataObj,
+                                                                                          predict_result,
+                                                                                          local_c_m)
+    local_pm_size = pm_size
     origin_use_rate = local_res_use
     origin_pm_size = local_pm_size
     #############################################use_pm_average##################################
@@ -130,16 +134,15 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     #############################################use_search_maximum##################################
     if use_search_maximum:
         search_maximum_way1(dataObj, predict_result)
-        vm_size, vm, local_pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                              global_optimal_result,
-                                                                                              global_c_m)
+        vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
+                                                                                        global_optimal_result,
+                                                                                        global_c_m)
         print('use_search_use_rate=%.5f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
-        vm_size, vm, local_pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, local_pm_size, pm, dataObj,
-                                                                         pm_free)
+        vm_size, vm, pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
         print('use_smooth_use_rate=%.5f%%\n' % (res_use))
 
     #############################################use_smooth##################################
@@ -149,7 +152,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     # if is_parameter_search == False:
     #     evaluation(dataObj, predict_result)
 
-    result = result_to_list(vm_size, vm, local_pm_size, pm, pm_name, dataObj.pm_type_name)
+    result = result_to_list(vm_size, vm, pm_size, pm, pm_name, dataObj.pm_type_name)
     print(result)
     return result
 

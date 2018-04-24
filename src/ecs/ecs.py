@@ -16,7 +16,7 @@ def main():
         # path = 'data/continuous'
         path='data'
         ecsDataPath = path + '/TrainData_2015.12.txt'
-        inputFilePath = path + '/input_3hosttypes_5flavors_1week.txt'
+        inputFilePath = path + '/input_3hosttypes_5flavors_1week2.txt'
         resultFilePath = 'result/output0.txt'
     else:
         print 'main function begin.'
