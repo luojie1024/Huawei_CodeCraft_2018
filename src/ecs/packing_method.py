@@ -176,8 +176,8 @@ def pack_model2(vmWorker, serverObj):
             # 根据物理机的c/m比例来选择放置
             c_m = serverObj.get_pm_c_m(pm_id)
             # 获取最接近的优化目标
-            target_c_m = serverObj.get_nearest_distance(c_m)
-            # target_c_m=0.5
+            # target_c_m = serverObj.get_nearest_distance(c_m)
+            target_c_m=1.0
             # 为了靠近目标比例：选择 内存多,cpu少的vm先放,从而使c/m比接近目标c/m
             # if c_m < target_c_m:
             # 距离优化目标
