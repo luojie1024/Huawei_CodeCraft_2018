@@ -48,7 +48,7 @@ try_result = {}
 is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = False
+use_smooth = True
 use_search_maximum = True
 use_search_u_m_maximum = False
 
@@ -142,8 +142,8 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     #############################################use_smooth##################################
     if use_smooth:
-        vm_size, vm, pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
-        print('use_smooth_use_rate=%.5f%%\n' % (res_use))
+        vm_size, vm, pm_size, pm, add_cpu, add_mem = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
+        print('use_smooth_use_rate=%.5f%% + cpu=+%d mem=+%d  \n' % (res_use, add_cpu, add_mem))
 
     #############################################use_smooth##################################
 
@@ -325,7 +325,8 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     #     other_res_use_pro = dataObj.CPU * pm
 
     VM_QUE = VM_CPU_QU
-
+    add_cpu = 0
+    add_mem = 0
     epoch = 2
     # 遍历物理机
     for i in range(pm_size):
@@ -360,24 +361,12 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                                 # 剪切空闲空间数
                                 pm_free[i][0] = pm_free[i][0] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
                                 pm_free[i][1] = pm_free[i][1] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
+                                add_cpu += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
+                                add_mem += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
                                 # 无空闲资源,则跳出循环
                                 if pm_free[i][0] == 0 or pm_free[i][1] == 0:
                                     break
-                    # 占比减半
-                    M_C = M_C / 2.0
-        free_cpu += pm_free[i][0]
-        free_mem += pm_free[i][1]
-        print('%d:cpu:%d mem:%d' % (i, pm_free[i][0], pm_free[i][1]))
-    if dataObj.opt_target == 'CPU':
-        res_use_pro = free_cpu / (dataObj.CPU * pm_size)
-        other_res_use_pro = free_mem / (dataObj.MEM * pm_size)
-    else:
-        res_use_pro = free_mem / (dataObj.MEM * pm_size)
-        other_res_use_pro = free_cpu / (dataObj.CPU * pm_size)
-
-    res_use_pro = (1.0 - res_use_pro) * 100
-    other_res_use_pro = (1.0 - other_res_use_pro) * 100
-    return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
+    return vm_size, vm, pm_size, pm, add_cpu, add_mem
 
 
 def search_u_m_maximum(dataObj, predict_result):
