@@ -16,7 +16,9 @@ global try_result
 global threshold
 global vm_map
 global pm_name
+global c_m
 
+c_m = 0.5
 pm_name = []
 
 vm_map = {}
@@ -34,7 +36,7 @@ is_parameter_search = False
 is_deeplearing = False
 use_smooth = False
 use_search_maximum = True
-use_pm_average = False
+use_search_u_m_maximum = False
 
 
 def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
@@ -88,24 +90,26 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         print('max_score:%f' % max_score)
     #############################################微调数量##################################
     global try_result
+    global c_m
     global vm_map
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
     vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                    predict_result)
+                                                                                    predict_result, c_m)
     print('origin_use_rate=%.2f%%\n' % (res_use))
     #############################################use_pm_average##################################
-    if use_pm_average:
-        predict_result = res_average(vm_size, vm, pm_size, pm, res_use, pm_free, vm_map, dataObj,
-                                     predict_result)
+    # if use_search_u_m_maximum:
+    #     search_u_m_maximum(dataObj, predict_result)
+    #     vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
+    #                                                                                     try_result)
     #############################################use_pm_average##################################
 
     #############################################use_search_maximum##################################
     if use_search_maximum:
         search_maximum_way1(dataObj, predict_result)
         vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                        try_result)
+                                                                                        try_result,c_m)
     print('use_search_use_rate=%.2f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
@@ -134,7 +138,19 @@ def search_maximum_way1(dataObj, predict_result):
     global pm
     global try_result
     global vm_map
-    vm_size, vm, pm_size, pm, pm_name, res_use, _ = packing_utils_v2.pack_api(dataObj, predict_result)
+    global c_m
+    # vm_size, vm, pm_size, pm, pm_name, res_use, _ = packing_utils_v2.pack_api(dataObj, predict_result)
+
+    # 寻找最优CM比例
+    target_c_m = [0.25, 0.5, 1, None]
+    for i in range(len(target_c_m)):
+        try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
+                                                                                                          predict_result,
+                                                                                                          target_c_m[i])
+        if (try_res_use) > (res_use) and try_pm_size <= pm_size:
+            c_m = target_c_m[i]
+            vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
+
     pading_que = []
 
     # 搜索优先级
@@ -168,56 +184,6 @@ def search_maximum_way1(dataObj, predict_result):
                     result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
 
 
-def search_maximum_way2(dataObj, predict_result):
-    global res_use_pro
-    global vm_size
-    global vm
-    global pm_size
-    global pm
-    global try_result
-    global other_res_use_pro
-    vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro = packing_utils_v2.pack_api(dataObj, predict_result)
-    pading_que = []
-
-    # 搜索优先级
-    if dataObj.opt_target == 'CPU':
-        pading_que = [1.0, 2.0, 4.0]
-    else:
-        pading_que = [4.0, 2.0, 1.0]
-
-    # 根据数量初始化队列
-    # vm_que=init_que(caseInfo)
-
-    # 震荡范围
-    value_range = 3
-    # 范围表
-    data_range = [[value_range] * dataObj.vm_types_size]
-    # 虚拟机类型
-    vm_type = dataObj.vm_types
-    # 虚拟机震荡表
-    vm_range = dict(zip(vm_type, data_range))
-
-    try_result = copy.deepcopy(predict_result)
-    end_vm_pos = 0
-    # 找到第一个非0位[1,15]
-    for vm_type_index in range(len(VM_TYPE_DIRT) - 1, -1, -1):
-        if try_result.has_key(VM_TYPE_DIRT[vm_type_index]) and try_result[VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
-            end_vm_pos = vm_type_index
-            break
-    for que in range(3):
-        # 在有数量的区间内填充[1,8]
-        for vm_type in range(end_vm_pos, -1, -1):
-            if try_result.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
-                que]:  # 键值对存在,C/M比相等
-                # 数量
-                if try_result[VM_TYPE_DIRT[vm_type]] > 0:
-                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type])
-                    result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type])
-                else:
-                    # 找到非0的,最大,虚拟机
-                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type])
-
-
 def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     '''
     :param predict_result: 虚拟机预测结果 贪心搜索局部优解
@@ -239,17 +205,24 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     try_predict[vm_type][0] = try_predict[vm_type][0] + try_value
     if try_predict[vm_type][0] < 0:  # 小于0没有意义
         return
-    try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(
-        dataObj, try_predict)
-    if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
-        vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
-        try_result = try_predict
-        try_vm_map[vm_type] += try_value
-        vm_map = try_vm_map
-        # 继续深度搜索
-        result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
-    else:
-        return
+    # try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(
+    #     dataObj, try_predict)
+
+    # 遍历各种不同优化比例
+    target_c_m = [0.25, 0.5, 1]
+    for i in range(len(target_c_m)):
+        try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
+                                                                                                          predict_result,
+                                                                                                          target_c_m[i])
+        if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+            vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
+            try_result = try_predict
+            try_vm_map[vm_type] += try_value
+            vm_map = try_vm_map
+            # 继续深度搜索
+            result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
+        else:
+            return
 
 
 def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
@@ -333,24 +306,22 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     return vm_size, vm, pm_size, pm, res_use_pro, other_res_use_pro
 
 
-def res_average(vm_size, vm, pm_size, pm, res_use, pm_free, vm_map, dataObj, predict_result):
-    avg_predict_result = copy.deepcopy(predict_result)
-
-    vm_types = dataObj.vm_types
-
-    avg_value = -1
-    M_C = 0.0
-    if dataObj.opt_target == 'CPU':
-        M_C = 4.0
-    else:
-        M_C = 1.0
-
-    if res_use_pro < other_res_use_pro:
-        for vm_type in vm_types:
-            if VM_PARAM[vm_type][2] == M_C and avg_predict_result[vm_type][0] >= -avg_value:
-                avg_predict_result[vm_type][0] += avg_value
-
-    return avg_predict_result
+def search_u_m_maximum(dataObj, predict_result):
+    '''
+    搜寻最优的资源CM优化比例
+    :param dataObj:
+    :param predict_result:
+    :return:
+    '''
+    global res_use
+    global vm_size
+    global vm
+    global pm_size
+    global pm_name
+    global pm
+    global try_result
+    global vm_map
+    pass
 
 
 # 检查dict中是否存在key

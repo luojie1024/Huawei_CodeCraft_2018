@@ -9,7 +9,7 @@ import packing_method
 pack_function = packing_method.used_func
 
 
-def pack_api(dataObj, predict_result):
+def pack_api(dataObj, predict_result,target_c_m):
     '''
     装配接口
     :param dataObj: 数据对象
@@ -17,7 +17,7 @@ def pack_api(dataObj, predict_result):
     '''
     picker = VmWorker(predict_result)
     group = ServerObj(dataObj, picker.origin_cpu_mem_sum())
-    pack_function(picker, group)
+    pack_function(picker, group,target_c_m)
     vm_size, vm = picker.to_origin_desc()
     pm_size, pm, pm_name = group.to_description()
     res_use = group.get_res_used_pro()

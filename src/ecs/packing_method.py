@@ -100,7 +100,7 @@ def pack_model(vmWorker, serverObj, opt_target='CPU'):
     return (vm_cpu_size * 100.0 / (num * C), vm_mem_size * 100.0 / (num * M))
 
 
-def pack_model2(vmWorker, serverObj):
+def pack_model2(vmWorker, serverObj,target_c_m=None):
     '''
     具体装配方案1,packing1,M/U权重分配
     :param vmWorker:虚拟机
@@ -176,8 +176,11 @@ def pack_model2(vmWorker, serverObj):
             # 根据物理机的c/m比例来选择放置
             c_m = serverObj.get_pm_c_m(pm_id)
             # 获取最接近的优化目标
-            # target_c_m = serverObj.get_nearest_distance(c_m)
-            target_c_m=0.25
+            if target_c_m==None:
+                target_c_m = serverObj.get_nearest_distance(c_m)
+            # else:
+            #     target_c_m=0.5
+
             # 为了靠近目标比例：选择 内存多,cpu少的vm先放,从而使c/m比接近目标c/m
             # if c_m < target_c_m:
             # 距离优化目标

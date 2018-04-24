@@ -7,7 +7,7 @@ import predict
 # python2 ecs.py data/TrainData_2015.12.txt  data/input_3hosttypes_5flavors_1week.txt result/output1.txt
 
 
-is_Dubug = False
+is_Dubug = True
 
 
 def main():
