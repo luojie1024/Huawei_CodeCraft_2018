@@ -18,7 +18,7 @@ global vm_map
 global pm_name
 global c_m
 
-c_m = 0.5
+c_m = None
 pm_name = []
 
 vm_map = {}
@@ -35,7 +35,7 @@ is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
 use_smooth = False
-use_search_maximum = False
+use_search_maximum = True
 use_search_u_m_maximum = False
 
 
@@ -92,6 +92,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     global try_result
     global c_m
     global vm_map
+    global res_use
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
@@ -148,7 +149,7 @@ def search_maximum_way1(dataObj, predict_result):
                                                                                                           predict_result,
                                                                                                           target_c_m[i])
         # if (try_res_use) > (res_use) and try_pm_size <= pm_size:
-        if (try_res_use) > (res_use) and try_pm_size <= pm_size:
+        if (try_res_use) > (res_use):
             c_m = target_c_m[i]
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
 
@@ -215,7 +216,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     target_c_m = [0.25, 0.5, 1,None]
     for i in range(len(target_c_m)):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
-                                                                                                          predict_result,
+                                                                                                          try_predict,
                                                                                                           target_c_m[i])
         if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
