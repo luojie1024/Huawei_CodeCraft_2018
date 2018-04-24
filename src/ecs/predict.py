@@ -161,8 +161,9 @@ def search_maximum_way1(dataObj, predict_result):
             c_m = target_c_m[i]
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
 
-    Weight_que = [4.0, 2.0,1.0]
-
+    Weight_que1 = [4.0, 2.0,1.0]
+    Weight_que2 = [2.0, 1.0, 2.0]
+    Weight_que3 = [1.0, 4.0, 2.0]
     # 搜索优先级
     # if dataObj.opt_target == 'CPU':
     #     pading_que = [1.0, 2.0, 4.0]
@@ -171,17 +172,17 @@ def search_maximum_way1(dataObj, predict_result):
 
     # 根据数量初始化队列
     try_result = copy.deepcopy(predict_result)
-    # 遍历所有放置队列 九个方向寻找最优解 TODO 可能超时
+    # 遍历所有放置队列 九个方向寻找最优解 TODO 可能超时 容易陷入局部最优
     pading_que = [1.0, 1.0, 1.0]
-    for i in range(len(Weight_que)):
-        pading_que[0] = Weight_que[i]
-        for j in range(len(Weight_que)):
-            pading_que[1] = Weight_que[j]
-            for k in range(len(Weight_que)):
-                pading_que[2] = Weight_que[k]
+    for i in range(len(Weight_que1)):
+        pading_que[0] = Weight_que1[i]
+        for j in range(len(Weight_que2)):
+            pading_que[1] = Weight_que2[j]
+            for k in range(len(Weight_que3)):
+                pading_que[2] = Weight_que3[k]
 
                 # 根据数量初始化队列
-                pre_copy = copy.deepcopy(predict_result)
+                pre_copy = copy.deepcopy(try_result)
 
                 end_vm_pos = 0
                 # 找到第一个非0位[1,15]
@@ -234,7 +235,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           try_predict,
                                                                                                           target_c_m[i])
-        if (try_res_use) > (res_use) :  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+        if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
             try_result = try_predict
             try_vm_map[vm_type] += try_value
