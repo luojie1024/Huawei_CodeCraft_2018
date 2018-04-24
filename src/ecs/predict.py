@@ -93,12 +93,14 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     global c_m
     global vm_map
     global res_use
+    global pm_size
+    origin_use_rate=0.0
     # 虚拟机表
     vm_map = dict(zip(dataObj.vm_types, [0] * dataObj.vm_types_size))
 
     vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                     predict_result, c_m)
-    print('origin_use_rate=%.5f%%\n' % (res_use))
+    origin_use_rate=res_use
     #############################################use_pm_average##################################
     # if use_search_u_m_maximum:
     #     search_u_m_maximum(dataObj, predict_result)
@@ -121,6 +123,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     #############################################use_smooth##################################
 
+    print('origin_use_rate=%.5f%%\n' % (origin_use_rate))
     # # 评估函数
     # if is_parameter_search == False:
     #     evaluation(dataObj, predict_result)
