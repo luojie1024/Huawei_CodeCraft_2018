@@ -164,7 +164,7 @@ def search_maximum_way1(dataObj, predict_result):
     # else:
     #     pading_que = [4.0, 2.0, 1.0]
 
-    pading_que = [1.0, 2.0, 2.0]
+    pading_que = [1.0, 1.0, 1.0]
 
     # pading_que = [2.0, 2.0, 2.0]
     # 根据数量初始化队列
