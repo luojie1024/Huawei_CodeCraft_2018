@@ -234,7 +234,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           try_predict,
                                                                                                           target_c_m[i])
-        if (try_res_use) > (res_use) and try_pm_size <= pm_size:  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
+        if (try_res_use) > (res_use) :  # 如果结果优,物理机数量相等或者 【更小,利用率更高 】保存最优结果
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
             try_result = try_predict
             try_vm_map[vm_type] += try_value
