@@ -97,7 +97,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
 
     vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                     predict_result, c_m)
-    print('origin_use_rate=%.2f%%\n' % (res_use))
+    print('origin_use_rate=%.5f%%\n' % (res_use))
     #############################################use_pm_average##################################
     # if use_search_u_m_maximum:
     #     search_u_m_maximum(dataObj, predict_result)
@@ -109,14 +109,14 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     if use_search_maximum:
         search_maximum_way1(dataObj, predict_result)
         vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                        try_result,c_m)
-    print('use_search_use_rate=%.2f%%\n' % (res_use))
+                                                                                        try_result, c_m)
+    print('use_search_use_rate=%.5f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
         vm_size, vm, pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
-        print('use_smooth_use_rate=%.2f%%\n' % (res_use))
+        print('use_smooth_use_rate=%.5f%%\n' % (res_use))
 
     #############################################use_smooth##################################
 
@@ -147,7 +147,7 @@ def search_maximum_way1(dataObj, predict_result):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           predict_result,
                                                                                                           target_c_m[i])
-        # if (try_res_use) > (res_use) and try_pm_size <= pm_size:                                          target_c_m[i])
+        # if (try_res_use) > (res_use) and try_pm_size <= pm_size:
         if (try_res_use) > (res_use) and try_pm_size <= pm_size:
             c_m = target_c_m[i]
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
@@ -160,8 +160,9 @@ def search_maximum_way1(dataObj, predict_result):
     # else:
     #     pading_que = [4.0, 2.0, 1.0]
 
-    pading_que = [4.0, 2.0, 1.0]
+    pading_que = [1.0, 2.0, 4.0]
 
+    # pading_que = [2.0, 2.0, 2.0]
     # 根据数量初始化队列
 
     try_result = copy.deepcopy(predict_result)
@@ -201,6 +202,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
     global try_result
     global vm_map
     global pm_name
+    global c_m
     try_predict = copy.deepcopy(predict_result)
     try_vm_map = copy.deepcopy(vm_map)
     try_predict[vm_type][0] = try_predict[vm_type][0] + try_value
@@ -220,10 +222,12 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
             try_result = try_predict
             try_vm_map[vm_type] += try_value
             vm_map = try_vm_map
+            c_m=target_c_m[i]
             # 继续深度搜索
             result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
         else:
-            return
+            continue
+    return
 
 
 def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
