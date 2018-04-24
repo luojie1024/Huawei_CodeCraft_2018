@@ -145,7 +145,7 @@ def search_maximum_way1(dataObj, predict_result):
     global pm_size
     global pm_name
     global pm
-    global try_result
+    # global try_result
     global vm_map
     global c_m
     # vm_size, vm, pm_size, pm, pm_name, res_use, _ = packing_utils_v2.pack_api(dataObj, predict_result)
