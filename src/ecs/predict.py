@@ -171,7 +171,7 @@ def search_maximum_way1(dataObj, predict_result):
 
     # 根据数量初始化队列
     try_result = copy.deepcopy(predict_result)
-    # 遍历所有放置队列 TODO 可能超时
+    # 遍历所有放置队列 九个方向寻找最优解 TODO 可能超时
     pading_que = [1.0, 1.0, 1.0]
     for i in range(len(Weight_que)):
         pading_que[0] = Weight_que[i]
@@ -181,7 +181,7 @@ def search_maximum_way1(dataObj, predict_result):
                 pading_que[2] = Weight_que[k]
 
                 # 根据数量初始化队列
-                pre_copy = copy.deepcopy(try_result)
+                pre_copy = copy.deepcopy(predict_result)
 
                 end_vm_pos = 0
                 # 找到第一个非0位[1,15]
