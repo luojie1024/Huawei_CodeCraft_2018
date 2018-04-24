@@ -169,27 +169,29 @@ def search_maximum_way1(dataObj, predict_result):
     # else:
     #     pading_que = [4.0, 2.0, 1.0]
     pading_que = [4.0, 2.0, 1.0]
+
+    # pading_que = [2.0, 2.0, 2.0]
     # 根据数量初始化队列
-    pre_copy = copy.deepcopy(predict_result)
+
+    try_result = copy.deepcopy(predict_result)
 
     end_vm_pos = 0
     # 找到第一个非0位[1,15]
     for vm_type_index in range(len(VM_TYPE_DIRT) - 1, -1, -1):
-        if pre_copy.has_key(VM_TYPE_DIRT[vm_type_index]) and pre_copy[
-            VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
+        if try_result.has_key(VM_TYPE_DIRT[vm_type_index]) and try_result[VM_TYPE_DIRT[vm_type_index]] > 0:  # 键值对存在
             end_vm_pos = vm_type_index
             break
     for que in range(3):
         # 在有数量的区间内填充[1,8]
         for vm_type in range(end_vm_pos, -1, -1):
-            if pre_copy.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
+            if try_result.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
                 que]:  # 键值对存在,C/M比相等
-                if pre_copy[VM_TYPE_DIRT[vm_type]][0] > 0:
-                    result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
-                    result_modify1(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
+                if try_result[VM_TYPE_DIRT[vm_type]][0] > 0:
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
                 else:
                     # 找到非0的,最大,虚拟机
-                    result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                    result_modify1(try_result, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
     # pading_que = [1.0, 1.0, 1.0]
     # for i in range(len(Weight_que)):
     #     pading_que[0] = Weight_que[i]
