@@ -126,13 +126,15 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     if use_search_maximum:
         search_maximum_way1(dataObj, predict_result)
         vm_size, vm, local_pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
-                                                                                              global_optimal_result, c_m)
+                                                                                              global_optimal_result,
+                                                                                              c_m)
     print('use_search_use_rate=%.5f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
-        vm_size, vm, local_pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, local_pm_size, pm, dataObj, pm_free)
+        vm_size, vm, local_pm_size, pm, pm_name, res_use = result_smooth(vm_size, vm, local_pm_size, pm, dataObj,
+                                                                         pm_free)
         print('use_smooth_use_rate=%.5f%%\n' % (res_use))
 
     #############################################use_smooth##################################
@@ -166,7 +168,12 @@ def search_maximum_way1(dataObj, predict_result):
 
     # 寻找最优CM比例
     target_c_m = [0.25, 0.5, 1, None]
+
+    # 初始化pm_size 0.5
+    pm_size = local_pm_size+2
+
     for i in range(len(target_c_m)):
+
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           predict_result,
                                                                                                           target_c_m[i])
@@ -226,8 +233,10 @@ def search_maximum_way1(dataObj, predict_result):
                     global_res_use = local_res_use
                 # 初始化局部最优解
                 local_optimal_result = copy.deepcopy(predict_result)
+                # 初始化使用率
                 local_res_use = res_use
-                local_pm_size=pm_size
+                # 回滚主机数量
+                local_pm_size = pm_size
 
 
 def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
