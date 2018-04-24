@@ -170,7 +170,7 @@ def search_maximum_way1(dataObj, predict_result):
     target_c_m = [0.25, 0.5, 1, None]
 
     # 初始化pm_size 0.5
-    pm_size = local_pm_size+2
+    pm_size = local_pm_size+1
 
     for i in range(len(target_c_m)):
 
