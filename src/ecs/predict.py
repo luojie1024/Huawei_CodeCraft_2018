@@ -161,7 +161,7 @@ def search_maximum_way1(dataObj, predict_result):
             c_m = target_c_m[i]
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
 
-    Weight_que = [1.0, 2.0, 4.0]
+    Weight_que = [4.0, 2.0,1.0]
 
     # 搜索优先级
     # if dataObj.opt_target == 'CPU':
@@ -171,7 +171,7 @@ def search_maximum_way1(dataObj, predict_result):
 
     # 根据数量初始化队列
     try_result = copy.deepcopy(predict_result)
-
+    # 遍历所有放置队列 TODO 可能超时
     pading_que = [1.0, 1.0, 1.0]
     for i in range(len(Weight_que)):
         pading_que[0] = Weight_que[i]
