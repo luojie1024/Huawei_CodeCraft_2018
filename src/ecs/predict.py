@@ -147,6 +147,7 @@ def search_maximum_way1(dataObj, predict_result):
         try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use, _ = packing_utils_v2.pack_api(dataObj,
                                                                                                           predict_result,
                                                                                                           target_c_m[i])
+        # if (try_res_use) > (res_use) and try_pm_size <= pm_size:                                          target_c_m[i])
         if (try_res_use) > (res_use) and try_pm_size <= pm_size:
             c_m = target_c_m[i]
             vm_size, vm, pm_size, pm, pm_name, res_use = try_vm_size, try_vm, try_pm_size, try_pm, try_pm_name, try_res_use
@@ -159,7 +160,7 @@ def search_maximum_way1(dataObj, predict_result):
     # else:
     #     pading_que = [4.0, 2.0, 1.0]
 
-    pading_que = [1.0, 2.0, 4.0]
+    pading_que = [4.0, 2.0, 1.0]
 
     # 根据数量初始化队列
 
