@@ -368,6 +368,11 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                                 # 无空闲资源,则跳出循环
                                 if pm_free[i][0] == 0 or pm_free[i][1] == 0:
                                     break
+                            else:
+                                continue
+                        else:
+                            continue
+
                 # 只进行三轮检索
                 is_all_pack += 1
     return vm_size, vm, pm_size, pm, add_cpu, add_mem
