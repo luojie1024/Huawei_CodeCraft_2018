@@ -49,7 +49,7 @@ is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
 use_smooth = True
-use_search_maximum = True
+use_search_maximum = False
 use_search_u_m_maximum = False
 
 
@@ -124,6 +124,7 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
     local_pm_size = pm_size
     origin_use_rate = local_res_use
     origin_pm_size = local_pm_size
+    res_use = origin_use_rate
     #############################################use_pm_average##################################
     # if use_search_u_m_maximum:
     #     search_u_m_maximum(dataObj, predict_result)
