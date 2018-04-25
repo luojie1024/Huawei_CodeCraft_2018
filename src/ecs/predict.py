@@ -48,7 +48,7 @@ try_result = {}
 is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = False
+use_smooth = True
 use_search_maximum = True
 use_search_u_m_maximum = False
 
@@ -329,14 +329,15 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     add_mem = 0
     epoch = 1
     # 遍历物理机
-    for i in range(pm_size-2,pm_size):
+    for i in range(pm_size - 2, pm_size):
         M_C = 0.0
         # 进行多轮赋值,防止漏空
         for e in range(epoch):  # CPU 内存均有空间
             if pm_free[i][0] and pm_free[i][1]:
                 # 计算占比
+                is_all_pack = 0
                 M_C = computer_MC(pm_free[i])
-                while (M_C >= 1 and pm_free[i][0] and pm_free[i][1]):  # CPU 内存均有空间
+                while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 3):  # CPU 内存均有空间
                     # 3轮不同比例的检索
                     for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
                         # 比例匹配,并且是属于预测列表的最大资源虚拟机
@@ -366,6 +367,8 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                                 # 无空闲资源,则跳出循环
                                 if pm_free[i][0] == 0 or pm_free[i][1] == 0:
                                     break
+                # 只进行三轮检索
+                is_all_pack += 1
     return vm_size, vm, pm_size, pm, add_cpu, add_mem
 
 
