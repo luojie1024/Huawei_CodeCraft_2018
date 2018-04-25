@@ -328,7 +328,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     VM_QUE = VM_CPU_QU
     add_cpu = 0
     add_mem = 0
-    epoch = 1
+    epoch = 10
     # 遍历物理机
     for i in range(pm_size - 2, pm_size):
         M_C = 0.0
@@ -338,43 +338,42 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                 # 计算占比
                 is_all_pack = 0
                 M_C = computer_MC(pm_free[i])
-                while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 1):  # CPU 内存均有空间
+                # while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 1):  # CPU 内存均有空间
                     # 3轮不同比例的检索
-                    for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
-                        # 比例匹配,并且是属于预测列表的最大资源虚拟机
-                        if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][2] == M_C and (
-                                VM_TYPE_DIRT[vm_type_index] in vm_types):
-                            # CPU 内存均有空间放入该虚拟机
-                            if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0] <= pm_free[i][0] and \
-                                    VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1] <= pm_free[i][1]:
-                                # 虚拟机数量增加
-                                vm_size += 1
+                for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
+                    # 比例匹配,并且是属于预测列表的最大资源虚拟机
+                    if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][2] == M_C and (
+                            VM_TYPE_DIRT[vm_type_index] in vm_types):
+                        # CPU 内存均有空间放入该虚拟机
+                        if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0] <= pm_free[i][0] and \
+                                VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1] <= pm_free[i][1]:
+                            # 虚拟机数量增加
+                            vm_size += 1
 
-                                if isContainKey(vm, VM_TYPE_DIRT[vm_type_index]):
-                                    # 列表中数量添加
-                                    vm[VM_TYPE_DIRT[vm_type_index]] += 1
-                                else:
-                                    vm[VM_TYPE_DIRT[vm_type_index]] = 1
-                                # 物理机列表中添加
-                                if isContainKey(pm[i], VM_TYPE_DIRT[vm_type_index]):
-                                    pm[i][VM_TYPE_DIRT[vm_type_index]] += 1
-                                else:
-                                    pm[i][VM_TYPE_DIRT[vm_type_index]] = 1
-                                # 剪切空闲空间数
-                                pm_free[i][0] = pm_free[i][0] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
-                                pm_free[i][1] = pm_free[i][1] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
-                                add_cpu += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
-                                add_mem += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
-                                # 无空闲资源,则跳出循环
-                                if pm_free[i][0] == 0 or pm_free[i][1] == 0:
-                                    break
+                            if isContainKey(vm, VM_TYPE_DIRT[vm_type_index]):
+                                # 列表中数量添加
+                                vm[VM_TYPE_DIRT[vm_type_index]] += 1
                             else:
-                                continue
+                                vm[VM_TYPE_DIRT[vm_type_index]] = 1
+                            # 物理机列表中添加
+                            if isContainKey(pm[i], VM_TYPE_DIRT[vm_type_index]):
+                                pm[i][VM_TYPE_DIRT[vm_type_index]] += 1
+                            else:
+                                pm[i][VM_TYPE_DIRT[vm_type_index]] = 1
+                            # 剪切空闲空间数
+                            pm_free[i][0] = pm_free[i][0] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
+                            pm_free[i][1] = pm_free[i][1] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
+                            add_cpu += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
+                            add_mem += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
+                            # 无空闲资源,则跳出循环
+                            if pm_free[i][0] == 0 or pm_free[i][1] == 0:
+                                break
                         else:
                             continue
-
+                    else:
+                        continue
                 # 只进行三轮检索
-                is_all_pack += 1
+                # is_all_pack += 1
     return vm_size, vm, pm_size, pm, add_cpu, add_mem
 
 
