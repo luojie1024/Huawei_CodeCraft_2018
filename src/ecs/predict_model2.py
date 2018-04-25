@@ -379,7 +379,69 @@ def predict_model4(his_data, dataObj, vm_type, alpha, beta, gamma):  # 霍尔特
     return result
 
 
+def predict_model5(his_data, dataObj, vm_type):
+    # 无noise
+    # 需要预测的天数
+    date_range_size = dataObj.date_range_size
+    sigma = 0.5
+    # 获取放大权重
+    # count_weight=dataObj.get_count_weight(vm_type)
+
+
+    weight = PREDICT_MODEL1_WEIGHTS[vm_type]
+
+    n = weight['n']
+    # 放大系数
+    enlarge = weight['enlarge']
+    beta = weight['beta']
+    back_week = weight['back_week']
+    chis_data = copy.deepcopy(his_data['value'])
+    cal_len = len(chis_data)
+
+    result = []
+    temp_result = 0
+    for rept in range(date_range_size):  # 预测天数范围
+        day_avage = 0.0
+        cot_week = 0
+        for i in range(1, back_week + 1):
+            index = i * 7
+            if index <= cal_len:
+                day_tmp = chis_data[-index] * n
+                cot_day = n
+                cot_week += 1
+                for j in range(1, n):
+                    tmp = (n - j) / beta
+                    day_tmp += chis_data[-index + j] * tmp
+                    cot_day += tmp
+                    if index + j <= cal_len:
+                        day_tmp += chis_data[-index - j] * tmp
+                        cot_day += tmp
+                    else:
+                        continue
+                day_avage += day_tmp / cot_day
+            else:
+                break
+        if cot_week != 0:  # 直接平均  --> 改进成指数平均
+            day_avage = day_avage * 1.0 / cot_week  # 注意报错
+
+        # 系数放大,修正高斯效果
+        day_avage = day_avage * enlarge
+
+        # 加入噪声
+        if is_noise:
+            noise = random.gauss(0, sigma)
+            noise = math.fabs(noise)
+            day_avage = int(math.floor(day_avage + noise))
+        chis_data.append(day_avage)
+        temp_result += day_avage
+    result.append(temp_result)
+
+    return result
+
 model1_used_func = predict_model1
+
 model2_used_func = predict_model2
 
 model3_used_func = predict_model3
+
+model5_used_func = predict_model5
