@@ -326,8 +326,8 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     #     other_res_use_pro = dataObj.CPU * pm
 
     # VM_QUE = VM_CPU_QU
-    VM_QUE = VM_MEM_QU
-    # VM_QUE = VM_PARAM
+    # VM_QUE = VM_MEM_QU
+    VM_QUE = VM_PARAM
     add_cpu = 0
     add_mem = 0
     epoch = 30
