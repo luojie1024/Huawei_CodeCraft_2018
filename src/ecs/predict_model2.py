@@ -388,7 +388,7 @@ def predict_model5(his_data, dataObj, vm_type):
     # count_weight=dataObj.get_count_weight(vm_type)
 
 
-    weight = PREDICT_MODEL1_WEIGHTS[vm_type]
+    weight = PREDICT_MODEL21_WEIGHTS[vm_type]
 
     n = weight['n']
     # 放大系数
