@@ -338,7 +338,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                 # 计算占比
                 is_all_pack = 0
                 M_C = computer_MC(pm_free[i])
-                while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 3):  # CPU 内存均有空间
+                while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 1):  # CPU 内存均有空间
                     # 3轮不同比例的检索
                     for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
                         # 比例匹配,并且是属于预测列表的最大资源虚拟机
