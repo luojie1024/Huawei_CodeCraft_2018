@@ -325,7 +325,9 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     #     res_use_pro = dataObj.MEM * pm
     #     other_res_use_pro = dataObj.CPU * pm
 
-    VM_QUE = VM_CPU_QU
+    # VM_QUE = VM_CPU_QU
+    VM_QUE = VM_MEM_QU
+    # VM_QUE = VM_PARAM
     add_cpu = 0
     add_mem = 0
     epoch = 30
@@ -339,7 +341,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                 is_all_pack = 0
                 M_C = computer_MC(pm_free[i])
                 # while (M_C >= 1 and pm_free[i][0] and pm_free[i][1] and is_all_pack < 1):  # CPU 内存均有空间
-                    # 3轮不同比例的检索
+                # 3轮不同比例的检索
                 for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
                     # 比例匹配,并且是属于预测列表的最大资源虚拟机
                     if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][2] == M_C and (
