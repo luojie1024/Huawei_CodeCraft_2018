@@ -393,6 +393,7 @@ def predict_model5(his_data, dataObj, vm_type):
     n = weight['n']
     # 放大系数
     enlarge = weight['enlarge']
+    enlarge=1
     beta = weight['beta']
     back_week = weight['back_week']
     chis_data = copy.deepcopy(his_data['value'])
