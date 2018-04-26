@@ -238,6 +238,199 @@ def pack_model2(vmWorker, serverObj,target_c_m=None):
     return vm_cpu_size * 100.0
 
 
+
+###########################################################################################
+def pack_model3(vmWorker, serverObj,target_c_m=None):
+    '''
+    具体装配方案1,packing1,M/U权重分配
+    :param vmWorker:虚拟机
+    :param serverObj: 物理机
+    :return:
+    '''
+    # 获得放置顺序
+    vm_orders = [[],  # vm_types
+                 []]  # cot
+    weightes = [1, 2, 4]
+    cpu = [1, 2, 4, 8, 16, 32]
+
+    # 物理机id
+    pm_id = 0
+
+    # 获得所需的CPU 内存总数
+    vm_cpu_size, vm_mem_size = vmWorker.origin_cpu_mem_sum()
+
+    # 无需装装配,结束
+    if vm_cpu_size == 0:
+        return
+
+    # 基线
+    baseline_C_M = 56.0 / 128
+    print ('baseline C/M %.2f \n' % (baseline_C_M))
+
+
+    # 拾取放置队列
+    ''' 
+    [[vm_type],[count]]
+    vm_orders['1.0'] 
+    vm_orders['2.0']
+    vm_orders['4.0']
+    '''
+
+    # 获取放置队列
+    vm_orders = vmWorker.get_vm_order(cpu[-1])  #队列已经放置好
+
+    # 队列为0,结束
+    # if len(vm_orders) == 0:
+    #     return  # 无装配项，结束
+    if len(vm_orders["4.0"][0])==0 and len(vm_orders["2.0"][0])==0 and len(vm_orders["1.0"][0])==0:
+        return
+
+    # 还没有放完
+    while (serverObj.is_packing()):
+        # 物理机资源比
+        C_M = serverObj.get_sum_C_M()
+        vm_cpu_size, vm_mem_size=serverObj.get_lave_cpu_mem_sum()
+        if vm_cpu_size>=112 and vm_mem_size>=256:
+            if C_M>2:
+                print ('C/M %.2f >2 \n',C_M)
+                pm_id=serverObj.new_physic_machine("Large-Memory")
+            else:
+                pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size<=56 and vm_mem_size<=128:
+            pm_id=serverObj.new_physic_machine("General")
+
+        elif vm_cpu_size>=112 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size>=112 and vm_mem_size<192 and vm_mem_size>128:
+            pm_id=serverObj.new_physic_machine("General")
+
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size>=256:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("General")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<192 and vm_mem_size>=128:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<128:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size>=256:
+            pm_id=serverObj.new_physic_machine("General")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<192 and vm_mem_size>=128:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<128:
+            pm_id = serverObj.new_physic_machine("High-Performance")
+
+        elif vm_cpu_size<56 and vm_cpu_size>=192 and vm_mem_size<256:
+            pm_id = serverObj.new_physic_machine("Large-Memory")
+
+        elif vm_cpu_size<56 and vm_mem_size>=128 and vm_mem_size<192:
+            pm_id = serverObj.new_physic_machine("High-Performance")
+
+
+        # 大量虚拟机时候,首选大号物理机
+        # if (vm_cpu_size >= 112 and vm_mem_size >= 256):
+        #     if (C_M > baseline_C_M):  # cpu比例大,选用高性能物理机
+        #        c
+        #         pm_id = serverObj.new_physic_machine('High-Performance')
+        #     elif (C_M<=baseline_C_M and C_M>1.5):
+        #         pm_id=serverObj.new_physic_machine("Large-Memory")
+        #     else:
+        #         pm_id=serverObj.new_physic_machine("High-Performance")
+        #     #
+        #     # else:  # mem比例大,选择大内存的物理机
+        #     #     pm_id = serverObj.new_physic_machine('Large-Memory')
+        # elif (vm_cpu_size > 56 and vm_cpu_size <= 84 and vm_mem_size > 192 and vm_mem_size <=256):  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('Large-Memory')
+        # elif (vm_cpu_size > 84 and vm_cpu_size <= 112 and vm_mem_size > 128 and vm_mem_size <= 192):  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('High-Performance')
+        # else:  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('General')
+            # pm_id = serverObj.new_physic_machine('High-Performance')
+            # pass
+
+        # 是全部遍历过了
+        is_all_picked = False
+
+        # 标记
+        vm_index = ''
+
+        # 还有剩余空间,而且没有把所有情况遍历完
+        while (serverObj.is_free(pm_id) and not is_all_picked):
+            # 根据物理机的c/m比例来选择放置
+            c_m = serverObj.get_pm_c_m(pm_id)
+            # 获取最接近的优化目标
+            if target_c_m==None:
+                target_c_m = serverObj.get_nearest_distance(c_m)
+            # else:
+            #     target_c_m=0.5
+
+            # 为了靠近目标比例：选择 内存多,cpu少的vm先放,从而使c/m比接近目标c/m
+            # if c_m < target_c_m:
+            # 距离优化目标
+            distance_target = 10
+            # 应该放入的类型
+            in_type = None
+            for i in range(len(vm_orders['4.0'][0])):
+                vm_type = vm_orders['4.0'][0][i]
+                # 数量大于0
+                if vm_orders['4.0'][1][i] > 0:
+                    for j in range(vm_orders["4.0"][1][i]):
+                        ok, re_items = serverObj.test_put_vm(pm_id, vm_type)
+                        if not ok: continue
+                    # 如果,距离目标更近了,则保存
+                        if distance_target > abs(re_items[2] - target_c_m):
+                           distance_target = abs(re_items[2] - target_c_m)
+                           in_type = vm_type
+                           vm_index = '4.0'
+                        break
+            for i in range(len(vm_orders['2.0'][0])):
+                vm_type = vm_orders['2.0'][0][i]
+                # 数量大于0
+                if vm_orders['2.0'][1][i] > 0:
+                    for j in range(vm_orders["2.0"][1][i]):
+                        ok, re_items = serverObj.test_put_vm(pm_id, vm_type)
+                        if not ok: continue
+                        # 如果,距离目标更近了,则保存
+                        if distance_target > abs(re_items[2] - target_c_m):
+                            distance_target = abs(re_items[2] - target_c_m)
+                            in_type = vm_type
+                            vm_index = '2.0'
+                        break
+
+
+            for i in range(len(vm_orders['1.0'][0])):
+                vm_type = vm_orders['1.0'][0][i]
+                # 数量大于0
+                if vm_orders['1.0'][1][i] > 0:
+                    for j in range(vm_orders["1.0"][1][i]):
+                        ok, re_items = serverObj.test_put_vm(pm_id, vm_type)
+                        if not ok: continue
+                        # 如果,距离目标更近了,则保存
+                        if distance_target > abs(re_items[2] - target_c_m):
+                            distance_target = abs(re_items[2] - target_c_m)
+                            in_type = vm_type
+                            vm_index = '1.0'
+                        break
+
+
+            # 遍历所有虚拟机类型,均无法放下,跳出去开物理机
+            if in_type == None:
+                is_all_picked = True
+            else:  # 放置最优的那台虚拟机
+
+                serverObj.put_vm(pm_id, in_type)
+                postion = vm_orders[vm_index][0].index(in_type)
+                # 减去对应队列的物理机
+                if vm_orders[vm_index][1][postion] > 0:
+                    vm_orders[vm_index][1][postion] -= 1
+                else:
+                    print('error: in_type 0 \n')
+
+    return vm_cpu_size * 100.0
+
+
 #################################################优化方案########################################
 #
 # def search_maximum_way1(dataObj, predict_result):
