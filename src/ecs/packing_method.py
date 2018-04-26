@@ -680,5 +680,5 @@ def pack_model3(vmWorker, serverObj,target_c_m=None):
 
 #########################################
 # 选择装配方案
-used_func = pack_model2
+used_func = pack_model3
 #########################################
