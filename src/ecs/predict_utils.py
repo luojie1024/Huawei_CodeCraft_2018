@@ -61,7 +61,7 @@ def predict_all(dataObj):
     start_time = datetime.strptime(dataObj.data_range[0], "%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime(dataObj.data_range[1], "%Y-%m-%d %H:%M:%S")
     # 2016 4 5月份
-    pos_time1 = datetime.strptime('2016-06-08 00:00:00', "%Y-%m-%d %H:%M:%S")
+    pos_time1 = datetime.strptime('2016-04-08 00:00:00', "%Y-%m-%d %H:%M:%S")
     pos_time2 = datetime.strptime('2016-04-15 00:00:00', "%Y-%m-%d %H:%M:%S")
     # pos_time3 = datetime.strptime('2016-04-16 00:00:00', "%Y-%m-%d %H:%M:%S")
     # pos_time4 = datetime.strptime('2016-04-18 00:00:00', "%Y-%m-%d %H:%M:%S")
