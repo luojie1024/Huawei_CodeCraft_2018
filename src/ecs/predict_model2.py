@@ -23,7 +23,7 @@ def predict_model1(his_data, dataObj, vm_type):
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    n = 14
+    n = 3
     # 放大系数
     enlarge = 1
     beta = 2.0
