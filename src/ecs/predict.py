@@ -329,7 +329,7 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     VM_QUE = VM_PARAM
     add_cpu = 0
     add_mem = 0
-    epoch = 20
+    epoch = 25
     # 遍历物理机
     for i in range(0, pm_size):
         M_C = 0.0
