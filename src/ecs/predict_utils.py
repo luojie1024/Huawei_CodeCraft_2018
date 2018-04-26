@@ -136,12 +136,8 @@ def predict_all(dataObj):
     # predict_func = predict_model2.model3_used_func
     # 3x3填充方案
 
-    if dataObj.gap_time>1:
-        vmtype_avage_v = 7
-        predict_func = predict_model2.model4_used_func
-    else:
-        vmtype_avage_v = 6
-        predict_func = predict_model2.model5_used_func
+    vmtype_avage_v = 6
+    predict_func = predict_model2.model5_used_func
 
     # vmtype_avage_v = 6
 
