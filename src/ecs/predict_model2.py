@@ -364,11 +364,11 @@ def predict_model4(his_data, dataObj, vm_type, alpha, beta, gamma):  # 霍尔特
         if temp_reuslt < 0:
             temp_reuslt = 0
 
-    # enlarge = weight['enlarge']
-    #
-    # enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
-    #
-    # temp_reuslt = temp_reuslt * (1.5+enlarge)
+    enlarge = weight['enlarge']
+
+    enlarge = enlarge * dataObj.get_count_weight(vm_type,temp_reuslt,dataObj.date_range_size)
+
+    temp_reuslt = temp_reuslt * (1.5+enlarge)
 
     # 结果修正
     temp_reuslt = int(math.floor(temp_reuslt))
@@ -453,5 +453,7 @@ model1_used_func = predict_model1
 model2_used_func = predict_model2
 
 model3_used_func = predict_model3
+
+model4_used_func = predict_model4
 
 model5_used_func = predict_model5
