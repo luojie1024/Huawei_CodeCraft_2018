@@ -138,17 +138,17 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                         global_optimal_result,
                                                                                         global_c_m)
-        print('use_search_use_rate=%.5f%%\n' % (res_use))
+        # print('use_search_use_rate=%.5f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
         vm_size, vm, pm_size, pm, add_cpu, add_mem = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
-        print('use_smooth_use_rate=%.5f%% + cpu=+%d mem=+%d  \n' % (res_use, add_cpu, add_mem))
+        # print('use_smooth_use_rate=%.5f%% + cpu=+%d mem=+%d  \n' % (res_use, add_cpu, add_mem))
 
     #############################################use_smooth##################################
 
-    print('origin_use_rate=%.5f%%\n' % (origin_use_rate))
+    # print('origin_use_rate=%.5f%%\n' % (origin_use_rate))
     # # 评估函数
     # if is_parameter_search == False:
     #     evaluation(dataObj, predict_result)
@@ -232,11 +232,11 @@ def search_maximum_way1(dataObj, predict_result):
                         if pre_copy.has_key(VM_TYPE_DIRT[vm_type]) and VM_PARAM[VM_TYPE_DIRT[vm_type]][2] == pading_que[
                             que]:  # 键值对存在,C/M比相等
                             if pre_copy[VM_TYPE_DIRT[vm_type]][0] > 0:
-                                result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
-                                result_modify1(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
+                                result_search(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                                result_search(pre_copy, dataObj, -1, VM_TYPE_DIRT[vm_type], vm_map)
                             else:
                                 # 找到非0的,最大,虚拟机
-                                result_modify1(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
+                                result_search(pre_copy, dataObj, 1, VM_TYPE_DIRT[vm_type], vm_map)
                 # 保存最优解
                 if local_res_use > global_res_use:
                     global_optimal_result = local_optimal_result
@@ -250,7 +250,7 @@ def search_maximum_way1(dataObj, predict_result):
                 local_pm_size = pm_size
 
 
-def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
+def result_search(predict_result, dataObj, try_value, vm_type, try_vm_map):
     '''
     :param predict_result: 虚拟机预测结果 贪心搜索局部优解
     :param dataObj: 训练集信息
@@ -294,7 +294,7 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
             vm_map = try_vm_map
             local_c_m = target_c_m[i]
             # 继续深度搜索
-            result_modify1(try_predict, dataObj, try_value, vm_type, try_vm_map)
+            result_search(try_predict, dataObj, try_value, vm_type, try_vm_map)
         else:
             continue
     return
