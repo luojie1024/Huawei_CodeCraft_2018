@@ -166,11 +166,11 @@ PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
 PREDICT_MODEL29_WEIGHTS = {  # 84.543 #有  ##无
     'flavor1': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},#+
     'flavor2': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor3': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.55},
+    'flavor3': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.6},
 
     'flavor4': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor5': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.30},##
-    'flavor6': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.30},##
+    'flavor5': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor6': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
 
     'flavor7': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
     'flavor8': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.185},#+  1.8
