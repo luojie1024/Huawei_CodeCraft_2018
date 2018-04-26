@@ -48,8 +48,8 @@ try_result = {}
 is_parameter_search = False
 # 使用深度学习模型
 is_deeplearing = False
-use_smooth = True
-use_search_maximum = True
+use_smooth = False
+use_search_maximum = False
 use_search_u_m_maximum = False
 
 
