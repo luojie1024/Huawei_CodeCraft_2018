@@ -278,7 +278,7 @@ def predict_model3(his_data, dataObj, vm_type):  # 霍尔特线性趋势法 {'al
     return result
 
 
-def predict_model4(his_data, dataObj, vm_type, alpha, beta, gamma):  # 霍尔特线性趋势法
+def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
     预测方案 2 Holt-Winters
     :param his_data: 真实的历史数据出现次数表
@@ -301,13 +301,13 @@ def predict_model4(his_data, dataObj, vm_type, alpha, beta, gamma):  # 霍尔特
     # 2.65
 
     # 衰减值 220
-    # alpha = weight['alpha']
+    alpha = weight['alpha']
     # alpha = 0.06
     # 趋势
-    # beta = weight['beta']
+    beta = weight['beta']
     # beta = 0.6
     # 季节 0.215
-    # gamma = weight['gamma']
+    gamma = weight['gamma']
     # gamma = 0.08
     # 季度周期长度
     s = weight['s']
