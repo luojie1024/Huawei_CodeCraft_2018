@@ -139,7 +139,7 @@ PREDICT_MODEL10_WEIGHTS = {
 PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
     'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},  # +
     'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},  # -
-    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.75},  # +
+    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.70},  # +
 
     'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
     'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
