@@ -189,7 +189,8 @@ def pack_model2(vmWorker, serverObj,target_c_m=None):
             pm_id = serverObj.new_physic_machine("High-Performance")
         elif vm_cpu_size <= 56 and vm_mem_size <= 128:
             pm_id = serverObj.new_physic_machine("General")
-
+        else:
+            pm_id = serverObj.new_physic_machine("General")
             # pm_id = serverObj.new_physic_machine('High-Performance')
             # pass
 
