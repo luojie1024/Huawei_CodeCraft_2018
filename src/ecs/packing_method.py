@@ -156,12 +156,44 @@ def pack_model2(vmWorker, serverObj,target_c_m=None):
                 pm_id = serverObj.new_physic_machine('High-Performance')
             else:  # mem比例大,选择大内存的物理机
                 pm_id = serverObj.new_physic_machine('Large-Memory')
-        elif (vm_cpu_size > 56 and vm_cpu_size <= 84 and vm_mem_size > 192 and vm_mem_size <=256):  # 最后资源优化策略
-            pm_id = serverObj.new_physic_machine('Large-Memory')
-        elif (vm_cpu_size > 84 and vm_cpu_size <= 112 and vm_mem_size > 128 and vm_mem_size <= 192):  # 最后资源优化策略
-            pm_id = serverObj.new_physic_machine('High-Performance')
-        else:  # 最后资源优化策略
-            pm_id = serverObj.new_physic_machine('General')
+        # elif (vm_cpu_size > 56 and vm_cpu_size <= 84 and vm_mem_size > 192 and vm_mem_size <=256):  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('Large-Memory')
+        # elif (vm_cpu_size > 84 and vm_cpu_size <= 112 and vm_mem_size > 128 and vm_mem_size <= 192):  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('High-Performance')
+        # else:  # 最后资源优化策略
+        #     pm_id = serverObj.new_physic_machine('General')
+
+        elif vm_cpu_size<=56 and vm_mem_size<=128:
+            pm_id=serverObj.new_physic_machine("General")
+
+        elif vm_cpu_size>=112 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size>=112 and vm_mem_size<192 and vm_mem_size>128:
+            pm_id=serverObj.new_physic_machine("General")
+
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size>=256:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("General")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<192 and vm_mem_size>=128:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size<112 and vm_cpu_size>=84 and vm_mem_size<128:
+            pm_id=serverObj.new_physic_machine("High-Performance")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size>=256:
+            pm_id=serverObj.new_physic_machine("General")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<256 and vm_mem_size>=192:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<192 and vm_mem_size>=128:
+            pm_id=serverObj.new_physic_machine("Large-Memory")
+
+        elif vm_cpu_size<84 and vm_cpu_size>=56 and vm_mem_size<128:
+            pm_id = serverObj.new_physic_machine("High-Performance")
+
+        elif vm_cpu_size<56 and vm_cpu_size>=192 and vm_mem_size<256:
+            pm_id = serverObj.new_physic_machine("Large-Memory")
+
+        elif vm_cpu_size<56 and vm_mem_size>=128 and vm_mem_size<192:
+            pm_id = serverObj.new_physic_machine("High-Performance")
             # pm_id = serverObj.new_physic_machine('High-Performance')
             # pass
 
@@ -296,6 +328,7 @@ def pack_model3(vmWorker, serverObj,target_c_m=None):
                 pm_id=serverObj.new_physic_machine("Large-Memory")
             else:
                 pm_id=serverObj.new_physic_machine("High-Performance")
+
         elif vm_cpu_size<=56 and vm_mem_size<=128:
             pm_id=serverObj.new_physic_machine("General")
 
