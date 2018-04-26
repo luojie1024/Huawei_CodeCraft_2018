@@ -258,7 +258,7 @@ class DataObj(object):
         '''
         avg_pre = temp_reuslt / float(date_range_size)
         avg_train = self.train_vm_count[vmtype] / float(self.train_day_count)
-        modify=(avg_train-avg_pre)/avg_pre
+        modify = (avg_train - avg_pre) / avg_pre
         return (1 + modify)
 
     def toInt(self, value, tType=0):
@@ -530,6 +530,12 @@ class DataObj(object):
         return result
 
     def get_data_list_v6(self, vmtype, toInt=0):
+        '''
+        填充值+高斯滤波
+        :param vmtype:
+        :param toInt:
+        :return:
+        '''
         result = self.get_data_list_v2(vmtype, toInt=0)
 
         orign_martix_data = []
