@@ -139,7 +139,7 @@ PREDICT_MODEL10_WEIGHTS = {
 PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
     'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},  # +
     'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.45},  # -
-    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},
+    'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  # +
 
     'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
     'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
@@ -200,29 +200,29 @@ gamma = 0.2
 s = 7
 '''
 PREDICT_MODEL2_WEIGHTS = {
-    'flavor1': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor2': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor3': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor1': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.2},
+    'flavor2': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor3': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.3},
 
-    'flavor4': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor5': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor6': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor4': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor5': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor6': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
 
-    'flavor7': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor8': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor9': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor7': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor8': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.3},
+    'flavor9': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
 
-    'flavor10': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor11': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor12': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor10': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor11': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor12': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
 
-    'flavor13': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor14': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor15': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor13': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor14': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor15': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
 
-    'flavor16': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor17': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
-    'flavor18': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.49},
+    'flavor16': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor17': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
+    'flavor18': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 7, 'enlarge': 1.0},
 }
 
 VM_TYPE_DIRT = ['flavor1', 'flavor2', 'flavor3', 'flavor4', 'flavor5',
