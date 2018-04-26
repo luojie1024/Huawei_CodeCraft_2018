@@ -25,7 +25,7 @@ def predict_model1(his_data, dataObj, vm_type):
 
     n = 3
     # 放大系数
-    enlarge = 1.38 #1.3  79.844
+    enlarge = 1.35 #1.37  79.942
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
