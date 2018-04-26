@@ -82,10 +82,12 @@ def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例
     # count_weight=dataObj.get_count_weight(vm_type)
 
     n = 3
-    if dataObj.gap_time == 1:
-        enlarge = 1.1
-    else:
-        enlarge = 1.49  # 1.35  80.032 .
+    if dataObj.gap_time == 1:  # 连续
+        enlarge = 0.9
+    elif dataObj.gap_time <= 8:  # 间隔7天
+        enlarge = 1.49  # 1.49  84.625
+    else:  # 间隔15天
+        enlarge = 1.49
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
