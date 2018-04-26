@@ -200,7 +200,7 @@ gamma = 0.2
 s = 7
 '''
 PREDICT_MODEL2_WEIGHTS = {
-    'flavor1': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 14, 'enlarge': 1.0},
+    'flavor1': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 14, 'enlarge': 1.2},
     'flavor2': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 14, 'enlarge': 1.0},
     'flavor3': {'alpha': 0.06, 'beta': 0.6, 'gamma': 0.08, 's': 14, 'enlarge': 1.0},
 
