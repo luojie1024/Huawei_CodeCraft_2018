@@ -386,10 +386,12 @@ def predict_model5(his_data, dataObj, vm_type):
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    if dataObj.date_range_size == 7 and dataObj.vm_types_size == 5:  # 预测时间7天,间隔1天(连续)
+    if dataObj.date_range_size == 7 and dataObj.gap_time == 1 and dataObj.vm_types_size == 5:  # 预测时间7天,间隔1天(连续)
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     elif dataObj.date_range_size == 14 and dataObj.gap_time == 8 and dataObj.vm_types_size == 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
         weight = PREDICT_MODEL29_WEIGHTS[vm_type]
+    else:
+        weight = PREDICT_MODEL21_WEIGHTS[vm_type]
     # if dataObj.gap_time == 1:  # 无间隔 7天预测
     #     weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     # elif dataObj.gap_time > 1 and dataObj.gap_time <= 8:  # 间隔7天
