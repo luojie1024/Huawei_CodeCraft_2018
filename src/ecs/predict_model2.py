@@ -15,7 +15,6 @@ from const_map import *
 is_noise = True
 
 
-
 def predict_model1(his_data, dataObj, vm_type):
     # 无noise
     # 需要预测的天数
@@ -28,7 +27,7 @@ def predict_model1(his_data, dataObj, vm_type):
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     elif dataObj.gap_time > 1 and dataObj.gap_time <= 8:  # 间隔7天
         weight = PREDICT_MODEL21_WEIGHTS[vm_type]
-    elif dataObj.gap_time > 8 :  # 间隔7天
+    elif dataObj.gap_time > 8:  # 间隔7天
         weight = PREDICT_MODEL21_WEIGHTS[vm_type]
     n = weight['n']
     # 放大系数
@@ -387,8 +386,11 @@ def predict_model5(his_data, dataObj, vm_type):
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    if dataObj.gap_time == 1:  # 无间隔 7天预测
+    if dataObj.date_range_size == 7:
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
+
+    # if dataObj.gap_time == 1:  # 无间隔 7天预测
+    #     weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     # elif dataObj.gap_time > 1 and dataObj.gap_time <= 8:  # 间隔7天
     #     weight = PREDICT_MODEL21_WEIGHTS[vm_type]
     # elif dataObj.gap_time > 8 :  # 间隔7天
@@ -441,6 +443,7 @@ def predict_model5(his_data, dataObj, vm_type):
     result.append(temp_result)
 
     return result
+
 
 model1_used_func = predict_model1
 
