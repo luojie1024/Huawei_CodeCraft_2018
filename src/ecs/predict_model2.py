@@ -342,7 +342,7 @@ def predict_model5(his_data, dataObj, vm_type):  # 样例+类型区分 86.7
 
     if dataObj.gap_time == 1:  # 预测时间7天,间隔1天(连续),5种类
         weight = PREDICT_MODEL1_WEIGHTS[vm_type]
-    elif dataObj.gap_time > 8 and dataObj.gap_time <= 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
+    elif dataObj.gap_time <= 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
         weight = PREDICT_MODEL21_WEIGHTS[vm_type]
     else:
         weight = PREDICT_MODEL21_WEIGHTS[vm_type]
