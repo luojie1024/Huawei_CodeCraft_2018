@@ -137,56 +137,55 @@ PREDICT_MODEL10_WEIGHTS = {
 }
 
 PREDICT_MODEL21_WEIGHTS = {  # 84.543 #有  ##无
-    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},#+
-    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
+    'flavor1': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},  # +
+    'flavor2': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
     'flavor3': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},
 
-    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor4': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor5': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor6': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 
-    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.80},#+  1.8
-    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
+    'flavor7': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
+    'flavor8': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.80},  # +  1.8
+    'flavor9': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
 
-    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
+    'flavor10': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor11': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
+    'flavor12': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
 
-    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor13': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor14': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor15': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 
-    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor16': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor17': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor18': {'n': 10, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 }
 
-
 PREDICT_MODEL29_WEIGHTS = {  # 84.543 #有  ##无
-    'flavor1': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},#+
-    'flavor2': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor3': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.6},
+    'flavor1': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.54},  # +
+    'flavor2': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
+    'flavor3': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.75},  # +
 
-    'flavor4': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor5': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor6': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor4': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor5': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor6': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 
-    'flavor7': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor8': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.185},#+  1.8
-    'flavor9': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
+    'flavor7': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
+    'flavor8': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.185},  # +  1.8
+    'flavor9': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
 
-    'flavor10': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor11': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
-    'flavor12': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},#-
+    'flavor10': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor11': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
+    'flavor12': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.38},  # -
 
-    'flavor13': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor14': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor15': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor13': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor14': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor15': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 
-    'flavor16': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor17': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
-    'flavor18': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},##
+    'flavor16': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor17': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
+    'flavor18': {'n': 14, 'back_week': 1, 'beta': 2.0, 'enlarge': 1.49},  ##
 }
 
 # Holt-Winters，权重
