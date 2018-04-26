@@ -14,7 +14,7 @@ from const_map import *
 # 加入随机数
 is_noise = True
 
-
+# v6  	74.473
 def predict_model1(his_data, dataObj, vm_type):
     # 无noise
     # 需要预测的天数
