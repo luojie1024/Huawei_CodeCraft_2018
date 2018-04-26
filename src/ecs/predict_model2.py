@@ -83,7 +83,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例
 
     n = 3
     if dataObj.gap_time == 1:
-        enlarge = 1
+        enlarge = 1.1
     else:
         enlarge = 1.49  # 1.35  80.032 .
     beta = 2.0
