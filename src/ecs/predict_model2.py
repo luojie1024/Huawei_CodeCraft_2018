@@ -298,7 +298,6 @@ def predict_model4(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
 
     temp_reuslt = 0.0
     result = []
-    # 2.65
 
     # 衰减值 220
     alpha = weight['alpha']
