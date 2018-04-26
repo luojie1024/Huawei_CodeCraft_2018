@@ -83,7 +83,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例
 
     n = 3
     if dataObj.gap_time == 1:  # 连续
-        enlarge = 0.8
+        enlarge = 1
     elif dataObj.gap_time <= 8:  # 间隔7天
         enlarge = 1.49  # 1.49  84.625
     else:  # 间隔15天
