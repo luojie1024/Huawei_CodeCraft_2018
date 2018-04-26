@@ -516,8 +516,8 @@ def predict_model7(his_data, dataObj, vm_type):
     # else:
     #     weight = PREDICT_MODEL21_WEIGHTS[vm_type]
 
-    if dataObj.date_range_size > 7 and dataObj.date_range_size <= 14 and dataObj.gap_time > 8 and dataObj.gap_time <= 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
-        weight = PREDICT_MODEL21_WEIGHTS[vm_type]
+    # if dataObj.date_range_size > 7 and dataObj.date_range_size <= 14 and dataObj.gap_time > 8 and dataObj.gap_time <= 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
+    weight = PREDICT_MODEL21_WEIGHTS[vm_type]
 
     n = weight['n']
     # 放大系数
