@@ -133,13 +133,13 @@ def predict_all(dataObj):
     # if gap_time==1:
     #     predict_func = predict_model2.model1_used_func
 
-    #<6月
+    # 大于4月08
 
-    if start_time>=pos_time1:
-        predict_func = predict_model2.model7_used_func
+    # if start_time>=pos_time1:
+    #     predict_func = predict_model2.model7_used_func
 
+    predict_func = predict_model2.model1_used_func
     vmtype_avage_v = 6
-
 
     # vmtype_avage_v = 6
 
