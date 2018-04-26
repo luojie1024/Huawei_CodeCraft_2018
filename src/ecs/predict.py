@@ -374,31 +374,31 @@ def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
                             continue
                     else:
                         continue
-                for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
-                    for vm_type in vm_types:
-                        if VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0] <= pm_free[i][0] and \
-                                VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1] <= pm_free[i][1]:
-                            # 虚拟机数量增加
-                            vm_size += 1
 
-                            if isContainKey(vm, VM_TYPE_DIRT[vm_type_index]):
-                                # 列表中数量添加
-                                vm[VM_TYPE_DIRT[vm_type_index]] += 1
-                            else:
-                                vm[VM_TYPE_DIRT[vm_type_index]] = 1
-                            # 物理机列表中添加
-                            if isContainKey(pm[i], VM_TYPE_DIRT[vm_type_index]):
-                                pm[i][VM_TYPE_DIRT[vm_type_index]] += 1
-                            else:
-                                pm[i][VM_TYPE_DIRT[vm_type_index]] = 1
-                            # 剪切空闲空间数
-                            pm_free[i][0] = pm_free[i][0] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
-                            pm_free[i][1] = pm_free[i][1] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
-                            add_cpu += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
-                            add_mem += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
-                            # 无空闲资源,则跳出循环
-                            if pm_free[i][0] == 0 or pm_free[i][1] == 0:
-                                break
+                for vm_type_index in range(len(VM_PARAM) - 1, -1, -1):
+                    if VM_TYPE_DIRT[vm_type_index] in vm_types and VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0] <= pm_free[i][0] and \
+                            VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1] <= pm_free[i][1]:
+                        # 虚拟机数量增加
+                        vm_size += 1
+
+                        if isContainKey(vm, VM_TYPE_DIRT[vm_type_index]):
+                            # 列表中数量添加
+                            vm[VM_TYPE_DIRT[vm_type_index]] += 1
+                        else:
+                            vm[VM_TYPE_DIRT[vm_type_index]] = 1
+                        # 物理机列表中添加
+                        if isContainKey(pm[i], VM_TYPE_DIRT[vm_type_index]):
+                            pm[i][VM_TYPE_DIRT[vm_type_index]] += 1
+                        else:
+                            pm[i][VM_TYPE_DIRT[vm_type_index]] = 1
+                        # 剪切空闲空间数
+                        pm_free[i][0] = pm_free[i][0] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
+                        pm_free[i][1] = pm_free[i][1] - VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
+                        add_cpu += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][0]
+                        add_mem += VM_PARAM[VM_TYPE_DIRT[vm_type_index]][1]
+                        # 无空闲资源,则跳出循环
+                        if pm_free[i][0] == 0 or pm_free[i][1] == 0:
+                            break
 
                 # is_all_pack += 1
     return vm_size, vm, pm_size, pm, add_cpu, add_mem
