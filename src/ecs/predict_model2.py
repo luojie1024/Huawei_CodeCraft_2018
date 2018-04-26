@@ -14,8 +14,9 @@ from const_map import *
 # 加入随机数
 is_noise = True
 
+
 # v6  	74.473
-def predict_model1(his_data, dataObj, vm_type):
+def predict_model1(his_data, dataObj, vm_type):  # 但模型,不区分样例
     # 无noise
     # 需要预测的天数
     date_range_size = dataObj.date_range_size
@@ -25,7 +26,7 @@ def predict_model1(his_data, dataObj, vm_type):
 
     n = 3
     # 放大系数
-    enlarge = 1.35 #1.35  80.032 .
+    enlarge = 1.35  # 1.35  80.032 .
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -71,7 +72,8 @@ def predict_model1(his_data, dataObj, vm_type):
 
     return result
 
-def predict_model2(his_data, dataObj, vm_type):
+
+def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例
     # 无noise
     # 需要预测的天数
     date_range_size = dataObj.date_range_size
@@ -80,10 +82,10 @@ def predict_model2(his_data, dataObj, vm_type):
     # count_weight=dataObj.get_count_weight(vm_type)
 
     n = 3
-    if dataObj.gap_time==1:
-        enlarge=1
+    if dataObj.gap_time == 1:
+        enlarge = 1
     else:
-        enlarge = 1.49 #1.35  80.032 .
+        enlarge = 1.49  # 1.35  80.032 .
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -128,6 +130,7 @@ def predict_model2(his_data, dataObj, vm_type):
     result.append(temp_result)
 
     return result
+
 
 def predict_model6(his_data, dataObj, vm_type):  # 霍尔特线性趋势法
     '''
