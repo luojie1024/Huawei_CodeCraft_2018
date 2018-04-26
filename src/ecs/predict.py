@@ -302,7 +302,6 @@ def result_modify1(predict_result, dataObj, try_value, vm_type, try_vm_map):
 
 def result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free):
     '''
-    平滑填充结果集
     :param vm:虚拟机列表
     :param pm_size:虚拟机数量
     :param pm:物理机列表

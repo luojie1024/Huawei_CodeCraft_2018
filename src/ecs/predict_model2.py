@@ -23,10 +23,10 @@ def predict_model1(his_data, dataObj, vm_type):
     # 获取放大权重
     # count_weight=dataObj.get_count_weight(vm_type)
 
-    n = 7
+    n = 14
     # 放大系数
-    enlarge = 1.49
-    beta = 2.0
+    enlarge = 1
+    beta = 1.1
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
     cal_len = len(chis_data)
