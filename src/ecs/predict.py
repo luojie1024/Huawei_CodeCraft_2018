@@ -138,17 +138,17 @@ def predict_vm(ecs_lines, input_lines, input_test_file_array=None):
         vm_size, vm, pm_size, pm, pm_name, res_use, pm_free = packing_utils_v2.pack_api(dataObj,
                                                                                         global_optimal_result,
                                                                                         global_c_m)
-        # print('use_search_use_rate=%.5f%%\n' % (res_use))
+        print('use_search_use_rate=%.5f%%\n' % (res_use))
     #############################################use_search_maximum##################################
 
     #############################################use_smooth##################################
     if use_smooth:
         vm_size, vm, pm_size, pm, add_cpu, add_mem = result_smooth(vm_size, vm, pm_size, pm, dataObj, pm_free)
-        # print('use_smooth_use_rate=%.5f%% + cpu=+%d mem=+%d  \n' % (res_use, add_cpu, add_mem))
+        print('use_smooth_use_rate=%.5f%% + cpu=+%d mem=+%d  \n' % (res_use, add_cpu, add_mem))
 
     #############################################use_smooth##################################
 
-    # print('origin_use_rate=%.5f%%\n' % (origin_use_rate))
+    print('origin_use_rate=%.5f%%\n' % (origin_use_rate))
     # # 评估函数
     # if is_parameter_search == False:
     #     evaluation(dataObj, predict_result)
