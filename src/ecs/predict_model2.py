@@ -86,7 +86,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例  
     elif dataObj.gap_time <= 8:  # 间隔7天
         enlarge = 1.49  # 1.49  84.625
     else:  # 间隔15天
-        enlarge = 2.0
+        enlarge = 1.0
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
@@ -345,7 +345,7 @@ def predict_model5(his_data, dataObj, vm_type):  # 样例+类型区分 86.7
     elif dataObj.gap_time <= 8:  # 预测时间14天,间隔7天(=8),8种类预测类型
         weight = PREDICT_MODEL21_WEIGHTS[vm_type]
     else:
-        weight = PREDICT_MODEL21_WEIGHTS[vm_type]
+        weight = PREDICT_MODEL31_WEIGHTS[vm_type]
     # if dataObj.gap_time == 1:  # 无间隔 7天预测
     #     weight = PREDICT_MODEL1_WEIGHTS[vm_type]
     # elif dataObj.gap_time > 1 and dataObj.gap_time <= 8:  # 间隔7天
