@@ -86,7 +86,7 @@ def predict_model2(his_data, dataObj, vm_type):  # 按间隔时间区分样例  
     elif dataObj.gap_time <= 8:  # 间隔7天
         enlarge = 1.49  # 1.49  84.625
     else:  # 间隔15天
-        enlarge = 1.49
+        enlarge = 2.0
     beta = 2.0
     back_week = 1
     chis_data = copy.deepcopy(his_data['value'])
