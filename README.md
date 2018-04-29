@@ -1,4 +1,5 @@
 # 【2018华为软件精英挑战赛】武长赛区初赛第1
+![](https://img.shields.io/badge/platform-Ubuntu16.04-green.svg)  ![](https://img.shields.io/badge/language-python2.7-green.svg)   ![](https://img.shields.io/badge/version-v1.0-green.svg) 
 
 > 比赛要求Python2.7 不容许使用第三方库
 华为软件精英挑战赛（Huawei Code Craft）是华为公司面向全球大学生举办的一年一度的大型软件竞赛，致力于让参赛学生充分感受软件改变世界魅力，展示软件设计与编程潜力，享受Coding解决问题乐趣，锻炼实战实践、与人沟通协作能力。
