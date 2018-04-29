@@ -1,0 +1,180 @@
+{'flavor11': 10, 'flavor10': 4}
+{'flavor14': 5, 'flavor10': 4}
+{'flavor13': 2, 'flavor11': 10}
+{'flavor16': 1, 'flavor11': 10}
+{'flavor14': 5, 'flavor13': 2}
+{'flavor16': 1, 'flavor14': 5}
+{'flavor13': 1, 'flavor11': 10, 'flavor10': 2}
+{'flavor14': 5, 'flavor13': 1, 'flavor10': 2}
+{'flavor14': 4, 'flavor11': 2, 'flavor10': 4}
+{'flavor17': 2, 'flavor11': 2, 'flavor10': 4}
+{'flavor14': 3, 'flavor11': 4, 'flavor10': 4}
+{'flavor14': 2, 'flavor11': 6, 'flavor10': 4}
+{'flavor17': 1, 'flavor11': 6, 'flavor10': 4}
+{'flavor14': 1, 'flavor11': 8, 'flavor10': 4}
+{'flavor17': 2, 'flavor14': 1, 'flavor10': 4}
+{'flavor17': 1, 'flavor14': 3, 'flavor10': 4}
+{'flavor12': 1, 'flavor11': 7, 'flavor10': 6}
+{'flavor12': 2, 'flavor11': 4, 'flavor10': 8}
+{'flavor15': 1, 'flavor11': 4, 'flavor10': 8}
+{'flavor14': 2, 'flavor12': 2, 'flavor10': 8}
+{'flavor17': 1, 'flavor12': 2, 'flavor10': 8}
+{'flavor15': 1, 'flavor14': 2, 'flavor10': 8}
+{'flavor17': 1, 'flavor15': 1, 'flavor10': 8}
+{'flavor12': 3, 'flavor11': 1, 'flavor10': 10}
+{'flavor13': 5, 'flavor12': 3, 'flavor11': 1}
+{'flavor14': 4, 'flavor13': 2, 'flavor11': 2}
+{'flavor17': 2, 'flavor13': 2, 'flavor11': 2}
+{'flavor16': 1, 'flavor14': 4, 'flavor11': 2}
+{'flavor17': 2, 'flavor16': 1, 'flavor11': 2}
+{'flavor13': 4, 'flavor12': 2, 'flavor11': 4}
+{'flavor16': 2, 'flavor12': 2, 'flavor11': 4}
+{'flavor14': 3, 'flavor13': 2, 'flavor11': 4}
+{'flavor15': 1, 'flavor13': 4, 'flavor11': 4}
+{'flavor16': 1, 'flavor14': 3, 'flavor11': 4}
+{'flavor16': 2, 'flavor15': 1, 'flavor11': 4}
+{'flavor14': 2, 'flavor13': 2, 'flavor11': 6}
+{'flavor17': 1, 'flavor13': 2, 'flavor11': 6}
+{'flavor16': 1, 'flavor14': 2, 'flavor11': 6}
+{'flavor17': 1, 'flavor16': 1, 'flavor11': 6}
+{'flavor13': 3, 'flavor12': 1, 'flavor11': 7}
+{'flavor14': 1, 'flavor13': 2, 'flavor11': 8}
+{'flavor16': 1, 'flavor14': 1, 'flavor11': 8}
+{'flavor14': 2, 'flavor13': 4, 'flavor12': 2}
+{'flavor17': 1, 'flavor13': 4, 'flavor12': 2}
+{'flavor16': 2, 'flavor14': 2, 'flavor12': 2}
+{'flavor17': 1, 'flavor16': 2, 'flavor12': 2}
+{'flavor17': 2, 'flavor14': 1, 'flavor13': 2}
+{'flavor17': 1, 'flavor14': 3, 'flavor13': 2}
+{'flavor15': 1, 'flavor14': 2, 'flavor13': 4}
+{'flavor17': 1, 'flavor15': 1, 'flavor13': 4}
+{'flavor17': 2, 'flavor16': 1, 'flavor14': 1}
+{'flavor16': 2, 'flavor15': 1, 'flavor14': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor14': 3}
+{'flavor17': 1, 'flavor16': 2, 'flavor15': 1}
+{'flavor13': 4, 'flavor12': 3, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 2, 'flavor12': 3, 'flavor11': 1, 'flavor10': 2}
+{'flavor14': 4, 'flavor13': 1, 'flavor11': 2, 'flavor10': 2}
+{'flavor17': 2, 'flavor13': 1, 'flavor11': 2, 'flavor10': 2}
+{'flavor13': 3, 'flavor12': 2, 'flavor11': 4, 'flavor10': 2}
+{'flavor14': 3, 'flavor13': 1, 'flavor11': 4, 'flavor10': 2}
+{'flavor15': 1, 'flavor13': 3, 'flavor11': 4, 'flavor10': 2}
+{'flavor14': 2, 'flavor13': 1, 'flavor11': 6, 'flavor10': 2}
+{'flavor17': 1, 'flavor13': 1, 'flavor11': 6, 'flavor10': 2}
+{'flavor13': 2, 'flavor12': 1, 'flavor11': 7, 'flavor10': 2}
+{'flavor16': 1, 'flavor12': 1, 'flavor11': 7, 'flavor10': 2}
+{'flavor14': 1, 'flavor13': 1, 'flavor11': 8, 'flavor10': 2}
+{'flavor14': 2, 'flavor13': 3, 'flavor12': 2, 'flavor10': 2}
+{'flavor17': 1, 'flavor13': 3, 'flavor12': 2, 'flavor10': 2}
+{'flavor17': 2, 'flavor14': 1, 'flavor13': 1, 'flavor10': 2}
+{'flavor17': 1, 'flavor14': 3, 'flavor13': 1, 'flavor10': 2}
+{'flavor15': 1, 'flavor14': 2, 'flavor13': 3, 'flavor10': 2}
+{'flavor17': 1, 'flavor15': 1, 'flavor13': 3, 'flavor10': 2}
+{'flavor13': 3, 'flavor12': 3, 'flavor11': 1, 'flavor10': 4}
+{'flavor17': 1, 'flavor14': 2, 'flavor11': 2, 'flavor10': 4}
+{'flavor13': 2, 'flavor12': 2, 'flavor11': 4, 'flavor10': 4}
+{'flavor16': 1, 'flavor12': 2, 'flavor11': 4, 'flavor10': 4}
+{'flavor15': 1, 'flavor13': 2, 'flavor11': 4, 'flavor10': 4}
+{'flavor17': 1, 'flavor14': 1, 'flavor11': 4, 'flavor10': 4}
+{'flavor16': 1, 'flavor15': 1, 'flavor11': 4, 'flavor10': 4}
+{'flavor13': 1, 'flavor12': 1, 'flavor11': 7, 'flavor10': 4}
+{'flavor14': 2, 'flavor13': 2, 'flavor12': 2, 'flavor10': 4}
+{'flavor17': 1, 'flavor13': 2, 'flavor12': 2, 'flavor10': 4}
+{'flavor16': 1, 'flavor14': 2, 'flavor12': 2, 'flavor10': 4}
+{'flavor17': 1, 'flavor16': 1, 'flavor12': 2, 'flavor10': 4}
+{'flavor15': 1, 'flavor14': 2, 'flavor13': 2, 'flavor10': 4}
+{'flavor17': 1, 'flavor15': 1, 'flavor13': 2, 'flavor10': 4}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 2, 'flavor10': 4}
+{'flavor17': 1, 'flavor16': 1, 'flavor15': 1, 'flavor10': 4}
+{'flavor14': 3, 'flavor12': 1, 'flavor11': 1, 'flavor10': 6}
+{'flavor13': 2, 'flavor12': 3, 'flavor11': 1, 'flavor10': 6}
+{'flavor16': 1, 'flavor12': 3, 'flavor11': 1, 'flavor10': 6}
+{'flavor14': 2, 'flavor12': 1, 'flavor11': 3, 'flavor10': 6}
+{'flavor17': 1, 'flavor12': 1, 'flavor11': 3, 'flavor10': 6}
+{'flavor13': 1, 'flavor12': 2, 'flavor11': 4, 'flavor10': 6}
+{'flavor15': 1, 'flavor13': 1, 'flavor11': 4, 'flavor10': 6}
+{'flavor14': 1, 'flavor12': 1, 'flavor11': 5, 'flavor10': 6}
+{'flavor14': 2, 'flavor13': 1, 'flavor12': 2, 'flavor10': 6}
+{'flavor17': 1, 'flavor13': 1, 'flavor12': 2, 'flavor10': 6}
+{'flavor15': 1, 'flavor14': 2, 'flavor13': 1, 'flavor10': 6}
+{'flavor17': 1, 'flavor15': 1, 'flavor13': 1, 'flavor10': 6}
+{'flavor13': 1, 'flavor12': 3, 'flavor11': 1, 'flavor10': 8}
+{'flavor14': 1, 'flavor12': 2, 'flavor11': 2, 'flavor10': 8}
+{'flavor15': 1, 'flavor14': 1, 'flavor11': 2, 'flavor10': 8}
+{'flavor15': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 10}
+{'flavor14': 3, 'flavor13': 3, 'flavor12': 1, 'flavor11': 1}
+{'flavor15': 1, 'flavor13': 5, 'flavor12': 1, 'flavor11': 1}
+{'flavor16': 2, 'flavor13': 1, 'flavor12': 3, 'flavor11': 1}
+{'flavor16': 1, 'flavor13': 3, 'flavor12': 3, 'flavor11': 1}
+{'flavor14': 1, 'flavor13': 4, 'flavor12': 2, 'flavor11': 2}
+{'flavor16': 2, 'flavor14': 1, 'flavor12': 2, 'flavor11': 2}
+{'flavor17': 1, 'flavor14': 2, 'flavor13': 2, 'flavor11': 2}
+{'flavor15': 1, 'flavor14': 1, 'flavor13': 4, 'flavor11': 2}
+{'flavor16': 2, 'flavor15': 1, 'flavor14': 1, 'flavor11': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor14': 2, 'flavor11': 2}
+{'flavor14': 2, 'flavor13': 3, 'flavor12': 1, 'flavor11': 3}
+{'flavor17': 1, 'flavor13': 3, 'flavor12': 1, 'flavor11': 3}
+{'flavor16': 1, 'flavor13': 2, 'flavor12': 2, 'flavor11': 4}
+{'flavor17': 1, 'flavor14': 1, 'flavor13': 2, 'flavor11': 4}
+{'flavor16': 1, 'flavor15': 1, 'flavor13': 2, 'flavor11': 4}
+{'flavor17': 1, 'flavor16': 1, 'flavor14': 1, 'flavor11': 4}
+{'flavor14': 1, 'flavor13': 3, 'flavor12': 1, 'flavor11': 5}
+{'flavor16': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 7}
+{'flavor16': 1, 'flavor14': 2, 'flavor13': 2, 'flavor12': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor13': 2, 'flavor12': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 2, 'flavor13': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor15': 1, 'flavor13': 2}
+{'flavor14': 3, 'flavor13': 2, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor15': 1, 'flavor13': 4, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 1, 'flavor14': 3, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 2, 'flavor15': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 1, 'flavor13': 2, 'flavor12': 3, 'flavor11': 1, 'flavor10': 2}
+{'flavor14': 1, 'flavor13': 3, 'flavor12': 2, 'flavor11': 2, 'flavor10': 2}
+{'flavor17': 1, 'flavor14': 2, 'flavor13': 1, 'flavor11': 2, 'flavor10': 2}
+{'flavor15': 1, 'flavor14': 1, 'flavor13': 3, 'flavor11': 2, 'flavor10': 2}
+{'flavor14': 2, 'flavor13': 2, 'flavor12': 1, 'flavor11': 3, 'flavor10': 2}
+{'flavor17': 1, 'flavor13': 2, 'flavor12': 1, 'flavor11': 3, 'flavor10': 2}
+{'flavor16': 1, 'flavor14': 2, 'flavor12': 1, 'flavor11': 3, 'flavor10': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor12': 1, 'flavor11': 3, 'flavor10': 2}
+{'flavor16': 1, 'flavor13': 1, 'flavor12': 2, 'flavor11': 4, 'flavor10': 2}
+{'flavor17': 1, 'flavor14': 1, 'flavor13': 1, 'flavor11': 4, 'flavor10': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor13': 1, 'flavor11': 4, 'flavor10': 2}
+{'flavor14': 1, 'flavor13': 2, 'flavor12': 1, 'flavor11': 5, 'flavor10': 2}
+{'flavor16': 1, 'flavor14': 1, 'flavor12': 1, 'flavor11': 5, 'flavor10': 2}
+{'flavor16': 1, 'flavor14': 2, 'flavor13': 1, 'flavor12': 2, 'flavor10': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor13': 1, 'flavor12': 2, 'flavor10': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 2, 'flavor13': 1, 'flavor10': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor15': 1, 'flavor13': 1, 'flavor10': 2}
+{'flavor14': 3, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 4}
+{'flavor15': 1, 'flavor13': 3, 'flavor12': 1, 'flavor11': 1, 'flavor10': 4}
+{'flavor16': 1, 'flavor13': 1, 'flavor12': 3, 'flavor11': 1, 'flavor10': 4}
+{'flavor14': 1, 'flavor13': 2, 'flavor12': 2, 'flavor11': 2, 'flavor10': 4}
+{'flavor16': 1, 'flavor14': 1, 'flavor12': 2, 'flavor11': 2, 'flavor10': 4}
+{'flavor15': 1, 'flavor14': 1, 'flavor13': 2, 'flavor11': 2, 'flavor10': 4}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 1, 'flavor11': 2, 'flavor10': 4}
+{'flavor14': 2, 'flavor13': 1, 'flavor12': 1, 'flavor11': 3, 'flavor10': 4}
+{'flavor17': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 3, 'flavor10': 4}
+{'flavor14': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 5, 'flavor10': 4}
+{'flavor15': 1, 'flavor13': 2, 'flavor12': 1, 'flavor11': 1, 'flavor10': 6}
+{'flavor17': 1, 'flavor14': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 6}
+{'flavor16': 1, 'flavor15': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 6}
+{'flavor14': 1, 'flavor13': 1, 'flavor12': 2, 'flavor11': 2, 'flavor10': 6}
+{'flavor15': 1, 'flavor14': 1, 'flavor13': 1, 'flavor11': 2, 'flavor10': 6}
+{'flavor15': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 8}
+{'flavor16': 1, 'flavor14': 3, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1}
+{'flavor16': 2, 'flavor15': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1}
+{'flavor17': 1, 'flavor14': 1, 'flavor13': 3, 'flavor12': 1, 'flavor11': 1}
+{'flavor16': 1, 'flavor15': 1, 'flavor13': 3, 'flavor12': 1, 'flavor11': 1}
+{'flavor16': 1, 'flavor14': 1, 'flavor13': 2, 'flavor12': 2, 'flavor11': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 1, 'flavor13': 2, 'flavor11': 2}
+{'flavor16': 1, 'flavor14': 2, 'flavor13': 1, 'flavor12': 1, 'flavor11': 3}
+{'flavor17': 1, 'flavor16': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 3}
+{'flavor16': 1, 'flavor14': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 5}
+{'flavor17': 1, 'flavor14': 1, 'flavor13': 2, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor13': 2, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor17': 1, 'flavor16': 1, 'flavor14': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 2}
+{'flavor16': 1, 'flavor14': 1, 'flavor13': 1, 'flavor12': 2, 'flavor11': 2, 'flavor10': 2}
+{'flavor16': 1, 'flavor15': 1, 'flavor14': 1, 'flavor13': 1, 'flavor11': 2, 'flavor10': 2}
+{'flavor17': 1, 'flavor14': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 4}
+{'flavor16': 1, 'flavor15': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1, 'flavor10': 4}
+{'flavor17': 1, 'flavor16': 1, 'flavor14': 1, 'flavor13': 1, 'flavor12': 1, 'flavor11': 1}

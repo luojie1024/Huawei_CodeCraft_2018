@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f7f5f29f-8427-4c7a-a40d-0a9fca23a985" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/ecs/const_map.py" afterPath="$PROJECT_DIR$/src/ecs/const_map.py" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/luojie$packing_method.coverage" NAME="packing_method Coverage Results" MODIFIED="1524214889059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ecs" />
+    <SUITE FILE_PATH="coverage/luojie$paremeter_utils.coverage" NAME="paremeter_utils Coverage Results" MODIFIED="1524200662603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ecs" />
+    <SUITE FILE_PATH="coverage/luojie$predict.coverage" NAME="predict Coverage Results" MODIFIED="1524134122517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ecs" />
+    <SUITE FILE_PATH="coverage/luojie$packing_utils_v2.coverage" NAME="packing_utils_v2 Coverage Results" MODIFIED="1524368961047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ecs" />
+    <SUITE FILE_PATH="coverage/luojie$ecs.coverage" NAME="ecs Coverage Results" MODIFIED="1524816855504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ecs" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="predict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ecs/predict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2070">
+              <caret line="74" column="42" lean-forward="false" selection-start-line="74" selection-start-column="42" selection-end-line="74" selection-end-column="42" />
+              <folding>
+                <element signature="e#1869#2873#0" expanded="false" />
+                <element signature="e#9293#11094#0" expanded="false" />
+                <element signature="e#11164#15599#0" expanded="false" />
+                <element signature="e#15655#15903#0" expanded="false" />
+                <element signature="e#15955#15972#0" expanded="false" />
+                <element signature="e#16018#16084#0" expanded="false" />
+                <element signature="e#16120#16582#0" expanded="false" />
+                <element signature="e#16618#17241#0" expanded="false" />
+                <element signature="e#17274#17435#0" expanded="false" />
+                <element signature="e#17616#19379#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict_model2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ecs/predict_model2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="347" column="35" lean-forward="false" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
+              <folding>
+                <element signature="e#312#1898#0" expanded="false" />
+                <element signature="e#1974#3691#0" expanded="false" />
+                <element signature="e#3795#6100#0" expanded="false" />
+                <element signature="e#6167#8454#0" expanded="false" />
+                <element signature="e#10796#13109#0" expanded="false" />
+                <element signature="e#13160#15293#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="const_map.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ecs/const_map.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="188" column="70" lean-forward="false" selection-start-line="165" selection-start-column="2" selection-end-line="189" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ecs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ecs/ecs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ecs/predict_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4050">
+              <caret line="140" column="41" lean-forward="false" selection-start-line="140" selection-start-column="41" selection-end-line="140" selection-end-column="41" />
+              <folding>
+                <element signature="e#6157#7856#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tic</find>
+      <find>normalize_uniform</find>
+      <find>predict_result</find>
+      <find>num</find>
+      <find>isContainKey</find>
+      <find>cpu_used:</find>
+      <find>result_smooth</find>
+      <find>test_vm_count</find>
+      <find>gap_time</find>
+      <find>train_day_count</find>
+      <find>alpha': 0.1</find>
+      <find>'n': 7</find>
+      <find>'enlarge': 1.58</find>
+      <find>min_type_count</find>
+      <find>'enlarge':1.4</find>
+      <find>sum_type_count</find>
+      <find>flavor18</find>
+      <find>test_put_vm</find>
+      <find>vm_cpu_size</find>
+      <find>PM_Free</find>
+      <find>lave_cpu_sum</find>
+      <find>'enlarge': 1.45</find>
+      <find>'enlarge': 1.48</find>
+      <find>pack_api</find>
+      <find>'enlarge': 1.38</find>
+      <find>'enlarge': 1.52</find>
+      <find>'alpha': 0.22</find>
+      <find>'beta': 0.0, 'gamma': 0.215</find>
+      <find>'s': 7</find>
+      <find>'enlarge': 1.49</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>alpha': 0.22</replace>
+      <replace>'enlarge': 1.50</replace>
+      <replace>'s': 7,</replace>
+      <replace>'enlarge':1.7</replace>
+      <replace>'enlarge': 1.48</replace>
+      <replace>'enlarge': 1.55</replace>
+      <replace>'n': 14</replace>
+      <replace>'enlarge': 1.45</replace>
+      <replace>'enlarge': 1.49</replace>
+      <replace>'alpha': 0.06</replace>
+      <replace>'beta': 0.6, 'gamma': 0.08</replace>
+      <replace>'s': 14</replace>
+      <replace>'enlarge': 1.35</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/ecs/input_5flavors_cpu_7days.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/input_5flavors_cpu_7days2.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_processer.py" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_processer.py" />
+        <option value="$PROJECT_DIR$/src/ecs/prediction_processer.py" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_model.py" />
+        <option value="$PROJECT_DIR$/src/ecs/data/input_5flavors_cpu_7days2.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/CaseProcess.py" />
+        <option value="$PROJECT_DIR$/src/ecs/prediction_processer.py" />
+        <option value="$PROJECT_DIR$/src/ecs/ParamInfo.py" />
+        <option value="$PROJECT_DIR$/src/ecs/vectorization.py" />
+        <option value="$PROJECT_DIR$/src/ecs/predictor.py" />
+        <option value="$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_3week.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/data/TrainData_2015.121.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/predict_model.py" />
+        <option value="$PROJECT_DIR$/src/ecs/paremeter_utils.py" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_utils.py" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_utils_v2.py" />
+        <option value="$PROJECT_DIR$/src/ecs/data/continuous/input_3hosttypes_5flavors_1week.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/packing_method.py" />
+        <option value="$PROJECT_DIR$/luojie_recoder" />
+        <option value="$PROJECT_DIR$/src/ecs/DataObj.py" />
+        <option value="$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_1week.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/predict.py" />
+        <option value="$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_1week2.txt" />
+        <option value="$PROJECT_DIR$/src/ecs/predict_utils.py" />
+        <option value="$PROJECT_DIR$/src/ecs/predict_model2.py" />
+        <option value="$PROJECT_DIR$/src/ecs/ecs.py" />
+        <option value="$PROJECT_DIR$/src/ecs/const_map.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="313" />
+    <option name="y" value="132" />
+    <option name="width" value="1584" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Python</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>PyRedeclarationInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="luojie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luojie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luojie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luojie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ecs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luojie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luojie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ecs" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ecs" />
+      <recent name="$PROJECT_DIR$/src/ecs/data/continuous" />
+      <recent name="$PROJECT_DIR$/src/ecs/data" />
+      <recent name="$PROJECT_DIR$/src/data" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ecs" />
+      <recent name="$PROJECT_DIR$/src/data" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.ecs">
+    <configuration name="ecs" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ecs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="luojie" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ecs/ecs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="packing_method" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ecs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="luojie" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ecs/packing_method.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="packing_utils_v2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ecs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="luojie" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ecs/packing_utils_v2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="paremeter_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ecs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="luojie" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ecs/paremeter_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="predict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ecs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="luojie" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ecs/predict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.ecs" />
+      <item index="1" class="java.lang.String" itemvalue="Python.predict" />
+      <item index="2" class="java.lang.String" itemvalue="Python.paremeter_utils" />
+      <item index="3" class="java.lang.String" itemvalue="Python.packing_method" />
+      <item index="4" class="java.lang.String" itemvalue="Python.packing_utils_v2" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.ecs" />
+        <item index="1" class="java.lang.String" itemvalue="Python.packing_utils_v2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.packing_method" />
+        <item index="3" class="java.lang.String" itemvalue="Python.paremeter_utils" />
+        <item index="4" class="java.lang.String" itemvalue="Python.predict" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7f5f29f-8427-4c7a-a40d-0a9fca23a985" name="Default" comment="" />
+      <created>1522312111725</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522312111725</updated>
+    </task>
+    <task id="LOCAL-01075" summary="use_smooth fix">
+      <created>1524726930909</created>
+      <option name="number" value="01075" />
+      <option name="presentableId" value="LOCAL-01075" />
+      <option name="project" value="LOCAL" />
+      <updated>1524726930909</updated>
+    </task>
+    <task id="LOCAL-01076" summary="use_smooth fix">
+      <created>1524727204525</created>
+      <option name="number" value="01076" />
+      <option name="presentableId" value="LOCAL-01076" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727204525</updated>
+    </task>
+    <task id="LOCAL-01077" summary="use_smooth fix">
+      <created>1524727249191</created>
+      <option name="number" value="01077" />
+      <option name="presentableId" value="LOCAL-01077" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727249191</updated>
+    </task>
+    <task id="LOCAL-01078" summary="use_smooth fix">
+      <created>1524727328572</created>
+      <option name="number" value="01078" />
+      <option name="presentableId" value="LOCAL-01078" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727328572</updated>
+    </task>
+    <task id="LOCAL-01079" summary="use_smooth fix">
+      <created>1524727432298</created>
+      <option name="number" value="01079" />
+      <option name="presentableId" value="LOCAL-01079" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727432298</updated>
+    </task>
+    <task id="LOCAL-01080" summary="use_smooth fix">
+      <created>1524727569445</created>
+      <option name="number" value="01080" />
+      <option name="presentableId" value="LOCAL-01080" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727569445</updated>
+    </task>
+    <task id="LOCAL-01081" summary="use_smooth fix">
+      <created>1524727780058</created>
+      <option name="number" value="01081" />
+      <option name="presentableId" value="LOCAL-01081" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727780058</updated>
+    </task>
+    <task id="LOCAL-01082" summary="use_smooth fix">
+      <created>1524727989875</created>
+      <option name="number" value="01082" />
+      <option name="presentableId" value="LOCAL-01082" />
+      <option name="project" value="LOCAL" />
+      <updated>1524727989875</updated>
+    </task>
+    <task id="LOCAL-01083" summary="use_smooth fix">
+      <created>1524728119734</created>
+      <option name="number" value="01083" />
+      <option name="presentableId" value="LOCAL-01083" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728119734</updated>
+    </task>
+    <task id="LOCAL-01084" summary="use_smooth fix">
+      <created>1524728188393</created>
+      <option name="number" value="01084" />
+      <option name="presentableId" value="LOCAL-01084" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728188393</updated>
+    </task>
+    <task id="LOCAL-01085" summary="use_smooth fix">
+      <created>1524728304088</created>
+      <option name="number" value="01085" />
+      <option name="presentableId" value="LOCAL-01085" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728304088</updated>
+    </task>
+    <task id="LOCAL-01086" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728425365</created>
+      <option name="number" value="01086" />
+      <option name="presentableId" value="LOCAL-01086" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728425365</updated>
+    </task>
+    <task id="LOCAL-01087" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728455170</created>
+      <option name="number" value="01087" />
+      <option name="presentableId" value="LOCAL-01087" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728455170</updated>
+    </task>
+    <task id="LOCAL-01088" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728521797</created>
+      <option name="number" value="01088" />
+      <option name="presentableId" value="LOCAL-01088" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728521797</updated>
+    </task>
+    <task id="LOCAL-01089" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728617607</created>
+      <option name="number" value="01089" />
+      <option name="presentableId" value="LOCAL-01089" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728617607</updated>
+    </task>
+    <task id="LOCAL-01090" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728709428</created>
+      <option name="number" value="01090" />
+      <option name="presentableId" value="LOCAL-01090" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728709428</updated>
+    </task>
+    <task id="LOCAL-01091" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728806356</created>
+      <option name="number" value="01091" />
+      <option name="presentableId" value="LOCAL-01091" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728806356</updated>
+    </task>
+    <task id="LOCAL-01092" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524728868843</created>
+      <option name="number" value="01092" />
+      <option name="presentableId" value="LOCAL-01092" />
+      <option name="project" value="LOCAL" />
+      <updated>1524728868843</updated>
+    </task>
+    <task id="LOCAL-01093" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524729029159</created>
+      <option name="number" value="01093" />
+      <option name="presentableId" value="LOCAL-01093" />
+      <option name="project" value="LOCAL" />
+      <updated>1524729029159</updated>
+    </task>
+    <task id="LOCAL-01094" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524729224755</created>
+      <option name="number" value="01094" />
+      <option name="presentableId" value="LOCAL-01094" />
+      <option name="project" value="LOCAL" />
+      <updated>1524729224755</updated>
+    </task>
+    <task id="LOCAL-01095" summary="sigma=2 model1 = 74.473  平滑填充+高斯滤波">
+      <created>1524729352229</created>
+      <option name="number" value="01095" />
+      <option name="presentableId" value="LOCAL-01095" />
+      <option name="project" value="LOCAL" />
+      <updated>1524729352229</updated>
+    </task>
+    <task id="LOCAL-01096" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524729508405</created>
+      <option name="number" value="01096" />
+      <option name="presentableId" value="LOCAL-01096" />
+      <option name="project" value="LOCAL" />
+      <updated>1524729508405</updated>
+    </task>
+    <task id="LOCAL-01097" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524730372364</created>
+      <option name="number" value="01097" />
+      <option name="presentableId" value="LOCAL-01097" />
+      <option name="project" value="LOCAL" />
+      <updated>1524730372364</updated>
+    </task>
+    <task id="LOCAL-01098" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524730609870</created>
+      <option name="number" value="01098" />
+      <option name="presentableId" value="LOCAL-01098" />
+      <option name="project" value="LOCAL" />
+      <updated>1524730609870</updated>
+    </task>
+    <task id="LOCAL-01099" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524730734785</created>
+      <option name="number" value="01099" />
+      <option name="presentableId" value="LOCAL-01099" />
+      <option name="project" value="LOCAL" />
+      <updated>1524730734785</updated>
+    </task>
+    <task id="LOCAL-01100" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524730844921</created>
+      <option name="number" value="01100" />
+      <option name="presentableId" value="LOCAL-01100" />
+      <option name="project" value="LOCAL" />
+      <updated>1524730844921</updated>
+    </task>
+    <task id="LOCAL-01101" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524730921557</created>
+      <option name="number" value="01101" />
+      <option name="presentableId" value="LOCAL-01101" />
+      <option name="project" value="LOCAL" />
+      <updated>1524730921557</updated>
+    </task>
+    <task id="LOCAL-01102" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524731040521</created>
+      <option name="number" value="01102" />
+      <option name="presentableId" value="LOCAL-01102" />
+      <option name="project" value="LOCAL" />
+      <updated>1524731040521</updated>
+    </task>
+    <task id="LOCAL-01103" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738266324</created>
+      <option name="number" value="01103" />
+      <option name="presentableId" value="LOCAL-01103" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738266325</updated>
+    </task>
+    <task id="LOCAL-01104" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738356374</created>
+      <option name="number" value="01104" />
+      <option name="presentableId" value="LOCAL-01104" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738356374</updated>
+    </task>
+    <task id="LOCAL-01105" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738390064</created>
+      <option name="number" value="01105" />
+      <option name="presentableId" value="LOCAL-01105" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738390064</updated>
+    </task>
+    <task id="LOCAL-01106" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738439114</created>
+      <option name="number" value="01106" />
+      <option name="presentableId" value="LOCAL-01106" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738439114</updated>
+    </task>
+    <task id="LOCAL-01107" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738492571</created>
+      <option name="number" value="01107" />
+      <option name="presentableId" value="LOCAL-01107" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738492571</updated>
+    </task>
+    <task id="LOCAL-01108" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738553125</created>
+      <option name="number" value="01108" />
+      <option name="presentableId" value="LOCAL-01108" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738553125</updated>
+    </task>
+    <task id="LOCAL-01109" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524738612013</created>
+      <option name="number" value="01109" />
+      <option name="presentableId" value="LOCAL-01109" />
+      <option name="project" value="LOCAL" />
+      <updated>1524738612013</updated>
+    </task>
+    <task id="LOCAL-01110" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524739075835</created>
+      <option name="number" value="01110" />
+      <option name="presentableId" value="LOCAL-01110" />
+      <option name="project" value="LOCAL" />
+      <updated>1524739075835</updated>
+    </task>
+    <task id="LOCAL-01111" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524739111799</created>
+      <option name="number" value="01111" />
+      <option name="presentableId" value="LOCAL-01111" />
+      <option name="project" value="LOCAL" />
+      <updated>1524739111799</updated>
+    </task>
+    <task id="LOCAL-01112" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524739252135</created>
+      <option name="number" value="01112" />
+      <option name="presentableId" value="LOCAL-01112" />
+      <option name="project" value="LOCAL" />
+      <updated>1524739252135</updated>
+    </task>
+    <task id="LOCAL-01113" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524739287949</created>
+      <option name="number" value="01113" />
+      <option name="presentableId" value="LOCAL-01113" />
+      <option name="project" value="LOCAL" />
+      <updated>1524739287949</updated>
+    </task>
+    <task id="LOCAL-01114" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524739840861</created>
+      <option name="number" value="01114" />
+      <option name="presentableId" value="LOCAL-01114" />
+      <option name="project" value="LOCAL" />
+      <updated>1524739840861</updated>
+    </task>
+    <task id="LOCAL-01115" summary="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波">
+      <created>1524740014375</created>
+      <option name="number" value="01115" />
+      <option name="presentableId" value="LOCAL-01115" />
+      <option name="project" value="LOCAL" />
+      <updated>1524740014375</updated>
+    </task>
+    <task id="LOCAL-01116" summary="sigma=2 + model5 +=86.032    平滑填充+高斯滤波">
+      <created>1524740246460</created>
+      <option name="number" value="01116" />
+      <option name="presentableId" value="LOCAL-01116" />
+      <option name="project" value="LOCAL" />
+      <updated>1524740246460</updated>
+    </task>
+    <task id="LOCAL-01117" summary="sigma=2 + model5 +=86.032    平滑填充+高斯滤波">
+      <created>1524741163530</created>
+      <option name="number" value="01117" />
+      <option name="presentableId" value="LOCAL-01117" />
+      <option name="project" value="LOCAL" />
+      <updated>1524741163530</updated>
+    </task>
+    <task id="LOCAL-01118" summary="单模型+等比调参方案">
+      <created>1524755713354</created>
+      <option name="number" value="01118" />
+      <option name="presentableId" value="LOCAL-01118" />
+      <option name="project" value="LOCAL" />
+      <updated>1524755713354</updated>
+    </task>
+    <task id="LOCAL-01119" summary="单模型+等比调参方案">
+      <created>1524806818350</created>
+      <option name="number" value="01119" />
+      <option name="presentableId" value="LOCAL-01119" />
+      <option name="project" value="LOCAL" />
+      <updated>1524806818351</updated>
+    </task>
+    <task id="LOCAL-01120" summary="单模型+等比调参方案">
+      <created>1524809252838</created>
+      <option name="number" value="01120" />
+      <option name="presentableId" value="LOCAL-01120" />
+      <option name="project" value="LOCAL" />
+      <updated>1524809252838</updated>
+    </task>
+    <task id="LOCAL-01121" summary="单模型+等比调参方案">
+      <created>1524809534896</created>
+      <option name="number" value="01121" />
+      <option name="presentableId" value="LOCAL-01121" />
+      <option name="project" value="LOCAL" />
+      <updated>1524809534896</updated>
+    </task>
+    <task id="LOCAL-01122" summary="单模型+等比调参方案">
+      <created>1524810318728</created>
+      <option name="number" value="01122" />
+      <option name="presentableId" value="LOCAL-01122" />
+      <option name="project" value="LOCAL" />
+      <updated>1524810318728</updated>
+    </task>
+    <task id="LOCAL-01123" summary="单模型+等比调参方案">
+      <created>1524816860460</created>
+      <option name="number" value="01123" />
+      <option name="presentableId" value="LOCAL-01123" />
+      <option name="project" value="LOCAL" />
+      <updated>1524816860460</updated>
+    </task>
+    <option name="localTasksCounter" value="1124" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="313" y="132" width="1584" height="1050" extended-state="0" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928678" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25965998" sideWeight="0.066693775" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921174" sideWeight="0.4950884" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24884081" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21413276" sideWeight="0.6803579" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08423493" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15372102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29118028" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980886" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980886" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24729522" sideWeight="0.9333062" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18315302" sideWeight="0.49857667" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32302937" sideWeight="0.49206996" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998455" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add mode 12" />
+    <MESSAGE value="add recoder" />
+    <MESSAGE value="set features" />
+    <MESSAGE value="smooth" />
+    <MESSAGE value="modle7 预测参数优化beta=1.1" />
+    <MESSAGE value="修复打印bug" />
+    <MESSAGE value="代码结构优化" />
+    <MESSAGE value="n=14 改进" />
+    <MESSAGE value="vmtype_avage 4" />
+    <MESSAGE value="add average_Filter and get_list_v4" />
+    <MESSAGE value="天数修正" />
+    <MESSAGE value="修复天数少一天的bug &#10;2016-01-14 23:59:59  +1s" />
+    <MESSAGE value="test" />
+    <MESSAGE value="add gaussian filter" />
+    <MESSAGE value="fix gaussian filter" />
+    <MESSAGE value="fix gaussian bug" />
+    <MESSAGE value="暴力求解" />
+    <MESSAGE value="拾取方案修改中." />
+    <MESSAGE value="拾取方案pack2" />
+    <MESSAGE value="拾取方案pack2+分段预测+调参" />
+    <MESSAGE value="use_smooth fix" />
+    <MESSAGE value="sigma=2 model1 = 74.473  平滑填充+高斯滤波" />
+    <MESSAGE value="sigma=2 + model1 + enlarge = 1.35=80.032    平滑填充+高斯滤波" />
+    <MESSAGE value="sigma=2 + model5 +=86.032    平滑填充+高斯滤波" />
+    <MESSAGE value="单模型+等比调参方案" />
+    <option name="LAST_COMMIT_MESSAGE" value="单模型+等比调参方案" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/ecs/predict_model.py</url>
+          <line>217</line>
+          <option name="timeStamp" value="402" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="757" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ecs/out.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2/__builtin__.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="129" column="8" lean-forward="false" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="657" column="28" lean-forward="false" selection-start-line="657" selection-start-column="25" selection-end-line="657" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/packing_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="190" column="41" lean-forward="false" selection-start-line="190" selection-start-column="34" selection-end-line="190" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/output1.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding>
+            <element signature="e#1869#2873#0" expanded="false" />
+            <element signature="e#9293#11094#0" expanded="false" />
+            <element signature="e#11164#15599#0" expanded="false" />
+            <element signature="e#15655#15903#0" expanded="false" />
+            <element signature="e#15955#15972#0" expanded="false" />
+            <element signature="e#16018#16084#0" expanded="false" />
+            <element signature="e#16120#16582#0" expanded="false" />
+            <element signature="e#16618#17241#0" expanded="false" />
+            <element signature="e#17274#17435#0" expanded="false" />
+            <element signature="e#17616#19379#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/output0.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/result_out.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/practice_data/data_2015_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/TestData_2015.2.20_2015.2.27.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/TrainData_2015.1.1_2015.2.19.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/output1.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/input_5flavors_cpu_7days.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/input_5flavors_cpu_7days2.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/features_merge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/martix_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/data_features.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="3" column="58" lean-forward="true" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/-1965467007/datetime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1454">
+          <caret line="492" column="8" lean-forward="false" selection-start-line="492" selection-start-column="8" selection-end-line="492" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/LSTM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_1week3.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/TrainData_2015.121.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/continuous/TrainData_2015.12.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-38452">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/TestData_2016.1.8_2016.1.14.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/TrainData_2015.12.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33390">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/High.txt" />
+    <entry file="file://$PROJECT_DIR$/src/ecs/BPNN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4944">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/Large-Memory.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/High-Performance.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="1071" column="0" lean-forward="false" selection-start-line="1071" selection-start-column="0" selection-end-line="1071" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/paremeter_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="832">
+          <caret line="94" column="31" lean-forward="true" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/General.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/result/output0.txt" />
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/remote_sources/1040383408/1270636780/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/continuous/input_3hosttypes_5flavors_1week.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1208">
+          <caret line="932" column="38" lean-forward="false" selection-start-line="932" selection-start-column="38" selection-end-line="932" selection-end-column="38" />
+          <folding>
+            <element signature="e#300#1172#0" expanded="false" />
+            <element signature="e#1227#2820#0" expanded="false" />
+            <element signature="e#2886#3759#0" expanded="false" />
+            <element signature="e#3826#5314#0" expanded="false" />
+            <element signature="e#5381#7285#0" expanded="false" />
+            <element signature="e#7353#8777#0" expanded="false" />
+            <element signature="e#10328#11752#0" expanded="false" />
+            <element signature="e#11818#12691#0" expanded="false" />
+            <element signature="e#12759#14072#0" expanded="false" />
+            <element signature="e#14221#16164#0" expanded="false" />
+            <element signature="e#16252#18198#0" expanded="false" />
+            <element signature="e#18285#20239#0" expanded="false" />
+            <element signature="e#20327#22293#0" expanded="false" />
+            <element signature="e#22453#24059#0" expanded="false" />
+            <element signature="e#24163#25768#0" expanded="false" />
+            <element signature="e#25872#27477#0" expanded="false" />
+            <element signature="e#27581#28938#0" expanded="false" />
+            <element signature="e#29071#34097#0" expanded="false" />
+            <element signature="e#34327#34582#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/packing_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="81" column="24" lean-forward="false" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/packing_utils_v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/packing_method.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="149" column="11" lean-forward="false" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/DataObj.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="871">
+          <caret line="569" column="81" lean-forward="false" selection-start-line="569" selection-start-column="81" selection-end-line="569" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/feature_map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="74" column="17" lean-forward="true" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_1week2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/data/input_3hosttypes_5flavors_1week.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2070">
+          <caret line="74" column="42" lean-forward="false" selection-start-line="74" selection-start-column="42" selection-end-line="74" selection-end-column="42" />
+          <folding>
+            <element signature="e#1869#2873#0" expanded="false" />
+            <element signature="e#9293#11094#0" expanded="false" />
+            <element signature="e#11164#15599#0" expanded="false" />
+            <element signature="e#15655#15903#0" expanded="false" />
+            <element signature="e#15955#15972#0" expanded="false" />
+            <element signature="e#16018#16084#0" expanded="false" />
+            <element signature="e#16120#16582#0" expanded="false" />
+            <element signature="e#16618#17241#0" expanded="false" />
+            <element signature="e#17274#17435#0" expanded="false" />
+            <element signature="e#17616#19379#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/luojie_recoder">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="386" column="18" lean-forward="false" selection-start-line="386" selection-start-column="18" selection-end-line="386" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/ecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4050">
+          <caret line="140" column="41" lean-forward="false" selection-start-line="140" selection-start-column="41" selection-end-line="140" selection-end-column="41" />
+          <folding>
+            <element signature="e#6157#7856#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/predict_model2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="347" column="35" lean-forward="false" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
+          <folding>
+            <element signature="e#312#1898#0" expanded="false" />
+            <element signature="e#1974#3691#0" expanded="false" />
+            <element signature="e#3795#6100#0" expanded="false" />
+            <element signature="e#6167#8454#0" expanded="false" />
+            <element signature="e#10796#13109#0" expanded="false" />
+            <element signature="e#13160#15293#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ecs/const_map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="188" column="70" lean-forward="false" selection-start-line="165" selection-start-column="2" selection-end-line="189" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
