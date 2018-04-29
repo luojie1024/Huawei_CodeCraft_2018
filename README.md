@@ -1,4 +1,4 @@
-# 【2018华为软件精英挑战赛】武长赛区初赛第1
+# 【2018华为软件精英挑战赛】武长赛区初赛No.1
 ![](https://img.shields.io/badge/platform-Ubuntu16.04-green.svg)  ![](https://img.shields.io/badge/language-python2.7-green.svg)   ![](https://img.shields.io/badge/version-v1.0-green.svg) 
 
 > 比赛要求Python2.7 不容许使用第三方库
